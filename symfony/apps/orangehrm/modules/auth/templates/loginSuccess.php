@@ -28,7 +28,7 @@ $imagePath = theme_path("images/login");
     .textInputContainer {
         font-family: Arial, Helvetica, sans-serif;
         font-size: 20px;
-        color: #000000;
+        
     }
 
     #divLogin {
@@ -81,13 +81,13 @@ $imagePath = theme_path("images/login");
     }
 
     #divLoginButton {
-        padding: 15px 35px 45px; ;
-
-        width: 300px;
+        padding: 25px 45px 45px; ;
+	width: 300px;
+	vertical-align: middle;
     }
 
     #btnLogin {
-        background-color: #FF6600 ;
+        background-color: #A13487 ;
         cursor:pointer;
         width: 200px;
         height: 26px;
@@ -104,31 +104,30 @@ $imagePath = theme_path("images/login");
     }
 
     #divLogo {
-         vertical-align: middle;
-        padding-top: 36px;
-	margin-left: 48%;
+         
+	margin-left: 40%;
     }
 
     #spanMessage {
         background: transparent url(<?php echo "{$imagePath}/mark.png"; ?>) no-repeat;
         padding-left: 18px; 
-        padding-top: 0px;
-        color: #DD7700;
+        padding-top: 5px;
+        color: #A13487;
         font-weight: bold;
     }
     
     #logInPanelHeading{
-        margin-bottom: 20px;
+        
 	margin: 0px auto;
         font-family:'Lato' sans-serif;
-        font-size: 20px;
-        color: #FF6600;
+        font-size: 22px;
+        color: #A13487;
         font-weight: bold;
-	padding: 0.5em;
+	padding: 1em 1em 2em;
     }
     
     .form-hint {
-    color: #FF6600;
+    color: #A13487;
     padding: 4px 8px;
     left:-150px;
 	 font-size: 15px;
@@ -156,15 +155,13 @@ padding: 15px 35px 45px;
     padding-right-ltr-source: physical;
     padding-right-rtl-source: physical;
 margin: 2em auto;
-background-color: #112233;
+background-color: #98BB9C;
 border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .form-group:before, .form-group:after {
 
-  content: " ";
-
-  display: table;
+   display: table;
 
 }
 
@@ -176,6 +173,7 @@ border: 1px solid rgba(0, 0, 0, 0.1);
 
 <div id= "divlogin" >
     <div id="divLogo">
+	 <img src="<?php echo "{$imagePath}/logo.png"; ?>" />
       </div>
 
     <form class="form-signin" method="post" action="<?php echo url_for('auth/validateCredentials'); ?>">
@@ -187,19 +185,18 @@ border: 1px solid rgba(0, 0, 0, 0.1);
         <div id="logInPanelHeading"><?php echo __('Veuillez vous connecter'); ?></div>
 
         <div class="form-group" class="textInputContainer">
-            <?php echo $form['Username']->render(); ?>
-          <span class ="form-hint" ><?php echo __('Username'); ?></span> 
-        </div>
+            <?php echo $form['Username']->render(array(
+		'placeholder' => __('Identifiant') ,
+)); ?>
+        
+       </div>
         <div class="form-group" class="textInputContainer">
-            <?php echo $form['Password']->render(); ?>
-         <span class="form-hint" ><?php echo __('Mot de passe'); ?></span>
+            <?php echo $form['Password']->render(array(
+                'placeholder' => __('Mot de Passe') ,
+)); ?>
+         
         </div>
-<!--  //      <div id="divLoginHelpLink"><?php
-     //       include_component('core', 'ohrmPluginPannel', array(
-       //         'location' => 'login-page-help-link',
-         //   ));
-         // ?></div> 
- -->
+
         <div id="divLoginButton">
             <input type="submit" name="Submit" class="button" id="btnLogin" value="<?php echo __('CONNEXION'); ?>" />
             <?php if (!empty($message)) : ?>
@@ -209,12 +206,6 @@ border: 1px solid rgba(0, 0, 0, 0.1);
     </form>
 
 </div>
-
-/*<div style="text-align: center">
-    <?php include_component('core', 'ohrmPluginPannel', array(
-                'location' => 'other-login-mechanisms',
-            )); ?>
-</div> */
 
 <?php include_partial('global/footer_copyright_social_links'); ?>
 
