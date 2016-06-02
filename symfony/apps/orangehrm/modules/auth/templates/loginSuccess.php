@@ -120,10 +120,10 @@ $imagePath = theme_path("images/login");
         
 	margin: 0px auto;
         font-family:'Lato' sans-serif;
-        font-size: 22px;
+        font-size: 23px;
         color: #A13487;
         font-weight: bold;
-	padding: 1em 1em 2em;
+	padding: 1em 2em 2em;
     }
     
     .form-hint {
@@ -182,7 +182,7 @@ border: 1px solid rgba(0, 0, 0, 0.1);
         <?php 
             echo $form->renderHiddenFields(); // rendering csrf_token 
         ?>
-        <div id="logInPanelHeading"><?php echo __('Veuillez vous connecter'); ?></div>
+        <div id="logInPanelHeading"><?php echo __('Connectez vous'); ?></div>
 
         <div class="form-group" class="textInputContainer">
             <?php echo $form['Username']->render(array(
