@@ -8708,7 +8708,7 @@
                            </trans-unit>
                            <trans-unit id="1743">
                             <source>IonCube loader is not installed in the server. Please contact OrangeHRM for help.</source>
-                            <target>Le loader IonCube n'est pas installé sur ce serveur. Pour toute question technique, veuillez contacter OrangeHRM.</target>
+                            <target>Le loader IonCube n'est pas installé sur ce serveur. Pour toute question technique, veuillez contacter SeproERP.</target>
                             <note>For help with a specific error when installing the loader, you may get an error message saying the ionCube Loader is not currently installed successfully. Please contact OrangeHRM for Help</note>
                            </trans-unit>
                            <trans-unit id="1744">
@@ -8928,12 +8928,12 @@
                            </trans-unit>
                            <trans-unit id="1787">
                             <source>Join OrangeHRM Community</source>
-                            <target>Rejoignez la communauté OrangeHRM</target>
+                            <target>Rejoignez la communauté SeproERP</target>
                             <note>Invites translators to join with OrangeHRM community and help translating the system to a desired language.</note>
                            </trans-unit>
                            <trans-unit id="1788">
                             <source>Join the OrangeHRM User Community</source>
-                            <target>Rejoignez la communauté des utilisateurs OrangeHRM </target>
+                            <target>Rejoignez la communauté des utilisateurs SeproERP </target>
                             <note>Invites translators to join with OrangeHRM community and help translating the system to a desired language.</note>
                            </trans-unit>
                            <trans-unit id="1789">
@@ -11914,32 +11914,32 @@
                               </trans-unit>
                               <trans-unit id="2389">
                                <source>Orange Buzz</source>
-                               <target>Orange Buzz</target>
+                               <target>Sepro Buzz</target>
                                <note>The main purpose of this project is to develop an android app to be used for the Buzz Application. This app will be able to view buzz, post buzz and like/unlike comments etc. The speciality of the app is the ability to instantaneously take a photo from the camera and upload to buzz within few seconds.</note>
                               </trans-unit>
                               <trans-unit id="2390">
                                <source>OrangeHRM - Activate Event</source>
-                               <target>OrangeHRM - Activer l'événement</target>
+                               <target>Sepro - Activer l'événement</target>
                                <note>For the Admin/Event owner to activate an event and assign a set of tasks,  go to On-boarding&gt;&gt; Events&gt;&gt; Select an existing event&gt;&gt; Events Details , click “Activate”, Select the task type(s) involved in this event and click “Generate Tasks</note>
                               </trans-unit>
                               <trans-unit id="2391">
                                <source>OrangeHRM - Bulk Update</source>
-                               <target>OrangeHRM - Mise à jour groupée </target>
+                               <target>Sepro - Mise à jour groupée </target>
                                <note>Admin or Event owner can select number of assigned tasks and change the task owner, due date etc.,</note>
                               </trans-unit>
                               <trans-unit id="2392">
                                <source>OrangeHRM - Confirmation Required</source>
-                               <target>OrangeHRM - Confirmation requise</target>
+                               <target>SeproERP - Confirmation requise</target>
                                <note>When translating the labels in modules to another language under internationalization mechanism, OrangeHRM confirmation is required.</note>
                               </trans-unit>
                               <trans-unit id="2393">
                                <source>OrangeHRM - Information</source>
-                               <target>OrangeHRM - Information</target>
+                               <target>SeproERP - Information</target>
                                <note>General information of the OrangeHRM company</note>
                               </trans-unit>
                               <trans-unit id="2394">
                                <source>OrangeHRM - Post to Facebook</source>
-                               <target>OrangeHRM - Poster sur Facebook</target>
+                               <target>SeproERP - Poster sur Facebook</target>
                                <note>Both internal and external applicants can apply for a OrangeHRM vacancy which is posted on FB</note>
                               </trans-unit>
                               <trans-unit id="2395">
@@ -11959,11 +11959,11 @@
                               </trans-unit>
                               <trans-unit id="2398">
                                <source>OrangeHRM is not licensed to run on this server. Please contact OrangeHRM for an updated License.</source>
-                               <target>La licence d'OrangeHRM n'inclut pas ce serveur. Veuillez contacter OrangeHRM pour toute modification.</target>
+                               <target>La licence d'SeproERP n'inclut pas ce serveur. Veuillez contacter OrangeHRM pour toute modification.</target>
                               </trans-unit>
                               <trans-unit id="2399">
                                <source>OrangeHRM Password Reset</source>
-                               <target>Réinitialisation du mot de passe OrangeHRM</target>
+                               <target>Réinitialisation du mot de passe SeproERP</target>
                                <note>If you enter the wrong password many times then you will be required to reset the password.</note>
                               </trans-unit>
                               <trans-unit id="2400">
@@ -11973,7 +11973,7 @@
                               </trans-unit>
                               <trans-unit id="2401">
                                <source>OrangeHRM Username</source>
-                               <target>Nom d'utilisateur OrangeHRM</target>
+                               <target>Nom d'utilisateur SeproERP</target>
                                <note>You can create an administrator account to login to the system by entering the preferred Username and Password.</note>
                               </trans-unit>
                               <trans-unit id="2402">
@@ -18790,7 +18790,7 @@
                                                          </trans-unit>
                                                          <trans-unit id="3767">
                                                           <source>You have been restricted from accessing OrangeHRM temporarily.</source>
-                                                          <target>Votre accès à OrangeHRM a été momentanément restreint.</target>
+                                                          <target>Votre accès à SeproERP a été momentanément restreint.</target>
                                                           <note>It is a restriction error message which strictly says that user have been restricted from accessing OrangeHRM temporarily.</note>
                                                          </trans-unit>
                                                          <trans-unit id="3768">
