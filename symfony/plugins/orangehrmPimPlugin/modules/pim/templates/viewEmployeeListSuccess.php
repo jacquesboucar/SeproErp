@@ -84,7 +84,7 @@
 
         // Handle hints
         if ($("#empsearch_id").val() == '') {
-            $("#empsearch_id").val('<?php echo __("Type Employee Id") . "..."; ?>')
+            $("#empsearch_id").val("<?php echo __("Type Employee Id") . "..."; ?>")
                     .addClass("inputFormatHint");
         }
 

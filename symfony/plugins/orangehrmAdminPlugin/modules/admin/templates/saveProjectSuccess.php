@@ -254,7 +254,7 @@ use_javascript(plugin_web_path('orangehrmAdminPlugin', 'js/saveProjectSuccess'))
     <?php } ?>
     var numberOfProjectAdmins = <?php echo $form->numberOfProjectAdmins; ?>;
     var lang_typeHint = '<?php echo __("Type for hints") . "..."; ?>';
-    var lang_nameRequired = '<?php echo __(ValidationMessages::REQUIRED); ?>';
+    var lang_nameRequired = "<?php echo __(ValidationMessages::REQUIRED); ?>";
     var lang_activityNameRequired = '<?php echo __(ValidationMessages::REQUIRED); ?>';
     var lang_validCustomer = '<?php echo __(ValidationMessages::INVALID); ?>';
     var lang_projectRequired = '<?php echo __(ValidationMessages::REQUIRED); ?>';
@@ -279,7 +279,7 @@ use_javascript(plugin_web_path('orangehrmAdminPlugin', 'js/saveProjectSuccess'))
     var lang_Project = '<?php echo __("Project"); ?>';
     var lang_uniqueCustomer = '<?php echo __(ValidationMessages::ALREADY_EXISTS); ?>';
     var lang_uniqueName = '<?php echo __(ValidationMessages::ALREADY_EXISTS); ?>';
-    var lang_editActivity = '<?php echo __("Edit Project Activity"); ?>';
+    var lang_editActivity = "<?php echo __("Edit Project Activity"); ?>";
     var lang_addActivity = '<?php echo __("Add Project Activity"); ?>';
     var isProjectAdmin = '<?php echo $isProjectAdmin; ?>';
     var dontHavePermission = '<?php echo (!$projectPermissions->canCreate() || !$projectPermissions->canUpdate()); ?>';
