@@ -6163,7 +6163,7 @@
                      </trans-unit>
                      <trans-unit id="1232">
                       <source>Employee cannot be a reviewer in another category</source>
-                      <target>L'employé ne peut pas être examinateur dans une autre catégorie</target>
+                      <target>Un employé ne peut pas être examinateur dans une autre catégorie</target>
                       <note>If an employee selected as a Main evaluator for a certain appraisal, the same person can not be assigned as a peer/supervisor to that.</note>
                      </trans-unit>
                      <trans-unit id="1233">
@@ -7630,7 +7630,7 @@
                         </trans-unit>
                         <trans-unit id="1526">
                          <source>From time should be less than To time</source>
-                         <target>Date incorrecte. "De" devrait être avant "à". </target>
+                         <target>Devrait etre moins. </target>
                          <note>If the employee selects a to time that falls before From time when apply for leave, he will receive the error message saying From time should be less than To time.</note>
                         </trans-unit>
                         <trans-unit id="1527">

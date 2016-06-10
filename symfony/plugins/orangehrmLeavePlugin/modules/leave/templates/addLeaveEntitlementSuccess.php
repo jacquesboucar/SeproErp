@@ -139,17 +139,17 @@ use_stylesheets_for_form($form);
     var lang_matchesNone = '<?php echo __('No matching employees');?>';
     var lang_required = '<?php echo __(ValidationMessages::REQUIRED); ?>';
     var lang_invalid = '<?php echo __(ValidationMessages::INVALID); ?>';
-    var lang_number = '<?php echo __("Should be a number with upto %count% decimal places", array('%count%' => 2)); ?>';
+    var lang_number = "<?php echo __("Should be a number with upto %count% decimal places", array('%count%' => 2)); ?>";
     var lang_valid_entitlement = '<?php echo __("Used amount exceeds the current amount"); ?>';
     var validEntitlemnetUrl =  '<?php echo url_for('leave/isValidEntitlemnetAjax');?>';
     var lang_Loading = '<?php echo __('Loading');?>';
     var lang_Employees = '<?php echo __('Employees');?>';
     var lang_NoResultsFound = '<?php echo __("No Records Found");?>';
     var lang_BulkAssignPleaseWait = '<?php echo __('Bulk Assigning Leave Entitlement to %count% Employees. Please Wait');?>';
-    var lang_PleaseWait = '<?php echo __('Assigning Leave Entitlement. Please Wait');?>';
+    var lang_PleaseWait = "<?php echo __('Assigning Leave Entitlement. Please Wait');?>";
         
     var filterMatchingEmployees = 0;
     
-    var mode = '<?php echo ($addMode)?'add':'update'; ?>';
+    var mode = "<?php echo ($addMode)?'add':'update'; ?>";
     
 </script>

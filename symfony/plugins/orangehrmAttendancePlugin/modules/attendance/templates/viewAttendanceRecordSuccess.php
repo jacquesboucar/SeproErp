@@ -76,12 +76,12 @@
     var linkForProxyPunchInOut='<?php echo url_for('attendance/proxyPunchInPunchOut'); ?>'
     var trigger='<?php echo $trigger; ?>';
     var employeeAll='<?php echo __('All'); ?>';
-    var employeeId='<?php echo $employeeId; ?>';
+    var employeeId="<?php echo $employeeId; ?>";
     var dateSelected='<?php echo $date; ?>';
     var actionRecorder='<?php echo $actionRecorder; ?>';
     var employeeSelect = '<?php echo __('Select an Employee') ?>';
     var invalidEmpName = '<?php echo __('Invalid Employee Name') ?>';
-    var noEmployees = '<?php echo __('No Employees Available') ?>';
+    var noEmployees = "<?php echo __('No Employees Available') ?>";
     var typeForHints = '<?php echo __("Type for hints") . '...'; ?>';
     var date='<?php echo $date; ?>';
     var linkToEdit='<?php echo url_for('attendance/editAttendanceRecord'); ?>'

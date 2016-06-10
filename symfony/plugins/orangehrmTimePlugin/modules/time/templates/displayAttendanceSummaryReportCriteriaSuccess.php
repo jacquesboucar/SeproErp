@@ -12,7 +12,7 @@
                 <ol>
                                                                    
                     <li> 
-                        <label><?php echo __('Employee Name'.' <em>*</em>') ?></label>
+                        <label><?php echo __('Employee Name') ?></label>
                         <?php echo $form['empName']->render(); ?>
                     
                     </li>
@@ -203,7 +203,7 @@
         errorMsge = null;
         if(empDateCount==0){
 
-            errorMsge = '<?php echo __("No Employees Available");?>';
+            errorMsge = "<?php echo __("No Employees Available");?>";
             return false;
         }
         for (i=0; i < empDateCount; i++) {

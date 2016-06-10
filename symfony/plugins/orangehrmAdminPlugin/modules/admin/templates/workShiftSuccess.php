@@ -99,7 +99,7 @@
 	var workShiftInfoUrl = "<?php echo url_for("admin/getWorkShiftInfoJson?id="); ?>";
 	var workShiftEmpInfoUrl = "<?php echo url_for("admin/getWorkShiftEmpInfoJson?id="); ?>";
 
-	var lang_Required = '<?php echo __(ValidationMessages::REQUIRED); ?>';
+	var lang_Required = "<?php echo __(ValidationMessages::REQUIRED); ?>";
 	var lang_exceed50Charactors = '<?php echo __(ValidationMessages::TEXT_LENGTH_EXCEEDS, array('%amount%' => 50)); ?>';
 	var lang_addWorkShift = "<?php echo __("Add Work Shift"); ?>";
 	var lang_editWorkShift = "<?php echo __("Edit Work Shift"); ?>";
