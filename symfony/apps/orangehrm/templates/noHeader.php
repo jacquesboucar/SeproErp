@@ -2,15 +2,21 @@
 
     </head>
     <body>
-      
-        <div id="wrapper">
-            
-            <div id="content">
+    <div class="container-fluid">
+        <header class="headerlogin">
 
-                  <?php echo $sf_content ?>
+        </header>
+    </div>
 
-            </div> <!-- content -->
-          
-        </div> <!-- wrapper -->
-        
+    <div id="wrapper">
+
+      <div id="content">
+
+        <?php echo $sf_content ?>
+
+      </div> <!-- content -->
+
+    </div> <!-- wrapper -->
+
+
 <?php require_once '_footer.php'; ?>

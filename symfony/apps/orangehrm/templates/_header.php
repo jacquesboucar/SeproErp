@@ -18,6 +18,10 @@ $cultureElements = explode('_', $sf_user->getCulture());
         <link href="<?php echo theme_path('css/tipTip.css')?>" rel="stylesheet" type="text/css"/>
         <link href="<?php echo theme_path('css/jquery/jquery-ui-1.8.21.custom.css')?>" rel="stylesheet" type="text/css"/>
         <link href="<?php echo theme_path('css/jquery/jquery.autocomplete.css')?>" rel="stylesheet" type="text/css"/>
+        <link href="<?php echo public_path('../../themes/orange/css/bootstrap.css')?>" rel="stylesheet" type="text/css"/>
+        <link href="<?php echo public_path('../../themes/orange/css/bootstrap.min.css')?>" rel="stylesheet" type="text/css"/>
+        <link href="<?php echo public_path('../../themes/orange/css/style-login.css')?>" rel="stylesheet" type="text/css"/>
+        <link href="<?php echo public_path('../../themes/orange/css/bootstrap-theme.css')?>" rel="stylesheet" type="text/css"/>
         
         <!-- Custom CSS files -->
         <link href="<?php echo theme_path('css/main.css')?>" rel="stylesheet" type="text/css"/>

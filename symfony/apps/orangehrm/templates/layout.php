@@ -26,6 +26,12 @@ $cultureElements = explode('_', $sf_user->getCulture());
     <!--[if IE 8]>
         <link href="<?php echo public_path('../../themes/orange/css/IE8_style.css')?>" rel="stylesheet" type="text/css"/>
     <![endif]-->
+      <link href="css/bootstrap.css" rel="stylesheet">
+      <link href="css/bootstrap.min.css" rel="stylesheet">
+      <link href="css/style-login.css" rel="stylesheet">
+      <link href="css/bootstrap-theme.css" rel="stylesheet">
+
+
 	<script type="text/javascript" src="<?php echo public_path('../../themes/orange/scripts/style.js');?>"></script>
 	
 	<script type="text/javascript" src="<?php echo public_path('../../scripts/archive.js');?>"></script>
@@ -44,7 +50,7 @@ $cultureElements = explode('_', $sf_user->getCulture());
     
   </head>
   <body>
-      
+
         <div id="wrapper">
 
             <div id="branding">
