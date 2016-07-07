@@ -24,8 +24,8 @@
     margin-top: 10px;
 
 }
-/*
-.box{
+
+#boxlogin{
     background-color: #fff;
     height: auto;
     margin: 0 auto;
@@ -33,7 +33,7 @@
     border-top: 5px solid #650582;
     margin-top: 20px;
 }
-*/
+
 .login__form{
     padding: 10px;
 }

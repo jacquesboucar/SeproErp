@@ -15,7 +15,7 @@ $imagePath = theme_path("images/login");
     <div class="row">
         <div class="col-xs-12 col-sm-8 col-md-4 col-lg-4"></div>
         <div class="col-xs-12 col-sm-8 col-md-4 col-lg-4">
-            <div class="box">
+            <div class="box" id="boxlogin">
                 <form action="<?php echo url_for('auth/validateCredentials'); ?>" method="post" class="login__form">
                     <h3 class="form-title text-center">Authentifiez-vous!</h3>
                     <?php
