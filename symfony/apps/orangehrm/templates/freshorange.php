@@ -9,13 +9,8 @@ include_slot('header', get_partial('global/header'));
     <body>
 
         <header class="headerlogin">
-
-        </header>
-
-        <div id="wrapper">
-
             <div id="branding">
-                <a href="http://www.orangehrm.com/" target="_blank"><img src="<?php echo theme_path('images/logo.png')?>" width="283" height="56" alt="OrangeHRM"/></a>
+               <!-- <a href="http://www.orangehrm.com/" target="_blank"><img src="<?php //echo theme_path('images/logo.png')?>" width="283" height="56" alt="OrangeHRM"/></a> -->
                 <!--<a href="http://www.orangehrm.com/user-survey-registration.php" class="subscribe" target="_blank"><?php echo __('Join OrangeHRM Community'); ?></a>-->
                 <a href="#" id="welcome" class="panelTrigger"><?php echo __("Welcome %username%", array("%username%" => $sf_user->getAttribute('auth.firstName'))); ?></a>
                 <div id="welcome-menu" class="panelContainer">
@@ -40,6 +35,11 @@ include_slot('header', get_partial('global/header'));
                     </ul>
                 </div>-->
             </div> <!-- branding -->
+        </header>
+
+        <div id="wrapper">
+
+
 
             <?php include_component('core', 'mainMenu'); ?>
 
@@ -51,13 +51,11 @@ include_slot('header', get_partial('global/header'));
 
         </div> <!-- wrapper -->
 
-        <footer class="footerlayout">
-
-            <div id="footer" class="pull-left">
-                <?php include_partial('global/copyright');?>
-            </div>
-            <!-- footer -->
-        </footer>
+       <footer class="footerlayout">
+          <div id="footer">
+            <?php include_partial('global/copyright');?>
+          </div> <!-- footer -->
+       </footer>
 
 
 

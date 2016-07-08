@@ -73,7 +73,7 @@ $cultureElements = explode('_', $sf_user->getCulture());
                         <li><a href="#">Link 4</a></li>
                     </ul>
                 </div>
-            </div> <!-- branding -->      
+            </div> <!-- branding -->
             
             <?php include_component('core', 'mainMenu'); ?>
 
@@ -83,25 +83,25 @@ $cultureElements = explode('_', $sf_user->getCulture());
 
             </div> <!-- content -->
           
-        </div> <!-- wrapper -->      
-     
+        </div> <!-- wrapper -->
+
     <script type="text/javascript">
     //<![CDATA[
     <?php $skipRoundBorder = $sf_request->getAttribute('skipRoundBorder');
     if (!isset($skipRoundBorder)) { ?>
-	
+
     	if (document.getElementById && document.createElement) {
 	 			roundBorder('outerbox');
 		}
-            
-        $(document).ready(function() {        
+
+        $(document).ready(function() {
 
             $("#welcome").click(function () {
                 $("#welcome-menu").slideToggle("fast");
                 $(this).toggleClass("activated");
                 return false;
             });
-            
+
             /* Highlighting firstLevelMenu: Begins */
             $(".firstLevelMenu").click(function () {
 
@@ -113,10 +113,10 @@ $cultureElements = explode('_', $sf_user->getCulture());
 
             });
             /* Highlighting firstLevelMenu: Ends */
-            
 
-        });            
-	    
+
+        });
+
     <?php } ?>
     //]]>
     </script>
