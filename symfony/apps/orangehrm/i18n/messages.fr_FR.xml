@@ -1282,7 +1282,7 @@
         </trans-unit>
         <trans-unit id="256">
          <source>Admin</source>
-         <target>Admin</target>
+         <target>Administration</target>
          <note>The administrator who has full privilege over the functionality of application.</note>
         </trans-unit>
         <trans-unit id="257">
@@ -9264,7 +9264,7 @@
                             </trans-unit>
                             <trans-unit id="1854">
                              <source>Leave</source>
-                             <target>Congé</target>
+                             <target>Gestion RH</target>
                              <note>A comprehensive leave management module with extensive possibilities of defining leave types, company holidays, applying for and assigning of leave for the employees of the company.</note>
                             </trans-unit>
                             <trans-unit id="1855">
@@ -12589,7 +12589,7 @@
                                  </trans-unit>
                                  <trans-unit id="2523">
                                   <source>Performance</source>
-                                  <target>Performance</target>
+                                  <target>Evolution</target>
                                   <note>Manages and reviews the performance of all employees where a company can understand how well an employee is performing in relation to their strategic goals and objectives.</note>
                                  </trans-unit>
                                  <trans-unit id="2524">
@@ -12799,7 +12799,7 @@
                                  </trans-unit>
                                  <trans-unit id="2565">
                                   <source>PIM</source>
-                                  <target>PIM</target>
+                                  <target>Collaborateur</target>
                                   <note>Personal Information Management</note>
                                  </trans-unit>
                                  <trans-unit id="2566">
