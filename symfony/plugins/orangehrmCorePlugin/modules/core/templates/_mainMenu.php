@@ -76,7 +76,7 @@ function getHtmlId($menuItem) {
                         
                         <?php if (count($secondLevelItem['subMenuItems']) > 0) : ?>
                         
-                            <ul>
+                            <ul class="nav navbar-nav">
                                 
                                 <?php foreach ($secondLevelItem['subMenuItems'] as $thirdLevelItem) : ?>
                                 

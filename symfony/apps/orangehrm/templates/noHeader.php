@@ -2,13 +2,12 @@
 
     </head>
     <body>
-    <div class="container-fluid">
+
         <header class="headerlogin">
 
         </header>
-    </div>
 
-    <div id="wrapper">
+    <div id="wrappers">
 
       <div id="content">
 
