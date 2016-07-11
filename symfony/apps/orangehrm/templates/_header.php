@@ -23,6 +23,7 @@ $cultureElements = explode('_', $sf_user->getCulture());
         <link href="<?php echo public_path('../../themes/orange/css/style-login.css')?>" rel="stylesheet" type="text/css"/>
         <link href="<?php echo public_path('../../themes/orange/css/bootstrap-theme.css')?>" rel="stylesheet" type="text/css"/>
         <link href="<?php echo public_path('../../themes/orange/css/font-awesome.css')?>" rel="stylesheet">
+        <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
         <!-- Custom CSS files -->
         <link href="<?php echo theme_path('css/main.css')?>" rel="stylesheet" type="text/css"/>
         
