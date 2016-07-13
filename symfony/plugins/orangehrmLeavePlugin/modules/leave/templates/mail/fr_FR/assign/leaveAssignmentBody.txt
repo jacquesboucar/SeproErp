@@ -1,0 +1,8 @@
+Hi %recipientFirstName%,
+
+%performerFullName% vous a attribué les jours suivants de congé:
+
+%leaveDetails%
+Merci.
+
+Ceci est un mail automatisé.

@@ -1,0 +1,11 @@
+Hi %recipientFirstName%,
+
+%performerFullName% a annulé le congé. les details du congé:
+
+%leaveDetails%
+
+Ce courrier vous a été envoyé , car vous avez souscrit à Sablux Group annulations de congés .
+
+Merci.
+
+Ceci est une notification automatisé.

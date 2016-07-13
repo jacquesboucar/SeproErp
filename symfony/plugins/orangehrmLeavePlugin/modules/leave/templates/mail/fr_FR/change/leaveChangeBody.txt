@@ -1,0 +1,8 @@
+Hi %recipientFirstName%,
+
+%performerFullName% a fait les changements suivants à votre demande de congé pour les jours suivants:
+
+%leaveDetails%
+Merci.
+
+Ceci mail est une notification automatisé.

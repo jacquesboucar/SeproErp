@@ -1,0 +1,10 @@
+Hi %recipientFirstName%,
+
+%performerFullName% a approuvé la demande de congé de  %applicantFullName%. Les details du congé:
+
+%leaveDetails%
+On vous a envoyé ce mail, comme vous avez souscrit à Sablux Group approbations de congé.
+
+Merci.
+
+Ceci est un mail automatisé.

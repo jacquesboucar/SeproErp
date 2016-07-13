@@ -1,0 +1,1 @@
+Notification Congé - %performerFullName% appliquée pour  %numberOfDays% Day(s) de %leaveType% Congé

@@ -1,0 +1,10 @@
+Hi %recipientFirstName%,
+
+%performerFullName% a demandé l'autorisation . Les détails du congé:
+
+%leaveDetails%
+Ce mail Vous avez été envoyé, comme vous avez souscrit à des demandes d'autorisation Sablux Group.
+
+Merci.
+
+Ceci est une notification automatisée.

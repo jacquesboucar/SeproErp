@@ -1,0 +1,10 @@
+Hi %recipientFirstName%,
+
+%performerFullName% a rejetée la demande de congé de %applicantFullName%. Les details du congé:
+
+%leaveDetails%
+Ce mail vous a été envoyé , car vous avez souscrit à Sablux Group refus de congé .
+
+Merci.
+
+Ceci est un mail automatique.

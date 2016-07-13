@@ -1,0 +1,10 @@
+Hi %recipientFirstName%,
+
+%performerFullName% a attribué l'autorisation de %assigneeFullName%. Les details du Congé:
+
+%leaveDetails%
+Vous avez été envoyé ce courrier , comme vous êtes un superviseur affecté à %assigneeFullName%.
+
+Merci.
+
+Ceci est un mail automatisé.

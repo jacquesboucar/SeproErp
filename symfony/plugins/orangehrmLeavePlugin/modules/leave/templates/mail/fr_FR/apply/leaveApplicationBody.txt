@@ -1,0 +1,12 @@
+Hi %recipientFirstName%,
+
+%performerFullName% a demandé l'autorisation . Les détails de congé:
+
+%leaveDetails%      
+Ce mail Vous avez été envoyé, comme vous êtes un superviseur affecté à %performerFirstName%.
+
+S'il vous plaît connectez vous à Sablux Group, et approuver ou rejeter de la liste congés .
+
+Merci.
+
+Ceci est une notification automatisée.

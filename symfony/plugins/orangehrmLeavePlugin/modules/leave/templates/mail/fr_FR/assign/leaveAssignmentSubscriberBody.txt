@@ -1,0 +1,11 @@
+Hi %recipientFirstName%,
+
+%performerFullName% a attribué le congé de %assigneeFullName%. Les details des congé:
+
+%leaveDetails%
+
+Ce mail vous a été envoyé, comme vous avez souscrit à Sablux Group assignation de congé .
+
+Merci.
+
+Ceci est un mail automatisé.

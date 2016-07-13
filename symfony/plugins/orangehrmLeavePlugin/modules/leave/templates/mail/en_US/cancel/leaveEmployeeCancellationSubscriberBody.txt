@@ -3,7 +3,7 @@ Hi %recipientFirstName%,
 %performerFullName% has cancelled leave. The leave details:
 
 %leaveDetails%
-You were sent this mail, as you have subscribed to OrangeHRM leave cancellations.
+You were sent this mail, as you have subscribed to Sablux Group leave cancellations.
 
 Thank you.
 

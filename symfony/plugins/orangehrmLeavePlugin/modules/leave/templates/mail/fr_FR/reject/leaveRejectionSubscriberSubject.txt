@@ -1,0 +1,1 @@
+Notification conge- %performerFullName% A Rejeté la demande de congé de %applicantFullName%

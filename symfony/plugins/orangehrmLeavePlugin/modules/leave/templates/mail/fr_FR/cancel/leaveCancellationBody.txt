@@ -1,0 +1,8 @@
+Hi %recipientFirstName%,
+
+%performerFullName% a annulé votre demande de congé pour les jours suivants:
+
+%leaveDetails%
+Merci.
+
+Ceci est une notification automatisé.

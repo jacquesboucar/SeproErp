@@ -1,0 +1,10 @@
+Hi %recipientFirstName%,
+
+%performerFullName% a fait les modifications suivantes à quitter demande %applicantFullName%. Les détails du congé:
+
+%leaveDetails%
+Ce mail vous a été envoyé , car vous avez souscrit à des changements de congé Sablux Group .
+
+Merci.
+
+Ceci est une notification automatisée.

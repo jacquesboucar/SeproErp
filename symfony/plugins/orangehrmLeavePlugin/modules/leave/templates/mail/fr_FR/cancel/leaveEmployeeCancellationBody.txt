@@ -1,0 +1,10 @@
+Hi %recipientFirstName%,
+
+%performerFullName% a annulé le congé . Les détails de congé:
+
+%leaveDetails%
+Ce mail vous a été envoyé , car vous êtes un superviseur affecté à %performerFirstName%.
+
+Merci.
+
+Ceci est une notification automatisé.

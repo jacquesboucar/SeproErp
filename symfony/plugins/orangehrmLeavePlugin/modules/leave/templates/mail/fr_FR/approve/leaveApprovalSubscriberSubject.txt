@@ -1,0 +1,1 @@
+Notification Congé - %performerFullName% a approué votre demande de conge de %applicantFullName%

@@ -1,0 +1,8 @@
+Hi %recipientFirstName%,
+
+%performerFullName% a rejeté votre demande de congé pour les jours suivants:
+
+%leaveDetails%
+Merci.
+
+Ceci est une notification automatique.
