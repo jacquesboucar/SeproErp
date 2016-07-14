@@ -1297,11 +1297,7 @@ INSERT INTO `ohrm_module` (`id`, `name`, `status`) VALUES
 (5, 'time', 1),
 (6, 'attendance', 1),
 (7, 'recruitment', 1),
-(8, 'recruitmentApply', 1),
-(9, 'Collaborateur', 1),
-(10, 'Gestion RH', 1),
-(11, 'Evaluation', 1),
-(12, 'Formation', 1);
+(8, 'recruitmentApply', 1);
 
 
 INSERT INTO ohrm_screen (`id`, `name`, `module_id`, `action_url`) VALUES
@@ -1400,30 +1396,7 @@ INSERT INTO ohrm_screen (`id`, `name`, `module_id`, `action_url`) VALUES
 (100, 'Terminate Employment', 3, 'terminateEmployement'),
 (101, 'View Attendance Summary Report', 5, 'displayAttendanceSummaryReport'),
 (102, 'View Project Activity Details Report', 5, 'displayProjectActivityDetailsReport'),
-
-(103, 'View Collaborateur Module', 9, ''),
-(104, 'Information Personnelles', 9, ''),
-(105, 'Addresses', 9, ''),
-(106, 'Fiche de poste', 9, ''),
-(107, 'Salaire', 9, ''),
-(108, 'Affectation', 9, ''),
-(109, 'Parcours', 9, ''),
-(110, 'Avantages', 9, ''),
-
-(111, 'View Gestion RH Module', 10, ''),
-(112, 'Demande de congé', 10, ''),
-(113, 'Validation congé', 10, ''),
-(114, 'Validation congé collaborateur', 10, ''),
-(115, 'Attribution de congés exceptionnels', 10, ''),
-(116, 'Vehicule', 10, ''),
-
-(117, 'View Evaluation Module', 11, ''),
-(118, 'Objectifs', 11, ''),
-
-(119, 'View Formation Module', 12, ''),
-(120, 'Demande de formation', 12, ''),
-
-(121, 'Banque de CV', 7, '');
+(103, 'Banque de CV', 7, '');
 
 INSERT INTO ohrm_menu_item (`id`, `menu_title`, `screen_id`, `parent_id`, `level`, `order_hint`, `url_extras`, `status`) VALUES
 (1, 'Admin', 74, NULL, 1, 100, NULL, 1),
@@ -1497,31 +1470,8 @@ INSERT INTO ohrm_menu_item (`id`, `menu_title`, `screen_id`, `parent_id`, `level
 (78, 'Reports', NULL, 41, 2, 400, NULL, 0),
 (79, 'Leave Entitlements and Usage Report', 78, 78, 3, 100, NULL, 0),
 (80, 'My Leave Entitlements and Usage Report', 79, 78, 3, 200, NULL, 0),
-(81, 'Users', 1, 2, 3, 100, NULL, 1),
-
-(82, 'Collaborateur', 103, NULL, 1, 100, NULL, 1),
-(83, 'Information Personnelles', 104, 82, 1, 100, NULL, 1),
-(84, 'Addresses', 105, 82, 1, 100, NULL, 1),
-(85, 'Fiche de poste', 106, 82, 1, 100, NULL, 1),
-(86, 'Salaire', 107, 82, 1, 100, NULL, 1),
-(87, 'Affectation', 108, 82, 1, 100, NULL, 1),
-(88, 'Parcours', 109, 82, 1, 100, NULL, 1),
-(89, 'Avantages', 110, 82, 1, 100, NULL, 1),
-
-(90, 'Gestion RH', 111, NULL, 1, 100, NULL, 1),
-(91, 'Demande de conge', 112, 90, 1, 100, NULL, 1),
-(92, 'Validation conge', 113, 90, 1, 100, NULL, 1),
-(93, 'Validation conge collaborateur', 114, 90, 1, 100, NULL, 1),
-(94, 'Attribution de conges exceptionnels', 115, 90, 1, 100, NULL, 1),
-(95, 'Vehicule', 116, 90, 1, 100, NULL, 1),
-
-(96, 'Evaluation', 117, NULL, 1, 100, NULL, 1),
-(97, 'Objectifs', 118, 96, 1, 100, NULL, 1),
-
-(98, 'Formation', 119, NULL, 1, 100, NULL, 1),
-(99, 'Demande de formation', 120, 98, 1, 100, NULL, 1),
-
-(100, 'Banque de CV', 121, 65, 2, 100, NULL, 1);
+(81, 'Users', 1, 2, 3, 100, NULL, 1)
+(82, 'Banque de CV', 121, 65, 2, 100, NULL, 1);
 
 
 
@@ -1665,30 +1615,9 @@ INSERT INTO ohrm_user_role_screen (user_role_id, screen_id, can_read, can_create
 (1, 102, 1, 1, 1, 1),
 (4, 102, 1, 1, 1, 1),
 
-(1, 103, 1, 1, 1, 1),
-(1, 104, 1, 1, 1, 1),
-(1, 105, 1, 1, 1, 1),
-(1, 106, 1, 1, 1, 1),
-(1, 107, 1, 1, 1, 1),
-(1, 108, 1, 1, 1, 1),
-(1, 109, 1, 1, 1, 1),
-(1, 110, 1, 1, 1, 1),
 
 
-(1, 111, 1, 1, 1, 1),
-(1, 112, 1, 1, 1, 1),
-(1, 113, 1, 1, 1, 1),
-(1, 114, 1, 1, 1, 1),
-(1, 115, 1, 1, 1, 1),
-(1, 116, 1, 1, 1, 1),
-
-(1, 117, 1, 1, 1, 1),
-(1, 118, 1, 1, 1, 1),
-
-(1, 119, 1, 1, 1, 1),
-(1, 120, 1, 1, 1, 1),
-
-(2, 121, 1, 1, 1, 1);
+(2, 103, 1, 1, 1, 1);
 
 INSERT INTO `ohrm_data_group` (`id`, `name`, `description`, `can_read`, `can_create`, `can_update`, `can_delete`) VALUES
 (1, 'personal_information', 'PIM - Personal Details', 1, NULL, 1, NULL),
