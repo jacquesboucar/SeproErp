@@ -1,14 +1,5 @@
-/*
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-}*/
 body{
     background-image: url("../pictures/PageLogin.png");
-    background-position: center;
 }
 .headerlogin{
     height: 30px;
@@ -22,27 +13,6 @@ body{
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#125882', endColorstr='#16618c',GradientType=1 );
     border-bottom: 4px solid #fab824;
 }
-.logo-back{
-    margin-top: 10px;
-
-}
-
-#boxlogin{
-    background-color: #fff;
-    height: auto;
-    margin: 0 auto;
-    border: 1px solid #d9d9d9;
-    border-top: 5px solid #650582;
-    margin-top: 20px;
-}
-
-.login__form{
-    padding: 10px;
-}
-.header{
-    top: 31px !important;
-}
-
 
 .footerlayout{
     height: 30px;
@@ -55,4 +25,6 @@ body{
     background: linear-gradient(135deg, #770a82 0%, #770a82 13%, #770a82 13%, #770a82 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#125882', endColorstr='#16618c',GradientType=1 );
     border-top: 4px solid #fab824;
+    padding-bottom:50px;
+    position: static;
 }

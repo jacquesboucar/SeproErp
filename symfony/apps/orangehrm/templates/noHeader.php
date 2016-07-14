@@ -1,5 +1,5 @@
 <?php require_once '_header.php'; ?>
-
+<link href="<?php echo public_path('../../themes/orange/css/style-login.css')?>" rel="stylesheet" type="text/css"/>
     </head>
     <body>
 
