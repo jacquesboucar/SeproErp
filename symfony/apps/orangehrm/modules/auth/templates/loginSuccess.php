@@ -13,7 +13,7 @@ $imagePath = theme_path("images/login");
     </div>
 
     <div class="row">
-        <div class="col-xs-12 col-sm-8 col-md-4 col-lg-4"></div>
+        <div class="col-xs-12 col-sm-8 col-md-4 col-lg-4"><img src="<?php echo "{$imagePath}/logoligne.png"; ?>" height="25%" width="25%" style="margin-left: auto"></div>
         <div class="col-xs-12 col-sm-8 col-md-4 col-lg-4">
             <div class="box" id="boxlogin">
                 <form action="<?php echo url_for('auth/validateCredentials'); ?>" method="post" class="login__form">
