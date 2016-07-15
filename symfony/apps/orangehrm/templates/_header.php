@@ -43,8 +43,6 @@ $cultureElements = explode('_', $sf_user->getCulture());
         echo javascript_include_tag('jquery/jquery.tipTip.minified.js');
         echo javascript_include_tag('jquery/bootstrap-modal.js');
         echo javascript_include_tag('jquery/jquery.clickoutside.js');
-        echo javascript_include_tag('jquery/bootstrap.js');
-        echo javascript_include_tag('jquery/bootstrap.min.js');
         echo javascript_include_tag('jquery/menu.js');
 
 

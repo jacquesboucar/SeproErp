@@ -8,20 +8,20 @@
     background: -ms-linear-gradient(-45deg, #770a82 0%, #770a82 13%, #770a82 13%, #770a82 100%);
     background: linear-gradient(135deg, #770a82 0%, #770a82 13%, #770a82 13%, #770a82 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#125882', endColorstr='#16618c',GradientType=1 );
-    border-bottom: 4px solid #fab824;
+    /*border-bottom: 4px solid #fab824;*/
 }
 
 .footerlayout{
     height: 30px;
-    background: #770a82;
-    background: -moz-linear-gradient(-45deg, #770a82 0%, #770a82 13%, #770a82 13%, #770a82 100%);
-    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #770a82), color-stop(13%, #770a82), color-stop(13%, #770a82), color-stop(100%, #770a82));
-    background: -webkit-linear-gradient(-45deg, #770a82 0%, #770a82 13%, #770a82 13%, #770a82 100%);
-    background: -o-linear-gradient(-45deg, #770a82 0%, #770a82 13%, #770a82 13%, #770a82 100%);
-    background: -ms-linear-gradient(-45deg, #770a82 0%, #770a82 13%, #770a82 13%, #770a82 100%);
-    background: linear-gradient(135deg, #770a82 0%, #770a82 13%, #770a82 13%, #770a82 100%);
+    background: #1b438c;
+    background: -moz-linear-gradient(-45deg, #1b438c 0%, #1b438c 13%, #1b438c 13%, #1b438c 100%);
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #1b438c), color-stop(13%, #1b438c), color-stop(13%, #1b438c), color-stop(100%, #1b438c));
+    background: -webkit-linear-gradient(-45deg, #1b438c 0%, #1b438c 13%, #1b438c 13%, #1b438c 100%);
+    background: -o-linear-gradient(-45deg, #1b438c 0%, #1b438c 13%, #1b438c 13%, #1b438c 100%);
+    background: -ms-linear-gradient(-45deg, #1b438c 0%, #1b438c 13%, #1b438c 13%, #1b438c 100%);
+    background: linear-gradient(135deg, #1b438c 0%, #1b438c 13%, #1b438c 13%, #1b438c 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#125882', endColorstr='#16618c',GradientType=1 );
-    border-top: 4px solid #fab824;
-    padding-bottom:50px;
-    position: static;
+    /* border-top: 4px solid #fab824;*/
+ padding-bottom:50px;
+ position: static;
 }

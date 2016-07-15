@@ -17,7 +17,7 @@ $imagePath = theme_path("images/login");
         <div class="col-xs-12 col-sm-8 col-md-4 col-lg-4">
             <div class="box" id="boxlogin">
                 <form action="<?php echo url_for('auth/validateCredentials'); ?>" method="post" class="login__form">
-                    <h3 class="form-title text-center">Authentifiez-vous!</h3>
+                    <h1 class="form-title text-center" style="color: #770a82">Mon Compte</h1>
                     <?php
                     echo $form->renderHiddenFields(); // rendering csrf_token
                     ?>
@@ -48,7 +48,7 @@ $imagePath = theme_path("images/login");
                         <label for="remember_me">se souvenir</label>
                     </div>
                     <div class="pull-right">
-                        <input type="submit" id="_submit" name="_submit" value="Connextion" class="btn btn-primary" />
+                        <input type="submit" id="_submit" name="_submit" value="Login" class="btn btn-primary" style="color: #770a82 " />
                     </div><br><br>
 
 
