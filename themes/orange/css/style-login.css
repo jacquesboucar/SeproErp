@@ -30,14 +30,40 @@ body{
 #boxlogin{
     height: auto;
     margin: 0 auto;
-    border: 1px solid #d9d9d9;
-    border: 5px solid #FFFFFF;
+    border: 2px solid #FFFFFF;
     margin-top: 20px;
+    border-radius: 10px;
 }
 
 .login__form{
     padding: 10px;
 }
+.login__form .form-group.form-password{
+
+    margin-bottom:50px
+
+}
+.login__form .form-submit{
+    color: #aaaaaa;
+}
+.login__form .form-submit input{
+    border-radius: 10px;
+}
+.login__form .form-group .input-icon{
+    position: relative;
+}
+.login__form .form-group .input-icon .icon-user,
+.login__form .form-group .input-icon .icon-lock{
+    position:absolute;
+    top:12px;
+    left:5px;
+
+}
+.login__form .form-group .input-icon input{
+    padding:12px 20px;
+
+}
+
 .header{
     top: 31px !important;
 }

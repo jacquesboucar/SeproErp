@@ -12,7 +12,7 @@ $imagePath = theme_path("images/login");
             <img src="<?php echo "{$imagePath}/twiter.png"; ?>" alt="Sablux Group on twitter"/></a>&nbsp;
         <a href="http://www.youtube.com/watch?feature=player_embedded&v=wMBBHTMEpb4" target="_blank">
             <img src="<?php echo "{$imagePath}/youtube.png"; ?>" alt="Sablux Group on youtube"/></a>&nbsp;
-	 <a href="http://www.linkedin.com" target="_blank">
+	    <a href="http://www.linkedin.com" target="_blank">
             <img src="<?php echo "{$imagePath}/linkedin.png"; ?>" alt="LinkedIn Sablux Group"/></a>&nbsp;   
- </div>
+    </div>
 </div>

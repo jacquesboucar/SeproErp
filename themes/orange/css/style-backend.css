@@ -1,4 +1,8 @@
-.headerlogin{
+.wrap{
+    background-image: url("../pictures/Rubriquesepro.png");
+    background-position: -16px -65px;
+}
+.headerbackend{
     height: 30px;
     background: #770a82;
     background: -moz-linear-gradient(-45deg, #770a82 0%, #770a82 13%, #770a82 13%, #770a82 100%);
@@ -21,7 +25,103 @@
     background: -ms-linear-gradient(-45deg, #1b438c 0%, #1b438c 13%, #1b438c 13%, #1b438c 100%);
     background: linear-gradient(135deg, #1b438c 0%, #1b438c 13%, #1b438c 13%, #1b438c 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#125882', endColorstr='#16618c',GradientType=1 );
-    /* border-top: 4px solid #fab824;*/
- padding-bottom:50px;
- position: static;
+
+    padding:0px 20px 50px;
+}
+
+.footerlayout .footer-block{
+    color: #FFFFFF;
+    font-weight: bold;
+    padding: 10px 0px;
+    font-size: 20px;
+}
+
+.footerlayout .footer-block .versions{
+
+}
+
+.footerlayout .footer-block .copyright{
+
+}
+
+.footerlayout .footer-block .compagnie{
+    color:#ee7d60;
+}
+
+.navbarcontent{
+    border-bottom:5px solid #1b438c;
+}
+
+.headerbackend .account a{
+    padding: 2px 10px 0px;
+    color:#ee7d60;
+    font-size: 20px;
+    margin: 0px;
+}
+.navbar-inner-backend{
+    border:none;
+}
+
+.headerbackend .account a:focus{
+
+}
+.headerbackend .account > a:hover,
+.headerbackend .account > a:focus{
+    border-right:1px solid #770a82;
+    background-color: transparent;
+}
+
+.headerbackend  .opened > a{
+
+}
+.box  a{
+
+    display: block;
+    width: 100%;
+    text-align: center;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+.box .form-hexagone{
+    margin-bottom: 20px;
+    min-height: 200px;
+    background: #E75C58;
+    padding-top: 87px;
+    font-weight:bold;
+    font-size: 25px;
+    -webkit-clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+.headerbackend .account .submenu{
+    left: auto;
+    right: 0px;
+    border: 1px solid #770a82;
+    box-shadow: none;
+    top: auto;
+    border-top-width: 0px;
+    border-radius: 0px;
+}
+
+.arrow-box:after,
+.arrow-box:before{
+    top:100;
+    left:80%;
+    content: ' ';
+    height: 0;
+    width:0;
+    position: absolute;
+}
+
+.arrow-box:after {
+    border-color: #770a82;
+    border-top-color: #000;
+    border-width: 30px;
+    margin-left: -30px;
+}
+
+.arrow-box:before {
+    border-color: #000;
+    border-top-color: #770a82;
+    border-width: 30px;
+    margin-left: -30px;
 }
