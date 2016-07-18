@@ -59,15 +59,14 @@ function getHtmlId($menuItem) {
 
 ?>
 
-<div class="menu">
     
-    <ul>
+    <ul class="dl-menu">
         
         <?php foreach ($menuItemArray as $firstLevelItem) : ?>
             
         <li<?php echo getListItemClass($firstLevelItem, $currentItemDetails); ?>><a href="<?php echo getMenuUrl($firstLevelItem); ?>" id="<?php echo getHtmlId($firstLevelItem); ?>" class="firstLevelMenu"><b><?php echo __($firstLevelItem['menuTitle']) ?></b></a>
             
-            <ul>
+            <ul class="dl-submenu">
             <?php if (count($firstLevelItem['subMenuItems']) > 0) : ?>            
                     
                     <?php foreach ($firstLevelItem['subMenuItems'] as $secondLevelItem) : ?>
@@ -76,7 +75,7 @@ function getHtmlId($menuItem) {
                         
                         <?php if (count($secondLevelItem['subMenuItems']) > 0) : ?>
                         
-                            <ul class="nav navbar-nav">
+                            <ul class="dl-submenu">
                                 
                                 <?php foreach ($secondLevelItem['subMenuItems'] as $thirdLevelItem) : ?>
                                 
@@ -103,5 +102,3 @@ function getHtmlId($menuItem) {
         <?php endforeach; ?>
             
     </ul> <!-- first level -->
-    
-</div> <!-- menu -->

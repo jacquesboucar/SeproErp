@@ -21,65 +21,51 @@
         <div class="col-xs-8 col-xs-offset-2 col-sm-8 col-sm-offset-2  col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
             <div class="row">
                 <div class="col-xs-4 col-sm-4 col-lg-4">
-                    <a class="" href="<?php echo url_for('recruitment/viewRecruitmentModule'); ?>">
+                    <a class="" href="<?php echo url_for('admin/viewModules'); ?>">
                     <div class="form-hexagone">
-
-                            ADMINISTRATION<!--  <img src="<?php //echo plugin_web_path('orangehrmDashboardPlugin', 'images/' .'RECRUTEMENT.jpg') ?>" alt="">-->
-
+                            GESTION DES DROITS
                     </div>
                      </a>
                 </div>
                 <div class="col-xs-4 col-sm-4 col-lg-4">
                     <a class="" href="<?php echo url_for('recruitment/viewRecruitmentModule'); ?>">
                     <div class="form-hexagone">
-
-                            ADMINISTRATION<!--  <img src="<?php //echo plugin_web_path('orangehrmDashboardPlugin', 'images/' .'RECRUTEMENT.jpg') ?>" alt="">-->
-
+                            RECRUTEMENT
+                    </div>
+                     </a>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-lg-4">
+                    <a class="" href="<?php echo url_for('leave/viewLeaveList'); ?>">
+                    <div class="form-hexagone">
+                            GESTION DES CONGES
+                    </div>
+                     </a>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-lg-4">
+                    <a class="" href="<?php echo url_for('performance/viewEmployeePerformanceTrackerList'); ?>">
+                    <div class="form-hexagone">
+                            EVALUATION
+                    </div>
+                     </a>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-lg-4">
+                    <a class="" href="#">
+                    <div class="form-hexagone">
+                            FORMATION
+                    </div>
+                     </a>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-lg-4">
+                    <a class="" href="<?php echo url_for('pim/viewEmployeeList'); ?>">
+                    <div class="form-hexagone">
+                            GESTION DU PERSONNEL
                     </div>
                      </a>
                 </div>
                 <div class="col-xs-4 col-sm-4 col-lg-4">
                     <a class="" href="<?php echo url_for('recruitment/viewRecruitmentModule'); ?>">
                     <div class="form-hexagone">
-
-                            ADMINISTRATION<!--  <img src="<?php //echo plugin_web_path('orangehrmDashboardPlugin', 'images/' .'RECRUTEMENT.jpg') ?>" alt="">-->
-
-                    </div>
-                     </a>
-                </div>
-                <div class="col-xs-4 col-sm-4 col-lg-4">
-                    <a class="" href="<?php echo url_for('recruitment/viewRecruitmentModule'); ?>">
-                    <div class="form-hexagone">
-
-                            ADMINISTRATION<!--  <img src="<?php //echo plugin_web_path('orangehrmDashboardPlugin', 'images/' .'RECRUTEMENT.jpg') ?>" alt="">-->
-
-                    </div>
-                     </a>
-                </div>
-                <div class="col-xs-4 col-sm-4 col-lg-4">
-                    <a class="" href="<?php echo url_for('recruitment/viewRecruitmentModule'); ?>">
-                    <div class="form-hexagone">
-
-                            ADMINISTRATION<!--  <img src="<?php //echo plugin_web_path('orangehrmDashboardPlugin', 'images/' .'RECRUTEMENT.jpg') ?>" alt="">-->
-
-                    </div>
-                     </a>
-                </div>
-                <div class="col-xs-4 col-sm-4 col-lg-4">
-                    <a class="" href="<?php echo url_for('recruitment/viewRecruitmentModule'); ?>">
-                    <div class="form-hexagone">
-
-                            ADMINISTRATION<!--  <img src="<?php //echo plugin_web_path('orangehrmDashboardPlugin', 'images/' .'RECRUTEMENT.jpg') ?>" alt="">-->
-
-                    </div>
-                     </a>
-                </div>
-                <div class="col-xs-4 col-sm-4 col-lg-4">
-                    <a class="" href="<?php echo url_for('recruitment/viewRecruitmentModule'); ?>">
-                    <div class="form-hexagone">
-
-                            ADMINISTRATION<!--  <img src="<?php //echo plugin_web_path('orangehrmDashboardPlugin', 'images/' .'RECRUTEMENT.jpg') ?>" alt="">-->
-
+                            ADMINISTRATION
                     </div>
                      </a>
                 </div>

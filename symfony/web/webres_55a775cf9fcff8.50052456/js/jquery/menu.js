@@ -2,11 +2,12 @@ $(document).ready(function()
 {
     $(".account").click(function()
     {
+        $(this).toggleClass('opened');
         var X=$(this).attr('id');
         if(X==1)
         {
             $(".submenu").hide();
-            $(this).attr('id', '0');
+            $(this).removeAttr('id');
         }
         else
         {
@@ -33,6 +34,10 @@ $(document).ready(function()
     $(document).mouseup(function()
     {
         $(".submenu").hide();
-        $(".account").attr('id', '');
+        $(this).removeAttr('id');
+        $(this).removeClass('opened');
+    });
+    $(function() {
+        $( '#dl-menu' ).dlmenu();
     });
 });

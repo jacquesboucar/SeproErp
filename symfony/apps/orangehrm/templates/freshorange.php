@@ -35,9 +35,18 @@ $imagePath = theme_path("images/login");
             <nav class="navbar navbarcontent">
               <div class="container">
                   <div class="pull-left">
-                   <img src="<?php echo "{$imagePath}/logo.png"; ?>" width="50%" height="50%">
+                   <img src="<?php echo "{$imagePath}/logo.png"; ?>" width="30%" height="5%"><a href="<?php echo url_for('dashboard/index'); ?>" class="homeicone"><img src="<?php echo "{$imagePath}/icone_home.png"; ?>" width="10%" height="1%"></a>
                   </div>
+                  <div class="pull-right">
 
+                        <div class="column">
+                            <div id="dl-menu" class="dl-menuwrapper">
+                                <button class="dl-trigger">Open Menu</button>
+                                <?php include_component('core', 'mainMenu'); ?>
+                            </div>
+                            <!-- /dl-menuwrapper -->
+                        </div>
+                  </div>
                     <?php //include_component('core', 'mainMenu'); ?>
               </div><!-- /.container -->
             </nav><!-- /.navbar -->

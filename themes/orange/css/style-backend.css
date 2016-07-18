@@ -85,7 +85,7 @@
 .box .form-hexagone{
     margin-bottom: 20px;
     min-height: 200px;
-    background: #E75C58;
+    background: #4a4c6c;
     padding-top: 87px;
     font-weight:bold;
     font-size: 25px;
@@ -124,4 +124,8 @@
     border-top-color: #770a82;
     border-width: 30px;
     margin-left: -30px;
+}
+
+.homeicone{
+    margin-left: 20px;
 }

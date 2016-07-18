@@ -33,10 +33,13 @@ body{
     border: 2px solid #FFFFFF;
     margin-top: 20px;
     border-radius: 10px;
+    margin-left: 25px;
+    margin-right: 25px;
 }
 
 .login__form{
     padding: 10px;
+    margin: 60px;
 }
 .login__form .form-group.form-password{
 
