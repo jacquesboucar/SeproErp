@@ -1,7 +1,17 @@
 .wrap{
-    background-image: url("../pictures/Rubriquesepro.png");
-    background-position: -16px -65px;
+    background-image: url("../pictures/Rubriquesepro.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+
 }
+
+.wrap.interne{
+    background-image: url("../pictures/interne.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+
+}
+
 .headerbackend{
     height: 30px;
     background: #770a82;
@@ -81,6 +91,7 @@
     text-align: center;
     color: #FFFFFF;
     text-decoration: none;
+    padding: 25px;
 }
 .box .form-hexagone{
     margin-bottom: 20px;
@@ -102,30 +113,28 @@
     border-radius: 0px;
 }
 
-.arrow-box:after,
-.arrow-box:before{
-    top:100;
-    left:80%;
-    content: ' ';
-    height: 0;
-    width:0;
-    position: absolute;
+.homeicone IMG {
+    width: 100px;
+    margin: 5px 0;
 }
 
-.arrow-box:after {
-    border-color: #770a82;
-    border-top-color: #000;
-    border-width: 30px;
-    margin-left: -30px;
+
+/* Fix dl menu */
+
+.navbarcontent .container .column {
+    padding-right: 0
 }
 
-.arrow-box:before {
-    border-color: #000;
-    border-top-color: #770a82;
-    border-width: 30px;
-    margin-left: -30px;
+.dl-menuwrapper:first-child {
+    margin-right: 0px;
 }
 
-.homeicone{
-    margin-left: 20px;
+
+.dl-menuwrapper button {
+    float: right;
+}
+
+.dl-menuwrapper .dl-menu.dl-menuopen {
+    top: 45px;
+    margin-top: 0
 }

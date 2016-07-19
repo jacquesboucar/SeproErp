@@ -18,59 +18,54 @@
 </style>
 <div class="box">
     <div class="row">
-        <div class="col-xs-8 col-xs-offset-2 col-sm-8 col-sm-offset-2  col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
-            <div class="row">
-                <div class="col-xs-4 col-sm-4 col-lg-4">
-                    <a class="" href="<?php echo url_for('recruitment/viewRecruitmentModule'); ?>">
-                        <div class="form-hexagone">
-                            RECRUTEMENT
-                        </div>
-                    </a>
+        <div class="col-xs-4 col-sm-4 col-lg-4">
+            <a class="" href="<?php echo url_for('recruitment/viewRecruitmentModule'); ?>">
+                <div class="form-hexagone">
+                    RECRUTEMENT
                 </div>
-                <div class="col-xs-4 col-sm-4 col-lg-4">
-                    <a class="" href="<?php echo url_for('pim/viewEmployeeList'); ?>">
-                        <div class="form-hexagone">
-                            PERSONNEL SABLUX
-                        </div>
-                    </a>
+            </a>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-lg-4">
+            <a class="" href="<?php echo url_for('pim/viewEmployeeList'); ?>">
+                <div class="form-hexagone">
+                    PERSONNEL SABLUX
                 </div>
-                <div class="col-xs-4 col-sm-4 col-lg-4">
-                    <a class="" href="<?php echo url_for('leave/viewLeaveList'); ?>">
-                        <div class="form-hexagone">
-                            CONGES
-                        </div>
-                    </a>
+            </a>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-lg-4">
+            <a class="" href="<?php echo url_for('leave/viewLeaveList'); ?>">
+                <div class="form-hexagone">
+                    CONGES
                 </div>
-                <div class="col-xs-4 col-sm-4 col-lg-4">
-                    <a class="" href="<?php echo url_for('performance/viewEmployeePerformanceTrackerList'); ?>">
-                        <div class="form-hexagone">
-                            EVALUATION
-                        </div>
-                    </a>
+            </a>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-lg-4">
+            <a class="" href="<?php echo url_for('performance/viewEmployeePerformanceTrackerList'); ?>">
+                <div class="form-hexagone">
+                    EVALUATION
                 </div>
-                <div class="col-xs-4 col-sm-4 col-lg-4">
-                    <a class="" href="#">
-                        <div class="form-hexagone">
-                            FORMATION
-                        </div>
-                    </a>
+            </a>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-lg-4">
+            <a class="" href="#">
+                <div class="form-hexagone">
+                    FORMATION
                 </div>
-                <div class="col-xs-4 col-sm-4 col-lg-4">
-                    <a class="" href="<?php echo url_for('admin/viewModules'); ?>">
-                    <div class="form-hexagone">
-                            CONFIGURATIONS
-                    </div>
-                     </a>
-                </div>
-                <div class="col-xs-4 col-sm-4 col-lg-4">
-                    <a class="" href="#">
-                    <div class="form-hexagone">
-                            DASHBOARD
-                    </div>
-                     </a>
-                </div>
-
+            </a>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-lg-4">
+            <a class="" href="<?php echo url_for('admin/viewModules'); ?>">
+            <div class="form-hexagone">
+                    CONFIGURATIONS
             </div>
+             </a>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-lg-4">
+            <a class="" href="#">
+            <div class="form-hexagone">
+                    DASHBOARD
+            </div>
+             </a>
         </div>
     </div>
 </div>

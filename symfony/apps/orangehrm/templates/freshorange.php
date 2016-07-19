@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 // Allow header partial to be overridden in individual actions
 // Can be overridden by: slot('header', get_partial('module/partial'));
@@ -35,7 +35,9 @@ $imagePath = theme_path("images/login");
             <nav class="navbar navbarcontent">
               <div class="container">
                   <div class="pull-left">
-                   <img src="<?php echo "{$imagePath}/logo.png"; ?>" width="30%" height="5%"><a href="<?php echo url_for('dashboard/index'); ?>" class="homeicone"><img src="<?php echo "{$imagePath}/icone_home.png"; ?>" width="10%" height="1%"></a>
+                    <a href="<?php echo url_for('dashboard/index'); ?>" class="homeicone">
+                      <img src="<?php echo "{$imagePath}/logo.png"; ?>" width="30%" height="5%">
+                    </a>
                   </div>
                   <div class="pull-right">
 
@@ -53,17 +55,24 @@ $imagePath = theme_path("images/login");
 
 
             <div id="content" >
-
+                <div class='container'>
                   <div class="row">
-                     <div class="col-lg-1">
-
-                        <!-- cd-accordion-menu -->
-                     </div>
-                     <div class="col-lg-11">
-                        <?php echo $sf_content ?>
+                    <?php if (count(explode('/',$_SERVER['REQUEST_URI'])) <= 5): ?>
+                    <div class="col-xs-9 col-xs-offset-1 col-sm-9 col-sm-offset-1 col-md-9 col-md-offset-1 col-lg-9 col-lg-offset-1">
+                    <?php else: ?>
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                        Add the menu bar here
+                    </div>
+                    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                    <?php endif ?>
+                      <?php echo $sf_content ?>
+                    </div>
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                      <img src="<?php echo "{$imagePath}/logoligne.png"; ?>">
                     </div>
                   </div>
-
+                  </div>
+                </div>
             </div> <!-- content -->
 
         </div> <!-- wrapper -->
