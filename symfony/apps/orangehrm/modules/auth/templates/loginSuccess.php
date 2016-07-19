@@ -7,7 +7,7 @@ $imagePath = theme_path("images/login");
     <div class="row">
         <div class="logo-back">
             <div class="col-xs-6 col-xs-offset-4 col-sm-5 col-sm-offset-4 col-md-4 col-md-offset-4 text-center">
-                <img src="<?php echo "{$imagePath}/logo.png"; ?>">
+                <img src="<?php echo "{$imagePath}/logosablux.png"; ?>" height="20%" width="20%">
             </div>
         </div>
     </div>

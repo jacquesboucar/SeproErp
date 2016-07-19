@@ -17,7 +17,7 @@
  * Boston, MA  02110-1301, USA
  */
 
-class mainMenuComponent extends sfComponent {
+class mainMenusComponent extends sfComponent {
 
     const MAIN_MENU_USER_ATTRIBUTE = 'mainMenu.menuItemArray';
     

@@ -61,7 +61,7 @@
              </a>
         </div>
         <div class="col-xs-4 col-sm-4 col-lg-4">
-            <a class="" href="#">
+            <a class="" href="<?php echo url_for('dashboard/indexs'); ?>">
             <div class="form-hexagone">
                     DASHBOARD
             </div>

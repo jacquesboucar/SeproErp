@@ -36,7 +36,7 @@ $imagePath = theme_path("images/login");
               <div class="container">
                   <div class="pull-left">
                     <a href="<?php echo url_for('dashboard/index'); ?>" class="homeicone">
-                      <img src="<?php echo "{$imagePath}/logo.png"; ?>" width="30%" height="5%">
+                      <img src="<?php echo "{$imagePath}/logosablux.png"; ?>" width="20%" height="20%">
                     </a>
                   </div>
                   <div class="pull-right">
@@ -55,13 +55,14 @@ $imagePath = theme_path("images/login");
 
 
             <div id="content" >
-                <div class='container'>
+                <div class='container-fluid'>
                   <div class="row">
                     <?php if (count(explode('/',$_SERVER['REQUEST_URI'])) <= 5): ?>
                     <div class="col-xs-9 col-xs-offset-1 col-sm-9 col-sm-offset-1 col-md-9 col-md-offset-1 col-lg-9 col-lg-offset-1">
                     <?php else: ?>
                     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                        Add the menu bar here
+                        <?php include_component('core', 'mainMenus'); ?>
+
                     </div>
                     <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
                     <?php endif ?>

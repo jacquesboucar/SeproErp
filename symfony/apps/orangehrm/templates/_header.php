@@ -25,8 +25,10 @@ $cultureElements = explode('_', $sf_user->getCulture());
 
         <link href="<?php echo public_path('../../themes/orange/css/default.css')?>" rel="stylesheet" type="text/css"/>
         <link href="<?php echo public_path('../../themes/orange/css/component.css')?>" rel="stylesheet" type="text/css"/>
+        <link href="<?php echo public_path('../../themes/orange/css/reset.css')?>" rel="stylesheet" type="text/css"/>
+        <link href="<?php echo public_path('../../themes/orange/css/style.css')?>" rel="stylesheet" type="text/css"/>
 
-        <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
         <!-- Custom CSS files -->
         <link href="<?php echo theme_path('css/main.css')?>" rel="stylesheet" type="text/css"/>
         <link href="<?php echo public_path('../../themes/orange/css/style-backend.css')?>" rel="stylesheet" type="text/css"/>
@@ -53,6 +55,7 @@ $cultureElements = explode('_', $sf_user->getCulture());
 
         echo javascript_include_tag('jquery/menu.js');
         echo javascript_include_tag('jquery/path.js');
+        echo javascript_include_tag('jquery/main.js');
 
 
         // Custom JavaScript files
