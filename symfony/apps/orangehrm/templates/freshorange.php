@@ -54,13 +54,13 @@ $imagePath = theme_path("images/login");
             </nav><!-- /.navbar -->
 
 
-            <div id="content" >
+            <div id="content" class='content'>
                 <div class='container-fluid'>
                   <div class="row">
                     <?php if (count(explode('/',$_SERVER['REQUEST_URI'])) <= 5): ?>
                     <div class="col-xs-9 col-xs-offset-1 col-sm-9 col-sm-offset-1 col-md-9 col-md-offset-1 col-lg-9 col-lg-offset-1">
                     <?php else: ?>
-                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" id='sideMenu'>
                         <?php include_component('core', 'mainMenus'); ?>
 
                     </div>

@@ -66,10 +66,11 @@ function getHtmslId($menuItem) {
 
 
 <ul class="cd-accordion-menu animated">
+    <?php $gid = 1;?>
     <?php foreach ($menuItemArray as $firstLevelItem) : ?>
-        <li class="has-children" <?php echo getListsItemClass($firstLevelItem, $currentItemDetails); ?>>
-            <input type="checkbox" name ="group-1" id="group-1">
-            <label for="group-1">
+        <li class="has-children firstlevel" <?php echo getListsItemClass($firstLevelItem, $currentItemDetails); ?>>
+            <input type="checkbox" name ="group-<?php echo $gid;?>" id="group-<?php echo $gid;?>">
+            <label for="group-<?php echo $gid;?>">
                 <a href="<?php echo getMenusUrl($firstLevelItem); ?>" id="<?php echo getHtmslId($firstLevelItem); ?>" class="firstLevelMenu">
                     <?php echo __($firstLevelItem['menuTitle']) ?>
                 </a>
@@ -77,10 +78,11 @@ function getHtmslId($menuItem) {
 
             <ul>
                 <?php if (count($firstLevelItem['subMenuItems']) > 0) : ?>
+
                     <?php foreach ($firstLevelItem['subMenuItems'] as $secondLevelItem) : ?>
-                        <li class="has-children">
-                            <input type="checkbox" name ="sub-group-1" id="sub-group-1">
-                            <label for="sub-group-1">
+                        <li class="has-children secondlevel">
+                            <input type="checkbox" name ="sub-group-<?php echo $gid;?>" id="sub-group-<?php echo $gid;?>">
+                            <label for="sub-group-<?php echo $gid;?>">
                                 <a href="<?php echo getMenusUrl($secondLevelItem); ?>" id="<?php echo getHtmslId($secondLevelItem); ?>"<?php echo getSubMenusIndication($secondLevelItem); ?>>
                                     <?php echo __($secondLevelItem['menuTitle']) ?>
                                 </a>
@@ -107,6 +109,6 @@ function getHtmslId($menuItem) {
                 <?php endif; ?>
             </ul>
         </li>
-
+        <?php $gid++;?>
     <?php endforeach; ?>
 </ul> <!-- cd-accordion-menu -->
