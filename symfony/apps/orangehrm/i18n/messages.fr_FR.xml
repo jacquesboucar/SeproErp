@@ -13345,7 +13345,7 @@
                                    </trans-unit>
                                    <trans-unit id="2674">
                                     <source>Project Info</source>
-                                    <target>Informations sur le projet</target>
+                                    <target>Gestion des Projets</target>
                                     <note>Here information regarding projects, customers, project activities and project administrator can be defined, which can be later used for project management activities.</note>
                                    </trans-unit>
                                    <trans-unit id="2675">
