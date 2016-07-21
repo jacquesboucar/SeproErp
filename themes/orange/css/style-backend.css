@@ -178,6 +178,8 @@
 
 #sideMenu .cd-accordion-menu li.secondlevel{
     padding: 0 ;
+    margin-top: 10px;
+    margin-left: 20px;
 }
 
 
@@ -196,7 +198,7 @@
     padding: 0px 14px;
     background-color: #eee;
     border: 1px solid #000;
-    top: 30%;
+    top: 25%;
     font-size: 20px;
     line-height: 12px;
     padding: 3px 15px;
@@ -208,7 +210,6 @@
 #sideMenu  .cd-accordion-menu li.checked.firstlevel > label::after {
     content: '-'
 }
-
 /*Table */
 
 table.table th {
@@ -218,3 +219,6 @@ table.table th {
 table tbody tr td a{
     color: #000;
 }
+
+/* Breadcrumb */
+

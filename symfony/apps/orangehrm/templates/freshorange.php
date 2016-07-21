@@ -38,10 +38,13 @@ $imagePath = theme_path("images/login");
                     <a href="<?php echo url_for('dashboard/index'); ?>" class="homeicone">
                       <img src="<?php echo "{$imagePath}/logosablux.png"; ?>" width="20%" height="20%">
                     </a>
+
                   </div>
+
                   <div class="pull-right">
 
                         <div class="column">
+
                             <div id="dl-menu" class="dl-menuwrapper">
                                 <button class="dl-trigger">Open Menu</button>
                                 <?php include_component('core', 'mainMenu'); ?>
@@ -66,6 +69,13 @@ $imagePath = theme_path("images/login");
                     </div>
                     <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
                     <?php endif ?>
+                            <div class="breadcrumb flat">
+                                <a href="#">Browse</a>
+                                <a href="#">Compare</a>
+                                <a href="#">Order Confirmation</a>
+                                <a href="#">Checkout</a>
+                            </div>
+
                       <?php echo $sf_content ?>
                     </div>
                     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
