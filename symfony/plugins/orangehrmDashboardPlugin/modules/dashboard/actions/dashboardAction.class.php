@@ -21,7 +21,7 @@
 /**
  * Description of indexAction
  */
-class indexsAction extends BaseDashboardAction {
+class dashboardAction extends BaseDashboardAction {
 
     public function execute($request) {
         $this->settings = $this->setAllowedGroups();
