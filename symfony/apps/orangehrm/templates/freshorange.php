@@ -69,12 +69,7 @@ $imagePath = theme_path("images/login");
                     </div>
                     <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
                     <?php endif ?>
-                            <div class="breadcrumb flat">
-                                <a href="#">Browse</a>
-                                <a href="#">Compare</a>
-                                <a href="#">Order Confirmation</a>
-                                <a href="#">Checkout</a>
-                            </div>
+                           
 
                       <?php echo $sf_content ?>
                     </div>

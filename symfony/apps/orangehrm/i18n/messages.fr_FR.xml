@@ -752,18 +752,18 @@
         <note>Add image to the employee profile.</note>
        </trans-unit>
        <trans-unit id="150">
-        <source>Add Immigration</source>
-        <target>Ajouter informations immigration</target>
+        <source>Add Mission</source>
+        <target>Ajouter informations Mission</target>
         <note>Adding details of the employee's passport or visa.</note>
        </trans-unit>
        <trans-unit id="151">
         <source>ADD IMMIGRATION DETAILS</source>
-        <target>AJOUTER INFORMATIONS D'IMMIGRATION</target>
+        <target>AJOUTER INFORMATIONS DE LA MISSION</target>
         <note>Adding details of the employee's passport or visa.</note>
        </trans-unit>
        <trans-unit id="152">
         <source>Add Immigration Details</source>
-        <target>Détails de Ajouter information d'immigration</target>
+        <target>Détails de Ajouter information de la Mission</target>
         <note>Adding details of the employee's passport or visa.</note>
        </trans-unit>
        <trans-unit id="153">
@@ -2367,7 +2367,7 @@
           </trans-unit>
           <trans-unit id="473">
            <source>Assigned Immigration Records</source>
-           <target>Fichiers Immigration associés</target>
+           <target>Fichiers Mission associés</target>
            <note>To assign immigration information of a particular employee such as passport details/visa details</note>
           </trans-unit>
           <trans-unit id="474">
@@ -4916,12 +4916,12 @@
                 </trans-unit>
                 <trans-unit id="983">
                  <source>DELETE IMMIGRATION DETAILS</source>
-                 <target>EFFACER INFORMATIONS D'IMMIGRATION</target>
+                 <target>EFFACER INFORMATIONS DE LA MISSION</target>
                  <note>Delete immigration information of a particular employee.</note>
                 </trans-unit>
                 <trans-unit id="984">
                  <source>Delete Immigration Details</source>
-                 <target>Détails de Supprimer information d'immigration</target>
+                 <target>Détails de Supprimer information de la mission</target>
                  <note>Delete immigration information of a particular employee.</note>
                 </trans-unit>
                 <trans-unit id="985">
@@ -5720,7 +5720,7 @@
                   </trans-unit>
                   <trans-unit id="1144">
                    <source>Edit Immigration</source>
-                   <target>Modifier Immigration</target>
+                   <target>Modifier Mission</target>
                    <note>Changing details of the employee's passport or visa.</note>
                   </trans-unit>
                   <trans-unit id="1145">
@@ -6227,17 +6227,17 @@
                       </trans-unit>
                       <trans-unit id="1244">
                        <source>Employee Id</source>
-                       <target>Identifiant de l'employé</target>
+                       <target>Matricule de l'employé</target>
                        <note>Employee ID/No will help uniquely identifying a particular employee.</note>
                       </trans-unit>
                       <trans-unit id="1245">
                        <source>Employee ID</source>
-                       <target>Identifiant de l'employé</target>
+                       <target>Matricule de l'employé</target>
                        <note>Employee ID/No will help uniquely identifying a particular employee.</note>
                       </trans-unit>
                       <trans-unit id="1246">
                        <source>Employee Id must be unique</source>
-                       <target>L'identifiant de l'employé doit être unique </target>
+                       <target>Le Matricule de l'employé doit être unique </target>
                        <note>Employee ID should be always a number that is unique and help identifying each and every employee.</note>
                       </trans-unit>
                       <trans-unit id="1247">
@@ -7144,7 +7144,7 @@
                       </trans-unit>
                       <trans-unit id="1428">
                        <source>Failed To Save: Employee Id Exists</source>
-                       <target>Impossible d'enregistrer: l'identifiant du salarié existe déjà</target>
+                       <target>Impossible d'enregistrer: le Matricule du salarié existe déjà</target>
                        <note>This validation message appears when failing to save when trying to enter the same employee id</note>
                       </trans-unit>
                       <trans-unit id="1429">
@@ -8319,12 +8319,12 @@
                           </trans-unit>
                           <trans-unit id="1665">
                            <source>Immigration</source>
-                           <target>Immigration</target>
+                           <target>Mission</target>
                            <note>Immigration details about employees are recorded in this tab.</note>
                           </trans-unit>
                           <trans-unit id="1666">
                            <source>Immigration Custom Fields</source>
-                           <target>Champs Personnalisés - Immigration  </target>
+                           <target>Champs Personnalisés - Mission  </target>
                            <note>This feature allows the Admin to customize and add fields to all the screen of the PIM Module that may be specific and relevant to the company EX: Immigration custom field</note>
                           </trans-unit>
                           <trans-unit id="1667">
@@ -12884,17 +12884,17 @@
                                  </trans-unit>
                                  <trans-unit id="2582">
                                   <source>PIM - Immigration</source>
-                                  <target>PIM - Immigration </target>
+                                  <target>PIM - Mission </target>
                                   <note>Data group permission appears for the PIM module which need to be granted for a particular user role</note>
                                  </trans-unit>
                                  <trans-unit id="2583">
                                   <source>PIM - Immigration - Attachments</source>
-                                  <target>PIM - Immigration - Pièces jointes</target>
+                                  <target>PIM - Mission - Pièces jointes</target>
                                   <note>Data group permission appears for the PIM module which need to be granted for a particular user role</note>
                                  </trans-unit>
                                  <trans-unit id="2584">
                                   <source>PIM - Immigration - Custom Fields</source>
-                                  <target>PIM - Immigration - Champs personnalisés</target>
+                                  <target>PIM - Mission - Champs personnalisés</target>
                                   <note>Data group permission appears for the PIM module which need to be granted for a particular user role</note>
                                  </trans-unit>
                                  <trans-unit id="2585">
@@ -17623,17 +17623,17 @@
                                                      </trans-unit>
                                                      <trans-unit id="3530">
                                                       <source>Update Immigration Custom Fields</source>
-                                                      <target>Mettre Champs Personnalisés - Immigration à jour </target>
+                                                      <target>Mettre Champs Personnalisés - Mission à jour </target>
                                                       <note>Update Custom Field displayed under PIM immigration screen</note>
                                                      </trans-unit>
                                                      <trans-unit id="3531">
                                                       <source>UPDATE IMMIGRATION DETAILS</source>
-                                                      <target>METTRE INFORMATIONS D'IMMIGRATION À JOUR</target>
+                                                      <target>METTRE INFORMATIONS DE LA MISSION À JOUR</target>
                                                       <note>Update immigration details of employees in the company</note>
                                                      </trans-unit>
                                                      <trans-unit id="3532">
                                                       <source>Update Immigration Details</source>
-                                                      <target>Détails de Mettre à jour information d'immigration</target>
+                                                      <target>Détails de Mettre à jour information de la Mission</target>
                                                       <note>Update immigration details of employees in the company</note>
                                                      </trans-unit>
                                                      <trans-unit id="3533">

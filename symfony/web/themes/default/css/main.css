@@ -818,6 +818,7 @@ input[type=submit].reset {
 .searchForm form ol li {
     margin:0 0 15px 0;
     width:25%;
+
 }
 .searchForm form ol li label {
 	display:block;
@@ -827,6 +828,7 @@ input[type=submit].reset {
 .searchForm form ol li input {
 	float:left;
 	width:80%;
+	min-height: 25px;
 }
 .searchForm form ol li select {
 	float:left;
