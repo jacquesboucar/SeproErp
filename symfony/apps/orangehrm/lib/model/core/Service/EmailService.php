@@ -31,7 +31,7 @@ class EmailService extends BaseService {
     const SMTP_AUTH_NONE = 'none';
     const SMTP_AUTH_LOGIN = 'login';
     
-    const FALLBACK_TEMPLATE_LOCALE = 'en_US';
+    const FALLBACK_TEMPLATE_LOCALE = 'fr_FR';
 
     private $emailConfig;
     private $configSet = false;
@@ -192,7 +192,7 @@ class EmailService extends BaseService {
 
         if (empty($this->messageFrom)) {
             $this->_validateEmailAddress($this->emailConfig->getSentAs());
-            $this->messageFrom = array($this->emailConfig->getSentAs() => 'Sablux Group');
+            $this->messageFrom = array($this->emailConfig->getSentAs() => 'Sablux');
         }
 
         if (empty($this->messageTo)) {
@@ -295,7 +295,7 @@ class EmailService extends BaseService {
 
             $subject = "SMTP Configuration Test Email";
 
-            $body = "This email confirms that SMTP details set in Sablux Group are ";
+            $body = "This email confirms that SMTP details set in Sablux are ";
             $body .= "correct. You received this email since your email address ";
             $body .= "was entered to test email in configuration screen.";
             
@@ -303,7 +303,7 @@ class EmailService extends BaseService {
 
             $subject = "Sendmail Configuration Test Email";
 
-            $body = "This email confirms that Sendmail details set in Sablux Group ";
+            $body = "This email confirms that Sendmail details set in Sablux";
             $body .= "are correct. You received this email since your email ";
             $body .= "address was entered to test email in configuration screen.";
 
@@ -463,7 +463,7 @@ class EmailService extends BaseService {
 
                         try {
                             $message->setTo($to);
-                            $message->setFrom(array($this->emailConfig->getSentAs() => 'Sablux Group'));
+                            $message->setFrom(array($this->emailConfig->getSentAs() => 'Sablux'));
 
                             $message->setSubject($emailSubject);
                             $message->setBody($emailBody);

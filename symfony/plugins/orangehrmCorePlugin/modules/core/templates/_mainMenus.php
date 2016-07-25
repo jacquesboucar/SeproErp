@@ -80,7 +80,7 @@ function getHtmslId($menuItem) {
                 <?php if (count($firstLevelItem['subMenuItems']) > 0) : ?>
 
                     <?php foreach ($firstLevelItem['subMenuItems'] as $secondLevelItem) : ?>
-                        <li class="has-children secondlevel">
+                        <li class="has-children secondlevel notification active">
                             <input type="checkbox" name ="sub-group-<?php echo $gid;?>" id="sub-group-<?php echo $gid;?>">
                             <label for="sub-group-<?php echo $gid;?>">
                                 <a href="<?php echo getMenusUrl($secondLevelItem); ?>" id="<?php echo getHtmslId($secondLevelItem); ?>"<?php echo getSubMenusIndication($secondLevelItem); ?>>

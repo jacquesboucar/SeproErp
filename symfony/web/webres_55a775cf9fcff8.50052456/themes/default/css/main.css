@@ -590,7 +590,8 @@ form ol li textarea {
 	height:80px;
 }
 form ol li input[type=text] {
-    height:16px;
+    height:25px;
+	width: 237px;
 
 }
 form ol li input[type="file"] {
@@ -827,10 +828,12 @@ input[type=submit].reset {
 .searchForm form ol li input {
 	float:left;
 	width:80%;
+	min-height: 25px;
 }
 .searchForm form ol li select {
 	float:left;
-	width:84%;    
+	width:84%;
+	min-height: 25px;
 }
 .searchForm form ol li input.calendar {
 	width:165px;
