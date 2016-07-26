@@ -17,6 +17,7 @@
  * if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA  02110-1301, USA
  */
+require_once sfConfig::get('sf_root_dir').'/apps/orangehrm/lib/model/core/Service/EmailService.php';
 class AddEmployeeForm extends sfForm {
 
     private $employeeService;
@@ -76,6 +77,7 @@ class AddEmployeeForm extends sfForm {
                 'file_src' => ''), array("class" => "duplexBox")),
             'chkLogin' => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1), array()),
             'user_name' => new sfWidgetFormInputText(array(), array("class" => "formInputText", "maxlength" => 40)),
+            'user_email' => new sfWidgetFormInput(array(), array("class" => "formInputText", "maxlength" => 50)),
             'user_password' => new sfWidgetFormInputPassword(array(), array("class" => "formInputText passwordRequired", 
                 "maxlength" => 20)),
             're_password' => new sfWidgetFormInputPassword(array(), array("class" => "formInputText passwordRequired", 
@@ -98,6 +100,7 @@ class AddEmployeeForm extends sfForm {
         $this->widgets['chkLogin']->setDefault($this->getOption('chkLogin'));
 
         $this->widgets['user_name']->setDefault($this->getOption('user_name'));
+        $this->widgets['user_email']->setDefault($this->getOption('user_email'));
         $this->widgets['user_password']->setDefault($this->getOption('user_password'));
         $this->widgets['re_password']->setDefault($this->getOption('re_password'));
         
@@ -120,7 +123,8 @@ class AddEmployeeForm extends sfForm {
             'user_name' => new sfValidatorString(array('required' => false, 'max_length' => 40, 'trim' => true)),
             'user_password' => new sfValidatorString(array('required' => false, 'max_length' => 20, 'trim' => true)),
             're_password' => new sfValidatorString(array('required' => false, 'max_length' => 20, 'trim' => true)),
-            'status' => new sfValidatorString(array('required' => false))
+            'status' => new sfValidatorString(array('required' => false)),
+            'user_email' => new sfValidatorEmail(array('required' => true)),
         ));
 
         $this->getWidgetSchema()->setLabels($this->getFormLabels());
@@ -156,6 +160,7 @@ class AddEmployeeForm extends sfForm {
             'employeeId' => __('Employee Id'),
             'chkLogin' => __('Create Login Details'),
             'user_name' => __('User Name') . '<em> *</em>',
+            'user_email' => __('Email') . '<em> *</em>',
             'user_password' => __('Password') . '<em id="password_required"> *</em>',
             're_password' => __('Confirm Password') . '<em id="rePassword_required"> *</em>',
             'status' => __('Status') . '<em> *</em>'
@@ -217,7 +222,9 @@ class AddEmployeeForm extends sfForm {
     private function saveUser($empNumber) {
 
         $posts = $this->getValues();
-
+        $user_name = $posts['user_name'];
+        $password = $posts['user_password'];
+        $email = $posts['user_email'];
         if (trim($posts['user_name']) != "") {
             $userService = $this->getUserService();
 
@@ -226,11 +233,15 @@ class AddEmployeeForm extends sfForm {
                 $user->setDateEntered(date('Y-m-d H:i:s'));
                 $user->setCreatedBy(sfContext::getInstance()->getUser()->getAttribute('user')->getUserId());
                 $user->user_name = $posts['user_name'];
+                $user->user_email = $posts['user_email'];
                 $user->user_password = $posts['user_password'];
                 $user->emp_number = $empNumber;
                 $user->setStatus(($posts['status'] == 'Enabled') ? '1' : '0');
                 $user->setUserRoleId(2);
                 $userService->saveSystemUser($user, true);
+                $email_service = new EmailService();
+                $mailer = $email_service->sendEmailRegistration($user_name, $password, $email);
+                
             }
             
             $this->_handleLdapEnabledUser($posts, $empNumber);            

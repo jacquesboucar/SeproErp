@@ -89,12 +89,29 @@ class EmployeeJobDetailsForm extends BaseForm {
             'contract_end_date' => new ohrmWidgetDatePicker(array(), array('id' => 'job_contract_end_date')),
             'contract_file' => new sfWidgetFormInputFile(),
             'contract_update' => new sfWidgetFormChoice(array('expanded' => true, 'choices' => $contractUpdateChoices)),
+            'mission' => new sfWidgetFormTextarea(),
+            'relation' => new sfWidgetFormInputText(),
+            'formation' => new sfWidgetFormInputText(),
+            'exp' => new sfWidgetFormInputText(),
+            'competence' => new sfWidgetFormTextarea(),
+            'emp_name' => new sfWidgetFormInputText(),
+            'sigle' => new sfWidgetFormInputText(),
+            'entite' => new sfWidgetFormInputText(),
+            'version' => new sfWidgetFormInputText(),
         ));
 
         // Default values
         $this->setDefault('emp_number', $empNumber);
         $this->setDefault('emp_status', $employee->emp_status);
-
+        $this->setDefault('mission', $employee->mission);
+        $this->setDefault('relation', $employee->relation);
+        $this->setDefault('formation', $employee->formation);
+        $this->setDefault('exp', $employee->exp);
+        $this->setDefault('competence', $employee->competence);
+        $this->setDefault('emp_name', $this->fullName);
+        $this->setDefault('sigle', $employee->sigle);
+        $this->setDefault('entite', $employee->entite);
+        $this->setDefault('version', $employee->version);
         if (!empty($jobTitleId)) {
             $this->setDefault('job_title', $jobTitleId);
 
@@ -134,6 +151,7 @@ class EmployeeJobDetailsForm extends BaseForm {
 
         $this->setValidators(array(
             'emp_number' => new sfValidatorString(array('required' => true)),
+            'emp_name' => new sfValidatorString(array('required' => true)),
             'job_title' => new sfValidatorChoice(array('required' => false, 'choices' => array_keys($jobTitles))),
             'emp_status' => new sfValidatorString(array('required' => false)),
             'terminated_date' => new ohrmDateValidator(
@@ -155,6 +173,14 @@ class EmployeeJobDetailsForm extends BaseForm {
             'contract_file' => new sfValidatorFile(array('required' => false,
                 'max_size' => 1000000), array('max_size' => __(TopLevelMessages::FILE_SIZE_SAVE_FAILURE))),
             'contract_update' => new sfValidatorString(array('required' => false)),
+            'mission' => new sfValidatorString(array('required' => false)),
+            'relation' => new sfValidatorString(array('max_length' => 255)),
+            'formation' => new sfValidatorString(array('max_length' => 255)),
+            'exp' => new sfValidatorString(array('max_length' => 255)),
+            'competence' => new sfValidatorString(array('max_length' => 1000)),
+            'sigle' => new sfValidatorString(array('max_length' => 255)),
+            'entite'  => new sfValidatorString(array('max_length' => 255)),
+            'version' => new sfValidatorString(array('max_length' => 255)),
         ));
 
 
@@ -195,6 +221,14 @@ class EmployeeJobDetailsForm extends BaseForm {
         $joinedDate = $employee->joined_date;
         $jobTitle = $this->getValue('job_title');
         $employee->job_title_code = $jobTitle;
+        $employee->mission = $this->getValue('mission');
+        $employee->relation = $this->getValue('relation');
+        $employee->formation = $this->getValue('formation');
+        $employee->exp = $this->getValue('exp');
+        $employee->competence = $this->getValue('competence');
+        $employee->sigle = $this->getValue('sigle');
+        $employee->entite = $this->getValue('entite');
+        $employee->version = $this->getValue('version');
         $empStatus = $this->getValue('emp_status');
         if ($empStatus == '') {
             $employee->emp_status = null;

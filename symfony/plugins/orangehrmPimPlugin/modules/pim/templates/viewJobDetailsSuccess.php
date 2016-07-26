@@ -45,8 +45,24 @@
                     <?php echo $form['emp_number']->render(); ?>
                     <ol>
                         <li>
-                            <?php echo $form['job_title']->renderLabel(__('Job Title')); ?>
+                            <?php echo $form['job_title']->renderLabel(__('Intitulé du poste')); ?>
                             <?php echo $form['job_title']->render(array("class" => "formSelect")); ?>    
+                        </li>
+                         <li>
+                            <?php echo $form['emp_name']->renderLabel(__("Prénom et Nom du titulaire")); ?>
+                            <?php echo $form['emp_name']->render(array("class" => "formTxtArea")); ?>    
+                        </li>
+                        <li>
+                            <?php echo $form['sigle']->renderLabel(__("Sigle")); ?>
+                            <?php echo $form['sigle']->render(array("class" => "formTxtArea")); ?>    
+                        </li>
+                        <li>
+                            <?php echo $form['entite']->renderLabel(__("Entité")); ?>
+                            <?php echo $form['entite']->render(array("class" => "formTxtArea")); ?>    
+                        </li>
+                        <li>
+                            <?php echo $form['version']->renderLabel(__("Version")); ?>
+                            <?php echo $form['version']->render(array("class" => "formTxtArea")); ?>    
                         </li>
                         <li>
                             <label><?php echo __("Job Specification"); ?></label>
@@ -72,28 +88,48 @@
                             <?php echo $form['eeo_category']->render(array("class" => "formSelect")); ?>
                         </li>
                         <li>
-                            <?php echo $form['joined_date']->renderLabel(__('Joined Date')); ?>
-                            <?php echo $form['joined_date']->render(array("class" => "formDateInput")); ?>
+                            <?php //echo $form['joined_date']->renderLabel(__('Joined Date')); ?>
+                            <?php //echo $form['joined_date']->render(array("class" => "formDateInput")); ?>
                         </li>
                         <li>
-                            <?php echo $form['sub_unit']->renderLabel(__('Sub Unit')); ?>
-                            <?php echo $form['sub_unit']->render(array("class" => "formSelect")); ?>
+                            <?php //echo $form['sub_unit']->renderLabel(__('Sub Unit')); ?>
+                            <?php //echo $form['sub_unit']->render(array("class" => "formSelect")); ?>
                         </li>
                         <li>
-                            <?php echo $form['location']->renderLabel(__('Location')); ?>
+                            <?php echo $form['location']->renderLabel(__('Direction')); ?>
                             <?php echo $form['location']->render(array("class" => "formSelect")); ?>
                         </li>
                         <li>
-                            <h2><?php echo __('Employment Contract'); ?></h2>
+                            <h2><?php //echo __('Employment Contract'); ?></h2>
                         </li>
                         <li>
-                            <?php echo $form['contract_start_date']->renderLabel(__('Start Date')); ?>
-                            <?php echo $form['contract_start_date']->render(array("class" => "formDateInput")); ?>
+                            <?php //echo $form['contract_start_date']->renderLabel(__('Start Date')); ?>
+                            <?php //echo $form['contract_start_date']->render(array("class" => "formDateInput")); ?>
                         </li>
                         <li>
-                            <?php echo $form['contract_end_date']->renderLabel(__('End Date')); ?>
-                            <?php echo $form['contract_end_date']->render(array("class" => "formDateInput")); ?>
+                            <?php //echo $form['contract_end_date']->renderLabel(__('End Date')); ?>
+                            <?php //echo $form['contract_end_date']->render(array("class" => "formDateInput")); ?>
                         </li>
+                        <li class="largeTextBox">
+                        <?php echo $form['mission']->renderLabel(__('mission')); ?>
+                        <?php echo $form['mission']->render(array("class" => "formTxtArea")); ?>
+                       </li>
+                        <li class="largeTextBox">
+                        <?php echo $form['relation']->renderLabel(__('Relations fonctionnelles')); ?>
+                        <?php echo $form['relation']->render(array("class" => "formTxtArea")); ?>
+                       </li>
+                        <li class="largeTextBox">
+                        <?php echo $form['formation']->renderLabel(__("Formations souhaitées")); ?>
+                        <?php echo $form['formation']->render(array("class" => "formTxtArea")); ?>
+                       </li>
+                        <li class="largeTextBox">
+                        <?php echo $form['exp']->renderLabel(__("Expériences souhaitées")); ?>
+                        <?php echo $form['exp']->render(array("class" => "formTxtArea")); ?>
+                       </li>
+                       <li class="largeTextBox">
+                        <?php echo $form['competence']->renderLabel(__('Compétences et aptitudes requises')); ?>
+                        <?php echo $form['competence']->render(array("class" => "formTxtArea")); ?>
+                       </li>
                             <?php
                             if (empty($form->attachment)) {
                                 echo "<li class=\"contractEdidMode\">";
@@ -352,7 +388,7 @@
         '#job_joined_date', '#job_sub_unit', '#job_location',
         '#contract_file', 'ul.radio_list input',
         '#job_contract_start_date', '#job_contract_end_date',
-        '#job_contract_file');
+        '#job_contract_file', '#job_emp_name');
         for(i=0; i < list.length; i++) {
             $(list[i]).attr("disabled", "disabled");
         }
