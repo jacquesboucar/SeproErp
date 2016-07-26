@@ -1275,6 +1275,15 @@ CREATE TABLE ohrm_plugin (
     key (`name`)
 ) engine=innodb default charset=utf8;
 
+CREATE TABLE `ohrm_training_request` (
+  `id` int unsigned NOT NULL auto_increment,
+  `cout_formation` varchar(256) default NULL,
+  `date_applied` date NOT NULL,
+  `emp_number` int(7) NOT NULL,
+  `description` varchar(256) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE = INNODB DEFAULT CHARSET=utf8;
+
 alter table ohrm_home_page 
     add foreign key (user_role_id) references ohrm_user_role(id) on delete cascade;
 
@@ -1779,6 +1788,10 @@ alter table ohrm_data_group_screen
 
 alter table ohrm_data_group_screen
     add foreign key (screen_id) references ohrm_screen(id) on delete cascade;
+
+alter table ohrm_training_request
+    add constraint foreign key (emp_number)
+        references hs_hr_employee (emp_number) on delete cascade;    
 
 -- 
 -- SET @admin_module_id := (SELECT `id` FROM `ohrm_module` WHERE `name` = 'admin');
