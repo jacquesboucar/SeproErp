@@ -1559,13 +1559,13 @@ div#timesheet table.table tbody tr td.comments, div#edit-timesheet table.table t
 #sidebar #sidenav {
 	margin:19px 0 0 0;
 	padding:7px;
-	background: #f28c38 url(../images/sidebar-nav-bg.png) repeat-y top right;
+	background-color: #650582;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
 }
 #sidebar #sidenav a {
-	color:#fff;
+	color: #faf8f8;
 	display:block;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
@@ -1577,7 +1577,7 @@ div#timesheet table.table tbody tr td.comments, div#edit-timesheet table.table t
 	border-bottom:1px solid #f19a52;
 }
 #sidebar #sidenav a:hover {
-	background-color:#ce6d1d;
+	background-color: rgba(2, 0, 5, 0.2);
 }
 
 #sidebar #sidenav a.disabled {
@@ -1585,8 +1585,8 @@ div#timesheet table.table tbody tr td.comments, div#edit-timesheet table.table t
 }
 
 #sidebar #sidenav .selected a {
-	background-color:#555657;
-	color:#fff;
+	background-color: #35ce10;
+	color: #faf8f8;
 	border-bottom:none;
 }
 /* ================ PIM sidebar styles: End ================ */

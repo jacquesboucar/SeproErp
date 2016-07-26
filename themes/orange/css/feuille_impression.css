@@ -1,0 +1,11 @@
+body {
+    background: white;
+}
+.headerbackend, .cd-accordion-menu,.navbarcontent, .sideMenu, #sidenav,#logocontent,#profile-pic, #btnEditCustom{
+    display: none;
+}
+
+#sidebar#layoutcontent{
+
+
+}
