@@ -18,6 +18,7 @@
  * Boston, MA  02110-1301, USA
  *
  */
+require_once sfConfig::get('sf_root_dir').'/apps/orangehrm/lib/model/core/Service/EmailService.php';
 class SystemUserForm extends BaseForm {
 
     private $userId = null;
@@ -48,7 +49,8 @@ class SystemUserForm extends BaseForm {
             'status' => new sfWidgetFormSelect(array('choices' => $statusList), array("class" => "formSelect", "maxlength" => 3)),
             'chkChangePassword' => new sfWidgetFormInputCheckbox(array(), array('class' => 'chkChangePassword', 'value' => 'on')),
             'password' => new sfWidgetFormInputPassword(array(), array("class" => "formInputText password", "maxlength" => 20)),
-            'confirmPassword' => new sfWidgetFormInputPassword(array(), array("class" => "formInputText password", "maxlength" => 20))
+            'confirmPassword' => new sfWidgetFormInputPassword(array(), array("class" => "formInputText password", "maxlength" => 20)),
+            'user_email' => new sfWidgetFormInput(array(), array("class" => "formInputText", "maxlength" => 50)),
         ));
 
         $this->setValidators(array(
@@ -60,7 +62,8 @@ class SystemUserForm extends BaseForm {
             'password' => new sfValidatorString(array('required' => false, 'max_length' => 20)),
             'confirmPassword' => new sfValidatorString(array('required' => false, 'max_length' => 20)),
             'status' => new sfValidatorString(array('required' => true, 'max_length' => 1)),
-            'chkChangePassword' => new sfValidatorString(array('required' => false))
+            'chkChangePassword' => new sfValidatorString(array('required' => false)),
+            'user_email' => new sfValidatorEmail(array('required' => true)),
         ));
 
 
@@ -129,6 +132,7 @@ class SystemUserForm extends BaseForm {
             $user->setDateEntered(date('Y-m-d H:i:s'));
             $user->setCreatedBy($this->getOption('sessionUser')->getUserId());
             $user->setUserPassword($this->getValue('password'));
+            $user->setUserEmail($this->getValue('user_email'));
             $changePasword = true;
         } else {
             $this->edited = true;
@@ -160,6 +164,8 @@ class SystemUserForm extends BaseForm {
 
         return $savedUser;
     }
+
+    
 
     public function getEmployeeListAsJson() {
 
@@ -197,6 +203,7 @@ class SystemUserForm extends BaseForm {
             'userType' => __('User Role') . $required,
             'employeeName' => __('Employee Name') . $required,
             'userName' => __('Username') . $required,
+            'user_email' => __('Email') . $required,
             'password' => __('Password') . '<em class="passwordRequired"> *</em>',
             'confirmPassword' => __('Confirm Password') . '<em class="passwordRequired"> *</em>',
             'status' => __('Status') . $required,
