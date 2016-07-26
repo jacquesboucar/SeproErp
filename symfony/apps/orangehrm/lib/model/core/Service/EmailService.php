@@ -489,6 +489,24 @@ class EmailService extends BaseService {
             $this->logger->error("No email found for: $emailName, and role: $recipientRole");
         }
     }
+
+    public function sendEmailRegistration($username, $password, $email) {
+      $mailType = $this->emailConfig->getMailType();
+
+        if ($mailType == 'smtp') {
+
+            $subject = "Creation de votre compte";
+
+            $body = "votre compte utilisateur en tant qu'employe chez sablux vient d'etre creer. Merci de vous connecter avec: nom d'utilisateur: " . $username . ' et mot de passe: ' . $password;
+            
+        } 
+        $this->messageSubject = $subject;
+        $this->messageTo = $email;
+        $this->messageBody = $body;
+
+        return $this->sendEmail();
+    }    
+    
     
     public function sendEmailNotifications($emailName, $recipientRoles, $eventData, $performerRole = null) {
         
