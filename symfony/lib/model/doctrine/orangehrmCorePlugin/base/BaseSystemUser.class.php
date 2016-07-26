@@ -9,6 +9,7 @@
  * @property integer $user_role_id
  * @property integer $emp_number
  * @property string $user_name
+ * @property string $user_email
  * @property string $user_password
  * @property integer $deleted
  * @property integer $status
@@ -31,6 +32,7 @@
  * @method integer             getUserRoleId()            Returns the current record's "user_role_id" value
  * @method integer             getEmpNumber()             Returns the current record's "emp_number" value
  * @method string              getUserName()              Returns the current record's "user_name" value
+ * @method string              getUserEmail()             Returns the current record's "user_email" value
  * @method string              getUserPassword()          Returns the current record's "user_password" value
  * @method integer             getDeleted()               Returns the current record's "deleted" value
  * @method integer             getStatus()                Returns the current record's "status" value
@@ -52,6 +54,7 @@
  * @method SystemUser          setUserRoleId()            Sets the current record's "user_role_id" value
  * @method SystemUser          setEmpNumber()             Sets the current record's "emp_number" value
  * @method SystemUser          setUserName()              Sets the current record's "user_name" value
+ * @method SystemUser          setUserEmail()             Sets the current record's "user_email" value
  * @method SystemUser          setUserPassword()          Sets the current record's "user_password" value
  * @method SystemUser          setDeleted()               Sets the current record's "deleted" value
  * @method SystemUser          setStatus()                Sets the current record's "status" value
@@ -94,6 +97,10 @@ abstract class BaseSystemUser extends sfDoctrineRecord
         $this->hasColumn('user_name', 'string', 40, array(
              'type' => 'string',
              'length' => 40,
+             ));
+        $this->hasColumn('user_email', 'string', 50, array(
+             'type' => 'string',
+             'length' => 50,
              ));
         $this->hasColumn('user_password', 'string', 255, array(
              'type' => 'string',
