@@ -67,13 +67,13 @@ $imagePath = theme_path("images/login");
                         <?php include_component('core', 'mainMenus'); ?>
 
                     </div>
-                    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8" id="layoutcontent">
                     <?php endif ?>
                            
 
                       <?php echo $sf_content ?>
                     </div>
-                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" id="logocontent">
                       <img src="<?php echo "{$imagePath}/logoligne.png"; ?>">
                     </div>
                   </div>

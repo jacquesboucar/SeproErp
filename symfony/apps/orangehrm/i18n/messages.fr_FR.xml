@@ -8853,7 +8853,7 @@
                            </trans-unit>
                            <trans-unit id="1772">
                             <source>Job</source>
-                            <target>Emploi</target>
+                            <target>Fiche de Poste</target>
                             <note>Allows the HR admin to define job titles, specifications, pay grades, employment status, job categories and work shifts.</note>
                            </trans-unit>
                            <trans-unit id="1773">

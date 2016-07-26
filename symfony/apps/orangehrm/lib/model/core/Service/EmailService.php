@@ -31,7 +31,7 @@ class EmailService extends BaseService {
     const SMTP_AUTH_NONE = 'none';
     const SMTP_AUTH_LOGIN = 'login';
     
-    const FALLBACK_TEMPLATE_LOCALE = 'fr_FR';
+    const FALLBACK_TEMPLATE_LOCALE = 'en_US';
 
     private $emailConfig;
     private $configSet = false;

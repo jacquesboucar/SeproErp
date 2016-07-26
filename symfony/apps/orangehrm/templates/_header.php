@@ -14,30 +14,32 @@ $cultureElements = explode('_', $sf_user->getCulture());
         <link rel="shortcut icon" href="<?php echo theme_path('images/favicon.ico')?>" />
 
         <!-- Library CSS files -->
-        <link href="<?php echo theme_path('css/reset.css')?>" rel="stylesheet" type="text/css"/>
-        <link href="<?php echo theme_path('css/tipTip.css')?>" rel="stylesheet" type="text/css"/>
-        <link href="<?php echo theme_path('css/jquery/jquery-ui-1.8.21.custom.css')?>" rel="stylesheet" type="text/css"/>
-        <link href="<?php echo theme_path('css/jquery/jquery.autocomplete.css')?>" rel="stylesheet" type="text/css"/>
-        <link href="<?php echo public_path('../../themes/orange/css/bootstrap.css')?>" rel="stylesheet" type="text/css"/>
-        <link href="<?php echo public_path('../../themes/orange/css/bootstrap.min.css')?>" rel="stylesheet" type="text/css"/>
-        <link href="<?php echo public_path('../../themes/orange/css/bootstrap-theme.css')?>" rel="stylesheet" type="text/css"/>
-        <link href="<?php echo public_path('../../themes/orange/css/bootstrap-theme.css')?>" rel="stylesheet" type="text/css"/>
+        <link href="<?php echo theme_path('css/reset.css')?>" rel="stylesheet" type="text/css" media="screen"/>
+        <link href="<?php echo theme_path('css/tipTip.css')?>" rel="stylesheet" type="text/css" media="screen"/>
+        <link href="<?php echo theme_path('css/jquery/jquery-ui-1.8.21.custom.css')?>" rel="stylesheet" type="text/css" media="screen"/>
+        <link href="<?php echo theme_path('css/jquery/jquery.autocomplete.css')?>" rel="stylesheet" type="text/css" media="screen"/>
+        <link href="<?php echo public_path('../../themes/orange/css/bootstrap.css')?>" rel="stylesheet" type="text/css" media="screen"/>
+        <link href="<?php echo public_path('../../themes/orange/css/bootstrap.min.css')?>" rel="stylesheet" type="text/css" media="screen"/>
+        <link href="<?php echo public_path('../../themes/orange/css/bootstrap-theme.css')?>" rel="stylesheet" type="text/css" media="screen"/>
+        <link href="<?php echo public_path('../../themes/orange/css/bootstrap-theme.css')?>" rel="stylesheet" type="text/css" media="screen"/>
 
-        <link href="<?php echo public_path('../../themes/orange/css/default.css')?>" rel="stylesheet" type="text/css"/>
-        <link href="<?php echo public_path('../../themes/orange/css/component.css')?>" rel="stylesheet" type="text/css"/>
-        <link href="<?php echo public_path('../../themes/orange/css/reset.css')?>" rel="stylesheet" type="text/css"/>
-        <link href="<?php echo public_path('../../themes/orange/css/style.css')?>" rel="stylesheet" type="text/css"/>
+        <link href="<?php echo public_path('../../themes/orange/css/default.css')?>" rel="stylesheet" type="text/css" media="screen"/>
+        <link href="<?php echo public_path('../../themes/orange/css/component.css')?>" rel="stylesheet" type="text/css" media="screen"/>
+        <link href="<?php echo public_path('../../themes/orange/css/reset.css')?>" rel="stylesheet" type="text/css" media="screen"/>
+        <link href="<?php echo public_path('../../themes/orange/css/style.css')?>" rel="stylesheet" type="text/css" media="screen"/>
 
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" media="screen">
         <!-- Custom CSS files -->
-        <link href="<?php echo theme_path('css/main.css')?>" rel="stylesheet" type="text/css"/>
-        <link href="<?php echo public_path('../../themes/orange/css/style-backend.css')?>" rel="stylesheet" type="text/css"/>
+        <link href="<?php echo theme_path('css/main.css')?>" rel="stylesheet" type="text/css" media="screen"/>
+        <link href="<?php echo public_path('../../themes/orange/css/style-backend.css')?>" rel="stylesheet" type="text/css" media="screen"/>
+        <link href="<?php echo public_path('../../themes/orange/css/feuille_impression.css')?>" rel="stylesheet" type="text/css" media="print"/>
 
         <?php
         // Library JavaScript files
 
 
         echo javascript_include_tag('jquery/jquery-1.7.2.min.js');
+
 
         echo javascript_include_tag('jquery/validate/jquery.validate.js');
 

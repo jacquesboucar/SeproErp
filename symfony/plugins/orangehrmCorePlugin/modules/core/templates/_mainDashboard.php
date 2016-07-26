@@ -61,12 +61,14 @@ function getHtmlsId($menuItem) {
 
 <div class="row">
     <?php foreach ($menuItemArray as $firstLevelItem) : ?>
-        <div class="col-xs-4 col-sm-4 col-lg-4" <?php echo getListItemsClass($firstLevelItem, $currentItemDetails); ?>>
-            <a class="" href="<?php echo getMenuUrls($firstLevelItem); ?>" id="<?php echo getHtmlsId($firstLevelItem); ?>">
-                <div class="form-hexagone">
-                    <?php echo __($firstLevelItem['menuTitle']) ?>
-                </div>
-            </a>
-        </div>
+        <?php if(getMenuUrls($firstLevelItem)!="#"){  ?>
+            <div class="col-xs-4 col-sm-4 col-lg-4" <?php echo getListItemsClass($firstLevelItem, $currentItemDetails); ?>>
+                <a class="" href="<?php echo getMenuUrls($firstLevelItem); ?>" id="<?php echo getHtmlsId($firstLevelItem); ?>">
+                    <div class="form-hexagone">
+                        <?php echo __($firstLevelItem['menuTitle']) ?>
+                    </div>
+                </a>
+            </div>
+        <?php } ?>
     <?php endforeach; ?>
 </div>
