@@ -41,6 +41,14 @@
  * @property date $joined_date
  * @property string $emp_oth_email
  * @property integer $termination_id
+ * @property string $mission
+ * @property string $relation
+ * @property string $formation
+ * @property string $sigle
+ * @property string $entite
+ * @property string $version
+ * @property string $exp
+ * @property string $competence
  * @property string $custom1
  * @property string $custom2
  * @property string $custom3
@@ -76,6 +84,7 @@
  * @property Doctrine_Collection $LeaveRequest
  * @property Doctrine_Collection $LeaveRequestComment
  * @property Doctrine_Collection $LeaveComment
+ * @property Doctrine_Collection $TrainingRequest
  * @property Doctrine_Collection $PerformanceReview
  * @property Doctrine_Collection $Reviewer
  * @property Doctrine_Collection $PerformanceTrack
@@ -133,6 +142,14 @@
  * @method date                      getJoinedDate()                 Returns the current record's "joined_date" value
  * @method string                    getEmpOthEmail()                Returns the current record's "emp_oth_email" value
  * @method integer                   getTerminationId()              Returns the current record's "termination_id" value
+ * @method string                    getMission()                    Returns the current record's "mission" value
+ * @method string                    getRelation()                   Returns the current record's "relation" value
+ * @method string                    getFormation()                  Returns the current record's "formation" value
+ * @method string                    getSigle()                      Returns the current record's "sigle" value
+ * @method string                    getEntite()                     Returns the current record's "entite" value
+ * @method string                    getVersion()                    Returns the current record's "version" value
+ * @method string                    getExp()                        Returns the current record's "exp" value
+ * @method string                    getCompetence()                 Returns the current record's "competence" value
  * @method string                    getCustom1()                    Returns the current record's "custom1" value
  * @method string                    getCustom2()                    Returns the current record's "custom2" value
  * @method string                    getCustom3()                    Returns the current record's "custom3" value
@@ -168,6 +185,7 @@
  * @method Doctrine_Collection       getLeaveRequest()               Returns the current record's "LeaveRequest" collection
  * @method Doctrine_Collection       getLeaveRequestComment()        Returns the current record's "LeaveRequestComment" collection
  * @method Doctrine_Collection       getLeaveComment()               Returns the current record's "LeaveComment" collection
+ * @method Doctrine_Collection       getTrainingRequest()            Returns the current record's "TrainingRequest" collection
  * @method Doctrine_Collection       getPerformanceReview()          Returns the current record's "PerformanceReview" collection
  * @method Doctrine_Collection       getReviewer()                   Returns the current record's "Reviewer" collection
  * @method Doctrine_Collection       getPerformanceTrack()           Returns the current record's "PerformanceTrack" collection
@@ -224,6 +242,14 @@
  * @method Employee                  setJoinedDate()                 Sets the current record's "joined_date" value
  * @method Employee                  setEmpOthEmail()                Sets the current record's "emp_oth_email" value
  * @method Employee                  setTerminationId()              Sets the current record's "termination_id" value
+ * @method Employee                  setMission()                    Sets the current record's "mission" value
+ * @method Employee                  setRelation()                   Sets the current record's "relation" value
+ * @method Employee                  setFormation()                  Sets the current record's "formation" value
+ * @method Employee                  setSigle()                      Sets the current record's "sigle" value
+ * @method Employee                  setEntite()                     Sets the current record's "entite" value
+ * @method Employee                  setVersion()                    Sets the current record's "version" value
+ * @method Employee                  setExp()                        Sets the current record's "exp" value
+ * @method Employee                  setCompetence()                 Sets the current record's "competence" value
  * @method Employee                  setCustom1()                    Sets the current record's "custom1" value
  * @method Employee                  setCustom2()                    Sets the current record's "custom2" value
  * @method Employee                  setCustom3()                    Sets the current record's "custom3" value
@@ -259,6 +285,7 @@
  * @method Employee                  setLeaveRequest()               Sets the current record's "LeaveRequest" collection
  * @method Employee                  setLeaveRequestComment()        Sets the current record's "LeaveRequestComment" collection
  * @method Employee                  setLeaveComment()               Sets the current record's "LeaveComment" collection
+ * @method Employee                  setTrainingRequest()            Sets the current record's "TrainingRequest" collection
  * @method Employee                  setPerformanceReview()          Sets the current record's "PerformanceReview" collection
  * @method Employee                  setReviewer()                   Sets the current record's "Reviewer" collection
  * @method Employee                  setPerformanceTrack()           Sets the current record's "PerformanceTrack" collection
@@ -452,6 +479,36 @@ abstract class BaseEmployee extends sfDoctrineRecord
              'type' => 'integer',
              'length' => 4,
              ));
+        $this->hasColumn('mission', 'string', null, array(
+             'type' => 'string',
+             ));
+        $this->hasColumn('relation', 'string', null, array(
+             'type' => 'string',
+             ));
+        $this->hasColumn('formation', 'string', 250, array(
+             'type' => 'string',
+             'length' => 250,
+             ));
+        $this->hasColumn('sigle', 'string', 250, array(
+             'type' => 'string',
+             'length' => 250,
+             ));
+        $this->hasColumn('entite', 'string', 250, array(
+             'type' => 'string',
+             'length' => 250,
+             ));
+        $this->hasColumn('version', 'string', 250, array(
+             'type' => 'string',
+             'length' => 250,
+             ));
+        $this->hasColumn('exp', 'string', 250, array(
+             'type' => 'string',
+             'length' => 250,
+             ));
+        $this->hasColumn('competence', 'string', 1000, array(
+             'type' => 'string',
+             'length' => 1000,
+             ));
         $this->hasColumn('custom1', 'string', 250, array(
              'type' => 'string',
              'length' => 250,
@@ -598,6 +655,10 @@ abstract class BaseEmployee extends sfDoctrineRecord
         $this->hasMany('LeaveComment', array(
              'local' => 'emp_number',
              'foreign' => 'created_by_emp_number'));
+
+        $this->hasMany('TrainingRequest', array(
+             'local' => 'emp_number',
+             'foreign' => 'emp_number'));
 
         $this->hasMany('PerformanceReview', array(
              'local' => 'emp_number',
