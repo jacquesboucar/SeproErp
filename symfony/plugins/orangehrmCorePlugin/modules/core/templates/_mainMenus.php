@@ -69,7 +69,7 @@ function getHtmslId($menuItem) {
     <?php $gid = 1;?>
     <?php $sgid = 1;?>
     <?php foreach ($menuItemArray as $firstLevelItem) : ?>
-        <li class="has-children firstlevel" <?php echo getListsItemClass($firstLevelItem, $currentItemDetails); ?>>
+        <li class="has-children firstlevel" <?php echo getListsItemClass($firstLevelItem, $currentItemDetails);?>>
             <input type="checkbox" name ="group-<?php echo $gid;?>" id="group-<?php echo $gid;?>">
             <label for="group-<?php echo $gid;?>">
                 <a href="<?php echo getMenusUrl($firstLevelItem); ?>" id="<?php echo getHtmslId($firstLevelItem); ?>" class="firstLevelMenu">
@@ -82,27 +82,51 @@ function getHtmslId($menuItem) {
                 <?php if (count($firstLevelItem['subMenuItems']) > 0) : ?>
 
                     <?php foreach ($firstLevelItem['subMenuItems'] as $secondLevelItem) : ?>
-                        <li class="has-children secondlevel notification active">
-                            <input type="checkbox" name ="sub-group-<?php echo $sgid;?>" id="sub-group-<?php echo $gid;?>">
-                            <label for="sub-group-<?php echo $sgid;?>">
-                                <a href="<?php echo getMenusUrl($secondLevelItem); ?>" id="<?php echo getHtmslId($secondLevelItem); ?>"<?php echo getSubMenusIndication($secondLevelItem); ?>>
-                                    <?php echo __($secondLevelItem['menuTitle']) ?>
-                                </a>
-                            </label>
-                            <?php if (count($secondLevelItem['subMenuItems']) > 0) : ?>
-                                <ul>
-                                    <?php foreach ($secondLevelItem['subMenuItems'] as $thirdLevelItem) : ?>
+                        <?php if(getMenusUrl($secondLevelItem)==="#"){?>
+                            <li class="has-children secondlevel notification active">
+                                <input type="checkbox" name ="sub-group-<?php echo $sgid;?>" id="sub-group-<?php echo $sgid;?>">
+                                <label for="sub-group-<?php echo $sgid;?>">
+                                    <a id="<?php echo getHtmslId($secondLevelItem); ?>"<?php echo getSubMenusIndication($secondLevelItem); ?>>
+                                        <?php echo __($secondLevelItem['menuTitle']) ?>
+                                    </a>
+                                </label>
+                                <?php if (count($secondLevelItem['subMenuItems']) > 0) : ?>
+                                    <ul>
+                                        <?php foreach ($secondLevelItem['subMenuItems'] as $thirdLevelItem) : ?>
 
-                                        <li>
-                                            <a href="<?php echo getMenusUrl($thirdLevelItem); ?>" id="<?php echo getHtmslId($thirdLevelItem); ?>">
-                                                <?php echo __($thirdLevelItem['menuTitle']) ?>
-                                            </a>
-                                        </li>
+                                            <li>
+                                                <a href="<?php echo getMenusUrl($thirdLevelItem); ?>" id="<?php echo getHtmslId($thirdLevelItem); ?>">
+                                                    <?php echo __($thirdLevelItem['menuTitle']) ?>
+                                                </a>
+                                            </li>
 
-                                    <?php endforeach; ?>
-                                </ul>
-                            <?php endif; ?>
-                        </li>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                <?php endif; ?>
+                            </li>
+                        <?php }else{ ?>
+                            <li class="has-children secondlevel notification active">
+                                <input type="checkbox" name ="sub-group-<?php echo $sgid;?>" id="sub-group-<?php echo $sgid;?>">
+                                <label for="sub-group-<?php echo $sgid;?>">
+                                    <a href="<?php echo getMenusUrl($secondLevelItem); ?>" id="<?php echo getHtmslId($secondLevelItem); ?>"<?php echo getSubMenusIndication($secondLevelItem); ?>>
+                                        <?php echo __($secondLevelItem['menuTitle']) ?>
+                                    </a>
+                                </label>
+                                <?php if (count($secondLevelItem['subMenuItems']) > 0) : ?>
+                                    <ul>
+                                        <?php foreach ($secondLevelItem['subMenuItems'] as $thirdLevelItem) : ?>
+
+                                            <li>
+                                                <a href="<?php echo getMenusUrl($thirdLevelItem); ?>" id="<?php echo getHtmslId($thirdLevelItem); ?>">
+                                                    <?php echo __($thirdLevelItem['menuTitle']) ?>
+                                                </a>
+                                            </li>
+
+                                        <?php endforeach; ?>
+                                    </ul>
+                                <?php endif; ?>
+                            </li>
+                        <?php } ?>
                         <?php $sgid++;?>
                     <?php endforeach; ?>
                 <?php else:
