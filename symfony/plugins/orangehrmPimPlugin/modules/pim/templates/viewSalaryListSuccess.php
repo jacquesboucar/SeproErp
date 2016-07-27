@@ -9,7 +9,7 @@
             <h1 id="headchangeSalary"><?php echo __('Add Salary Component'); ?></h1>
         </div>
         
-        <div class="inner">
+        <div class="inner ">
             <form id="frmSalary" action="<?php echo url_for('pim/viewSalaryList?empNumber=' . $empNumber); ?>" method="post" class="longLabels">
                 <fieldset>
                     <?php echo $form['_csrf_token']; ?>
@@ -101,7 +101,7 @@
     </div> <!-- changeSalary-Add-or-Edit-salary -->
     <?php } ?>
     
-    <div class="miniList" id="salaryMiniList">
+    <div class="miniList salairelist" id="salaryMiniList">
         <div class="head">
             <h1><?php echo __("Assigned Salary Components"); ?></h1>
         </div>
@@ -111,7 +111,7 @@
             
             <?php include_partial('global/flash_messages', array('prefix' => 'salary')); ?>
             
-            <form id="frmDelSalary" action="<?php echo url_for('pim/deleteSalary?empNumber=' . $empNumber); ?>" method="post" class="longLabels">
+            <form id="frmDelSalary" action="<?php echo url_for('pim/deleteSalary?empNumber=' . $empNumber); ?>" method="post" class="longLabels formsalaire">
                 <?php echo $listForm ?>
                 <p id="actionSalary">
                     <?php if ($salaryPermissions->canCreate()) { ?>

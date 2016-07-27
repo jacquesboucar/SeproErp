@@ -18,7 +18,7 @@ if (!empty($customFieldList) && (count($customFieldList) > 0)) {
 <?php endif; ?>
         <a name="custom"> </a>
         <?php if ($permission->canRead()) { ?>
-        <div class="single">
+        <div class="single fieldpersanlise">
             <div class="head"><h1><?php echo __('Custom Fields'); ?></h1></div>
             
             <div class="inner">

@@ -8,11 +8,11 @@ use_stylesheet(plugin_web_path('orangehrmPimPlugin', 'css/viewPersonalDetailsSuc
     
     <div class="personalDetails" id="pdMainContainer">
         
-        <div class="head">
+        <div class="head entetepersonnal">
             <h1><?php echo __('Personal Details'); ?></h1>
         </div> <!-- head -->
     
-        <div class="inner">
+        <div class="inner detailpersonnel">
 
             <?php if ($personalInformationPermission->canRead()) : ?>
 
@@ -34,7 +34,7 @@ use_stylesheet(plugin_web_path('orangehrmPimPlugin', 'css/viewPersonalDetailsSuc
                     <ol>
                         <li class="line nameContainer">
                             <label for="Full_Name" class="hasTopFieldHelp"><?php echo __('Full Name'); ?></label>
-                            <ol class="fieldsInLine">
+                            <ol>
                                 <li>
                                     <div class="fieldDescription"><em>*</em> <?php echo __('First Name'); ?></div>
                                     <?php echo $form['txtEmpFirstName']->render(array("class" => "block default editable", "maxlength" => 30, "title" => __('First Name'))); ?>
@@ -47,7 +47,7 @@ use_stylesheet(plugin_web_path('orangehrmPimPlugin', 'css/viewPersonalDetailsSuc
                                     <div class="fieldDescription"><em>*</em> <?php echo __('Last Name'); ?></div>
                                     <?php echo $form['txtEmpLastName']->render(array("class" => "block default editable", "maxlength" => 30, "title" => __('Last Name'))); ?>
                                 </li>
-                            </ol>    
+                            </ol>
                         </li>
                     </ol>
                     <ol>
@@ -63,22 +63,26 @@ use_stylesheet(plugin_web_path('orangehrmPimPlugin', 'css/viewPersonalDetailsSuc
                             <label for="personal_txtLicenNo"><?php echo __("Driver's License Number"); ?></label>
                             <?php echo $form['txtLicenNo']->render(array("maxlength" => 30, "class" => "editable")); ?>
                         </li>
+                    </ol>
+
+                    <ol>
+
                         <li>
                             <label for="personal_txtLicExpDate"><?php echo __('License Expiry Date'); ?></label>
                             <?php echo $form['txtLicExpDate']->render(array("class"=>"calendar editable")); ?>
                         </li>
                         <?php if ($showSSN) : ?>
-                        <li class="new">
-                            <label for="personal_txtNICNo"><?php echo __('SSN Number'); ?></label>
-                            <?php echo $form['txtNICNo']->render(array("class" => "editable", "maxlength" => 30)); ?>
-                        </li>                    
+                            <li class="new">
+                                <label for="personal_txtNICNo"><?php echo __('SSN Number'); ?></label>
+                                <?php echo $form['txtNICNo']->render(array("class" => "editable", "maxlength" => 30)); ?>
+                            </li>
                         <?php endif; ?>
                         <?php if ($showSIN) : ?>
-                        <li class="<?php echo !($showSSN)?'new':''; ?>">
-                            <label for="personal_txtSINNo"><?php echo __('SIN Number'); ?></label>
-                            <?php echo $form['txtSINNo']->render(array("class" => "editable", "maxlength" => 30)); ?>
-                        </li>                    
-                        <?php endif; ?>                    
+                            <li class="<?php echo !($showSSN)?'new':''; ?>">
+                                <label for="personal_txtSINNo"><?php echo __('SIN Number'); ?></label>
+                                <?php echo $form['txtSINNo']->render(array("class" => "editable", "maxlength" => 30)); ?>
+                            </li>
+                        <?php endif; ?>
                     </ol>
                     <ol>
                         <li class="radio">
@@ -89,6 +93,9 @@ use_stylesheet(plugin_web_path('orangehrmPimPlugin', 'css/viewPersonalDetailsSuc
                             <label for="personal_cmbMarital"><?php echo __('Marital Status'); ?></label>
                             <?php echo $form['cmbMarital']->render(array("class"=>"editable")); ?>
                         </li>
+                    </ol>
+                    <ol>
+
                         <li class="new">
                             <label for="personal_cmbNation"><?php echo __("Nationality"); ?></label>
                             <?php echo $form['cmbNation']->render(array("class"=>"editable")); ?>
@@ -98,33 +105,33 @@ use_stylesheet(plugin_web_path('orangehrmPimPlugin', 'css/viewPersonalDetailsSuc
                             <?php echo $form['DOB']->render(array("class"=>"editable")); ?>
                         </li>
                         <?php if(!$showDeprecatedFields) : ?>
-                        <li class="required new">
-                            <em>*</em> <?php echo __(CommonMessages::REQUIRED_FIELD); ?>
-                        </li>
+                            <li class="required new">
+                                <em>*</em> <?php echo __(CommonMessages::REQUIRED_FIELD); ?>
+                            </li>
                         <?php endif; ?>
-                    </ol>    
-                    <?php if($showDeprecatedFields) : ?>    
-                    <ol>
-                        <li>
-                            <label for="personal_txtEmpNickName"><?php echo __("Nick Name"); ?></label>
-                            <?php echo $form['txtEmpNickName']->render(array("maxlength" => 30, "class" => "editable")); ?>
-                        </li>
-                        <li>
-                            <label for="personal_chkSmokeFlag"><?php echo __('Smoker'); ?></label>
-                            <?php echo $form['chkSmokeFlag']->render(array("class" => "editable")); ?>
-                        </li>
-                        <li class="new">
-                            <label for="personal_txtMilitarySer"><?php echo __("Military Service"); ?></label>
-                            <?php echo $form['txtMilitarySer']->render(array("maxlength" => 30, "class" => "editable")); ?>
-                        </li>
-                        <li class="required new">
-                            <em>*</em> <?php echo __(CommonMessages::REQUIRED_FIELD); ?>
-                        </li>                    
                     </ol>
-                    <?php endif; ?>                        
+                    <?php if($showDeprecatedFields) : ?>
+                        <ol>
+                            <li>
+                                <label for="personal_txtEmpNickName"><?php echo __("Nick Name"); ?></label>
+                                <?php echo $form['txtEmpNickName']->render(array("maxlength" => 30, "class" => "editable")); ?>
+                            </li>
+                            <li>
+                                <label for="personal_chkSmokeFlag"><?php echo __('Smoker'); ?></label>
+                                <?php echo $form['chkSmokeFlag']->render(array("class" => "editable")); ?>
+                            </li>
+                            <li class="new">
+                                <label for="personal_txtMilitarySer"><?php echo __("Military Service"); ?></label>
+                                <?php echo $form['txtMilitarySer']->render(array("maxlength" => 30, "class" => "editable")); ?>
+                            </li>
+                            <li class="required new">
+                                <em>*</em> <?php echo __(CommonMessages::REQUIRED_FIELD); ?>
+                            </li>
+                        </ol>
+                    <?php endif; ?>
 
                     <?php  if ($personalInformationPermission->canUpdate()) : ?>
-                    <p><input type="button" id="btnSave" value="<?php echo __("Edit"); ?>" /></p>
+                        <p><input type="button" id="btnSave" value="<?php echo __("Edit"); ?>" /></p>
                     <?php endif; ?>
 
                 </fieldset>

@@ -227,7 +227,6 @@
 }
 #sideMenu  .cd-accordion-menu li.ul.li.checked.secondlevel > label::after {
     content: '-';
-    margin-top:20px;
 }
 /*Table */
 
@@ -239,5 +238,16 @@ table tbody tr td a{
     color: #000;
 }
 
-/* Breadcrumb */
-
+.formsalaire, .salairelist,.fieldpersanlise{
+    display: none;
+}
+.detailpersonnel{
+    width: 67%;
+    border-color: #1b438c;
+}
+.entetepersonnal{
+    width: 67%;
+}
+.personalDetails form ol li input[type=text] {
+    width: 278px;
+}
