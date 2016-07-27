@@ -63,13 +63,13 @@ function getHtmlId($menuItem) {
 <ul class="dl-menu">
 
     <?php foreach ($menuItemArray as $firstLevelItem) : ?>
-
+        <?php if(getMenuUrl($firstLevelItem)!="#"){ ?>
         <li<?php echo getListItemClass($firstLevelItem, $currentItemDetails); ?>>
             <a href="<?php echo getMenuUrl($firstLevelItem); ?>" id="<?php echo getHtmlId($firstLevelItem); ?>" class="firstLevelMenu">
                 <b><?php echo __($firstLevelItem['menuTitle']) ?></b>
             </a>
         </li>
-
+    <?php } ?>
     <?php endforeach; ?>
 
 </ul> <!-- first level -->
