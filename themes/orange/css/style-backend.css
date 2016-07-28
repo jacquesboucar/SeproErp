@@ -286,8 +286,16 @@ table tbody tr td a{
 
 
 #layoutcontent .box .head h1{
-    background: url() #A12B84;
+    background: url("") #A12B84;
     border: none;
     color: #FFFFFF;
     margin-bottom: 0;
+}
+
+#tableWrapper {
+    max-height: 400px;
+    display:block;
+}
+#deleteConfModal{
+    display: block;
 }
