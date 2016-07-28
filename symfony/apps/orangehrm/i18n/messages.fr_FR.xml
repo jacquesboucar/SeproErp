@@ -8104,7 +8104,7 @@
                           </trans-unit>
                           <trans-unit id="1621">
                            <source>Hiring Manager</source>
-                           <target>Responsable du recrutement</target>
+                           <target>Chargé du recrutement</target>
                            <note>The person who manages the recruitment process of a company by setting up interviews and hiring candidates</note>
                           </trans-unit>
                           <trans-unit id="1622">
@@ -8853,7 +8853,7 @@
                            </trans-unit>
                            <trans-unit id="1772">
                             <source>Job</source>
-                            <target>Fiche de Poste</target>
+                            <target>Poste</target>
                             <note>Allows the HR admin to define job titles, specifications, pay grades, employment status, job categories and work shifts.</note>
                            </trans-unit>
                            <trans-unit id="1773">
@@ -13330,7 +13330,7 @@
                                    </trans-unit>
                                    <trans-unit id="2671">
                                     <source>Project Admin</source>
-                                    <target>Administrateur de projet</target>
+                                    <target>Gestionnaire Project</target>
                                     <note>The employee assigned for the project to monitor it. You may assign more employees for the project.</note>
                                    </trans-unit>
                                    <trans-unit id="2672">
