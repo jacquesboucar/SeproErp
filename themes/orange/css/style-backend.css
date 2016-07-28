@@ -272,3 +272,22 @@ table tbody tr td a{
     width: 278px;
 }
 
+#layoutcontent .box.searchForm .inner,
+#layoutcontent .box {
+    border: 1px solid #A12B84;
+    background-color: rgba(255,255,255, 0.5);
+}
+
+#layoutcontent .box.searchForm,
+#layoutcontent .box .inner {
+    background-color: transparent;
+    border: none;
+}
+
+
+#layoutcontent .box .head h1{
+    background: url() #A12B84;
+    border: none;
+    color: #FFFFFF;
+    margin-bottom: 0;
+}
