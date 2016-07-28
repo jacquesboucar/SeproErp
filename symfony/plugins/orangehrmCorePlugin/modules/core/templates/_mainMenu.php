@@ -63,42 +63,13 @@ function getHtmlId($menuItem) {
 <ul class="dl-menu">
 
     <?php foreach ($menuItemArray as $firstLevelItem) : ?>
-
-        <li<?php echo getListItemClass($firstLevelItem, $currentItemDetails); ?>><a href="<?php echo getMenuUrl($firstLevelItem); ?>" id="<?php echo getHtmlId($firstLevelItem); ?>" class="firstLevelMenu"><b><?php echo __($firstLevelItem['menuTitle']) ?></b></a>
-
-            <ul class="dl-submenu">
-                <?php if (count($firstLevelItem['subMenuItems']) > 0) : ?>
-
-                    <?php foreach ($firstLevelItem['subMenuItems'] as $secondLevelItem) : ?>
-
-                        <li<?php echo getListItemClass($secondLevelItem, $currentItemDetails); ?>><a href="<?php echo getMenuUrl($secondLevelItem); ?>" id="<?php echo getHtmlId($secondLevelItem); ?>"<?php echo getSubMenuIndication($secondLevelItem); ?>><?php echo __($secondLevelItem['menuTitle']) ?></a>
-
-                            <?php if (count($secondLevelItem['subMenuItems']) > 0) : ?>
-
-                                <ul class="dl-submenu">
-
-                                    <?php foreach ($secondLevelItem['subMenuItems'] as $thirdLevelItem) : ?>
-
-                                        <li><a href="<?php echo getMenuUrl($thirdLevelItem); ?>" id="<?php echo getHtmlId($thirdLevelItem); ?>"><?php echo __($thirdLevelItem['menuTitle']) ?></a></li>
-
-                                    <?php endforeach; ?>
-
-                                </ul> <!-- third level -->
-
-                            <?php endif; ?>
-
-                        </li>
-
-                    <?php endforeach; ?>
-                <?php else:
-                    // Empty li to add an orange bar and maintain uniform look.
-                    ?>
-                    <li></li>
-                <?php endif; ?>
-
-            </ul> <!-- second level -->
+        <?php if(getMenuUrl($firstLevelItem)!="#"){ ?>
+        <li<?php echo getListItemClass($firstLevelItem, $currentItemDetails); ?>>
+            <a href="<?php echo getMenuUrl($firstLevelItem); ?>" id="<?php echo getHtmlId($firstLevelItem); ?>" class="firstLevelMenu">
+                <b><?php echo __($firstLevelItem['menuTitle']) ?></b>
+            </a>
         </li>
-
+    <?php } ?>
     <?php endforeach; ?>
 
 </ul> <!-- first level -->
