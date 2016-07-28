@@ -17985,7 +17985,7 @@
                                                       </trans-unit>
                                                       <trans-unit id="3604">
                                                        <source>Username cannot be empty</source>
-                                                       <target>Vous devez remplir le champ Nom d'utilisateur</target>
+                                                       <target>Vous devez remplir le champ Nom d\'utilisateur</target>
                                                        <note>When log in, entering user name is mandatory..if not it restricts users access to the system</note>
                                                       </trans-unit>
                                                       <trans-unit id="3605">

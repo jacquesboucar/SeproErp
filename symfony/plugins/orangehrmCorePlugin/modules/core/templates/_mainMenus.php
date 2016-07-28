@@ -69,7 +69,7 @@ function getHtmslId($menuItem) {
     <?php $gid = 1;?>
     <?php $sgid = 1;?>
     <?php foreach ($menuItemArray as $firstLevelItem) : ?>
-        <li class="has-children firstlevel" <?php echo getListsItemClass($firstLevelItem, $currentItemDetails); ?>>
+        <li name="group-<?php echo $gid;?>" class="has-children firstlevel" <?php echo getListsItemClass($firstLevelItem, $currentItemDetails); ?>>
             <input type="checkbox" name ="group-<?php echo $gid;?>" id="group-<?php echo $gid;?>">
             <label for="group-<?php echo $gid;?>">
                 <a href="<?php echo getMenusUrl($firstLevelItem); ?>" id="<?php echo getHtmslId($firstLevelItem); ?>" class="firstLevelMenu">
@@ -82,8 +82,8 @@ function getHtmslId($menuItem) {
                 <?php if (count($firstLevelItem['subMenuItems']) > 0) : ?>
 
                     <?php foreach ($firstLevelItem['subMenuItems'] as $secondLevelItem) : ?>
-                        <li class="has-children secondlevel notification active">
-                            <input type="checkbox" name ="sub-group-<?php echo $sgid;?>" id="sub-group-<?php echo $gid;?>">
+                        <li class="has-children secondlevel notification">
+                            <input type="checkbox" name ="sub-group-<?php echo $sgid;?>" id="sub-group-<?php echo $sgid;?>">
                             <label for="sub-group-<?php echo $sgid;?>">
                                 <a href="<?php echo getMenusUrl($secondLevelItem); ?>" id="<?php echo getHtmslId($secondLevelItem); ?>"<?php echo getSubMenusIndication($secondLevelItem); ?>>
                                     <?php echo __($secondLevelItem['menuTitle']) ?>
