@@ -11,6 +11,10 @@
  * @property integer $min_rating
  * @property integer $max_rating
  * @property integer $default_kpi
+ * @property varchar $kpi_type
+ * @property varchar $kpi_group
+ * @property string $delai
+ * @property string $valeur_cible
  * @property JobTitle $JobTitle
  * @property Doctrine_Collection $ReviewerRating
  * 
@@ -20,6 +24,10 @@
  * @method integer             getMinRating()      Returns the current record's "min_rating" value
  * @method integer             getMaxRating()      Returns the current record's "max_rating" value
  * @method integer             getDefaultKpi()     Returns the current record's "default_kpi" value
+ * @method varchar             getKpiType()        Returns the current record's "kpi_type" value
+ * @method varchar             getKpiGroup()       Returns the current record's "kpi_group" value
+ * @method string              getDelai()          Returns the current record's "delai" value
+ * @method string              getValeurCible()    Returns the current record's "valeur_cible" value
  * @method JobTitle            getJobTitle()       Returns the current record's "JobTitle" value
  * @method Doctrine_Collection getReviewerRating() Returns the current record's "ReviewerRating" collection
  * @method Kpi                 setId()             Sets the current record's "id" value
@@ -28,6 +36,10 @@
  * @method Kpi                 setMinRating()      Sets the current record's "min_rating" value
  * @method Kpi                 setMaxRating()      Sets the current record's "max_rating" value
  * @method Kpi                 setDefaultKpi()     Sets the current record's "default_kpi" value
+ * @method Kpi                 setKpiType()        Sets the current record's "kpi_type" value
+ * @method Kpi                 setKpiGroup()       Sets the current record's "kpi_group" value
+ * @method Kpi                 setDelai()          Sets the current record's "delai" value
+ * @method Kpi                 setValeurCible()    Sets the current record's "valeur_cible" value
  * @method Kpi                 setJobTitle()       Sets the current record's "JobTitle" value
  * @method Kpi                 setReviewerRating() Sets the current record's "ReviewerRating" collection
  * 
@@ -66,6 +78,22 @@ abstract class BaseKpi extends sfDoctrineRecord
         $this->hasColumn('default_kpi', 'integer', 2, array(
              'type' => 'integer',
              'length' => 2,
+             ));
+        $this->hasColumn('kpi_type', 'varchar', 255, array(
+             'type' => 'varchar',
+             'length' => 255,
+             ));
+        $this->hasColumn('kpi_group', 'varchar', 255, array(
+             'type' => 'varchar',
+             'length' => 255,
+             ));
+        $this->hasColumn('delai', 'string', 250, array(
+             'type' => 'string',
+             'length' => 250,
+             ));
+        $this->hasColumn('valeur_cible', 'string', 250, array(
+             'type' => 'string',
+             'length' => 250,
              ));
     }
 
