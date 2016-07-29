@@ -41,9 +41,12 @@ $cultureElements = explode('_', $sf_user->getCulture());
 
 
 
-        echo javascript_include_tag('jquery/jquery-1.9.1.js');
+
+        echo javascript_include_tag('jquery/jquery-2.1.4.js');
+        echo javascript_include_tag('jquery/bootstrap.js');
         echo javascript_include_tag('jquery/jquery.browser.min.js');
-        echo javascript_include_tag('jquery/bootstrap.min.js');
+        echo javascript_include_tag('jquery/jquery-1.8.0.min.js');
+
 
 
         echo javascript_include_tag('jquery/validate/jquery.validate.js');
@@ -54,7 +57,7 @@ $cultureElements = explode('_', $sf_user->getCulture());
         echo javascript_include_tag('jquery/jquery.ui.datepicker.js');
         echo javascript_include_tag('jquery/jquery.form.js');
         echo javascript_include_tag('jquery/jquery.tipTip.minified.js');
-        echo javascript_include_tag('jquery/modal.js');
+        echo javascript_include_tag('jquery/bootstrap-modal.js');
         echo javascript_include_tag('jquery/jquery.clickoutside.js');
 
         echo javascript_include_tag('jquery/modernizr.custom.js');

@@ -120,7 +120,7 @@ function getSortClass($column, $sortField, $sortOrder) {
             ?>
             <fieldset>
                 <p id="listActions">
-                    <input type="hidden" name="mode" id="mode" value=""></input>  
+                    <input type="hidden" name="mode" id="mode" value=""/>
 
                     <?php if ($fieldsLeft > 0) { ?>                
                         <input type="button" class="" id="buttonAdd" value="<?php echo __("Add") ?>" />
@@ -198,10 +198,10 @@ function getSortClass($column, $sortField, $sortOrder) {
 </div> <!-- End of list -->
 
 <!-- Confirmation box HTML: Begins -->
-<div class="modal hide" id="deleteConfModal">
+<div class="modal" id="deleteConfModal">
     <div class="modal-header">
         <a class="close" data-dismiss="modal">×</a>
-        <h3><?php echo __('OrangeHRM - Confirmation Required'); ?></h3>
+        <h5><?php echo __('SeproRH - Confirmation Required'); ?></h5>
     </div>
     <div class="modal-body">
         <p><?php echo __('Will be deleted from all employees'); ?></p>

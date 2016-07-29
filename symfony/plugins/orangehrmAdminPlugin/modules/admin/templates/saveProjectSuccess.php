@@ -26,7 +26,7 @@ use_javascript(plugin_web_path('orangehrmAdminPlugin', 'js/saveProjectSuccess'))
                         <?php echo $form['customerName']->renderLabel(__('Customer Name') . ' <em>*</em>'); ?>
                         <?php echo $form['customerName']->render(array("class" => "formInputCustomer", "maxlength" => 52)); ?>
                         <?php if($customerPermissions->canCreate()){?>
-                        <a id="addCustomerLink" class="btn2 fieldHelpRight" data-toggle="modal" href="#customerDialog" ><?php echo __('Add Customer') ?></a>
+                        <a id="addCustomerLink" class="btn2 fieldHelpRight" data-toggle="modal" data-target="#customerDialog" href="#customerDialog" ><?php echo __('Add Customer') ?></a>
                         <?php }?>
                     </li>
                     
@@ -126,7 +126,7 @@ use_javascript(plugin_web_path('orangehrmAdminPlugin', 'js/saveProjectSuccess'))
 
 <!-- Add customer window -->
 <?php if($customerPermissions->canCreate()){?>
-<div class="modal hide" id="customerDialog">
+<div class="modal" id="customerDialog">
     <div class="modal-header">
         <a class="close" data-dismiss="modal">×</a>
         <h3><?php echo __('Add Customer') ?></h3>
@@ -166,10 +166,10 @@ use_javascript(plugin_web_path('orangehrmAdminPlugin', 'js/saveProjectSuccess'))
 </form>
 
 <!-- undelete message dialog -->
-<div class="modal hide" id="undeleteDialog">
+<div class="modal" id="undeleteDialog">
     <div class="modal-header">
         <a class="close" data-dismiss="modal">×</a>
-        <h3><?php echo __('OrangeHRM - Confirmation Required'); ?></h3>
+        <h5><?php echo __('SeproRH - Confirmation Required'); ?></h5>
     </div>
     <div class="modal-body">
         <p><?php echo __('This is a deleted customer. Reactivate again?'); ?></p>
@@ -189,10 +189,10 @@ use_javascript(plugin_web_path('orangehrmAdminPlugin', 'js/saveProjectSuccess'))
 </div> <!-- undeleteDialog -->
 
 <!-- Copy activity -->
-<div class="modal hide" id="copyActivityModal">
+<div class="modal" id="copyActivityModal">
     <div class="modal-header">
         <a class="close" data-dismiss="modal">×</a>
-        <h3><?php echo __('Copy Activity') ?></h3>
+        <h5><?php echo __('Copy Activity') ?></h5>
     </div>
     <div class="modal-body">
         <form name="frmCopyAct" id="frmCopyAct" method="post" action="<?php echo url_for('admin/copyActivity?projectId=' . $projectId); ?>">
@@ -224,10 +224,10 @@ use_javascript(plugin_web_path('orangehrmAdminPlugin', 'js/saveProjectSuccess'))
 <!-- End-of-copy-activity -->
 
 <!-- Delete-confirmation -->
-<div class="modal hide" id="deleteConfModal">
+<div class="modal" id="deleteConfModal">
     <div class="modal-header">
         <a class="close" data-dismiss="modal">×</a>
-        <h3><?php echo __('OrangeHRM - Confirmation Required'); ?></h3>
+        <h5><?php echo __('SeproRH - Confirmation Required'); ?></h5>
             </div>
     <div class="modal-body">
         <p><?php echo __(CommonMessages::DELETE_CONFIRMATION); ?></p>

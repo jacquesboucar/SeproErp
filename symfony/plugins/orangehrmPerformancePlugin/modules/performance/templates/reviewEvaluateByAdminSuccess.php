@@ -197,7 +197,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                             <input type="button" class="applybutton" id="saveBtn" value="<?php echo __('Save'); ?>" title="<?php echo __('Add'); ?>"/>                
                         <?php } ?>
                         <?php if ($form->isEvaluationsCompleateEnabled()) { ?>
-                            <input type="button" class="applybutton" id="completeBtn"  data-toggle="modal" data-target="#deleteConfModal"   value="<?php echo __('Complete'); ?>" title="<?php echo __('Complete'); ?>"/>
+                            <input type="button" class="applybutton" id="completeBtn" data-toggle="modal" data-target="#deleteConfModal" value="<?php echo __('Complete'); ?>" title="<?php echo __('Complete'); ?>"/>
                         <?php } ?>
                         <input type="button" class="reset" id="backBtn" value="<?php echo __('Back'); ?>" title="<?php echo __('Back'); ?>"/> 
                     </p>
@@ -206,7 +206,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
             <div class="modal" id="deleteConfModal">
                 <div class="modal-header">
                     <a class="close" data-dismiss="modal">×</a>
-                    <h3><?php echo __('OrangeHRM - Confirmation Required'); ?></h3>
+                    <h5><?php echo __('SeproRH - Confirmation Required'); ?></h5>
                 </div>
                 <div class="modal-body">
                     <p><?php echo __("The review will be made read-only after completion.") . __("This action cannot be undone.") . __("Are you sure you want to continue?"); ?></p>

@@ -40,10 +40,10 @@ use_javascript(plugin_web_path('orangehrmAdminPlugin', 'js/nationalitySuccess'))
 </div>
 
 <!-- Confirmation box HTML: Begins -->
-<div class="modal hide" id="deleteConfModal">
+<div class="modal" id="deleteConfModal">
   <div class="modal-header">
     <a class="close" data-dismiss="modal">×</a>
-    <h3><?php echo __('OrangeHRM - Confirmation Required'); ?></h3>
+    <h5><?php echo __('SeproRH - Confirmation Required'); ?></h5>
   </div>
   <div class="modal-body">
     <p><?php echo __(CommonMessages::DELETE_CONFIRMATION); ?></p>

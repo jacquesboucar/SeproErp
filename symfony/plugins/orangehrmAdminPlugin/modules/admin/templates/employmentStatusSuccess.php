@@ -50,7 +50,7 @@ use_javascript(plugin_web_path('orangehrmAdminPlugin', 'js/employmentStatusSucce
 </div>
 
 <!-- Confirmation box HTML: Begins -->
-<div class="modal hide" id="deleteConfModal">
+<div class="modal" id="deleteConfModal">
     <div class="modal-header">
         <a class="close" data-dismiss="modal">×</a>
         <h3><?php echo __('OrangeHRM - Confirmation Required'); ?></h3>

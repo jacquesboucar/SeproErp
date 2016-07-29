@@ -12,7 +12,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
     <div class="inner">
         <?php include_partial('global/flash_messages'); ?>
 
-        <div id="reviewData">
+        <div id="reviewData paginer">
             <div style="" class="reviewInfo" id="review-details">
                 <div class="smallerHeader"><h1><?php echo __('Review Details') ?></h1></div>
                 <table class="expandTable">
@@ -185,10 +185,10 @@ if ($form->isFinalRatingVisible()) {
     </div>
 </div>
 <!-- Confirmation box HTML: Begins -->
-<div class="modal hide" id="deleteConfModal">
+<div class="modal" id="deleteConfModal">
     <div class="modal-header">
         <a class="close" data-dismiss="modal">×</a>
-        <h3><?php echo __('OrangeHRM - Confirmation Required'); ?></h3>
+        <h5><?php echo __('SeproRH - Confirmation Required'); ?></h5>
     </div>
     <div class="modal-body">
         <p><?php echo __("The review will be made read-only after completion.") . __("This action cannot be undone.") . __("Are you sure you want to continue?"); ?></p>
