@@ -123,11 +123,19 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                                     $valuesForCalcuation = array();
                                                     $ratings = $form->getSortedRatings($reviewer->getRating());
 
+                                                    $groupe = array('Certification ISO 9001', 'Etudes et marketing', 'Outils et évolutions SI', 'Reporting et analyse');
                                                     foreach ($ratings as $rating) {
                                                         ?>
                                                         <tr>
                                                     <input type="hidden" value="<?php echo $rating->getId(); ?>" id="rating_id_<?php echo $rating->getId(); ?>" name="rating_id[<?php echo $rating->getId(); ?>]" />
                                                     <?php if ($columNumber == 1) { ?>
+                                                       <?php foreach ($groupe as $key => $value): ?>
+                                                        <?php if ($rating->getKpi()->getKpiGroup() == $key): ?>
+                                                          <?php $group = $value; ?>
+                                                        <?php endif; ?>
+                                                       <?php endforeach; ?> 
+
+                                                        <td class="rightAlign"><center><?php echo $group ?></center></td> 
                                                         <td class="rightAlign"><center><?php echo $rating->getKpi()->getKpiIndicators() ?></center></td>
                                                         <td class="rightAlign"><center><?php echo $rating->getKpi()->getMinRating() ?></center></td>
                                                         <td class="rightAlign"></center><?php echo $rating->getKpi()->getMaxRating() ?></center></td>

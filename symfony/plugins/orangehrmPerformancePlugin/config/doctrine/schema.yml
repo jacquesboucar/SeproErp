@@ -17,6 +17,10 @@ Kpi:
       type: integer(11)
     default_kpi:
       type: integer(2)
+    kpi_type: varchar(255)
+    kpi_group: varchar(255)
+    delai: string(250)
+    valeur_cible: string(250)
   relations:
     JobTitle:
       local: jobTitleCode
