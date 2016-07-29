@@ -63,7 +63,7 @@ use_javascripts_for_form($form);
 <?php include_component('core', 'ohrmList'); ?>
 
 <!-- comment dialog -->
-<div class="modal hide midsize" id="commentDialog">
+<div class="modal midsize" id="commentDialog">
   <div class="modal-header">
     <a class="close" data-dismiss="modal">×</a>
     <h3><?php echo __('Leave Request Comments'); ?></h3>
