@@ -298,6 +298,14 @@ create table `hs_hr_employee` (
   `joined_date` date null default null,
   `emp_oth_email` varchar(50) default null,
   `termination_id` int(4) default null,
+  `mission` varchar(2000) default null,
+  `relation` varchar(250) default null,
+  `formation` varchar(250) default null,
+  `sigle` varchar(250) default null,
+  `entite` varchar(250) default null,
+  `version` varchar(250) default null,
+  `exp` varchar(250) default null,
+  `competence` varchar(1000) default null,
   `custom1` varchar(250) default null,
   `custom2` varchar(250) default null,
   `custom3` varchar(250) default null,
@@ -1853,6 +1861,10 @@ CREATE TABLE `ohrm_kpi` (
   `max_rating` int(7) DEFAULT 0,
   `default_kpi` smallint(1) DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL,
+  `kpi_type` varchar(255) DEFAULT NULL,
+  `kpi_group` varchar(255) DEFAULT NULL,
+  `delai` varchar(250) DEFAULT NULL,
+  `valeur_cible` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
