@@ -100,6 +100,8 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                     <div>
                                         <div class="evaluationexpand">
                                             <table  class="evaluateBy" >
+                                               
+                                                ?>
                                                 <thead>
                                                     <tr>
                                                         <?php if ($columNumber == 1) { ?>
@@ -114,10 +116,10 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                                             <th><?php echo __(" "); ?></th>
                                                             <th><?php echo __("Delai"); ?></th>
                                                             <th><?php echo __("Valeur Cible"); ?></th>
-                                                            <th><?php echo __("Max"); ?></th>
+                                                            <th><?php echo __("Poids"); ?></th>
                                                         <?php } ?>
                                                         <th><?php echo __("Rating"); ?></th>
-                                                       
+                                                       <th><?php echo __("Comment"); ?></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -141,14 +143,30 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                                         <td class="rightAlign"><center><?php echo $rating->getKpi()->getKpiIndicators() ?></center></td>
                                                         <td class="rightAlign"><center><?php echo $rating->getKpi()->getDelai() ?></center></td>
                                                         <td class="rightAlign"><center><?php echo $rating->getKpi()->getValeurCible() ?></center></td>
-                                                        <td class="rightAlign"></center><?php echo $rating->getKpi()->getMaxRating() ?></center></td>
+                                                        <td class="rightAlign"><center><?php echo $rating->getKpi()->getMaxRating() ?></center></td>
                                                     <?php } ?>
                                                     <td><center><input class="rightAlign" min="<?php echo $rating->getKpi()->getMinRating() ?>" max="<?php echo $rating->getKpi()->getMaxRating() ?>"  type="text" value="<?php echo $rating->getRating(); ?>" id="rating_<?php echo $rating->getId(); ?>"  name="rating[<?php echo $rating->getId(); ?>]" /></center></td>
-                                                    
+                                                    <td><textarea class="comment" type="text" id="comment_<?php echo $rating->getId(); ?>" name="comment[<?php echo $rating->getId(); ?>]" ><?php echo $rating->getComment(); ?></textarea> </td>
                                                     </tr>            
                                                     <?php
                                                 }
-
+                                                if ($columNumber == 1) {
+                                                     ?>
+                                                     <tr>
+                                                         <td colspan="1"><label class="lableName"><?php echo __("General Comment : "); ?></label></td>
+                                                         <td colspan="1"><textarea class="comment" type="text" id="general_comment_<?php echo $reviewer->getGroup()->getId(); ?>" name="general_comment[<?php echo $reviewer->getGroup()->getId(); ?>]" ><?php echo $reviewer->getComment(); ?></textarea></td>
+                                                     </tr>
+                                                     
+                                                     <?php
+                                                 } else {
+                                                     ?>
+                                                    <tr>
+                                                        <td colspan="1"><label class="lableName"><?php echo __("General Comment : "); ?></label></td>
+                                                         <td colspan="1"><textarea class="comment" type="text" id="general_comment_<?php echo $reviewer->getGroup()->getId(); ?>" name="general_comment[<?php echo $reviewer->getGroup()->getId(); ?>]" ><?php echo $reviewer->getComment(); ?></textarea></td>
+                                                     </tr>
+                                                    
+                                                    <?php
+                                                 }
                                                 
                                                 ?>
                                                 </tbody>
