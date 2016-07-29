@@ -11,7 +11,7 @@
 <input type="hidden" name="hdnMode" value="<?php echo $mode; ?>" />
 
 <!-- comment dialog -->
-<div class="modal midsize hide" id="commentDialog">
+<div class="modal midsize" id="commentDialog">
   <div class="modal-header">
     <a class="close" data-dismiss="modal">×</a>
     <h3><?php echo __('Leave Comments'); ?></h3>

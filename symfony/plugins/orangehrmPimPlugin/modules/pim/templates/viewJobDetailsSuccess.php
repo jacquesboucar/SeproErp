@@ -30,7 +30,7 @@
     
     <div class="">
         <div class="head">
-            <h1><?php echo __('Job'); ?></h1>
+            <h1><?php //echo __('Job'); ?>Fiche de Poste</h1>
         </div> <!-- head -->
         
         <div class="inner">
