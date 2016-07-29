@@ -2631,7 +2631,7 @@ UPDATE ohrm_home_page SET action = 'dashboard/index', priority = '5' WHERE user_
 INSERT INTO ohrm_module (name, status) VALUES ('dashboard', 1);
 SET @dashboard_module := (SELECT id FROM ohrm_module WHERE name = 'dashboard' LIMIT 1);
 
-INSERT INTO ohrm_screen (name, module_id, action_url) VALUES ('Dashboard', @dashboard_module, 'index');
+INSERT INTO ohrm_screen (name, module_id, action_url) VALUES ('Dashboard', @dashboard_module, 'dashboard');
 SET @dashboard_screen := (SELECT id FROM ohrm_screen WHERE name = 'Dashboard' LIMIT 1);
 
 INSERT INTO ohrm_menu_item (menu_title, screen_id, parent_id, level, order_hint, url_extras, status) VALUES
