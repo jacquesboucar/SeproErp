@@ -297,5 +297,5 @@ table tbody tr td a{
     display:block;
 }
 #deleteConfModal{
-    display: block;
+    display: none;
 }
