@@ -57,8 +57,8 @@
                             <?php echo $form['sigle']->render(array("class" => "formTxtArea")); ?>    
                         </li>
                         <li>
-                            <?php echo $form['entite']->renderLabel(__("Entité")); ?>
-                            <?php echo $form['entite']->render(array("class" => "formTxtArea")); ?>    
+                            <?php //echo $form['entite']->renderLabel(__("Departement")); ?>
+                            <?php //echo $form['entite']->render(array("class" => "formTxtArea")); ?>
                         </li>
                         <li>
                             <?php echo $form['version']->renderLabel(__("Version")); ?>
@@ -96,7 +96,7 @@
                             <?php //echo $form['sub_unit']->render(array("class" => "formSelect")); ?>
                         </li>
                         <li>
-                            <?php echo $form['location']->renderLabel(__('Direction')); ?>
+                            <?php echo $form['location']->renderLabel(__('Entite')); ?>
                             <?php echo $form['location']->render(array("class" => "formSelect")); ?>
                         </li>
                         <li>
@@ -225,7 +225,7 @@
 
 <!-- Terminate Employment box HTML: Begins -->
 <?php if ($allowTerminate || $allowActivate || $jobInformationPermission->canRead()) { ?>
-<div class="modal hide" id="terminateEmployement">
+<div class="modal" id="terminateEmployement">
     <div class="modal-header">
         <a class="close" data-dismiss="modal">×</a>
         <h3><?php echo __('Terminate Employment') ?></h3>
