@@ -61,14 +61,32 @@ function getHtmlsId($menuItem) {
 
 <div class="row">
     <?php foreach ($menuItemArray as $firstLevelItem) : ?>
-
-            <div class="col-xs-4 col-sm-4 col-lg-4" <?php echo getListItemsClass($firstLevelItem, $currentItemDetails); ?>>
-                <a class="" href="<?php echo getMenuUrls($firstLevelItem); ?>" id="<?php echo getHtmlsId($firstLevelItem); ?>">
-                    <div class="form-hexagone">
-                        <?php echo __($firstLevelItem['menuTitle']) ?>
-                    </div>
-                </a>
-            </div>
-       
+        <?php $i = 1;?>
+            <?php if(getMenuUrls($firstLevelItem)==="#"){ ?>
+                <?php foreach ($firstLevelItem['subMenuItems'] as $secondLevelItem) : ?>
+                    <?php if(getMenuUrls($secondLevelItem)==="#"){ ?>
+                        <?php foreach ($secondLevelItem['subMenuItems'] as $thirdLevelItem) : ?>
+                             <?php if($i==1): ?>
+                            <div class="col-xs-4 col-sm-4 col-lg-4" <?php echo getListItemsClass($firstLevelItem, $currentItemDetails); ?>>
+                                <a class="" href="<?php echo getMenuUrls($thirdLevelItem); ?>" id="<?php echo getHtmlsId($firstLevelItem); ?>">
+                                    <div class="form-hexagone">
+                                        <?php echo __($firstLevelItem['menuTitle']) ?>
+                                    </div>
+                                </a>
+                            </div>
+                                <?php $i++ ?>
+                            <?php  endif ?>
+                        <?php endforeach ?>
+                    <?php } ?>
+                <?php endforeach; ?>
+            <?php }else{ ?>
+                            <div class="col-xs-4 col-sm-4 col-lg-4" <?php echo getListItemsClass($firstLevelItem, $currentItemDetails); ?>>
+                                <a class="" href="<?php echo getMenuUrls($firstLevelItem) ?>" id="<?php echo getHtmlsId($firstLevelItem); ?>">
+                                    <div class="form-hexagone">
+                                        <?php echo __($firstLevelItem['menuTitle']) ?>
+                                    </div>
+                                </a>
+                            </div>
+            <?php } ?>
     <?php endforeach; ?>
 </div>

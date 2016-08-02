@@ -63,12 +63,28 @@ function getHtmlId($menuItem) {
 <ul class="dl-menu">
 
     <?php foreach ($menuItemArray as $firstLevelItem) : ?>
-
         <li<?php echo getListItemClass($firstLevelItem, $currentItemDetails); ?>>
-            <a href="<?php echo getMenuUrl($firstLevelItem); ?>" id="<?php echo getHtmlId($firstLevelItem); ?>" class="firstLevelMenu">
-                <b><?php echo __($firstLevelItem['menuTitle']) ?></b>
-            </a>
+            <?php $i = 1;?>
+            <?php if(getMenuUrl($firstLevelItem)==="#"){ ?>
+                <?php foreach ($firstLevelItem['subMenuItems'] as $secondLevelItem) : ?>
+                    <?php if(getMenuUrl($secondLevelItem)==="#"){ ?>
+                        <?php foreach ($secondLevelItem['subMenuItems'] as $thirdLevelItem) : ?>
+                            <?php if($i==1): ?>
+                                <a href="<?php echo getMenuUrl($thirdLevelItem); ?>" id="<?php echo getHtmlId($firstLevelItem); ?>" class="firstLevelMenu">
+                                    <b><?php echo __($firstLevelItem['menuTitle']) ?></b>
+                                </a>
+                                <?php $i++ ?>
+                            <?php  endif ?>
+                        <?php endforeach ?>
+                    <?php } ?>
+                <?php endforeach; ?>
+            <?php }else{ ?>
+                <a href="<?php echo getMenuUrl($firstLevelItem); ?>" id="<?php echo getHtmlId($firstLevelItem); ?>" class="firstLevelMenu">
+                    <b><?php echo __($firstLevelItem['menuTitle']) ?></b>
+                </a>
+            <?php } ?>
         </li>
+
     <?php endforeach; ?>
 
 </ul> <!-- first level -->
