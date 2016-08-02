@@ -27,7 +27,7 @@
 </div>
 
 <!-- unitDialog-Dialog -->
-<div class="modal hide" id="unitDialog">
+<div class="modal" id="unitDialog">
     <div class="modal-header">
         <a class="close" data-dismiss="modal">×</a>
         <h3 id="title"><?php echo "OrangeHRM - " . __("Edit Unit"); ?></h3>
@@ -65,7 +65,7 @@
 </div> <!-- unitDialog -->
 
 <!-- dltDialog-Dialog -->
-<div class="modal hide" id="dltDialog">
+<div class="modal" id="dltDialog">
     <div class="modal-header">
         <a class="close" data-dismiss="modal">×</a>
         <h3><?php echo __("OrangeHRM - Confirmation Required"); ?></h3>
