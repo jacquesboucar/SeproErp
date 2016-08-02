@@ -1081,7 +1081,7 @@ INSERT INTO `ohrm_emp_termination_reason` VALUES (1, 'Other'),
 INSERT INTO `ohrm_user_role` (`id`, `name`, `display_name`, `is_assignable`, `is_predefined`) VALUES
 (1, 'Admin', 'Admin', 1, 1),
 (2, 'ESS', 'ESS', 1, 1),
-(3, 'Supervisor', 'Supervisor', 0, 1),
+(3, 'Supervisor', 'Supervisor', 1, 1),
 (4, 'ProjectAdmin', 'ProjectAdmin', 0, 1),
 (5, 'Interviewer', 'Interviewer', 0, 1),
 (6, 'HiringManager', 'HiringManager', 0, 1),
