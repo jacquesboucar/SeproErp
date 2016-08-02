@@ -6227,7 +6227,7 @@
                       </trans-unit>
                       <trans-unit id="1244">
                        <source>Employee Id</source>
-                       <target>Matricule de l'employé</target>
+                       <target>Numéro de l'employé</target>
                        <note>Employee ID/No will help uniquely identifying a particular employee.</note>
                       </trans-unit>
                       <trans-unit id="1245">
@@ -6462,7 +6462,7 @@
                       </trans-unit>
                       <trans-unit id="1291">
                        <source>Employment Status</source>
-                       <target>Situation de l'employé</target>
+                       <target>Type de contrat</target>
                        <note>Administrators and supervisors can view leave details of employees with a particular employment status.</note>
                       </trans-unit>
                       <trans-unit id="1292">
@@ -12018,7 +12018,7 @@
                               </trans-unit>
                               <trans-unit id="2410">
                                <source>Other Id</source>
-                               <target>Autre Identifiant</target>
+                               <target>Matricule</target>
                                <note>One you have added and saved the employee name with his/her picture and the user logins, You can also edit the personal details such as other ID</note>
                               </trans-unit>
                               <trans-unit id="2411">
