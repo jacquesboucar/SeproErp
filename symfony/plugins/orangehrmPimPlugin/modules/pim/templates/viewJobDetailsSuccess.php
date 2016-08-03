@@ -57,7 +57,7 @@
                             <?php echo $form['sigle']->render(array("class" => "formTxtArea")); ?>    
                         </li>
                         <li>
-                            <?php echo $form['entite']->renderLabel(__("Departement")); ?>
+                            <?php echo $form['entite']->renderLabel(__("Département")); ?>
                             <?php echo $form['entite']->render(array("class" => "formTxtArea")); ?>
                         </li>
                         <li>
