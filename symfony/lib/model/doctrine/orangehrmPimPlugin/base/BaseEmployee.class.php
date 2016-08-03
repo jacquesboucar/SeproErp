@@ -44,6 +44,9 @@
  * @property string $mission
  * @property string $activite
  * @property string $relation
+ * @property string $validate
+ * @property string $remplacant
+ * @property string $comment
  * @property string $formation
  * @property string $sigle
  * @property string $entite
@@ -146,6 +149,9 @@
  * @method string                    getMission()                    Returns the current record's "mission" value
  * @method string                    getActivite()                   Returns the current record's "activite" value
  * @method string                    getRelation()                   Returns the current record's "relation" value
+ * @method string                    getValidate()                   Returns the current record's "validate" value
+ * @method string                    getRemplacant()                 Returns the current record's "remplacant" value
+ * @method string                    getComment()                    Returns the current record's "comment" value
  * @method string                    getFormation()                  Returns the current record's "formation" value
  * @method string                    getSigle()                      Returns the current record's "sigle" value
  * @method string                    getEntite()                     Returns the current record's "entite" value
@@ -247,6 +253,9 @@
  * @method Employee                  setMission()                    Sets the current record's "mission" value
  * @method Employee                  setActivite()                   Sets the current record's "activite" value
  * @method Employee                  setRelation()                   Sets the current record's "relation" value
+ * @method Employee                  setValidate()                   Sets the current record's "validate" value
+ * @method Employee                  setRemplacant()                 Sets the current record's "remplacant" value
+ * @method Employee                  setComment()                    Sets the current record's "comment" value
  * @method Employee                  setFormation()                  Sets the current record's "formation" value
  * @method Employee                  setSigle()                      Sets the current record's "sigle" value
  * @method Employee                  setEntite()                     Sets the current record's "entite" value
@@ -490,6 +499,18 @@ abstract class BaseEmployee extends sfDoctrineRecord
              ));
         $this->hasColumn('relation', 'string', null, array(
              'type' => 'string',
+             ));
+        $this->hasColumn('validate', 'string', 20, array(
+             'type' => 'string',
+             'length' => 20,
+             ));
+        $this->hasColumn('remplacant', 'string', 250, array(
+             'type' => 'string',
+             'length' => 250,
+             ));
+        $this->hasColumn('comment', 'string', 1000, array(
+             'type' => 'string',
+             'length' => 1000,
              ));
         $this->hasColumn('formation', 'string', 250, array(
              'type' => 'string',

@@ -1,5 +1,7 @@
 <?php use_javascripts_for_form($form); ?>
-<?php use_stylesheets_for_form($form); ?>
+<?php use_stylesheets_for_form($form); 
+
+?>
 <script type="text/javascript">
     //<![CDATA[
     //we write javascript related stuff here, but if the logic gets lengthy should use a seperate js file
@@ -23,7 +25,6 @@
     //]]>
 </script>
 
-
 <div class="box pimPane" id="">
     
     <?php echo include_component('pim', 'pimLeftMenu', array('empNumber'=>$empNumber, 'form' => $form));?>
@@ -31,8 +32,9 @@
     <div class="">
         <div class="head">
             <h1><?php //echo __('Job'); ?>Fiche de Poste</h1>
+             <a href="<?php echo url_for('pim/viewJobDetailsPdf') . '?empNumber=' . $empNumber ?>">Imprimer</a>
         </div> <!-- head -->
-        
+       
         <div class="inner">
             <?php if ($allowTerminate || $allowActivate || $jobInformationPermission->canRead()) : ?>
             
@@ -59,6 +61,10 @@
                         <li>
                             <?php echo $form['entite']->renderLabel(__("Département")); ?>
                             <?php echo $form['entite']->render(array("class" => "formTxtArea")); ?>
+                        </li>
+                        <li>
+                            <?php echo $form['remplacant']->renderLabel(__("Remplaçant habilité")); ?>
+                            <?php echo $form['remplacant']->render(array("class" => "formTxtArea")); ?>
                         </li>
                         <li>
                             <?php echo $form['version']->renderLabel(__("Version")); ?>
@@ -133,6 +139,14 @@
                        <li class="largeTextBox">
                         <?php echo $form['competence']->renderLabel(__('Compétences et aptitudes requises')); ?>
                         <?php echo $form['competence']->render(array("class" => "formTxtArea")); ?>
+                       </li>
+                       <li class="radio">
+                        <?php echo $form['validate']->renderLabel(__('Validez-vous les informations ci-dessus')); ?>
+                        <?php echo $form['validate']->render(array("class" => "editable")); ?>
+                       </li>
+                        <li class="largeTextBox">
+                        <?php echo $form['comment']->renderLabel(__('Commentaires')); ?>
+                        <?php echo $form['comment']->render(array("class" => "formTxtArea")); ?>
                        </li>
                             <?php
                             if (empty($form->attachment)) {
@@ -394,7 +408,7 @@
         '#contract_file', 'ul.radio_list input',
         '#job_contract_start_date', '#job_contract_end_date',
         '#job_contract_file', '#job_emp_name','#job_sigle','#job_version',
-        '#job_mission','#job_relation','#job_formation','#job_exp','#job_competence');
+        '#job_mission','#job_relation','#job_formation','#job_exp','#job_competence', '#job_entite', '#job_activite', '#job_remplacant', '#job_comment');
         for(i=0; i < list.length; i++) {
             $(list[i]).attr("disabled", "disabled");
         }

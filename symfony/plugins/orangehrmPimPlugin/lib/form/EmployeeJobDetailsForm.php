@@ -72,7 +72,7 @@ class EmployeeJobDetailsForm extends BaseForm {
         $contractUpdateChoices = array(self::CONTRACT_KEEP => __('Keep Current'),
             self::CONTRACT_DELETE => __('Delete Current'),
             self::CONTRACT_UPLOAD => __('Replace Current'));
-
+        $validate = array('no' => 'Non', 'yes' => 'Oui');
         // Note: Widget names were kept from old non-symfony version
         $this->setWidgets(array(
             'emp_number' => new sfWidgetFormInputHidden(),
@@ -98,7 +98,10 @@ class EmployeeJobDetailsForm extends BaseForm {
             'emp_name' => new sfWidgetFormInputText(),
             'sigle' => new sfWidgetFormInputText(),
             'entite' => new sfWidgetFormInputText(),
+            'remplacant' => new sfWidgetFormInputText(),
             'version' => new sfWidgetFormInputText(),
+            'validate' => new sfWidgetFormChoice(array('expanded' => true, 'choices' => $validate)),
+            'comment' => new sfWidgetFormTextarea(),
         ));
 
         // Default values
@@ -114,6 +117,9 @@ class EmployeeJobDetailsForm extends BaseForm {
         $this->setDefault('entite', $employee->entite);
         $this->setDefault('version', $employee->version);
         $this->setDefault('activite', $employee->activite);
+        $this->setDefault('validate', $employee->validate);
+        $this->setDefault('comment', $employee->comment);
+        $this->setDefault('remplacant', $employee->remplacant);
         if (!empty($jobTitleId)) {
             $this->setDefault('job_title', $jobTitleId);
 
@@ -177,6 +183,7 @@ class EmployeeJobDetailsForm extends BaseForm {
             'contract_update' => new sfValidatorString(array('required' => false)),
             'mission' => new sfValidatorString(array('required' => false)),
             'activite' => new sfValidatorString(array('required' => false)),
+            'comment' => new sfValidatorString(array('required' => false)),
             'relation' => new sfValidatorString(array('max_length' => 255)),
             'formation' => new sfValidatorString(array('max_length' => 255)),
             'exp' => new sfValidatorString(array('max_length' => 255)),
@@ -184,6 +191,8 @@ class EmployeeJobDetailsForm extends BaseForm {
             'sigle' => new sfValidatorString(array('max_length' => 255)),
             'entite'  => new sfValidatorString(array('max_length' => 255)),
             'version' => new sfValidatorString(array('max_length' => 255)),
+            'remplacant' => new sfValidatorString(array('max_length' => 255)),
+            'validate' => new sfValidatorChoice(array('required' => false, 'choices' => array_keys($validate))),
         ));
 
 
@@ -234,6 +243,9 @@ class EmployeeJobDetailsForm extends BaseForm {
         $employee->version = $this->getValue('version');
         $employee->activite = $this->getValue('activite');
         $empStatus = $this->getValue('emp_status');
+        $employee->validate = $this->getValue('validate');
+        $employee->comment = $this->getValue('comment');
+        $employee->remplacant = $this->getValue('remplacant');
         if ($empStatus == '') {
             $employee->emp_status = null;
         } else {

@@ -94,6 +94,9 @@ Employee:
     mission: string
     activite: string
     relation: string
+    validate: string(20)
+    remplacant: string(250)
+    comment: string(1000)
     formation: string(250)
     sigle: string(250)
     entite: string(250)
