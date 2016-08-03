@@ -92,6 +92,7 @@ Employee:
     emp_oth_email: string(50)
     termination_id: integer(4)
     mission: string
+    activite: string
     relation: string
     formation: string(250)
     sigle: string(250)
