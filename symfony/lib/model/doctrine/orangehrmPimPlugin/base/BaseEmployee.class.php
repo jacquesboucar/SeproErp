@@ -42,6 +42,7 @@
  * @property string $emp_oth_email
  * @property integer $termination_id
  * @property string $mission
+ * @property string $activite
  * @property string $relation
  * @property string $formation
  * @property string $sigle
@@ -143,6 +144,7 @@
  * @method string                    getEmpOthEmail()                Returns the current record's "emp_oth_email" value
  * @method integer                   getTerminationId()              Returns the current record's "termination_id" value
  * @method string                    getMission()                    Returns the current record's "mission" value
+ * @method string                    getActivite()                   Returns the current record's "activite" value
  * @method string                    getRelation()                   Returns the current record's "relation" value
  * @method string                    getFormation()                  Returns the current record's "formation" value
  * @method string                    getSigle()                      Returns the current record's "sigle" value
@@ -243,6 +245,7 @@
  * @method Employee                  setEmpOthEmail()                Sets the current record's "emp_oth_email" value
  * @method Employee                  setTerminationId()              Sets the current record's "termination_id" value
  * @method Employee                  setMission()                    Sets the current record's "mission" value
+ * @method Employee                  setActivite()                   Sets the current record's "activite" value
  * @method Employee                  setRelation()                   Sets the current record's "relation" value
  * @method Employee                  setFormation()                  Sets the current record's "formation" value
  * @method Employee                  setSigle()                      Sets the current record's "sigle" value
@@ -480,6 +483,9 @@ abstract class BaseEmployee extends sfDoctrineRecord
              'length' => 4,
              ));
         $this->hasColumn('mission', 'string', null, array(
+             'type' => 'string',
+             ));
+        $this->hasColumn('activite', 'string', null, array(
              'type' => 'string',
              ));
         $this->hasColumn('relation', 'string', null, array(
