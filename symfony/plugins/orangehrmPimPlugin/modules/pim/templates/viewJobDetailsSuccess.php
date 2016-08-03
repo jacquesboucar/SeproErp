@@ -114,6 +114,10 @@
                         <?php echo $form['mission']->renderLabel(__('mission')); ?>
                         <?php echo $form['mission']->render(array("class" => "formTxtArea")); ?>
                        </li>
+                       <li class="largeTextBox">
+                        <?php echo $form['activite']->renderLabel(__('Activités Principales')); ?>
+                        <?php echo $form['activite']->render(array("class" => "formTxtArea")); ?>
+                       </li>
                         <li class="largeTextBox">
                         <?php echo $form['relation']->renderLabel(__('Relations fonctionnelles')); ?>
                         <?php echo $form['relation']->render(array("class" => "formTxtArea")); ?>

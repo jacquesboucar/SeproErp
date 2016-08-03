@@ -90,6 +90,7 @@ class EmployeeJobDetailsForm extends BaseForm {
             'contract_file' => new sfWidgetFormInputFile(),
             'contract_update' => new sfWidgetFormChoice(array('expanded' => true, 'choices' => $contractUpdateChoices)),
             'mission' => new sfWidgetFormTextarea(),
+            'activite' => new sfWidgetFormTextarea(),
             'relation' => new sfWidgetFormInputText(),
             'formation' => new sfWidgetFormInputText(),
             'exp' => new sfWidgetFormInputText(),
@@ -112,6 +113,7 @@ class EmployeeJobDetailsForm extends BaseForm {
         $this->setDefault('sigle', $employee->sigle);
         $this->setDefault('entite', $employee->entite);
         $this->setDefault('version', $employee->version);
+        $this->setDefault('activite', $employee->activite);
         if (!empty($jobTitleId)) {
             $this->setDefault('job_title', $jobTitleId);
 
@@ -174,6 +176,7 @@ class EmployeeJobDetailsForm extends BaseForm {
                 'max_size' => 1000000), array('max_size' => __(TopLevelMessages::FILE_SIZE_SAVE_FAILURE))),
             'contract_update' => new sfValidatorString(array('required' => false)),
             'mission' => new sfValidatorString(array('required' => false)),
+            'activite' => new sfValidatorString(array('required' => false)),
             'relation' => new sfValidatorString(array('max_length' => 255)),
             'formation' => new sfValidatorString(array('max_length' => 255)),
             'exp' => new sfValidatorString(array('max_length' => 255)),
@@ -229,6 +232,7 @@ class EmployeeJobDetailsForm extends BaseForm {
         $employee->sigle = $this->getValue('sigle');
         $employee->entite = $this->getValue('entite');
         $employee->version = $this->getValue('version');
+        $employee->activite = $this->getValue('activite');
         $empStatus = $this->getValue('emp_status');
         if ($empStatus == '') {
             $employee->emp_status = null;
