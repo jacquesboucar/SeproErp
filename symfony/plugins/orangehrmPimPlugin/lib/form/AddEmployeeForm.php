@@ -124,7 +124,7 @@ class AddEmployeeForm extends sfForm {
             'user_password' => new sfValidatorString(array('required' => false, 'max_length' => 20, 'trim' => true)),
             're_password' => new sfValidatorString(array('required' => false, 'max_length' => 20, 'trim' => true)),
             'status' => new sfValidatorString(array('required' => false)),
-            'user_email' => new sfValidatorEmail(array('required' => true)),
+            'user_email' => new sfValidatorEmail(array('required' => false)),
         ));
 
         $this->getWidgetSchema()->setLabels($this->getFormLabels());

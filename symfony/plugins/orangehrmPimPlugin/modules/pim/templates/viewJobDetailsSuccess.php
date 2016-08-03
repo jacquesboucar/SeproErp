@@ -27,7 +27,7 @@
 <div class="box pimPane" id="">
     
     <?php echo include_component('pim', 'pimLeftMenu', array('empNumber'=>$empNumber, 'form' => $form));?>
-    
+
     <div class="">
         <div class="head">
             <h1><?php //echo __('Job'); ?>Fiche de Poste</h1>
@@ -57,8 +57,8 @@
                             <?php echo $form['sigle']->render(array("class" => "formTxtArea")); ?>    
                         </li>
                         <li>
-                            <?php //echo $form['entite']->renderLabel(__("Departement")); ?>
-                            <?php //echo $form['entite']->render(array("class" => "formTxtArea")); ?>
+                            <?php echo $form['entite']->renderLabel(__("Departement")); ?>
+                            <?php echo $form['entite']->render(array("class" => "formTxtArea")); ?>
                         </li>
                         <li>
                             <?php echo $form['version']->renderLabel(__("Version")); ?>
@@ -86,7 +86,7 @@
                         <li>
                             <?php echo $form['eeo_category']->renderLabel(__('Job Category')); ?>
                             <?php echo $form['eeo_category']->render(array("class" => "formSelect")); ?>
-                        </li>
+                        </li><!--
                         <li>
                             <?php //echo $form['joined_date']->renderLabel(__('Joined Date')); ?>
                             <?php //echo $form['joined_date']->render(array("class" => "formDateInput")); ?>
@@ -94,11 +94,11 @@
                         <li>
                             <?php //echo $form['sub_unit']->renderLabel(__('Sub Unit')); ?>
                             <?php //echo $form['sub_unit']->render(array("class" => "formSelect")); ?>
-                        </li>
+                        </li>-->
                         <li>
-                            <?php echo $form['location']->renderLabel(__('Entite')); ?>
+                            <?php echo $form['location']->renderLabel(__('Société')); ?>
                             <?php echo $form['location']->render(array("class" => "formSelect")); ?>
-                        </li>
+                        </li><!--
                         <li>
                             <h2><?php //echo __('Employment Contract'); ?></h2>
                         </li>
@@ -109,7 +109,7 @@
                         <li>
                             <?php //echo $form['contract_end_date']->renderLabel(__('End Date')); ?>
                             <?php //echo $form['contract_end_date']->render(array("class" => "formDateInput")); ?>
-                        </li>
+                        </li>-->
                         <li class="largeTextBox">
                         <?php echo $form['mission']->renderLabel(__('mission')); ?>
                         <?php echo $form['mission']->render(array("class" => "formTxtArea")); ?>
@@ -172,6 +172,7 @@
                     <?php endif; ?>
                     
                     <p>
+
                         <?php if ($jobInformationPermission->canUpdate()) : ?>
                         <input type="button" class="" id="btnSave" value="<?php echo __("Edit"); ?>" />
                         <?php endif; ?>  
@@ -194,13 +195,13 @@
                         <?php } ?>
                         <?php if ($allowActivate) { ?>
                             <label id="terminatedDate">
-                                <a class="btn2" data-toggle="modal" href="#terminateEmployement" ><?php echo $label; ?></a>
+                                <a class="btn2" data-toggle="modal" data-dismiss="#terminateEmployement" href="#terminateEmployement" ><?php echo $label; ?></a>
                             </label>      
                         <?php } else {
                             if ($jobInformationPermission->canRead()) {
                             ?>
                             <label id="terminatedDate">
-                                <a class="btn2" data-toggle="modal" href="#terminateEmployement" ><?php echo $label; ?></a>
+                                <a class="btn2" data-toggle="modal" data-dismiss="#terminateEmployement" href="#terminateEmployement" ><?php echo $label; ?></a>
                             </label>      
                         <?php 
                             }
@@ -291,7 +292,7 @@
     }
     
     $(document).ready(function() {
-        
+
         $('#btnTerminateEmployement').click(function(){
             if($(this).val() == lang_terminateEmployement){
                 clearErrors();
@@ -383,12 +384,13 @@
         <?php } ?>
         
         var list = new Array(
-        '#job_job_title', '#job_emp_status', '#job_terminated_date', 
+        '#job_job_title', '#job_emp_status', '#job_terminated_date',
         '.calendarBtn', '#job_termination_reason', '#job_eeo_category',
         '#job_joined_date', '#job_sub_unit', '#job_location',
         '#contract_file', 'ul.radio_list input',
         '#job_contract_start_date', '#job_contract_end_date',
-        '#job_contract_file', '#job_emp_name');
+        '#job_contract_file', '#job_emp_name','#job_sigle','#job_version',
+        '#job_mission','#job_relation','#job_formation','#job_exp','#job_competence');
         for(i=0; i < list.length; i++) {
             $(list[i]).attr("disabled", "disabled");
         }
@@ -418,7 +420,7 @@
             $('.contractEdidMode').show();
             $('.contractReadMode').hide();
             
-            if ( !readonlyFlag) {  
+            if ( !readonlyFlag) {
                 //if user clicks on Edit make all fields editable                                     
                 if($("#btnSave").attr('value') == edit) {
                     for(i=0; i < list.length; i++) {

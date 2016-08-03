@@ -108,7 +108,7 @@ class addEmployeeAction extends basePimAction {
                 //if everything seems ok save employee and create a user account
                 if ($this->form->isValid()) {
 
-                    $this->_checkWhetherEmployeeIdExists($this->form->getValue('employeeId'));
+                    //$this->_checkWhetherEmployeeIdExists($this->form->getValue('employeeId'));
 
                     try {
 
