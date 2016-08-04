@@ -2,7 +2,7 @@
 <?php use_stylesheets_for_form($form); 
 
 ?>
-<script type="text/javascript">
+<script type="text/javascript" xmlns="http://www.w3.org/1999/html">
     //<![CDATA[
     //we write javascript related stuff here, but if the logic gets lengthy should use a seperate js file
     var edit = "<?php echo __("Edit"); ?>";
@@ -32,7 +32,12 @@
     <div class="">
         <div class="head">
             <h1><?php //echo __('Job'); ?>Fiche de Poste</h1>
-             <a href="<?php echo url_for('pim/viewJobDetailsPdf') . '?empNumber=' . $empNumber ?>">Imprimer</a>
+            <div class="pull-right impressionbtn">
+                <button class="icon-print">
+                    <a href="<?php echo url_for('pim/viewJobDetailsPdf') . '?empNumber=' . $empNumber ?>">Imprimer</a>
+                </button>
+            </div>
+
         </div> <!-- head -->
        
         <div class="inner">
@@ -141,7 +146,7 @@
                         <?php echo $form['competence']->render(array("class" => "formTxtArea")); ?>
                        </li>
                        <li class="radio">
-                        <?php echo $form['validate']->renderLabel(__('Validez-vous les informations ci-dessus')); ?>
+                        <?php echo $form['validate']->renderLabel(__('Validez-vous les informations')); ?>
                         <?php echo $form['validate']->render(array("class" => "editable")); ?>
                        </li>
                         <li class="largeTextBox">
@@ -310,6 +315,11 @@
     }
     
     $(document).ready(function() {
+        $('.impressionbtn').hide();
+        if(document.getElementById("job_validate_yes").checked==true){
+            $('.radio').hide();
+            $('.impressionbtn').show();
+        }
 
         $('#btnTerminateEmployement').click(function(){
             if($(this).val() == lang_terminateEmployement){
@@ -408,7 +418,8 @@
         '#contract_file', 'ul.radio_list input',
         '#job_contract_start_date', '#job_contract_end_date',
         '#job_contract_file', '#job_emp_name','#job_sigle','#job_version',
-        '#job_mission','#job_relation','#job_formation','#job_exp','#job_competence', '#job_entite', '#job_activite', '#job_remplacant', '#job_comment');
+        '#job_mission','#job_relation','#job_formation','#job_exp','#job_competence',
+        '#job_entite', '#job_activite', '#job_remplacant', '#job_comment');
         for(i=0; i < list.length; i++) {
             $(list[i]).attr("disabled", "disabled");
         }
