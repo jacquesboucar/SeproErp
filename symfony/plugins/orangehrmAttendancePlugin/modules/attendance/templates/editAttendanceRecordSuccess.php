@@ -148,7 +148,7 @@
 </div><!-- box -->
 
 <!-- commentDialog-Dialog -->
-<div class="modal hide" id="commentDialog">
+<div class="modal" id="commentDialog">
     <div class="modal-header">
         <a class="close" data-dismiss="modal">×</a>
         <h3><?php echo __('Punch in/out note'); ?></h3>
