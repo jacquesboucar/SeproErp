@@ -4,7 +4,7 @@
 
     <a href="#" data-dismiss="modal" id="aboutDisplayLink"><?php echo __('About'); ?></a>
 
-    <div class="modal hide" id="displayAbout">
+    <div class="modal" id="displayAbout">
         <div class="modal-header">
             <a class="close" data-dismiss="modal">×</a>
             <h3><?php  echo __('About'); ?></h3>
