@@ -35,7 +35,7 @@ use_stylesheet(plugin_web_path('orangehrmLeavePlugin', 'css/assignLeaveSuccess.c
 </div> <!-- assign leave -->
 
 <!-- leave balance details HTML: Begins -->
-<div class="modal hide" id="balance_details">
+<div class="modal" id="balance_details">
   <div class="modal-header">
     <a class="close" data-dismiss="modal">×</a>
     <h3><?php echo 'OrangeHRM - ' . __('Leave Balance Details'); ?></h3>
@@ -86,7 +86,7 @@ use_stylesheet(plugin_web_path('orangehrmLeavePlugin', 'css/assignLeaveSuccess.c
 </div>
 
 <!-- leave balance details HTML: Begins -->
-<div class="modal hide" id="multiperiod_balance">
+<div class="modal" id="multiperiod_balance">
   <div class="modal-header">
     <a class="close" data-dismiss="modal">×</a>
     <h3><?php echo 'OrangeHRM - ' . __('Leave Balance Details'); ?></h3>
@@ -120,7 +120,7 @@ use_stylesheet(plugin_web_path('orangehrmLeavePlugin', 'css/assignLeaveSuccess.c
 </div>
 
 <!-- Confirmation box for leave balance update -->
-<div class="modal hide" id="leaveBalanceConfirm" style="width:500px">
+<div class="modal" id="leaveBalanceConfirm" style="width:500px">
   <div class="modal-header">
     <h3><?php echo 'OrangeHRM - ' . __('Confirm Leave Assignment'); ?></h3>
   </div>

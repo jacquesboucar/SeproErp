@@ -38,7 +38,7 @@ use_stylesheet(plugin_web_path('orangehrmLeavePlugin', 'css/assignLeaveSuccess.c
 </div> <!-- apply leave -->
 
 <!-- leave balance details HTML: Begins -->
-<div class="modal hide" id="balance_details">
+<div class="modal" id="balance_details">
   <div class="modal-header">
     <a class="close" data-dismiss="modal">×</a>
     <h3><?php echo 'OrangeHRM - ' . __('Leave Balance Details'); ?></h3>
@@ -83,7 +83,7 @@ use_stylesheet(plugin_web_path('orangehrmLeavePlugin', 'css/assignLeaveSuccess.c
 <!-- leave balance details HTML: Ends -->
 
 <!-- leave balance details HTML: Begins -->
-<div class="modal hide" id="multiperiod_balance">
+<div class="modal" id="multiperiod_balance">
   <div class="modal-header">
     <a class="close" data-dismiss="modal">×</a>
     <h3><?php echo 'OrangeHRM - ' . __('Leave Balance Details'); ?></h3>

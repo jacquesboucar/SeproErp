@@ -97,7 +97,7 @@ use_javascripts_for_form($form);
 <!-- end of comment dialog-->
 
 <!-- Leave Balance Popup -->
-<div class="modal hide" id="leaveBalanceDialog">
+<div class="modal" id="leaveBalanceDialog">
   <div class="modal-header">
     <a class="close" data-dismiss="modal">×</a>
     <h3><?php echo __('Leave Balance Details'); ?></h3>
