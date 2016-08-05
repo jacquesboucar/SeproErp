@@ -40,7 +40,7 @@
 <?php include_component('core', 'ohrmList', $parmetersForListCompoment); ?>
 
 <!-- comment dialog -->
-<div class="modal hide" id="commentDialog">
+<div class="modal" id="commentDialog">
   <div class="modal-header">
     <a class="close" data-dismiss="modal">×</a>
     <h3><?php echo __('Performance Tracker Log Comment'); ?></h3>
