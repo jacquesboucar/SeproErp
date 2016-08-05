@@ -54,7 +54,7 @@
 </div>
 
 <!-- Message for supported languages -->
-<div class="modal hide" id="languageDialog">
+<div class="modal" id="languageDialog">
     <div class="modal-header">
         <a class="close" data-dismiss="modal">×</a>
         <h3><?php echo __('OrangeHRM - Supported Languages')?></h3>

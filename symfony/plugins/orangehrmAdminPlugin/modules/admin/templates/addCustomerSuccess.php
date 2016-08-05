@@ -51,7 +51,7 @@ use_javascript(plugin_web_path('orangehrmAdminPlugin', 'js/addCustomerSuccess'))
 </form>
 
 <a id="undeleteDialogLink" data-toggle="modal" href="#undeleteDialog" ></a>
-<div class="modal hide" id="undeleteDialog">
+<div class="modal" id="undeleteDialog">
     <div class="modal-header">
         <a class="close" data-dismiss="modal">×</a>
         <h3><?php echo __('OrangeHRM - Confirmation Required'); ?></h3>
