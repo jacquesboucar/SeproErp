@@ -47,7 +47,7 @@
 
 
 <!-- Undelete Dialog: Begins -->
-<div class="modal hide" id="undeleteDialog">
+<div class="modal" id="undeleteDialog">
     <div class="modal-header">
         <a class="close" data-dismiss="modal">×</a>
         <h3><?php echo __('OrangeHRM - Confirmation Required'); ?></h3>
@@ -72,7 +72,7 @@
 </div>
 <!-- Undelete Dialog: Ends -->
 <!-- Exclude Info Dialog: Begins -->
-<div class="modal hide" id="excludeInfoDialog">
+<div class="modal" id="excludeInfoDialog">
     <div class="modal-header">
         <a class="close" data-dismiss="modal">×</a>
         <h3><?php echo __('OrangeHRM'); ?></h3>
