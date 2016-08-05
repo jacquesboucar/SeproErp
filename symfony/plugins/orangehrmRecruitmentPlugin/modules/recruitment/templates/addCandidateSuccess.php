@@ -192,7 +192,7 @@ foreach ($jobVacancyList as $vacancy) {
 <?php endif; ?>
 
 <!-- Confirmation box - delete HTML: Begins -->
-<div class="modal hide" id="deleteConfirmation">
+<div class="modal" id="deleteConfirmation">
     <div class="modal-header">
         <a class="close" data-dismiss="modal">×</a>
         <h3><?php echo __('OrangeHRM - Confirmation Required'); ?></h3>
@@ -208,7 +208,7 @@ foreach ($jobVacancyList as $vacancy) {
 <!-- Confirmation box HTML: Ends -->
 
 <!-- Confirmation box - remove vacancies & save HTML: Begins -->
-<div class="modal hide" id="deleteConfirmationForSave">
+<div class="modal" id="deleteConfirmationForSave">
     <div class="modal-header">
         <a class="close" data-dismiss="modal">×</a>
         <h3><?php echo __('OrangeHRM - Confirmation Required'); ?></h3>

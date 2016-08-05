@@ -62,7 +62,7 @@
 <?php include_component('core', 'ohrmList', $parmetersForListCompoment); ?>
 
 <!-- Confirmation box HTML: Begins -->
-<div class="modal hide" id="deleteConfirmation">
+<div class="modal" id="deleteConfirmation">
     <div class="modal-header">
         <a class="close" data-dismiss="modal">×</a>
         <h3><?php echo __('OrangeHRM - Confirmation Required'); ?></h3>
