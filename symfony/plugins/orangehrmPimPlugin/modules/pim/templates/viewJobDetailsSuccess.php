@@ -34,7 +34,7 @@
             <h1><?php //echo __('Job'); ?>Fiche de Poste</h1>
             <div class="pull-right impressionbtn">
                 <button class="icon-print">
-                    <a href="<?php echo url_for('pim/viewJobDetailsPdf') . '?empNumber=' . $empNumber ?>">Imprimer</a>
+                    <a href="<?php echo url_for('pim/viewJobDetailsPdf') . '?empNumber=' . $empNumber ?>">Telecharger</a>
                 </button>
             </div>
 
@@ -315,12 +315,9 @@
     }
     
     $(document).ready(function() {
-        $('.impressionbtn').hide();
+        $('.impressionbtn').show();
         if(document.getElementById("job_validate_yes").checked==true){
             $('.radio').hide();
-            $('.impressionbtn').show();
-        }else{
-            $('.impressionbtn').hide();
         }
 
         $('#btnTerminateEmployement').click(function(){
