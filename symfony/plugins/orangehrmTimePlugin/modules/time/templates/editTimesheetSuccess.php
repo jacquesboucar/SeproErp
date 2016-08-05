@@ -180,7 +180,7 @@ form ol li.largeTextBox textarea {
 
 <?php echo $listForm ?>
 <!-- comment-Dialog -->
-<div class="modal hide" id="commentDialog">
+<div class="modal" id="commentDialog">
     <div class="modal-header">
         <a class="close" data-dismiss="modal">×</a>
         <h3><?php echo __('Comment'); ?></h3>
