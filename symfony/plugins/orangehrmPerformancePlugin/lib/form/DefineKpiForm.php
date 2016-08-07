@@ -24,7 +24,11 @@ class DefineKpiForm extends BasePefromanceSearchForm {
             'maxRating' => new sfWidgetFormInput(array(), array('class' => 'formInputText')),
            // 'makeDefault' => new sfWidgetFormInputCheckbox(array(), array('class' => 'formCheckbox')),
             'delai' => new sfWidgetFormInputText(),
-            'valeur_cible'  => new sfWidgetFormInputText()
+            'valeur_cible'  => new sfWidgetFormInputText(),
+            'objectif'  => new sfWidgetFormInputText(),
+            'mode_calcul'  => new sfWidgetFormInputText(),
+
+
         ));
         $this->setValidators(array(
             'id' => new sfValidatorString(array('required' => false)),
@@ -36,6 +40,8 @@ class DefineKpiForm extends BasePefromanceSearchForm {
             'makeDefault' => new sfValidatorString(array('required' => false)),
             'delai' => new sfValidatorString(array('required' => false)),
             'valeur_cible' => new sfValidatorString(array('required' => true)),
+            'objectif' => new sfValidatorString(array('required' => false)),
+            'mode_calcul' => new sfValidatorString(array('required' => false)),
         ));
 
         $this->setDefault('minRating', 1);
@@ -90,8 +96,10 @@ class DefineKpiForm extends BasePefromanceSearchForm {
             'keyPerformanceIndicators' => __('Key Performance Indicator') . $requiredMarker,
             'minRating' => __('Minimum Rating'). $requiredMarker,
             'maxRating' => __('Poids'). $requiredMarker,
-            'delai' => __('Delai'),
+            'delai' => __("Périodicité"),
             'valeur_cible' => __('Valeur cible'). $requiredMarker,
+            'objectif' => __('Objectifs'),
+            'mode_calcul' => __('Mode de Calcul'),
            // 'makeDefault' => __('Make Default Scale')
         );
         return $labels;
@@ -111,6 +119,8 @@ class DefineKpiForm extends BasePefromanceSearchForm {
         
           $kpi->setDelai($values['delai']);
           $kpi->setValeurCible($values['valeur_cible']);
+          $kpi->setObjectif($values['objectif']);
+          $kpi->setModeCalcul($values['mode_calcul']);
           $job = $kpi->setJobTitleCode($jobcode);
           if( strlen( $values['minRating']) >0 ){
             $kpi->setMinRating($values['minRating']);

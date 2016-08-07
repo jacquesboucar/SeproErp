@@ -14,6 +14,8 @@
  * @property varchar $kpi_group
  * @property string $delai
  * @property string $valeur_cible
+ * @property string $objectif
+ * @property string $mode_calcul
  * @property JobTitle $JobTitle
  * @property Doctrine_Collection $ReviewerRating
  * 
@@ -26,6 +28,8 @@
  * @method varchar             getKpiGroup()       Returns the current record's "kpi_group" value
  * @method string              getDelai()          Returns the current record's "delai" value
  * @method string              getValeurCible()    Returns the current record's "valeur_cible" value
+ * @method string              getObjectif()       Returns the current record's "objectif" value
+ * @method string              getModeCalcul()     Returns the current record's "mode_calcul" value
  * @method JobTitle            getJobTitle()       Returns the current record's "JobTitle" value
  * @method Doctrine_Collection getReviewerRating() Returns the current record's "ReviewerRating" collection
  * @method Kpi                 setId()             Sets the current record's "id" value
@@ -37,6 +41,8 @@
  * @method Kpi                 setKpiGroup()       Sets the current record's "kpi_group" value
  * @method Kpi                 setDelai()          Sets the current record's "delai" value
  * @method Kpi                 setValeurCible()    Sets the current record's "valeur_cible" value
+ * @method Kpi                 setObjectif()       Sets the current record's "objectif" value
+ * @method Kpi                 setModeCalcul()     Sets the current record's "mode_calcul" value
  * @method Kpi                 setJobTitle()       Sets the current record's "JobTitle" value
  * @method Kpi                 setReviewerRating() Sets the current record's "ReviewerRating" collection
  * 
@@ -85,6 +91,14 @@ abstract class BaseKpi extends sfDoctrineRecord
              'length' => 250,
              ));
         $this->hasColumn('valeur_cible', 'string', 250, array(
+             'type' => 'string',
+             'length' => 250,
+             ));
+        $this->hasColumn('objectif', 'string', 250, array(
+             'type' => 'string',
+             'length' => 250,
+             ));
+        $this->hasColumn('mode_calcul', 'string', 250, array(
              'type' => 'string',
              'length' => 250,
              ));
