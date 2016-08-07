@@ -13,6 +13,7 @@ class BasePefromanceSearchForm extends sfForm {
 
     public $jobService;
     public $kpiService;
+    public $kpiGroupService;
     public $companyStructureService;
     public $employeeService;
     public $performanceReviewService;
@@ -186,6 +187,19 @@ class BasePefromanceSearchForm extends sfForm {
 
     /**
      *
+     * @return \KpiService 
+     */
+    public function getKpiGroupService() {
+
+        if ($this->kpiGroupService == null) {
+            return new KpiGroupService();
+        } else {
+            return $this->kpiGroupService;
+        }
+    }
+
+    /**
+     *
      * @param \KpiService $kpiService 
      */
     public function setKpiService($kpiService) {
@@ -228,6 +242,18 @@ class BasePefromanceSearchForm extends sfForm {
             $jobTitles [$job->getId()] = $job->getJobTitleName();
         }
         return $jobTitles;
+    }
+
+    /**
+     *
+     * @return array 
+     */
+    public function getKpiGroupListAsArray() {
+        $kpiGroup = array("" => "All");
+        foreach ($this->getKpiGroupService()->getKpiGroupList() as $group) {
+            $kpiGroup[$group->getId()] = $group->getKpiGroupName();
+        }
+        return $kpiGroup;
     }
     
     public function getPerformanceReviewStatusAsArray( $includeInactive = false){
