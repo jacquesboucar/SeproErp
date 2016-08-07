@@ -3,10 +3,10 @@
 /**
  * ViewJobDetailsAction
  */
-require_once sfConfig::get('sf_root_dir').'/plugins/sfTCPDFPlugin/lib/tcpdf/tcpdf.php';
+require_once sfConfig::get('sf_root_dir').'/plugins/sfTCPDFPlugin/lib/tcpdf/tcpdf_fiche.php';
 class viewJobDetailsPdfAction extends basePimAction {
 
-	public function getJobTitleService() {
+	  public function getJobTitleService() {
         if (is_null($this->jobTitleService)) {
             $this->jobTitleService = new JobTitleService();
             $this->jobTitleService->setJobTitleDao(new JobTitleDao());
@@ -36,18 +36,18 @@ class viewJobDetailsPdfAction extends basePimAction {
         }
         return $name;
     }
-    
+
     private function _getLocations($id) {
         $locationService = new LocationService();
-        $locations = $locationService->getLocationList();        
-     foreach ($locations as $location) {
+        $locations = $locationService->getLocationList();
+        foreach ($locations as $location) {
             if ($location->id == $id) {
               $name = $location->name;
             }
         }
         return $name;
     }
-    
+
     private function _getEmpStatuses($id) {
         $empStatusService = new EmploymentStatusService();
         $statuses = $empStatusService->getEmploymentStatusList();
@@ -58,9 +58,9 @@ class viewJobDetailsPdfAction extends basePimAction {
         }
         return $name;
     }
-   
 
-    
+
+
 
 	public function execute($request) {
 		$emp_number = $request->getParameter('empNumber');
@@ -92,18 +92,18 @@ class viewJobDetailsPdfAction extends basePimAction {
 		$remplacant = $employee->getRemplacant();
 		$activite = $employee->getActivite();
 		// create new PDF document
-       $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+       $pdf = new FICHE(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
       // set document information
        $pdf->SetCreator(PDF_CREATOR);
        $pdf->SetAuthor('Sablux');
-       $pdf->SetTitle('sablux fiche');
-       $pdf->SetSubject('fiche de poste');
+       $pdf->SetTitle('Fiche de description de poste');
+       $pdf->SetSubject('Fiche de poste : '. $name_first .' '.$name_last);
        $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
 
        // set default header data
        $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING, array(0,64,255), array(0,64,128));
-       $pdf->setFooterData(array(0,64,0), array(0,64,128));
+       // $pdf->setFooterData(array(0,64,0), array(0,64,128));
 
 // set header and footer fonts
 $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
@@ -138,33 +138,110 @@ $pdf->setFontSubsetting(true);
 // dejavusans is a UTF-8 Unicode font, if you only need to
 // print standard ASCII chars, you can use core fonts like
 // helvetica or times to reduce file size.
-$pdf->SetFont('dejavusans', '', 14, '', true);
+$pdf->SetFont('Helvetica', '', 12, '', true);
 
 // Add a page
 // This method has several options, check the source code documentation for more information.
 $pdf->AddPage();
 
 // set text shadow effect
-$pdf->setTextShadow(array('enabled'=>true, 'depth_w'=>0.2, 'depth_h'=>0.2, 'color'=>array(196,196,196), 'opacity'=>1, 'blend_mode'=>'Normal'));
+// $pdf->setTextShadow(array('enabled'=>true, 'depth_w'=>0.2, 'depth_h'=>0.2, 'color'=>array(196,196,196), 'opacity'=>1, 'blend_mode'=>'Normal'));
 
 // Set some content to print
 $html = <<<EOD
-<strong>Intitule du poste   </strong>$job_title<br>
-<strong>Sigle </strong> $sigle<br>
-<strong>Prénom et Nom du titulaire   </strong>$name_first  $name_middle $name_last<br>
-<strong>Département   </strong> $entite<br>
-<strong>Remplaçant habilité </strong>$remplacant<br>
-<strong>Société </strong> $direction<br>
-<strong>Matricule </strong> $matricule<br>
-<strong>Version </strong>$version<br>
-<strong>Categorie </strong>$cat<br>
-<strong>Type de contrat </strong>$status<br>
-<h3>Mission</h3>$mission<br>
-<h3>Activités principales</h3>$activite<br><br>
-<strong>Relations fonctionnelles  </strong> $relation<br>
-<strong>Formations souhaitées  </strong>$formation<br>
-<strong>Expériences souhaitée  </strong>$experience<br> 
-<h3>Compétences et aptitudes requises  </h3>$competence<br>
+
+<table border="0.5" cellspacing="0" cellpadding="4">
+  <tr bgcolor="#770a82" color="#ffffff">
+    <td><strong>Intitule du poste</strong></td><td><strong>$job_title </strong> </td>
+  </tr><tr bgcolor="#cccccc" color="#000000">
+    <td><strong>Sigle </strong></td><td><strong>$sigle </strong> </td>
+  </tr><tr bgcolor="#cccccc" color="#000000">
+    <td><strong>Intitule du poste</strong></td><td>$job_title</td>
+  </tr><tr bgcolor="#cccccc" color="#000000">
+    <td><strong>Prénom et Nom du titulaire</strong></td><td>$name_first  $name_middle $name_last </td>
+  </tr><tr bgcolor="#cccccc" color="#000000">
+    <td><strong>Département</strong></td><td>$entite</td>
+  </tr><tr bgcolor="#cccccc" color="#000000">
+    <td><strong>Remplaçant habilité</strong></td><td>$remplacant</td>
+  </tr><tr bgcolor="#cccccc" color="#000000">
+    <td><strong>Société </strong></td><td>$direction</td>
+  </tr><tr bgcolor="#cccccc" color="#000000">
+    <td><strong>Matricule</strong></td><td>$matricule</td>
+  </tr><tr bgcolor="#cccccc" color="#000000">
+    <td><strong>Version</strong></td><td>$version</td>
+  </tr><tr bgcolor="#cccccc" color="#000000">
+    <td><strong>Categorie</strong></td><td>$cat</td>
+  </tr><tr bgcolor="#cccccc" color="#000000">
+    <td><strong>Type de contrat</strong></td><td>$status</td>
+  </tr>
+</table>
+
+<br><br><br>
+<table border="0.5" cellspacing="0" cellpadding="5">
+  <tr>
+    <td>
+      <br>
+      <b><u>Mission</u></b><br>
+      $mission
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <br>
+      <b><u>Activités principales</u></b><br>
+      $activite
+    </td>
+  </tr>
+</table>
+<br><br>
+
+<table border="0.5" cellspacing="0" cellpadding="5">
+  <tr>
+    <td>
+      <b><u>Relations fonctionnelles</u></b>
+    </td>
+
+    <td>
+      $relation
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <b><u>Formations souhaitées</u></b>
+    </td>
+
+    <td>$formation</td>
+  </tr>
+
+  <tr>
+    <td>
+      <b><u>Expériences souhaitée</u></b>
+    </td>
+
+    <td>$experience</td>
+  </tr>
+
+  <tr>
+    <td colspan="2">
+      <b><u>Compétences et aptitudes requises</u></b><br>
+      $competence
+    </td>
+  </tr>
+</table>
+
+<br><br><br><br><br>
+
+<b><u>Signature supérieure hiérarchique</u></b>
+
+<br><br><br><br><br><br><br>
+
+<b><u>Signature titulaire (mention lu et approuvé)</u></b>
+
+<br><br><br><br><br><br><br>
+
+
 EOD;
 
 // Print text using writeHTMLCell()
@@ -174,7 +251,7 @@ $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
 
 // Close and output PDF document
 // This method has several options, check the source code documentation for more information.
-$pdf->Output();
+$pdf->Output('fiche_'.$name_first.'_'.$name_last, 'I');
 
 	}
-}			
+}
