@@ -299,3 +299,23 @@ table tbody tr td a{
 #deleteConfModal{
     display: none;
 }
+
+.impressionbtn {
+    margin: 15px 25px 0 0;
+
+}
+
+.impressionbtn a{
+    color: #FFFFFF;
+    text-decoration:none;
+    display: block;
+    padding: 10px 20px;
+    background-color: #650582;
+    border-radius: 30px;
+    text-transform: uppercase;
+
+}
+
+.impressionbtn a:hover{
+    background-color: #A12B84;
+}
