@@ -40,7 +40,19 @@ class ReviewEvaluationAdminForm extends ReviewEvaluationForm {
         $widgets = array(
             'id' => new sfWidgetFormInputHidden(),
             'action' => new sfWidgetFormInputHidden(),
-            'evaluationsAction' => new sfWidgetFormInputHidden(),            
+            'evaluationsAction' => new sfWidgetFormInputHidden(),
+            'Mois1' => new sfWidgetFormInput(),
+            'Mois1' => new sfWidgetFormInput(),
+            'Mois2' => new sfWidgetFormInput(),
+            'Mois3' => new sfWidgetFormInput(),
+            'Mois4' => new sfWidgetFormInput(),
+            'Mois5' => new sfWidgetFormInput(),
+            'Mois6' => new sfWidgetFormInput(),
+            'Mois7' => new sfWidgetFormInput(),
+            'Mois8' => new sfWidgetFormInput(),
+            'Mois9' => new sfWidgetFormInput(),
+            'Mois10' => new sfWidgetFormInput(),
+            'Mois11' => new sfWidgetFormInput(),
             'hrAdminComments' => new sfWidgetFormTextarea(array(), array('rows' => '5')),
             'finalRating' => new sfWidgetFormInput(array(), array('class' => 'formInputText')),
             'completedDate' => new ohrmWidgetDatePicker(array(), array('id' => 'saveReview360Form_workPeriodStartDate'), array('class' => 'formDateInput'))
@@ -58,6 +70,18 @@ class ReviewEvaluationAdminForm extends ReviewEvaluationForm {
             'id' => new sfValidatorString(array('required' => false)),
             'action' => new sfValidatorString(array('required' => false)),
             'evaluationsAction' => new sfValidatorString(array('required' => false)),
+            'Mois1' => new sfValidatorString(array('required' => false)),
+            'Mois2' => new sfValidatorString(array('required' => false)),
+            'Mois3' => new sfValidatorString(array('required' => false)),
+            'Mois4' => new sfValidatorString(array('required' => false)),
+            'Mois5' => new sfValidatorString(array('required' => false)),
+            'Mois6' => new sfValidatorString(array('required' => false)),
+            'Mois7' => new sfValidatorString(array('required' => false)),
+            'Mois8' => new sfValidatorString(array('required' => false)),
+            'Mois9' => new sfValidatorString(array('required' => false)),
+            'Mois10' => new sfValidatorString(array('required' => false)),
+            'Mois11' => new sfValidatorString(array('required' => false)),
+            'Mois12' => new sfValidatorString(array('required' => false)),
             'hrAdminComments' => new sfValidatorString(array('required' => false)),
             'finalRating' => new sfValidatorString(array('required' => false)),
             'completedDate' => new ohrmDateValidator(array('required' => false))
@@ -72,6 +96,18 @@ class ReviewEvaluationAdminForm extends ReviewEvaluationForm {
     protected function getFormLabels() {
         $requiredMarker = '&nbsp;<span class="required">*</span>';
         $labels = array(
+            'Mois1' => __('Mois 1'),
+            'Mois2' => __('Mois 2'),
+            'Mois3' => __('Mois 3'),
+            'Mois4' => __('Mois 4'),
+            'Mois5' => __('Mois 5'),
+            'Mois6' => __('Mois 6'),
+            'Mois7' => __('Mois 7'),
+            'Mois8' => __('Mois 8'),
+            'Mois9' => __('Mois 9') ,
+            'Mois10' => __('Mois 10'),
+            'Mois11' => __('Mois 11'),
+            'Mois12' => __('Mois 12'),
             'hrAdminComments' => __('Final Comment') . $requiredMarker,
             'finalRating' => __('Final Rating') . $requiredMarker,
             'completedDate' => __('Completed Date') . $requiredMarker
@@ -114,7 +150,7 @@ class ReviewEvaluationAdminForm extends ReviewEvaluationForm {
      */
     public function loadFormData($id) {
         
-        $this->setDefault('id', $this->getReviewId());       
+        $this->setDefault('id', $this->getReviewId());
         $this->setDefault('hrAdminComments', $this->getReview()->getFinalComment());
         $this->setDefault('finalRating', $this->getReview()->getFinalRate());
         $this->setDefault('completedDate', set_datepicker_date_format( $this->getReview()->getCompletedDate()) );

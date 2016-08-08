@@ -99,9 +99,8 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                 <td>   
                                     <div>
                                         <div class="evaluationexpand">
-                                            <table  class="evaluateBy" >
-                                               
-                                                ?>
+                                            <table  class="evaluateBy" width="auto" >
+
                                                 <thead>
                                                     <tr>
                                                         <?php if ($columNumber == 1) { ?>
@@ -118,6 +117,17 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                                             <th><?php echo __("Valeur Cible"); ?></th>
                                                             <th><?php echo __("Poids"); ?></th>
                                                         <?php } ?>
+                                                        <th> <?php echo $form['Mois1']->renderLabel(null, array('class' => 'labelValue')); ?></th>
+                                                        <th> <?php echo $form['Mois2']->renderLabel(null, array('class' => 'labelValue')); ?></th>
+                                                        <th> <?php echo $form['Mois3']->renderLabel(null, array('class' => 'labelValue')); ?></th>
+                                                        <th> <?php echo $form['Mois4']->renderLabel(null, array('class' => 'labelValue')); ?></th>
+                                                        <th> <?php echo $form['Mois5']->renderLabel(null, array('class' => 'labelValue')); ?></th>
+                                                        <th> <?php echo $form['Mois6']->renderLabel(null, array('class' => 'labelValue')); ?></th>
+                                                        <th> <?php echo $form['Mois7']->renderLabel(null, array('class' => 'labelValue')); ?></th>
+                                                        <th> <?php echo $form['Mois8']->renderLabel(null, array('class' => 'labelValue')); ?></th>
+                                                        <th> <?php echo $form['Mois9']->renderLabel(null, array('class' => 'labelValue')); ?></th>
+                                                        <th> <?php echo $form['Mois10']->renderLabel(null, array('class' => 'labelValue')); ?></th>
+                                                        <th> <?php echo $form['Mois11']->renderLabel(null, array('class' => 'labelValue')); ?></th>
                                                         <th><?php echo __("Rating"); ?></th>
                                                        <th><?php echo __("Comment"); ?></th>
                                                     </tr>
@@ -145,6 +155,17 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                                         <td class="rightAlign"><center><?php echo $rating->getKpi()->getValeurCible() ?></center></td>
                                                         <td class="rightAlign"><center><?php echo $rating->getKpi()->getMaxRating() ?></center></td>
                                                     <?php } ?>
+                                                            <td><?php echo $form['Mois1']->render() ?></td>
+                                                            <td><?php echo $form['Mois2']->render() ?></td>
+                                                            <td><?php echo $form['Mois3']->render() ?></td>
+                                                            <td><?php echo $form['Mois4']->render() ?></td>
+                                                            <td><?php echo $form['Mois5']->render() ?></td>
+                                                            <td><?php echo $form['Mois6']->render() ?></td>
+                                                            <td><?php echo $form['Mois7']->render() ?></td>
+                                                            <td><?php echo $form['Mois8']->render() ?></td>
+                                                            <td><?php echo $form['Mois9']->render() ?></td>
+                                                            <td><?php echo $form['Mois10']->render() ?></td>
+                                                            <td><?php echo $form['Mois11']->render() ?></td>
                                                     <td><center><input class="rightAlign" min="<?php echo $rating->getKpi()->getMinRating() ?>" max="<?php echo $rating->getKpi()->getMaxRating() ?>"  type="text" value="<?php echo $rating->getRating(); ?>" id="rating_<?php echo $rating->getId(); ?>"  name="rating[<?php echo $rating->getId(); ?>]" /></center></td>
                                                     <td><textarea class="comment" type="text" id="comment_<?php echo $rating->getId(); ?>" name="comment[<?php echo $rating->getId(); ?>]" ><?php echo $rating->getComment(); ?></textarea> </td>
                                                     </tr>            
