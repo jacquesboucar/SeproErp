@@ -8,6 +8,7 @@ class viewJobDetailsPdfAction extends basePimAction {
 
 	  public function getJobTitleService() {
         if (is_null($this->jobTitleService)) {
+
             $this->jobTitleService = new JobTitleService();
             $this->jobTitleService->setJobTitleDao(new JobTitleDao());
         }
