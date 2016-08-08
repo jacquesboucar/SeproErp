@@ -194,7 +194,9 @@
 
                     <p>
 
+                        <?php //var_dump($jobInformationPermission->canUpdate());die; ?>
                         <?php if ($jobInformationPermission->canUpdate()) : ?>
+                            <input type="hidden" id="droits" value="<?php $jobInformationPermission->canUpdate() ?>" />
                         <input type="button" class="" id="btnSave" value="<?php echo __("Edit"); ?>" />
                         <?php endif; ?>
                         <?php
@@ -313,8 +315,9 @@
     }
 
     $(document).ready(function() {
-        $('.impressionbtn').show();
+        $('.impressionbtn').hide();
         if(document.getElementById("job_validate_yes").checked==true){
+            $('.impressionbtn').show();
             $('.radio').hide();
         }
 

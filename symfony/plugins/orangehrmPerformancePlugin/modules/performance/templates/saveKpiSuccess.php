@@ -39,7 +39,7 @@
 
 <script>
     $(document).ready(function() {
-        
+      alert(document.forms["searchKpi"].element[0]);
         $('#saveBtn').click(function(){
             $('#searchKpi').submit();
         });
