@@ -178,13 +178,23 @@ class ReviewEvaluationForm extends BasePefromanceSearchForm {
 
         if ($this->isEditable()) {
             $postParameters = $request->getPostParameters();
-            print_r($postParameters); die();
+            //print_r($postParameters); die();
             foreach ($postParameters['rating_id'] as $key => $ratingId) {
                 if ($this->isValidRatingId($ratingId)) {
                     $rating = $this->getPerformanceReviewService()->getReviewRating($ratingId);
                     $rating->setRating($this->filterPostValues(round($postParameters['rating'][$key], 2)));
                     $rating->setComment($this->filterPostValues($postParameters['comment'][$key]));
-                    $rating->setMois($this->filterPostValues($postParameters['mois'][$key]));
+                    $rating->setMois2($this->filterPostValues($postParameters['mois2'][$key]));
+                    $rating->setMois3($this->filterPostValues($postParameters['mois3'][$key]));
+                    $rating->setMois4($this->filterPostValues($postParameters['mois4'][$key]));
+                    $rating->setMois5($this->filterPostValues($postParameters['mois5'][$key]));
+                    $rating->setMois6($this->filterPostValues($postParameters['mois6'][$key]));
+                    $rating->setMois7($this->filterPostValues($postParameters['mois7'][$key]));
+                    $rating->setMois8($this->filterPostValues($postParameters['mois8'][$key]));
+                    $rating->setMois9($this->filterPostValues($postParameters['mois9'][$key]));
+                    $rating->setMois10($this->filterPostValues($postParameters['mois10'][$key]));
+                    $rating->setMois11($this->filterPostValues($postParameters['mois11'][$key]));
+                    $rating->setMois12($this->filterPostValues($postParameters['mois12'][$key]));
                     $rating->save();
                 }
             }

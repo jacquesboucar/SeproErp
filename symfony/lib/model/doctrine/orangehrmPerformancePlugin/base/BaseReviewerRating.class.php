@@ -11,7 +11,17 @@
  * @property integer $reviewId
  * @property integer $reviewerId
  * @property clob $comment
- * @property decimal $mois
+ * @property decimal $mois2
+ * @property decimal $mois3
+ * @property decimal $mois4
+ * @property decimal $mois5
+ * @property decimal $mois6
+ * @property decimal $mois7
+ * @property decimal $mois8
+ * @property decimal $mois9
+ * @property decimal $mois10
+ * @property decimal $mois11
+ * @property decimal $mois12
  * @property PerformanceReview $performanceReview
  * @property Reviewer $reviewer
  * @property Kpi $kpi
@@ -22,7 +32,17 @@
  * @method integer           getReviewId()          Returns the current record's "reviewId" value
  * @method integer           getReviewerId()        Returns the current record's "reviewerId" value
  * @method clob              getComment()           Returns the current record's "comment" value
- * @method decimal           getMois()              Returns the current record's "mois" value
+ * @method decimal           getMois2()             Returns the current record's "mois2" value
+ * @method decimal           getMois3()             Returns the current record's "mois3" value
+ * @method decimal           getMois4()             Returns the current record's "mois4" value
+ * @method decimal           getMois5()             Returns the current record's "mois5" value
+ * @method decimal           getMois6()             Returns the current record's "mois6" value
+ * @method decimal           getMois7()             Returns the current record's "mois7" value
+ * @method decimal           getMois8()             Returns the current record's "mois8" value
+ * @method decimal           getMois9()             Returns the current record's "mois9" value
+ * @method decimal           getMois10()            Returns the current record's "mois10" value
+ * @method decimal           getMois11()            Returns the current record's "mois11" value
+ * @method decimal           getMois12()            Returns the current record's "mois12" value
  * @method PerformanceReview getPerformanceReview() Returns the current record's "performanceReview" value
  * @method Reviewer          getReviewer()          Returns the current record's "reviewer" value
  * @method Kpi               getKpi()               Returns the current record's "kpi" value
@@ -32,7 +52,17 @@
  * @method ReviewerRating    setReviewId()          Sets the current record's "reviewId" value
  * @method ReviewerRating    setReviewerId()        Sets the current record's "reviewerId" value
  * @method ReviewerRating    setComment()           Sets the current record's "comment" value
- * @method ReviewerRating    setMois()              Sets the current record's "mois" value
+ * @method ReviewerRating    setMois2()             Sets the current record's "mois2" value
+ * @method ReviewerRating    setMois3()             Sets the current record's "mois3" value
+ * @method ReviewerRating    setMois4()             Sets the current record's "mois4" value
+ * @method ReviewerRating    setMois5()             Sets the current record's "mois5" value
+ * @method ReviewerRating    setMois6()             Sets the current record's "mois6" value
+ * @method ReviewerRating    setMois7()             Sets the current record's "mois7" value
+ * @method ReviewerRating    setMois8()             Sets the current record's "mois8" value
+ * @method ReviewerRating    setMois9()             Sets the current record's "mois9" value
+ * @method ReviewerRating    setMois10()            Sets the current record's "mois10" value
+ * @method ReviewerRating    setMois11()            Sets the current record's "mois11" value
+ * @method ReviewerRating    setMois12()            Sets the current record's "mois12" value
  * @method ReviewerRating    setPerformanceReview() Sets the current record's "performanceReview" value
  * @method ReviewerRating    setReviewer()          Sets the current record's "reviewer" value
  * @method ReviewerRating    setKpi()               Sets the current record's "kpi" value
@@ -73,7 +103,37 @@ abstract class BaseReviewerRating extends sfDoctrineRecord
              'type' => 'clob',
              'length' => 65532,
              ));
-        $this->hasColumn('mois', 'decimal', null, array(
+        $this->hasColumn('mois2', 'decimal', null, array(
+             'type' => 'decimal',
+             ));
+        $this->hasColumn('mois3', 'decimal', null, array(
+             'type' => 'decimal',
+             ));
+        $this->hasColumn('mois4', 'decimal', null, array(
+             'type' => 'decimal',
+             ));
+        $this->hasColumn('mois5', 'decimal', null, array(
+             'type' => 'decimal',
+             ));
+        $this->hasColumn('mois6', 'decimal', null, array(
+             'type' => 'decimal',
+             ));
+        $this->hasColumn('mois7', 'decimal', null, array(
+             'type' => 'decimal',
+             ));
+        $this->hasColumn('mois8', 'decimal', null, array(
+             'type' => 'decimal',
+             ));
+        $this->hasColumn('mois9', 'decimal', null, array(
+             'type' => 'decimal',
+             ));
+        $this->hasColumn('mois10', 'decimal', null, array(
+             'type' => 'decimal',
+             ));
+        $this->hasColumn('mois11', 'decimal', null, array(
+             'type' => 'decimal',
+             ));
+        $this->hasColumn('mois12', 'decimal', null, array(
              'type' => 'decimal',
              ));
     }

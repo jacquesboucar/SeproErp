@@ -127,8 +127,28 @@ ReviewerRating:
     comment:
       name: comment as comment
       type: clob(65532)
-    mois:
-      type: decimal  
+    mois2:
+      type: decimal
+    mois3:
+      type: decimal
+    mois4:
+      type: decimal
+    mois5:
+      type: decimal
+    mois6:
+      type: decimal
+    mois7:
+      type: decimal
+    mois8:
+      type: decimal
+    mois9:
+      type: decimal
+    mois10:
+      type: decimal
+    mois11:
+      type: decimal
+    mois12:
+      type: decimal
   relations:
     performanceReview:
       class: PerformanceReview

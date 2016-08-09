@@ -101,7 +101,6 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                         <div class="evaluationexpand">
                                             <table  class="evaluateBy" >
                                                
-                                                ?>
                                                 <thead>
                                                     <tr>
                                                         <?php if ($columNumber == 1) { ?>
@@ -118,9 +117,20 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                                             <th><?php echo __("Valeur Cible"); ?></th>
                                                             <th><?php echo __("Poids"); ?></th>
                                                         <?php } ?>
-                                                        <th><?php echo __("Rating"); ?></th>
-                                                       <th><?php echo __("Comment"); ?></th>
-                                                       <th><?php echo __("Mois"); ?></th>
+
+                                                        <th><?php echo __("Comment"); ?></th>
+                                                        <th><?php echo __("Mois 1"); ?></th>
+                                                        <th><?php echo __("Mois 2"); ?></th>
+                                                        <th><?php echo __("Mois 3"); ?></th>
+                                                        <th><?php echo __("Mois 4"); ?></th>
+                                                        <th><?php echo __("Mois 5"); ?></th>
+                                                        <th><?php echo __("Mois 6"); ?></th>
+                                                        <th><?php echo __("Mois 7"); ?></th>
+                                                        <th><?php echo __("Mois 8"); ?></th>
+                                                        <th><?php echo __("Mois 9"); ?></th>
+                                                        <th><?php echo __("Mois 10"); ?></th>
+                                                        <th><?php echo __("Mois 11"); ?></th>
+                                                        <th><?php echo __("Mois 12"); ?></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -146,10 +156,20 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                                         <td class="rightAlign"><center><?php echo $rating->getKpi()->getValeurCible() ?></center></td>
                                                         <td class="rightAlign"><center><?php echo $rating->getKpi()->getMaxRating() ?></center></td>
                                                     <?php } ?>
-                                                    <td><center><input class="rightAlign" min="<?php echo $rating->getKpi()->getMinRating() ?>" max="<?php echo $rating->getKpi()->getMaxRating() ?>"  type="text" value="<?php echo $rating->getRating(); ?>" id="rating_<?php echo $rating->getId(); ?>"  name="rating[<?php echo $rating->getId(); ?>]" /></center></td>
-                                                    <td><textarea class="comment" type="text" id="comment_<?php echo $rating->getId(); ?>" name="comment[<?php echo $rating->getId(); ?>]" ><?php echo $rating->getComment(); ?></textarea> </td>
-                                                     <td><center><input class="rightAlign" type="text" id="mois_<?php echo $rating->getId(); ?>" name="mois[<?php echo $rating->getId(); ?>]" ><?php echo $rating->getMois(); ?></center></td>
-                                                     
+                                                     <td><textarea class="comment" type="text" id="comment_<?php echo $rating->getId(); ?>" name="comment[<?php echo $rating->getId(); ?>]" ><?php echo $rating->getComment(); ?></textarea> </td>
+                                                     <td><center><input class="rightAlign" min="<?php echo $rating->getKpi()->getMinRating() ?>" max="<?php echo $rating->getKpi()->getMaxRating() ?>"  type="text" value="<?php echo $rating->getRating(); ?>" id="rating_<?php echo $rating->getId(); ?>"  name="rating[<?php echo $rating->getId(); ?>]" /></center></td>
+                                                     <td><center><input class="rightAlign" type="text" id="mois2_<?php echo $rating->getId(); ?>" name="mois2[<?php echo $rating->getId(); ?>]" ><?php echo $rating->getMois2(); ?></center></td>
+                                                     <td><center><input class="rightAlign" type="text" id="mois3_<?php echo $rating->getId(); ?>" name="mois3[<?php echo $rating->getId(); ?>]" ><?php echo $rating->getMois3(); ?></center></td>
+                                                     <td><center><input class="rightAlign" type="text" id="mois4_<?php echo $rating->getId(); ?>" name="mois4[<?php echo $rating->getId(); ?>]" ><?php echo $rating->getMois4(); ?></center></td>
+                                                     <td><center><input class="rightAlign" type="text" id="mois5_<?php echo $rating->getId(); ?>" name="mois5[<?php echo $rating->getId(); ?>]" ><?php echo $rating->getMois5(); ?></center></td>
+                                                     <td><center><input class="rightAlign" type="text" id="mois6_<?php echo $rating->getId(); ?>" name="mois6[<?php echo $rating->getId(); ?>]" ><?php echo $rating->getMois6(); ?></center></td>
+                                                     <td><center><input class="rightAlign" type="text" id="mois7_<?php echo $rating->getId(); ?>" name="mois7[<?php echo $rating->getId(); ?>]" ><?php echo $rating->getMois7(); ?></center></td>
+                                                     <td><center><input class="rightAlign" type="text" id="mois8_<?php echo $rating->getId(); ?>" name="mois8[<?php echo $rating->getId(); ?>]" ><?php echo $rating->getMois8(); ?></center></td>
+                                                     <td><center><input class="rightAlign" type="text" id="mois9_<?php echo $rating->getId(); ?>" name="mois9[<?php echo $rating->getId(); ?>]" ><?php echo $rating->getMois9(); ?></center></td>
+                                                     <td><center><input class="rightAlign" type="text" id="mois10_<?php echo $rating->getId(); ?>" name="mois10[<?php echo $rating->getId(); ?>]" ><?php echo $rating->getMois10(); ?></center></td>
+                                                     <td><center><input class="rightAlign" type="text" id="mois11_<?php echo $rating->getId(); ?>" name="mois11[<?php echo $rating->getId(); ?>]" ><?php echo $rating->getMois11(); ?></center></td>
+                                                     <td><center><input class="rightAlign" type="text" id="mois12_<?php echo $rating->getId(); ?>" name="mois12[<?php echo $rating->getId(); ?>]" ><?php echo $rating->getMois12(); ?></center></td>
+
 
                                                     </tr>            
                                                     <?php
@@ -346,13 +366,13 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                 }, '<?php echo __(PerformanceValidationMessages::ONLY_INTEGER_ALLOWED); ?>');
 
 
-    });
-    var minMsg = "<?php echo __('Rating should be less than or equal to ') ?>";
-    var maxMsg = "<?php echo __('Rating should be greater than or equal to ') ?>";
+    });/*
+    var minMsg = "<?php //echo __('Rating should be less than or equal to ') ?>";
+    var maxMsg = "<?php //echo __('Rating should be greater than or equal to ') ?>";
     jQuery.extend(jQuery.validator.messages, {
         max: jQuery.validator.format(minMsg + "{0}."),
         min: jQuery.validator.format(maxMsg + "{0}.")
-    });
+    });*/
 </script>
 
 <?php
