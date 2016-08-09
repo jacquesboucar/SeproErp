@@ -19,7 +19,46 @@
             <fieldset>
 
                 <ol>
-                    <?php echo $form->render(); ?>
+                    <li>
+                        <?php echo $form['kpi_group']->renderLabel(null, array('class' => 'labelValue')); ?>
+                        <?php echo $form['kpi_group']->render() ?>
+                    </li>
+                    <li>
+                        <?php echo $form['jobTitleCode']->renderLabel(null, array('class' => 'labelValue')); ?>
+                        <?php echo $form['jobTitleCode']->render() ?>
+                    </li>
+                    <li>
+                       <?php echo $form['keyPerformanceIndicators']->renderLabel(null, array('class' => 'labelValue')); ?>
+                        <?php echo $form['keyPerformanceIndicators']->render() ?>
+                    </li>
+                    <li class="minratingclasse">
+                        <?php echo $form['minRating']->renderLabel(null, array('class' => 'labelValue')); ?>
+                        <?php echo $form['minRating']->render() ?>
+                    </li>
+                    <li>
+                        <?php echo $form['maxRating']->renderLabel(null, array('class' => 'labelValue')); ?>
+                        <?php echo $form['maxRating']->render() ?>
+                    </li>
+                    <li>
+                        <?php echo $form['delai']->renderLabel(null, array('class' => 'labelValue')); ?>
+                        <?php echo $form['delai']->render() ?>
+                    </li>
+                    <li>
+                       <?php echo $form['objectif']->renderLabel(null, array('class' => 'labelValue')); ?>
+                        <?php echo $form['objectif']->render() ?>
+                    </li>
+                    <li>
+                        <?php echo $form['mode_calcul']->renderLabel(null, array('class' => 'labelValue')); ?>
+                        <?php echo $form['mode_calcul']->render() ?>
+                        <?php echo $form['id']->render() ?>
+                        <?php echo $form['_csrf_token']->render() ?>
+                    </li>
+
+                    <li>
+                        <?php echo $form['valeur_cible']->renderLabel(null, array('class' => 'labelValue')); ?>
+                        <?php echo $form['valeur_cible']->render() ?>
+                    </li>
+                    <?php //echo $form->render(); ?>
 
                     <li class="required">
                         <em>*</em> <?php echo __(CommonMessages::REQUIRED_FIELD); ?>
@@ -39,7 +78,7 @@
 
 <script>
     $(document).ready(function() {
-      alert(document.forms["searchKpi"].element[0]);
+
         $('#saveBtn').click(function(){
             $('#searchKpi').submit();
         });

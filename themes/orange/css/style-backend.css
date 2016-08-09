@@ -320,7 +320,6 @@ table tbody tr td a{
 .impressionbtn a:hover{
     background-color: #A12B84;
 }
-
-#defineKpi360_minRating{
+.minratingclasse{
     display: none;
 }
