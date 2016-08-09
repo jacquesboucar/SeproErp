@@ -127,6 +127,8 @@ ReviewerRating:
     comment:
       name: comment as comment
       type: clob(65532)
+    mois:
+      type: decimal  
   relations:
     performanceReview:
       class: PerformanceReview

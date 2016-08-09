@@ -178,11 +178,13 @@ class ReviewEvaluationForm extends BasePefromanceSearchForm {
 
         if ($this->isEditable()) {
             $postParameters = $request->getPostParameters();
+            print_r($postParameters); die();
             foreach ($postParameters['rating_id'] as $key => $ratingId) {
                 if ($this->isValidRatingId($ratingId)) {
                     $rating = $this->getPerformanceReviewService()->getReviewRating($ratingId);
                     $rating->setRating($this->filterPostValues(round($postParameters['rating'][$key], 2)));
                     $rating->setComment($this->filterPostValues($postParameters['comment'][$key]));
+                    $rating->setMois($this->filterPostValues($postParameters['mois'][$key]));
                     $rating->save();
                 }
             }

@@ -11,6 +11,7 @@
  * @property integer $reviewId
  * @property integer $reviewerId
  * @property clob $comment
+ * @property decimal $mois
  * @property PerformanceReview $performanceReview
  * @property Reviewer $reviewer
  * @property Kpi $kpi
@@ -21,6 +22,7 @@
  * @method integer           getReviewId()          Returns the current record's "reviewId" value
  * @method integer           getReviewerId()        Returns the current record's "reviewerId" value
  * @method clob              getComment()           Returns the current record's "comment" value
+ * @method decimal           getMois()              Returns the current record's "mois" value
  * @method PerformanceReview getPerformanceReview() Returns the current record's "performanceReview" value
  * @method Reviewer          getReviewer()          Returns the current record's "reviewer" value
  * @method Kpi               getKpi()               Returns the current record's "kpi" value
@@ -30,6 +32,7 @@
  * @method ReviewerRating    setReviewId()          Sets the current record's "reviewId" value
  * @method ReviewerRating    setReviewerId()        Sets the current record's "reviewerId" value
  * @method ReviewerRating    setComment()           Sets the current record's "comment" value
+ * @method ReviewerRating    setMois()              Sets the current record's "mois" value
  * @method ReviewerRating    setPerformanceReview() Sets the current record's "performanceReview" value
  * @method ReviewerRating    setReviewer()          Sets the current record's "reviewer" value
  * @method ReviewerRating    setKpi()               Sets the current record's "kpi" value
@@ -69,6 +72,9 @@ abstract class BaseReviewerRating extends sfDoctrineRecord
         $this->hasColumn('comment as comment', 'clob', 65532, array(
              'type' => 'clob',
              'length' => 65532,
+             ));
+        $this->hasColumn('mois', 'decimal', null, array(
+             'type' => 'decimal',
              ));
     }
 
