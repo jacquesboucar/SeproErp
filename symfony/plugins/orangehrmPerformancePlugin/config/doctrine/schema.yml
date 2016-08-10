@@ -19,7 +19,6 @@ Kpi:
       type: integer(2)
     kpi_group: varchar(255)
     delai: string(250)
-    valeur_cible: string(250)
     objectif: string(250)
     mode_calcul: string(250)
   relations:
@@ -149,6 +148,7 @@ ReviewerRating:
       type: decimal
     mois12:
       type: decimal
+    valeur_cible: string(250)
   relations:
     performanceReview:
       class: PerformanceReview
