@@ -53,11 +53,12 @@
                         <?php echo $form['id']->render() ?>
                         <?php echo $form['_csrf_token']->render() ?>
                     </li>
-
+                    <!--
                     <li>
-                        <?php echo $form['valeur_cible']->renderLabel(null, array('class' => 'labelValue')); ?>
-                        <?php echo $form['valeur_cible']->render() ?>
+                        <?php //echo $form['valeur_cible']->renderLabel(null, array('class' => 'labelValue')); ?>
+                        <?php //echo $form['valeur_cible']->render() ?>
                     </li>
+                    -->
                     <?php //echo $form->render(); ?>
 
                     <li class="required">

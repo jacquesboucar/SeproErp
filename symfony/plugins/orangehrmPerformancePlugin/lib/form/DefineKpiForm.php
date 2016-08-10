@@ -24,7 +24,6 @@ class DefineKpiForm extends BasePefromanceSearchForm {
             'maxRating' => new sfWidgetFormInput(array(), array('class' => 'formInputText')),
            // 'makeDefault' => new sfWidgetFormInputCheckbox(array(), array('class' => 'formCheckbox')),
             'delai' => new sfWidgetFormInputText(),
-            'valeur_cible'  => new sfWidgetFormInputText(),
             'objectif'  => new sfWidgetFormInputText(),
             'mode_calcul'  => new sfWidgetFormInputText(),
 
@@ -39,7 +38,6 @@ class DefineKpiForm extends BasePefromanceSearchForm {
             'maxRating' => new sfValidatorString(array('required' => false)),
             'makeDefault' => new sfValidatorString(array('required' => false)),
             'delai' => new sfValidatorString(array('required' => false)),
-            'valeur_cible' => new sfValidatorString(array('required' => true)),
             'objectif' => new sfValidatorString(array('required' => false)),
             'mode_calcul' => new sfValidatorString(array('required' => false)),
         ));
@@ -97,7 +95,6 @@ class DefineKpiForm extends BasePefromanceSearchForm {
             'minRating' => __('Minimum Rating'). $requiredMarker,
             'maxRating' => __('Poids'). $requiredMarker,
             'delai' => __("Périodicité"),
-            'valeur_cible' => __('Valeur cible'). $requiredMarker,
             'objectif' => __('Objectifs'),
             'mode_calcul' => __('Mode de Calcul'),
            // 'makeDefault' => __('Make Default Scale')
@@ -118,7 +115,6 @@ class DefineKpiForm extends BasePefromanceSearchForm {
           $kpi->setKpiIndicators($values['keyPerformanceIndicators']);
         
           $kpi->setDelai($values['delai']);
-          $kpi->setValeurCible($values['valeur_cible']);
           $kpi->setObjectif($values['objectif']);
           $kpi->setModeCalcul($values['mode_calcul']);
           $job = $kpi->setJobTitleCode($jobcode);

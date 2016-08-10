@@ -305,5 +305,15 @@ class ReviewEvaluationForm extends BasePefromanceSearchForm {
             return "performance/searchEvaluatePerformancReview";
         }
     }
+    /**
+     *
+     * @return array
+     */
+    public function getKpiGroupListAsArray() {
+        foreach ($this->getKpiGroupService()->getKpiGroupList() as $group) {
+            $kpiGroup[$group->getId()] = $group->getKpiGroupName();
+        }
+        return $kpiGroup;
+    }
 
 }

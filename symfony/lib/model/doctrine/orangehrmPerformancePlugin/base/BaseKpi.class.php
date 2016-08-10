@@ -13,7 +13,6 @@
  * @property integer $default_kpi
  * @property varchar $kpi_group
  * @property string $delai
- * @property string $valeur_cible
  * @property string $objectif
  * @property string $mode_calcul
  * @property JobTitle $JobTitle
@@ -27,7 +26,6 @@
  * @method integer             getDefaultKpi()     Returns the current record's "default_kpi" value
  * @method varchar             getKpiGroup()       Returns the current record's "kpi_group" value
  * @method string              getDelai()          Returns the current record's "delai" value
- * @method string              getValeurCible()    Returns the current record's "valeur_cible" value
  * @method string              getObjectif()       Returns the current record's "objectif" value
  * @method string              getModeCalcul()     Returns the current record's "mode_calcul" value
  * @method JobTitle            getJobTitle()       Returns the current record's "JobTitle" value
@@ -40,7 +38,6 @@
  * @method Kpi                 setDefaultKpi()     Sets the current record's "default_kpi" value
  * @method Kpi                 setKpiGroup()       Sets the current record's "kpi_group" value
  * @method Kpi                 setDelai()          Sets the current record's "delai" value
- * @method Kpi                 setValeurCible()    Sets the current record's "valeur_cible" value
  * @method Kpi                 setObjectif()       Sets the current record's "objectif" value
  * @method Kpi                 setModeCalcul()     Sets the current record's "mode_calcul" value
  * @method Kpi                 setJobTitle()       Sets the current record's "JobTitle" value
@@ -87,10 +84,6 @@ abstract class BaseKpi extends sfDoctrineRecord
              'length' => 255,
              ));
         $this->hasColumn('delai', 'string', 250, array(
-             'type' => 'string',
-             'length' => 250,
-             ));
-        $this->hasColumn('valeur_cible', 'string', 250, array(
              'type' => 'string',
              'length' => 250,
              ));
