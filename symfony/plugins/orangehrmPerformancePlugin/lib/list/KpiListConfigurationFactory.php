@@ -57,13 +57,13 @@ class KpiListConfigurationFactory extends ohrmListConfigurationFactory {
         
         $header3 = new ListHeader();
         $header3->populateFromArray(array(
-            'name' => 'Min Rate',
+            'name' => 'Objectifs',
             'width' => '5%',
             'isSortable' => false,
             'sortField' => null,
             'elementType' => 'label',
             'textAlignmentStyle' => 'center',
-            'elementProperty' => array('getter' => 'getMinRating')
+            'elementProperty' => array('getter' => 'getObjectif')
                 
         ));
 
@@ -71,7 +71,7 @@ class KpiListConfigurationFactory extends ohrmListConfigurationFactory {
         
         $header4 = new ListHeader();
         $header4->populateFromArray(array(
-            'name' => 'Max Rate',
+            'name' => 'Poids',
             'width' => '5%',
             'isSortable' => false,
             'textAlignmentStyle' => 'center',
@@ -84,17 +84,12 @@ class KpiListConfigurationFactory extends ohrmListConfigurationFactory {
         
         $header5 = new ListHeader();
         $header5->populateFromArray(array(
-            'name' => 'Is Default',
+            'name' => 'Périodicité',
             'isSortable' => false,
-            'sortField' => null,           
-            'filters' => array('EnumCellFilter' => array(
-                                                    'enum' => array(0 => 'No', 1 => 'Yes'), 
-                                                    'default' => ''),
-                               'I18nCellFilter' => array()
-                              ),            
+            'sortField' => null, 
             'elementType' => 'label',
             'textAlignmentStyle' => 'left',
-            'elementProperty' => array('getter' => 'getDefaultKpi'),
+            'elementProperty' => array('getter' => 'getDelai'),
         ));
          $headerArray [] = $header5;     
         
