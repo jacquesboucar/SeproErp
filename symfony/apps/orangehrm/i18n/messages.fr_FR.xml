@@ -1352,7 +1352,7 @@
         </trans-unit>
         <trans-unit id="270">
          <source>Administrator Evaluation Form</source>
-         <target>Formulaire d'évaluation de l'aministrateur</target>
+         <target>Formulaire d'évaluation de l'administrateur</target>
          <note>Admin is defining appraisal forms with any combination of evaluation topics.</note>
         </trans-unit>
         <trans-unit id="271">
@@ -18868,6 +18868,11 @@
                                                            <source>[1M Max, any larger attachments will be ignored]xxxx</source>
                                                            <target>[1Mb Max. Toute pièce plus lourde sera automatiquement ignorée]xxxx</target>
                                                            <note>When uploading any larger attachments which is over 1MB in size  will be ignored.</note>
+                                                          </trans-unit>
+                                                          <trans-unit id="3783">
+                                                           <source>Finalization</source>
+                                                           <target>Finalisation</target>
+                                                           <note>finalisation evaluation</note>
                                                           </trans-unit>
                                                          </body>
                                                         </file>
