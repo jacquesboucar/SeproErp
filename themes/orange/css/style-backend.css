@@ -323,3 +323,19 @@ table tbody tr td a{
 .minratingclasse{
     display: none;
 }
+.smallerHeader, #induvidualEvaluate th{
+    background-color: #A12B84;
+}
+#induvidualEvaluate th{
+    color:#FFFFFF;
+}
+.evaluationEmployee{
+    background-color: #A12B84;
+}
+#enteteevaluationEmployees{
+    background-color: #A12B84;
+    color: #FFFFFF;
+}
+.evaluationEmployeeth{
+    color: #0f0f0f;
+}

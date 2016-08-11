@@ -145,8 +145,11 @@ class DefineKpiForm extends BasePefromanceSearchForm {
             $this->setDefault('id', $kpi->getId());
             $this->setDefault('jobTitleCode', $kpi->getJobTitleCode());
             $this->setDefault('keyPerformanceIndicators', $kpi->getKpiIndicators());
-            $this->setDefault('minRating', $kpi->getMaxRating());
+            $this->setDefault('minRating', 1);
             $this->setDefault('maxRating', $kpi->getMaxRating());
+            $this->setDefault('delai', $kpi->getDelai());
+            $this->setDefault('objectif',$kpi->getObjectif());
+            $this->setDefault('mode_calcul',$kpi->getModeCalcul());
             $this->setDefault('makeDefault', $kpi->getDefaultKpi());
             
         } else {
@@ -156,7 +159,7 @@ class DefineKpiForm extends BasePefromanceSearchForm {
             
             if(sizeof($kpi)>0){
                 $kpi = $kpi->getFirst();
-                $this->setDefault('minRating', $kpi->getMaxRating());
+                $this->setDefault('minRating', 1);
                 $this->setDefault('maxRating', $kpi->getMaxRating());
             }           
         }

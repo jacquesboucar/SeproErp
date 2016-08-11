@@ -21,9 +21,7 @@ div.evaluation {
     width: 100%;
 }
 
-.evaluationexpand table th{
-   background-color: #dedede;
-}
+
 
 .evaluation table th{
    background-color: #dedede;
@@ -86,11 +84,11 @@ div.mainHeading2 {
 }
 
 .box .smallerHeader h1 {
-    background: url("../../themes/default/images/h1-bg.png") repeat-x scroll left bottom #F3F3F3;
+
     border: 1px solid #DEDEDE;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
-    color: #5D5D5D;
+    color: #faf8f8;
     font-size: 15px;
     line-height: 15px;
     padding: 9px 20px;
@@ -147,9 +145,8 @@ form ol li span.validation-error {
 }
 
 .evaluateBy{
-    width: 600px; 
-    margin-left: 20px;
-    border: 1;
+    width: 600px;
+    border: 1px;
 }
 #reviewData{
     display: block;
@@ -179,4 +176,8 @@ form table span.validation-error{
 
 #reviewEvaluation_hrAdminComments {
     width: 600px;
+}
+
+div .evaluationexpand{
+    max-width: 250px;
 }

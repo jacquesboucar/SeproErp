@@ -80,7 +80,7 @@ input[type="text"].rightAlign {
 }
 
 textarea.comment {
-    width: 500px;
+    width: 91px;
 }
 
 div.reviewers{
@@ -96,7 +96,7 @@ div.instructions{
 }
 
 .box .smallerHeader h1 {
-    background: url("../../themes/default/images/h1-bg.png") repeat-x scroll left bottom #F3F3F3;
+
     border: 1px solid #DEDEDE;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
