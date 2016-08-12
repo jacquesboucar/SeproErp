@@ -10,7 +10,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
 <div class="box" id="divFormContainer">
     <div class="head"><h1><?php echo __('Administrator Evaluation Form'); ?></h1></div>
     <?php include_partial('global/form_errors', array('form' => $form)); ?>
-
+    
     <div class="inner">
         <?php include_partial('global/flash_messages'); ?>
         <div id="reviewData" >
@@ -53,7 +53,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                 </div>
             </div>
         </div>
-
+        
         <br/><br/>
         <div>
             <form id="reviewEvaluate" name="reviewEvaluate" method="post" action="">
@@ -63,12 +63,22 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                 echo $form['action']->render();
                 echo $form['evaluationsAction']->render();
                 ?>
+                <?php 
+                $ratings = $form->getSortedRatings($reviewer->getRating());
+                  foreach ($ratings as $rating) {
+                    $review_id = $rating->getReviewId();
+                }
+                ?>
+                <div class="pull-right impressionbtn">
+                <a href="<?php echo url_for('performance/reviewEvaluateByAdminPdf') . '?id=' . $review_id ?>" target="_blank">Telecharger</a>
+                </div>
                 <br class="clear"/>
                 <?php
                 if (sizeof($form->getReviewers()) > 0) {
                     $reviewerGroupId = $form->getReviewers()->getFirst()->getReviewerGroupId();
                 }
-
+                
+                
                 $columNumber = 0;
                 foreach ($form->getReviewers() as $reviewer) {
 
@@ -117,7 +127,11 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                                     <?php
                                                     $valuesForCalcuation = array();
                                                     $ratings = $form->getSortedRatings($reviewer->getRating());
-
+                                                    foreach ($ratings as $rating) {
+                                                        $review_id = $rating->getReviewId();
+                                                    }
+                                                    
+                                                    
                                                     $groupe =  $form->getKpiGroupListAsArray();//array('Certification ISO 9001', 'Etudes et marketing', 'Outils et évolutions SI', 'Reporting et analyse');
                                                     $existe_group = array();
 
