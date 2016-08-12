@@ -175,7 +175,6 @@ class ReviewEvaluationForm extends BasePefromanceSearchForm {
      * @return boolean 
      */
     public function saveForm($request) {
-
         if ($this->isEditable()) {
             $postParameters = $request->getPostParameters();
             //print_r($postParameters); die();
@@ -195,6 +194,21 @@ class ReviewEvaluationForm extends BasePefromanceSearchForm {
                     $rating->setMois10($this->filterPostValues($postParameters['mois10'][$key]));
                     $rating->setMois11($this->filterPostValues($postParameters['mois11'][$key]));
                     $rating->setMois12($this->filterPostValues($postParameters['mois12'][$key]));
+                    // Set Final Rating
+                    $mois1 = $this->filterPostValues($postParameters['rating'][$key]);
+                    $mois2 = $this->filterPostValues($postParameters['mois2'][$key]);
+                    $mois3 = $this->filterPostValues($postParameters['mois3'][$key]);
+                    $mois4 = $this->filterPostValues($postParameters['mois4'][$key]);
+                    $mois5 = $this->filterPostValues($postParameters['mois5'][$key]);
+                    $mois6 = $this->filterPostValues($postParameters['mois6'][$key]);
+                    $mois7 = $this->filterPostValues($postParameters['mois7'][$key]);
+                    $mois8 = $this->filterPostValues($postParameters['mois8'][$key]);
+                    $mois9 = $this->filterPostValues($postParameters['mois9'][$key]);
+                    $mois10 = $this->filterPostValues($postParameters['mois10'][$key]);
+                    $mois11 = $this->filterPostValues($postParameters['mois11'][$key]);
+                    $mois12 = $this->filterPostValues($postParameters['mois12'][$key]);
+                    $final_rate = $mois1+$mois2+$mois3+$mois4+$mois5+$mois6+$mois7+$mois8+$mois9+$mois10+$mois11+$mois12;
+                    $rating->setNote($final_rate);
                     $rating->save();
                 }
             }
