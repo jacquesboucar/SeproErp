@@ -119,7 +119,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                                     $ratings = $form->getSortedRatings($reviewer->getRating());
 
                                                     $groupe =  $form->getKpiGroupListAsArray();//array('Certification ISO 9001', 'Etudes et marketing', 'Outils et évolutions SI', 'Reporting et analyse');
-
+                                                    $existe_group = array();
 
                                                     foreach ($ratings as $rating) {
                                                         ?>
@@ -135,12 +135,12 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                                                             <?php $group = $value; ?>
                                                                         <?php endif; ?>
                                                                     <?php endforeach; ?>
-                                                                    <?php if($existe=$group){ ?>
+                                                                    <?php if(!in_array($group, $existe_group)){ ?>
 
                                                                     <tr class="evaluationEmployeeth">
                                                                             <th colspan="20">
                                                                                 <center><?php echo $group ?></center>
-                                                                                <?php $existe=$group ?>
+                                                                                <?php $existe_group[] = $group ?>
                                                                             </th>
                                                                     </tr>
                                                                     <tr>
