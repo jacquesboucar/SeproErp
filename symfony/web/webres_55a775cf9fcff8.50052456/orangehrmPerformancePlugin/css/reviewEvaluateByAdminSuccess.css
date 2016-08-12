@@ -41,6 +41,7 @@ div.evaluation {
 
 td.rightAlign  {
    text-align: right !important;
+    width: auto;
 }
 
 div.reviewInfo{
@@ -176,8 +177,4 @@ form table span.validation-error{
 
 #reviewEvaluation_hrAdminComments {
     width: 600px;
-}
-
-div .evaluationexpand{
-    max-width: 250px;
 }

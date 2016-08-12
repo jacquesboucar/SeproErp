@@ -339,3 +339,8 @@ table tbody tr td a{
 .evaluationEmployeeth{
     color: #0f0f0f;
 }
+.evaluationexpand{
+
+    width: 92%;
+    overflow: auto;
+}

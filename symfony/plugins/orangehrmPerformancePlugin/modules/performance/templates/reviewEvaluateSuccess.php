@@ -14,7 +14,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
 
             <div id="reviewData paginer">
                 <div style="" class="reviewInfo" id="review-details">
-                    <div class="smallerHeader"><h1><?php echo __('Review Details') ?></h1></div>
+                    <div class="smallerHeader"><center><h1><b><?php echo __('Review Details') ?></b></h1></center></div>
                     <table class="expandTable">
                         <tr style="height: 6px"><td></td></tr>
                         <tr class="trReviewHeight"><td class="tableColoumnWidth" ><label class="lableName"><?php echo __("Employee Name"); ?></label></td> <td class="tableColoumnWidthname"><label class="lableValue"><?php echo $form->getReview()->getEmployee()->getFullName() ?></label></td></tr>
@@ -27,7 +27,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                 </div>
 
                 <div class="reviewers reviewInfo" style="float: left; min-height: 202px; width: 400px; margin-left: 20px">
-                    <div class="smallerHeader"><h1><?php echo __("Individual Evaluation Status") ?></h1></div>
+                    <div class="smallerHeader"><center><h1><b><?php echo __("Individual Evaluation Status") ?></b></h1></center></div>
                     <div class="evaluation" style="margin: 0px">
                         <table class="expandTable" id="induvidualEvaluate">
                             <thead>
@@ -41,8 +41,8 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                             <?php foreach ($form->getReviewers() as $reviewer) { ?>
                                 <tr>
                                     <td><?php echo __($reviewer->getGroup()->getName()) ?></td>
-                                    <td ><?php echo $reviewer->getEmployee()->getFullName() ?></td>
-                                    <td ><?php echo ReviewerReviewStatusFactory::getInstance()->getStatus($reviewer->getStatus())->getName() ?></td>
+                                    <td><b><?php echo $reviewer->getEmployee()->getFullName() ?></b></td>
+                                    <td><?php echo ReviewerReviewStatusFactory::getInstance()->getStatus($reviewer->getStatus())->getName() ?></td>
                                 </tr>
                             <?php } ?>
                             </tbody>
@@ -115,66 +115,97 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                         <table class="expandTable">
                             <thead>
                             <tr>
-                                <th></th>
-                                <th><?php echo __("KPI"); ?></th>
-                                <th><?php echo __("Objectifs"); ?></th>
-                                <th><?php echo __("Mode de Calcul"); ?></th>
-                                <th><?php echo __("Delai"); ?></th>
-                                <th><?php echo __("Poids"); ?></th>
-                                <th><?php echo __("Cible"); ?></th>
 
-                                <th><?php echo __("Mois"); ?></th>
-                                <th><?php echo __("Mois 2"); ?></th>
-                                <th><?php echo __("Mois 3"); ?></th>
-                                <th><?php echo __("Mois 4"); ?></th>
-                                <th><?php echo __("Mois 5"); ?></th>
-                                <th><?php echo __("Mois 6"); ?></th>
-                                <th><?php echo __("Mois 7"); ?></th>
-                                <th><?php echo __("Mois 8"); ?></th>
-                                <th><?php echo __("Mois 9"); ?></th>
-                                <th><?php echo __("Mois 10"); ?></th>
-                                <th><?php echo __("Mois 11"); ?></th>
-                                <th><?php echo __("Mois 12"); ?></th>
-                                <th><?php echo __("Comment"); ?></th>
                             </tr>
                             </thead>
                             <tbody>
                             <?php
                             $valuesForCalcuation = array();
+                            $groupe =  $form->getKpiGroupListAsArray();
+                            $existe_group = array();
+                            //var_dump($form->getReviewRatings());die;
                             foreach ($form->getReviewRatings() as $rating) {
                                 ?>
                                 <tr>
-                                    <td>
-                                        <input type="hidden" value="<?php echo $rating->getId(); ?>" id="rating_id_<?php echo $rating->getId(); ?>" name="rating_id[<?php echo $rating->getId(); ?>]" />
-                                    </td>
-                                    <td class="rightAlign"><center><?php echo $rating->getKpi()->getKpiIndicators() ?></center></td>
+                                    <input type="hidden" value="<?php echo $rating->getId(); ?>" id="rating_id_<?php echo $rating->getId(); ?>" name="rating_id[<?php echo $rating->getId(); ?>]" />
 
-                                    <td class="rightAlign"><center><?php echo $rating->getKpi()->getObjectif() ?></center></td>
-                                    <td class="rightAlign"><center><?php echo $rating->getKpi()->getModeCalcul() ?></center></td>
-                                    <td class="rightAlign"><center><?php echo $rating->getKpi()->getDelai() ?></center></td>
-                                    <td class="rightAlign"><center><?php echo $rating->getKpi()->getMaxRating() ?></center></td>
-                                    <td><center><input class="rightAlign" type="text" id="valeur_cible_<?php echo $rating->getId(); ?>" name="valeur_cible[<?php echo $rating->getId(); ?>]" ><?php echo $rating->getValeurCible(); ?></center></td>
-                                    <td><center><input class="rightAlign" min="<?php echo $rating->getKpi()->getMinRating() ?>" max="<?php echo $rating->getKpi()->getMaxRating() ?>"  type="text" value="<?php echo $rating->getRating(); ?>" id="rating_<?php echo $rating->getId(); ?>"  name="rating[<?php echo $rating->getId(); ?>]" /></center></td>
-                                    <td><center><input class="rightAlign" type="text" id="mois2_<?php echo $rating->getId(); ?>" name="mois2[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois2(); ?>"></center></td>
-                                    <td><center><input class="rightAlign" type="text" id="mois3_<?php echo $rating->getId(); ?>" name="mois3[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois3(); ?>"></center></td>
-                                    <td><center><input class="rightAlign" type="text" id="mois4_<?php echo $rating->getId(); ?>" name="mois4[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois4(); ?>"></center></td>
-                                    <td><center><input class="rightAlign" type="text" id="mois5_<?php echo $rating->getId(); ?>" name="mois5[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois5(); ?>"></center></td>
-                                    <td><center><input class="rightAlign" type="text" id="mois6_<?php echo $rating->getId(); ?>" name="mois6[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois6(); ?>"></center></td>
-                                    <td><center><input class="rightAlign" type="text" id="mois7_<?php echo $rating->getId(); ?>" name="mois7[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois7(); ?>"></center></td>
-                                    <td><center><input class="rightAlign" type="text" id="mois8_<?php echo $rating->getId(); ?>" name="mois8[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois8(); ?>"></center></td>
-                                    <td><center><input class="rightAlign" type="text" id="mois9_<?php echo $rating->getId(); ?>" name="mois9[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois9(); ?>"></center></td>
-                                    <td><center><input class="rightAlign" type="text" id="mois10_<?php echo $rating->getId(); ?>" name="mois10[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois10(); ?>"></center></td>
-                                    <td><center><input class="rightAlign" type="text" id="mois11_<?php echo $rating->getId(); ?>" name="mois11[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois11(); ?>"></center></td>
-                                    <td><center><input class="rightAlign" type="text" id="mois12_<?php echo $rating->getId(); ?>" name="mois12[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois12(); ?>"></center></td>
-                                    <td><center><textarea class="comment" type="text" id="comment_<?php echo $rating->getId(); ?>" name="comment[<?php echo $rating->getId(); ?>]" value="?php echo $rating->getComment(); ?>"><</textarea></center></td>
+                                        <td class="rightAlign">
+                                            <table border="0" class="tableauevalution">
+                                                <thead>
+
+                                                    <?php foreach ($groupe as $key => $value): ?>
+                                                        <?php if ($rating->getKpi()->getKpiGroup() == $key): ?>
+                                                            <?php $group = $value; ?>
+                                                        <?php endif; ?>
+                                                    <?php endforeach; ?>
+                                                    <?php if(!in_array($group, $existe_group)){ ?>
+
+                                                        <tr class="evaluationEmployeeth">
+                                                            <th colspan="20">
+                                                                <center><b><?php echo $group ?></b></center>
+                                                                <?php $existe_group[] = $group ?>
+                                                            </th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th><b><?php echo __("Indicateur"); ?></b></th>
+                                                            <th><b><?php echo __("Objectifs"); ?></b></th>
+                                                            <th><b><?php echo __("Mode de Calcul"); ?></b></th>
+                                                            <th><b><?php echo __("Delai"); ?></b></th>
+                                                            <th><b><?php echo __("Poids"); ?></b></th>
+                                                            <th><b><?php echo __("Cible"); ?></b></th>
+                                                            <th><b><?php echo __("Mois 1"); ?></b></th>
+                                                            <th><b><?php echo __("Mois 2"); ?></b></th>
+                                                            <th><b><?php echo __("Mois 3"); ?></b></th>
+                                                            <th><b><?php echo __("Mois 4"); ?></b></th>
+                                                            <th><b><?php echo __("Mois 5"); ?></b></th>
+                                                            <th><b><?php echo __("Mois 6"); ?></b></th>
+                                                            <th><b><?php echo __("Mois 7"); ?></b></th>
+                                                            <th><b><?php echo __("Mois 8"); ?></b></th>
+                                                            <th><b><?php echo __("Mois 9"); ?></b></th>
+                                                            <th><b><?php echo __("Mois 10"); ?></b></th>
+                                                            <th><b><?php echo __("Mois 11"); ?></b></th>
+                                                            <th><b><?php echo __("Mois 12"); ?></b></th>
+                                                            <th><b><?php echo __("Comment"); ?></b></th>
+                                                        </tr>
+                                                    <?php } ?>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+
+                                                    <td class="rightAlign"><?php echo $rating->getKpi()->getKpiIndicators() ?></td>
+                                                    <td class="rightAlign"><center><?php echo $rating->getKpi()->getObjectif() ?></center></td>
+                                                    <td class="rightAlign"><center><?php echo $rating->getKpi()->getModeCalcul() ?></center></td>
+                                                    <td class="rightAlign"><center><?php echo $rating->getKpi()->getDelai() ?></center></td>
+                                                    <td class="rightAlign"><center><?php echo $rating->getKpi()->getMaxRating() ?></center></td>
+                                                    <td><center><input class="rightAlign" type="text" id="valeur_cible_<?php echo $rating->getId(); ?>" name="valeur_cible[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getValeurCible(); ?>"></center></td>
+                                                    <td><center><input class="rightAlign" min="<?php echo $rating->getKpi()->getMinRating() ?>" max="<?php echo $rating->getKpi()->getMaxRating() ?>"  type="text" value="<?php echo $rating->getRating(); ?>" id="rating_<?php echo $rating->getId(); ?>"  name="rating[<?php echo $rating->getId(); ?>]" /></center></td>
+                                                    <td><center><input class="rightAlign" type="text" id="mois2_<?php echo $rating->getId(); ?>" name="mois2[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois2(); ?>"></center></td>
+                                                    <td><center><input class="rightAlign" type="text" id="mois3_<?php echo $rating->getId(); ?>" name="mois3[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois3(); ?>"></center></td>
+                                                    <td><center><input class="rightAlign" type="text" id="mois4_<?php echo $rating->getId(); ?>" name="mois4[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois4(); ?>"></center></td>
+                                                    <td><center><input class="rightAlign" type="text" id="mois5_<?php echo $rating->getId(); ?>" name="mois5[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois5(); ?>"></center></td>
+                                                    <td><center><input class="rightAlign" type="text" id="mois6_<?php echo $rating->getId(); ?>" name="mois6[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois6(); ?>"></center></td>
+                                                    <td><center><input class="rightAlign" type="text" id="mois7_<?php echo $rating->getId(); ?>" name="mois7[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois7(); ?>"></center></td>
+                                                    <td><center><input class="rightAlign" type="text" id="mois8_<?php echo $rating->getId(); ?>" name="mois8[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois8(); ?>"></center></td>
+                                                    <td><center><input class="rightAlign" type="text" id="mois9_<?php echo $rating->getId(); ?>" name="mois9[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois9(); ?>"></center></td>
+                                                    <td><center><input class="rightAlign" type="text" id="mois10_<?php echo $rating->getId(); ?>" name="mois10[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois10(); ?>"></center></td>
+                                                    <td><center><input class="rightAlign" type="text" id="mois11_<?php echo $rating->getId(); ?>" name="mois11[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois11(); ?>"></center></td>
+                                                    <td><center><input class="rightAlign" type="text" id="mois12_<?php echo $rating->getId(); ?>" name="mois12[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois12(); ?>"></center></td>
+                                                    <td><textarea class="comment" type="text" id="comment_<?php echo $rating->getId(); ?>" name="comment[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getComment(); ?>"></textarea> </td>
+
+                                                </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </td>
                                 </tr>
                                 <?php
                             }
                             ?>
-                            <tr>
-                                <td colspan="4"><td colspan="1"><label class="lableName"><?php echo __("General Comment : "); ?></label></td>
-                                <td colspan="1"><center><textarea class="comment" type="text" id="general_comment_<?php echo $form->getReviewer()->getGroup()->getId(); ?>" name="general_comment[<?php echo $form->getReviewer()->getGroup()->getId(); ?>]" ><?php echo $form->getReviewer()->getComment(); ?></textarea></center></td>
+                           <!-- <tr>
+                                <td colspan="3"><td colspan="1"><label class="lableName"><?php //echo __("General Comment : "); ?></label></td>
+                                <td colspan="7"><center><textarea class="comment" type="text" id="general_comment_<?php //echo $form->getReviewer()->getGroup()->getId(); ?>" name="general_comment[<?php echo $form->getReviewer()->getGroup()->getId(); ?>]" value="<?php echo $form->getReviewer()->getComment(); ?>"></textarea></center></td>
                             </tr>
+                            -->
                             </tbody>
                         </table>
                     </div>
@@ -262,12 +293,13 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                 }
             });
         });
-       var minMsg = "<?php echo __('Rating should be less than or equal to ') ?>";
-        var maxMsg = "<?php echo __('Rating should be greater than or equal to ') ?>";
+      /* var minMsg = "<?php //echo __('Rating should be less than or equal to ') ?>";
+        var maxMsg = "<?php //echo __('Rating should be greater than or equal to ') ?>";
         jQuery.extend(jQuery.validator.messages, {
             max: jQuery.validator.format(minMsg + "{0}."),
             min: jQuery.validator.format(maxMsg + "{0}.")
         });
+        */
     </script>
 
 <?php
