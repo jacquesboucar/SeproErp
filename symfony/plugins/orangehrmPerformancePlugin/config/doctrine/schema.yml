@@ -148,6 +148,8 @@ ReviewerRating:
       type: decimal
     mois12:
       type: decimal
+    note:
+      type: decimal  
     valeur_cible: string(250)
   relations:
     performanceReview:

@@ -22,6 +22,7 @@
  * @property decimal $mois10
  * @property decimal $mois11
  * @property decimal $mois12
+ * @property decimal $note
  * @property string $valeur_cible
  * @property PerformanceReview $performanceReview
  * @property Reviewer $reviewer
@@ -44,6 +45,7 @@
  * @method decimal           getMois10()            Returns the current record's "mois10" value
  * @method decimal           getMois11()            Returns the current record's "mois11" value
  * @method decimal           getMois12()            Returns the current record's "mois12" value
+ * @method decimal           getNote()              Returns the current record's "note" value
  * @method string            getValeurCible()       Returns the current record's "valeur_cible" value
  * @method PerformanceReview getPerformanceReview() Returns the current record's "performanceReview" value
  * @method Reviewer          getReviewer()          Returns the current record's "reviewer" value
@@ -65,6 +67,7 @@
  * @method ReviewerRating    setMois10()            Sets the current record's "mois10" value
  * @method ReviewerRating    setMois11()            Sets the current record's "mois11" value
  * @method ReviewerRating    setMois12()            Sets the current record's "mois12" value
+ * @method ReviewerRating    setNote()              Sets the current record's "note" value
  * @method ReviewerRating    setValeurCible()       Sets the current record's "valeur_cible" value
  * @method ReviewerRating    setPerformanceReview() Sets the current record's "performanceReview" value
  * @method ReviewerRating    setReviewer()          Sets the current record's "reviewer" value
@@ -137,6 +140,9 @@ abstract class BaseReviewerRating extends sfDoctrineRecord
              'type' => 'decimal',
              ));
         $this->hasColumn('mois12', 'decimal', null, array(
+             'type' => 'decimal',
+             ));
+        $this->hasColumn('note', 'decimal', null, array(
              'type' => 'decimal',
              ));
         $this->hasColumn('valeur_cible', 'string', 250, array(

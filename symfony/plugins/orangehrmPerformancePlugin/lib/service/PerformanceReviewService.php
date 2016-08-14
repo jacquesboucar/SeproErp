@@ -106,4 +106,10 @@ class PerformanceReviewService {
      public function getReviewsByReviewerId($reviwerId){
          return $this->getDao()->getReviewsByReviewerId($reviwerId);
      }
+     public function getReviewerById($id){
+         return $this->getDao()->getReviewerById($id);
+     }
+     public function getRatingByReviewId($id) {
+        return $this->getDao()->getRatingByReviewId($id);
+     }
 }

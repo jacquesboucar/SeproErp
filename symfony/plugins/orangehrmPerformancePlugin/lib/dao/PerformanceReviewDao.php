@@ -241,5 +241,24 @@ class PerformanceReviewDao extends BaseDao {
             throw new DaoException($e->getMessage(), $e->getCode(), $e);
         }//@codeCoverageIgnoreEnd
     }
+    public function getReviewerById($id) {
+        try {
+            $result = Doctrine :: getTable('Reviewer')->find($id);
+            return $result;
+            //@codeCoverageIgnoreStart
+        } catch (Exception $e) {
+            throw new DaoException($e->getMessage(), $e->getCode(), $e);
+        }//@codeCoverageIgnoreEnd
+    }
+
+    public function getRatingByReviewId($id) {
+        try {
+            $result = Doctrine :: getTable('ReviewerRating')->find($id);
+            return $result;
+            //@codeCoverageIgnoreStart
+        } catch (Exception $e) {
+            throw new DaoException($e->getMessage(), $e->getCode(), $e);
+        }//@codeCoverageIgnoreEnd
+    }
 
 }
