@@ -150,7 +150,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                                             <th><b><?php echo __("Indicateur"); ?></b></th>
                                                             <th><b><?php echo __("Objectifs"); ?></b></th>
                                                             <th><b><?php echo __("Mode de Calcul"); ?></b></th>
-                                                            <th><b><?php echo __("Delai"); ?></b></th>
+                                                            <th><b><?php echo __("Periodicite"); ?></b></th>
                                                             <th><b><?php echo __("Poids"); ?></b></th>
                                                             <th><b><?php echo __("Cible"); ?></b></th>
                                                             <th><b><?php echo __("Mois 1"); ?></b></th>
@@ -165,6 +165,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                                             <th><b><?php echo __("Mois 10"); ?></b></th>
                                                             <th><b><?php echo __("Mois 11"); ?></b></th>
                                                             <th><b><?php echo __("Mois 12"); ?></b></th>
+                                                            <th><b><?php echo __("Note "); ?></b></th>
                                                             <th><b><?php echo __("Comment"); ?></b></th>
                                                         </tr>
                                                     <?php } ?>
@@ -190,6 +191,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                                     <td><center><input class="rightAlign" type="text" id="mois10_<?php echo $rating->getId(); ?>" name="mois10[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois10(); ?>"></center></td>
                                                     <td><center><input class="rightAlign" type="text" id="mois11_<?php echo $rating->getId(); ?>" name="mois11[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois11(); ?>"></center></td>
                                                     <td><center><input class="rightAlign" type="text" id="mois12_<?php echo $rating->getId(); ?>" name="mois12[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois12(); ?>"></center></td>
+                                                    <td><center><?php echo $rating->getNote(); ?></center></td>
                                                     <td><textarea class="comment" type="text" id="comment_<?php echo $rating->getId(); ?>" name="comment[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getComment(); ?>"></textarea> </td>
 
                                                 </tr>
