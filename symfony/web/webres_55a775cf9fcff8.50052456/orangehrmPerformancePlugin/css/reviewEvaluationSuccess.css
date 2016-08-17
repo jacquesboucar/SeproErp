@@ -66,12 +66,12 @@ div.evaluation {
 .evaluation table td,th{
     border-collapse: collapse;
     border-color: #dedede; 
-    padding: 7px;
+    padding: 4px;
     vertical-align: top;
 }
 
 td.rightAlign  {
-    text-align: right !important;
+  /*  text-align: right !important;*/
 }
 
 input[type="text"].rightAlign {

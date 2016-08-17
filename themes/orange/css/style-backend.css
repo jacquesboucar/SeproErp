@@ -341,6 +341,9 @@ table tbody tr td a{
 }
 .evaluationexpand{
 
-    width: 92%;
+    width: 90%;
     overflow: auto;
+}
+.test{
+    width: 50px;
 }

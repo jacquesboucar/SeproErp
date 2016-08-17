@@ -29,19 +29,18 @@ div.evaluation {
 
 .evaluation table td,th{
     border-collapse: collapse;
-    padding: 7px;
+    padding: 4px;
     vertical-align: top;
 }
 .evaluationexpand table td,th{
     border-collapse: collapse;   
-    padding: 7px;
+    padding: 4px;
     vertical-align: top;
     border: 1px solid #dedede;
 }
 
 td.rightAlign  {
-   text-align: right !important;
-    width: auto;
+  /* text-align: right !important;*/
 }
 
 div.reviewInfo{
