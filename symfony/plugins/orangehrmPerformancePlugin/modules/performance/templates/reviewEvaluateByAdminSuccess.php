@@ -82,7 +82,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                 $columNumber = 0;
                 foreach ($form->getReviewers() as $reviewer) {
 
-                    if (($reviewer->getGroup()->getId() == 2 && $reviewer->getStatus() == 3) || $reviewer->getGroup()->getId() != 2) {
+                    if (($reviewer->getGroup()->getId() == 2) || $reviewer->getGroup()->getId() != 2) {
                         if ($reviewer->getReviewerGroupId() != 2) {
                             $reviewerGroupId = $reviewer->getReviewerGroupId();
                             $columNumber = 1;
@@ -159,8 +159,6 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                                                     </tr>
                                                                     <tr>
                                                                         <th><b><?php echo __("Indicateur"); ?></b></th>
-                                                                        <th><b><?php echo __("Objectifs"); ?></b></th>
-                                                                        <th><b><?php echo __("Mode de Calcul"); ?></b></th>
                                                                         <th><b><?php echo __("Periodicite"); ?></b></th>
                                                                         <th><b><?php echo __("Poids"); ?></b></th>
                                                                         <th><b><?php echo __("Cible"); ?></b></th>
@@ -176,7 +174,9 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                                                         <th><b><?php echo __("Mois 10"); ?></b></th>
                                                                         <th><b><?php echo __("Mois 11"); ?></b></th>
                                                                         <th><b><?php echo __("Mois 12"); ?></b></th>
-                                                                        <th><b><?php echo __(" Note"); ?></b></th>
+                                                                        <th><b><?php echo __("Cumule"); ?></b></th>
+                                                                        <th><b><?php echo __("Note "); ?></b></th>
+                                                                        <th><b><?php echo __("Taux Atteint"); ?></b></th>
                                                                         <th><b><?php echo __("Comment"); ?></b></th>
 
                                                                     </tr>
@@ -187,12 +187,10 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                                                     <tr>
 
                                                                          <td class="rightAlign"><center><?php echo $rating->getKpi()->getKpiIndicators() ?></center></td>
-                                                                         <td class="rightAlign"><center><?php echo $rating->getKpi()->getObjectif() ?></center></td>
-                                                                         <td class="rightAlign"><center><?php echo $rating->getKpi()->getModeCalcul() ?></center></td>
                                                                          <td class="rightAlign"><center><?php echo $rating->getKpi()->getDelai() ?></center></td>
                                                                          <td class="rightAlign"><center><?php echo $rating->getKpi()->getMaxRating() ?></center></td>
                                                                          <td><center><input class="rightAlign" type="text" id="valeur_cible_<?php echo $rating->getId(); ?>" name="valeur_cible[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getValeurCible(); ?>"></center></td>
-                                                                         <td><center><input class="rightAlign" min="<?php echo $rating->getKpi()->getMinRating() ?>" max="<?php echo $rating->getKpi()->getMaxRating() ?>"  type="text" value="<?php echo $rating->getRating(); ?>" id="rating_<?php echo $rating->getId(); ?>"  name="rating[<?php echo $rating->getId(); ?>]" /></center></td>
+                                                                         <td><center><input class="rightAlign" min="<?php echo $rating->getKpi()->getMinRating() ?>" max="<?php echo $rating->getKpi()->getMaxRating() ?>"  type="text" value="<?php echo $rating->getRating(); ?>" id="rating_<?php echo $rating->getId(); ?>"  name="rating[<?php echo $rating->getId(); ?>]" /><br/>Taux:&nbsp<?php echo (double)($rating->getRating()/$rating->getValeurCible())*100; ?>%</center></td>
                                                                          <td><center><input class="rightAlign" type="text" id="mois2_<?php echo $rating->getId(); ?>" name="mois2[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois2(); ?>">Taux:&nbsp<?php echo (double)($rating->getMois2()/$rating->getValeurCible())*100; ?>%</center></td>
                                                                          <td><center><input class="rightAlign" type="text" id="mois3_<?php echo $rating->getId(); ?>" name="mois3[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois3(); ?>">Taux:&nbsp<?php echo ($rating->getMois3()/$rating->getValeurCible())*100; ?>%</center></td>
                                                                          <td><center><input class="rightAlign" type="text" id="mois4_<?php echo $rating->getId(); ?>" name="mois4[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois4(); ?>">Taux:&nbsp<?php echo ($rating->getMois4()/$rating->getValeurCible())*100; ?>%</center></td>
@@ -203,7 +201,9 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                                                          <td><center><input class="rightAlign" type="text" id="mois9_<?php echo $rating->getId(); ?>" name="mois9[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois9(); ?>">Taux:&nbsp<?php echo ($rating->getMois9()/$rating->getValeurCible())*100; ?>%</center></td>
                                                                          <td><center><input class="rightAlign" type="text" id="mois10_<?php echo $rating->getId(); ?>" name="mois10[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois10(); ?>">Taux:&nbsp<?php echo ($rating->getMois10()/$rating->getValeurCible())*100; ?>%</center></td>
                                                                          <td><center><input class="rightAlign" type="text" id="mois11_<?php echo $rating->getId(); ?>" name="mois11[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois11(); ?>">Taux:&nbsp<?php echo ($rating->getMois11()/$rating->getValeurCible())*100; ?>%</center></td>
-                                                                         <td><center><input class="rightAlign" type="text" id="mois12_<?php echo $rating->getId(); ?>" name="mois12[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois12(); ?>">Taux:&nbsp<?php echo ($rating->getMois12()/$rating->getValeurCible())*100; ?>%</center></td>
+                                                                         <td><center><input class="rightAlign" type="text" id="mois12_<?php echo $rating->getId(); ?>" name="mois12[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois12(); ?>"></center></td>
+                                                                         <td><center><input class="rightAlign" type="text" id="cumule_<?php echo $rating->getId(); ?>" name="cumule[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getCumule(); ?>"></center></td>
+                                                                         <td><center><input class="rightAlign" type="text" id="taux_atteint_<?php echo $rating->getId(); ?>" name="taux_atteint[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getTauxAtteint(); ?>"></center></td>
                                                                          <td><center><?php echo $rating->getNote(); ?></center></td>
                                                                          <td><textarea class="comment" type="text" id="comment_<?php echo $rating->getId(); ?>" name="comment[<?php echo $rating->getId(); ?>]" ><?php echo $rating->getComment(); ?></textarea> </td>
 
