@@ -149,7 +149,11 @@ ReviewerRating:
     mois12:
       type: decimal
     note:
-      type: decimal  
+      type: decimal
+    taux_atteint:
+      type: decimal
+    cumule:
+      type: decimal
     valeur_cible: string(250)
   relations:
     performanceReview:

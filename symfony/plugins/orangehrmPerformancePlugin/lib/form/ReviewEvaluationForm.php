@@ -195,6 +195,8 @@ class ReviewEvaluationForm extends BasePefromanceSearchForm {
                     $rating->setMois10($this->filterPostValues($postParameters['mois10'][$key]));
                     $rating->setMois11($this->filterPostValues($postParameters['mois11'][$key]));
                     $rating->setMois12($this->filterPostValues($postParameters['mois12'][$key]));
+                    $rating->setTauxAtteint($this->filterPostValues($postParameters['taux_atteint'][$key]));
+                    $rating->setCumule($this->filterPostValues($postParameters['cumule'][$key]));
                     // Set Final Rating
                     $mois1 = $this->filterPostValues($postParameters['rating'][$key]);
                     $mois2 = $this->filterPostValues($postParameters['mois2'][$key]);
