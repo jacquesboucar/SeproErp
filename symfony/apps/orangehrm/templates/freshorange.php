@@ -16,7 +16,7 @@ $imagePath = theme_path("images/login");
 
                         <div class="pull-right">
                             <ul class="nav">
-                                <li class="account"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo __("Bienvenu %username%", array("%username%" => $sf_user->getAttribute('auth.firstName'))); ?> <b class="caret"></b></a>
+                                <li class="account"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo __("Bienvenue %username%", array("%username%" => $sf_user->getAttribute('auth.firstName'))); ?> <b class="caret"></b></a>
                                     <ul class="dropdown-menu submenu">
                                         <li><?php include_component('communication', 'beaconAbout'); ?></li>
                                         <li><a href="<?php echo url_for('admin/changeUserPassword'); ?>"><i class="icon-edit-sign"></i><?php echo __('Change Password'); ?></a></li>
