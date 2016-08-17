@@ -40,11 +40,23 @@ class KpiListConfigurationFactory extends ohrmListConfigurationFactory {
                 'placeholderGetters' => array('id' => 'getId'),
                 'urlPattern' => 'index.php/performance/saveKpi?hdnEditId={id}'),
         ));
-        
+
         $headerArray [] = $header1;
-        
-        $header2 = new ListHeader();
+
+        $header2= new ListHeader();
         $header2->populateFromArray(array(
+            'name' => 'Kpi Groupe',
+            'isSortable' => false,
+            'sortField' => null,
+            'elementType' => 'label',
+            'elementProperty' => array(
+                'getter' => array('getKpiGroup', 'getKpiGroup'))
+        ));
+
+        $headerArray [] = $header2;
+
+        $header3 = new ListHeader();
+        $header3->populateFromArray(array(
             'name' => 'Job Title',
             'isSortable' => false,
             'sortField' => null,
@@ -53,37 +65,45 @@ class KpiListConfigurationFactory extends ohrmListConfigurationFactory {
                 'getter' => array('getJobTitle', 'getJobTitleName'))
                 
         ));        
-        $headerArray [] = $header2;   
+        $headerArray [] = $header3;
         
-        $header3 = new ListHeader();
-        $header3->populateFromArray(array(
+        $header4 = new ListHeader();
+        $header4->populateFromArray(array(
             'name' => 'Objectifs',
-            'width' => '5%',
             'isSortable' => false,
             'sortField' => null,
             'elementType' => 'label',
-            'textAlignmentStyle' => 'center',
             'elementProperty' => array('getter' => 'getObjectif')
                 
         ));
 
-        $headerArray [] = $header3;   
+        $headerArray [] = $header4;
         
-        $header4 = new ListHeader();
-        $header4->populateFromArray(array(
+        $header5 = new ListHeader();
+        $header5->populateFromArray(array(
+            'name' => 'Mode Calcul',
+            'isSortable' => false,
+            'sortField' => null,
+            'elementType' => 'label',
+            'elementProperty' => array('getter' => 'getModeCalcul')
+                
+        ));
+        $headerArray [] = $header5;
+
+        $header6 = new ListHeader();
+        $header6->populateFromArray(array(
             'name' => 'Poids',
-            'width' => '5%',
             'isSortable' => false,
             'textAlignmentStyle' => 'center',
             'sortField' => null,
             'elementType' => 'label',
             'elementProperty' => array('getter' => 'getMaxRating')
-                
+
         ));
-        $headerArray [] = $header4;     
+        $headerArray [] = $header6;
         
-        $header5 = new ListHeader();
-        $header5->populateFromArray(array(
+        $header7 = new ListHeader();
+        $header7->populateFromArray(array(
             'name' => 'Périodicité',
             'isSortable' => false,
             'sortField' => null, 
@@ -91,7 +111,7 @@ class KpiListConfigurationFactory extends ohrmListConfigurationFactory {
             'textAlignmentStyle' => 'left',
             'elementProperty' => array('getter' => 'getDelai'),
         ));
-         $headerArray [] = $header5;     
+         $headerArray [] = $header7;
         
         $this->headers = $headerArray;
     }
