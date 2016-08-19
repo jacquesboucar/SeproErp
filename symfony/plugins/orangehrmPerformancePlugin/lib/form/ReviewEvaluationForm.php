@@ -195,9 +195,10 @@ class ReviewEvaluationForm extends BasePefromanceSearchForm {
                     $rating->setMois10($this->filterPostValues($postParameters['mois10'][$key]));
                     $rating->setMois11($this->filterPostValues($postParameters['mois11'][$key]));
                     $rating->setMois12($this->filterPostValues($postParameters['mois12'][$key]));
-                    $rating->setTauxAtteint($this->filterPostValues($postParameters['taux_atteint'][$key]));
-                    $rating->setCumule($this->filterPostValues($postParameters['cumule'][$key]));
+
+
                     // Set Final Rating
+
                     $mois1 = $this->filterPostValues($postParameters['rating'][$key]);
                     $mois2 = $this->filterPostValues($postParameters['mois2'][$key]);
                     $mois3 = $this->filterPostValues($postParameters['mois3'][$key]);
@@ -211,7 +212,59 @@ class ReviewEvaluationForm extends BasePefromanceSearchForm {
                     $mois11 = $this->filterPostValues($postParameters['mois11'][$key]);
                     $mois12 = $this->filterPostValues($postParameters['mois12'][$key]);
                     $final_rate = $mois1+$mois2+$mois3+$mois4+$mois5+$mois6+$mois7+$mois8+$mois9+$mois10+$mois11+$mois12;
-                    $rating->setNote($final_rate);
+                    $rating->setCumule($final_rate);
+                    $rating->setNote($this->filterPostValues($postParameters['noter'][$key]));
+                    $nbre_mois=0; $valeur=0;
+                    if($mois1!=null){
+                        $nbre_mois++;
+                        $valeur=$valeur+$mois1;
+                    }
+                    if($mois2!=null){
+                        $nbre_mois++;
+                        $valeur=$valeur+$mois2;
+                    }
+                    if($mois3!=null){
+                        $nbre_mois++;
+                        $valeur=$valeur+$mois3;
+                    }
+                    if($mois4!=null){
+                        $nbre_mois++;
+                        $valeur=$valeur+$mois4;
+                    }
+                    if($mois5!=null){
+                        $nbre_mois++;
+                        $valeur=$valeur+$mois5;
+                    }
+                    if($mois6!=null){
+                        $nbre_mois++;
+                        $valeur=$valeur+$mois6;
+                    }
+                    if($mois7!=null){
+                        $nbre_mois++;
+                        $valeur=$valeur+$mois7;
+                    }
+                    if($mois8!=null){
+                        $nbre_mois++;
+                        $valeur=$valeur+$mois8;
+                    }
+                    if($mois9!=null){
+                        $nbre_mois++;
+                        $valeur=$valeur+$mois9;
+                    }
+                    if($mois10!=null){
+                        $nbre_mois++;
+                        $valeur=$valeur+$mois10;
+                    }
+                    if($mois11!=null){
+                        $nbre_mois++;
+                        $valeur=$valeur+$mois11;
+                    }
+                    if($mois12!=null){
+                        $nbre_mois++;
+                        $valeur=$valeur+$mois12;
+                    }
+
+                    $rating->setTauxAtteint($valeur/$nbre_mois);
                     $rating->save();
                 }
             }
