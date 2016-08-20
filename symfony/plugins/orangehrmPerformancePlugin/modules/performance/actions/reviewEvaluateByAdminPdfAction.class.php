@@ -30,6 +30,30 @@ class reviewEvaluateByAdminPdfAction extends basePeformanceAction {
         $review = $this->getPerformanceReviewService()->searchReview($parameters, 'piority');
         return $review;
     }
+
+    /**
+     *
+     * @return \KpiService 
+     */
+    public function getKpiGroupService() {
+
+        if ($this->kpiGroupService == null) {
+            return new KpiGroupService();
+        } else {
+            return $this->kpiGroupService;
+        }
+    }
+
+    /**
+     *
+     * @return array
+     */
+    public function getKpiGroupListAsArray() {
+        foreach ($this->getKpiGroupService()->getKpiGroupList() as $group) {
+            $kpiGroup[$group->getId()] = $group->getKpiGroupName();
+        }
+        return $kpiGroup;
+    }
     
     /**
      * Get EmployeeService
@@ -51,6 +75,9 @@ class reviewEvaluateByAdminPdfAction extends basePeformanceAction {
     $rating = $this->getPerformanceReviewService()->searchReviewRating($param);
     $employe_name = $this->getReview($review_id)->getEmployee()->getFullName();
     $emp_job = $this->getReview($review_id)->getJobTitle()->getJobTitleName();
+    $date_decheance = set_datepicker_date_format($this->getReview($review_id)->getDueDate());
+    $exam_start_date = set_datepicker_date_format($this->getReview($review_id)->getWorkPeriodStart());
+    $exam_end_date = set_datepicker_date_format($this->getReview($review_id)->getWorkPeriodEnd());
 
     foreach ($rating as $value) {
       $reviewer_id = $value->getReviewerId();
@@ -120,10 +147,24 @@ $pdf->AddPage();
 // $pdf->setTextShadow(array('enabled'=>true, 'depth_w'=>0.2, 'depth_h'=>0.2, 'color'=>array(196,196,196), 'opacity'=>1, 'blend_mode'=>'Normal'));
 
 // Set some content to print
+    //Get all group name and id the groupe id is saved on kpi.
+    $groupe =  $this->getKpiGroupListAsArray();
+    //Set an array which displayed already viewed groups.
+    $existe_group = array();
+    foreach ($groupe as $key => $group) {
+        if ($value->getKpi()->getKpiGroup() == $key) {
+          $kpigroup = $group;
+        }
+    }
+    if(!in_array($kpigroup, $existe_group)) {
+      $existe_group[] = $kpigroup;
+      // Afficher group et set les td tr pour le tableau
+    }
     foreach ($rating as $value) {
       $reviewer_id = $value->getReviewerId();
       $reviewer = $this->getPerformanceReviewService()->getReviewerById($reviewer_id);
       $reviewer_group = $reviewer->getReviewerGroupId();
+      
       if ($reviewer_group == 1) {
         $kpi = $value->getKpi()->getKpiIndicators();
         $objectifs = $value->getKpi()->getObjectif();
@@ -144,6 +185,8 @@ $pdf->AddPage();
         $mois11 = $value->getMois11();
         $mois12 = $value->getMois12();
         $note_final = $value->getNote();
+        $taux_atteind = $value->getTauxAtteint();
+        $comment = $value->getComment();
       
 $html = <<<EOD
     $emp
