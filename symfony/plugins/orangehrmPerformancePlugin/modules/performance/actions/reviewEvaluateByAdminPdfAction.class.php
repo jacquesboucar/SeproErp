@@ -4,13 +4,13 @@
  * ViewJobDetailsAction
  */
 require_once sfConfig::get('sf_root_dir').'/plugins/sfTCPDFPlugin/lib/tcpdf/tcpdf_evalution.php';
-require_once sfConfig::get('sf_root_dir').'/plugins/OrangehrmPerformanceplugin/lib/form/BasePefromanceSearchForm.php';
+require_once sfConfig::get('sf_root_dir').'/plugins/orangehrmPerformancePlugin/lib/form/BasePefromanceSearchForm.php';
 
 class reviewEvaluateByAdminPdfAction extends basePeformanceAction {
 
    /**
      *
-     * @return \PerformanceReviewService 
+     * @return \PerformanceReviewService
      */
     public function getPerformanceReviewService() {
         if ($this->performanceReviewService == null) {
@@ -22,18 +22,20 @@ class reviewEvaluateByAdminPdfAction extends basePeformanceAction {
 
     /**
      *
-     * @return type 
+     * @return type
      */
     public function getReview($id) {
 
         $parameters ['id'] = $id;
         $review = $this->getPerformanceReviewService()->searchReview($parameters, 'piority');
+        // print_r($review);
+        // exit();
         return $review;
     }
 
     /**
      *
-     * @return \KpiService 
+     * @return \KpiService
      */
     public function getKpiGroupService() {
 
@@ -54,7 +56,7 @@ class reviewEvaluateByAdminPdfAction extends basePeformanceAction {
         }
         return $kpiGroup;
     }
-    
+
     /**
      * Get EmployeeService
      * @returns EmployeeService
@@ -66,11 +68,11 @@ class reviewEvaluateByAdminPdfAction extends basePeformanceAction {
         }
         return $this->employeeService;
     }
-    
-	  public function execute($request) {
-    
+
+    public function execute($request) {
+
     $review_id = $request->getParameter('id');
-		$param = array('reviewId' => $review_id);
+    $param = array('reviewId' => $review_id);
     $rate = array();
     $rating = $this->getPerformanceReviewService()->searchReviewRating($param);
     $employe_name = $this->getReview($review_id)->getEmployee()->getFullName();
@@ -78,31 +80,40 @@ class reviewEvaluateByAdminPdfAction extends basePeformanceAction {
     $date_decheance = set_datepicker_date_format($this->getReview($review_id)->getDueDate());
     $exam_start_date = set_datepicker_date_format($this->getReview($review_id)->getWorkPeriodStart());
     $exam_end_date = set_datepicker_date_format($this->getReview($review_id)->getWorkPeriodEnd());
+    $date_completed = set_datepicker_date_format($this->getReview($review_id)->getCompletedDate());
+
+    // var_dump($this->getReview($review_id));
+
 
     foreach ($rating as $value) {
       $reviewer_id = $value->getReviewerId();
       $reviewer = $this->getPerformanceReviewService()->getReviewerById($reviewer_id);
       $reviewer_group = $reviewer->getReviewerGroupId();
+
       if ($reviewer_group == 1) {
         $emp_number = $reviewer->getEmployeeNumber();
       }
     }
+
     $employee = $this->getEmployeeService()->getEmployee($emp_number);
     $reviewer_first_name = $employee->getFirstName();
-    $reviewer_last_name = $employee->getLastName();    
-		// create new PDF document
-       $pdf = new FICHE(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+    $reviewer_last_name = $employee->getLastName();
+    // create new PDF document
+       $pdf = new FICHE("L", PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
       // set document information
        $pdf->SetCreator(PDF_CREATOR);
        $pdf->SetAuthor('Sablux');
-       $pdf->SetTitle("Fiche d'evaluation");
-       $pdf->SetSubject('Fiche de poste : '. $name_first .' '.$name_last);
+       $pdf->SetTitle("SYSTÈME DE MANAGEMENT DE LA QUALITE");
+       $pdf->SetSubject('TABLEAU DE BORD DU SMQ');
        $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
 
        // set default header data
-       $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING, array(0,64,255), array(0,64,128));
-       // $pdf->setFooterData(array(0,64,0), array(0,64,128));
+       $pdf->SetHeaderData(false);
+       $pdf->setFooterData(false);
+
+       $pdf->setPrintHeader(false);
+       $pdf->setPrintFooter(false);
 
 // set header and footer fonts
 $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
@@ -137,7 +148,7 @@ $pdf->setFontSubsetting(true);
 // dejavusans is a UTF-8 Unicode font, if you only need to
 // print standard ASCII chars, you can use core fonts like
 // helvetica or times to reduce file size.
-$pdf->SetFont('Helvetica', '', 12, '', true);
+$pdf->SetFont('Helvetica', '', 6, '', true);
 
 // Add a page
 // This method has several options, check the source code documentation for more information.
@@ -150,21 +161,80 @@ $pdf->AddPage();
     //Get all group name and id the groupe id is saved on kpi.
     $groupe =  $this->getKpiGroupListAsArray();
     //Set an array which displayed already viewed groups.
+    // var_dump($groupe);
     $existe_group = array();
-    foreach ($groupe as $key => $group) {
+
+    foreach ($rating as $value) {
+      foreach ($groupe as $key => $group) {
         if ($value->getKpi()->getKpiGroup() == $key) {
           $kpigroup = $group;
+          if(!in_array($kpigroup, $existe_group)) {
+            $existe_group[] = $kpigroup;
+          }
         }
+      }
     }
-    if(!in_array($kpigroup, $existe_group)) {
-      $existe_group[] = $kpigroup;
-      // Afficher group et set les td tr pour le tableau
-    }
+
+
+    $gen_date = date("d/m/Y");
+
+    // var_dump($existe_group);
+
+$curPage = $pdf->getAliasNumPage();
+$nbPage = $pdf->getAliasNbPages();
+$html = <<<EOD
+  <table border="0.4" cellspacing="0" cellpadding="4">
+    <tr>
+      <td colspan="2" rowspan="3"  bgcolor="#ffffff" color="#770a82" style="font-size: 20px;font-weight:bold;text-align:center;"> <br><br> SABLUX <br></td>
+      <td colspan="13" rowspan="3" border="0" bgcolor="#770a82" color="#ffffff" style="font-size: 20px;font-weight:bold;text-align:center;">  SYSTÈME DE MANAGEMENT DE LA QUALITE <br> TABLEAU DE BORD DU SMQ </td>
+      <td colspan="4" bgcolor="#ffffff" color="#770a82" > Page: $curPage sur $nbPage  </td>
+    </tr>
+    <tr>
+      <td colspan="4" bgcolor="#ffffff" color="#770a82" > Date de création: $date_completed  </td>
+    </tr>
+    <tr>
+      <td colspan="4" bgcolor="#ffffff" color="#770a82" > Code: </td>
+    </tr>
+EOD;
+
+    foreach ($existe_group as $ex_group) {
+$html .= <<<EOD
+      <tr>
+        <th colspan="19" style="font-weight:bold;text-align:center;font-size: 12px;"><b> $ex_group </b></th>
+      </tr><tr>
+        <th style="width:70px;"><b> Objectifs </b></th>
+        <th style="width:70px;"><b> INDICATEURS </b></th>
+        <th style="width:70px;"><b> MODE DE CALCUL </b></th>
+        <th style="width:70px;"><b> PERIODICITE </b></th>
+        <th style="width:70px;"><b> PILOTE </b></th>
+        <th style="width:40px;"><b> CIBLE </b></th>
+        <th style="width:40px;"><b> MOIS 1 </b></th>
+        <th style="width:40px;"><b> MOIS 2 </b></th>
+        <th style="width:40px;"><b> MOIS 3 </b></th>
+        <th style="width:40px;"><b> MOIS 4 </b></th>
+        <th style="width:40px;"><b> MOIS 5 </b></th>
+        <th style="width:40px;"><b> MOIS 6 </b></th>
+        <th style="width:40px;"><b> MOIS 7 </b></th>
+        <th style="width:40px;"><b> MOIS 8 </b></th>
+        <th style="width:40px;"><b> MOIS 9 </b></th>
+        <th style="width:40px;"><b> MOIS 10 </b></th>
+        <th style="width:40px;"><b> MOIS 11 </b></th>
+        <th style="width:40px;"><b> MOIS 12 </b></th>
+        <th style="width:69px;"><b> COMMENTAIRE </b></th>
+      </tr><tr>
+        <td colspan ="3"> </td>
+        <td><b> Collecte </b></td>
+        <td><b> Analyse </b></td>
+        <td colspan = "14"> </td>
+      </tr>
+
+EOD;
+
     foreach ($rating as $value) {
+
       $reviewer_id = $value->getReviewerId();
       $reviewer = $this->getPerformanceReviewService()->getReviewerById($reviewer_id);
       $reviewer_group = $reviewer->getReviewerGroupId();
-      
       if ($reviewer_group == 1) {
         $kpi = $value->getKpi()->getKpiIndicators();
         $objectifs = $value->getKpi()->getObjectif();
@@ -187,19 +257,45 @@ $pdf->AddPage();
         $note_final = $value->getNote();
         $taux_atteind = $value->getTauxAtteint();
         $comment = $value->getComment();
-      
-$html = <<<EOD
-    $emp
-   $kpi 
-   $objectifs
-   $mode_calcul
-   $periodicite
-   $mois1 $mois2 $mois3 $mois4 $mois5 $mois6 $mois7 $mois8 $mois9 $mois10 $mois11 $mois12     
+
+
+
+$html .= <<<EOD
+
+    <tr>
+      <td style="width:70px;"> $objectifs </td>
+      <td style="width:70px;"> $kpi </td>
+      <td style="width:70px;"> $mode_calcul </td>
+      <td style="width:70px;"> $periodicite </td>
+      <td style="width:70px;"> $periodicite </td>
+      <td style="width:40px;"> $cible </td>
+      <td style="width:40px;"> $mois1 </td>
+      <td style="width:40px;"> $mois2 </td>
+      <td style="width:40px;"> $mois3 </td>
+      <td style="width:40px;"> $mois4 </td>
+      <td style="width:40px;"> $mois5 </td>
+      <td style="width:40px;"> $mois6 </td>
+      <td style="width:40px;"> $mois7 </td>
+      <td style="width:40px;"> $mois8 </td>
+      <td style="width:40px;"> $mois9 </td>
+      <td style="width:40px;"> $mois10 </td>
+      <td style="width:40px;"> $mois11 </td>
+      <td style="width:40px;"> $mois12 </td>
+      <td style="width:69px;"> $comment </td>
+    </tr>
+
 
 EOD;
+
+}
+}
+}
+
+$html .= <<<EOD
+  </table>
+EOD;
+
 $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
-}
-}
 // Print text using writeHTMLCell()
 
 
@@ -207,7 +303,8 @@ $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
 
 // Close and output PDF document
 // This method has several options, check the source code documentation for more information.
-$pdf->Output('fiche_'.$name_first.'_'.$name_last, 'I');
+$pdf->Output('Evaluation_'.$employe_name);
 
-	}
+  }
 }
+
