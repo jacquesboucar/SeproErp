@@ -23,7 +23,11 @@
     <a href="#" class="toggle tiptip" title="<?php echo __(CommonMessages::TOGGABLE_DEFAULT_MESSAGE); ?>">&gt;</a>
 </div>
 
+
 <?php include_component('core', 'ohrmList'); ?>
+<div class="pull-right impressionbtn">
+<a href="<?php echo url_for('performance/searchKpiPdf') ?>" target="_blank">Telecharger</a>
+</div>
 <?php include_partial('global/delete_confirmation'); ?>
 <script>
     $(document).ready(function() {

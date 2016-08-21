@@ -38,6 +38,19 @@ class searchKpiAction extends basePeformanceAction {
             return $this->kpiSearchForm;
         }
     }
+    
+     /**
+     *
+     * @return \KpiService 
+     */
+    public function getKpiGroupService() {
+
+        if ($this->kpiGroupService == null) {
+            return new KpiGroupService();
+        } else {
+            return $this->kpiGroupService;
+        }
+    }
 
     /**
      *
@@ -50,7 +63,6 @@ class searchKpiAction extends basePeformanceAction {
     public function execute($request) {
 
         $form = $this->getKpiSearchForm();
-
         $page = $request->getParameter('hdnAction') == 'search' ? 1 : $request->getParameter('pageNo', 1);
 
         $this->setPageNumber($page);
@@ -87,13 +99,18 @@ class searchKpiAction extends basePeformanceAction {
      * @param Doctrine_Collection $kpiList 
      */
     protected function setListComponent($kpiList, $kpiListCount) {
+        
+        foreach ($kpiList as $key => $value) {
+          $group = $this->getKpiGroupService()->getKpiGroupById($value['kpi_group']);
+          $group = $group->getKpiGroupName();
+          $value['kpi_group'] = $group;
+        }    
         $pageNumber = $this->getPageNumber();
 
         $configurationFactory = $this->getListConfigurationFactory();
-
         ohrmListComponent::setActivePlugin('orangehrmPerformancePlugin');
         ohrmListComponent::setConfigurationFactory($configurationFactory);
-        ohrmListComponent::setListData($kpiList);
+        $list = ohrmListComponent::setListData($kpiList);
         ohrmListComponent::setPageNumber($pageNumber);
         $numRecords = $kpiListCount;
         ohrmListComponent::setItemsPerPage(sfConfig::get('app_items_per_page'));
