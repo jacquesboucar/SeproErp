@@ -186,14 +186,16 @@ $html = <<<EOD
   <table border="0.4" cellspacing="0" cellpadding="4">
     <tr>
       <td colspan="2" rowspan="3"  bgcolor="#ffffff" color="#770a82" style="font-size: 20px;font-weight:bold;text-align:center;"> <br><br> SABLUX <br></td>
-      <td colspan="13" rowspan="3" border="0" bgcolor="#770a82" color="#ffffff" style="font-size: 20px;font-weight:bold;text-align:center;">  SYSTÈME DE MANAGEMENT DE LA QUALITE <br> TABLEAU DE BORD DU SMQ </td>
-      <td colspan="4" bgcolor="#ffffff" color="#770a82" > Page: $curPage sur $nbPage  </td>
+      <td colspan="14" rowspan="2" border="0" bgcolor="#770a82" color="#ffffff" style="font-size: 20px;font-weight:bold;text-align:center;">  SYSTÈME DE MANAGEMENT DE LA QUALITE <br> TABLEAU DE BORD DU SMQ </td>
+      <td colspan="3" bgcolor="#ffffff" color="#770a82" > Page: $curPage sur $nbPage  </td>
     </tr>
     <tr>
-      <td colspan="4" bgcolor="#ffffff" color="#770a82" > Date de création: $date_completed  </td>
+      <td colspan="3" bgcolor="#ffffff" color="#770a82" > Date de création: $date_completed  </td>
     </tr>
     <tr>
-      <td colspan="4" bgcolor="#ffffff" color="#770a82" > Code: </td>
+      <td colspan="7" border="0" bgcolor="#770a82" color="#ffffff" style="font-size: 16px;font-weight:bold;text-align:center;" > Employé : $employe_name  </td>
+      <td colspan="7" border="0" bgcolor="#770a82" color="#ffffff" style="font-size: 16px;font-weight:bold;text-align:center;" > Evaluateur : $reviewer_first_name $reviewer_last_name  </td>
+      <td colspan="3" bgcolor="#ffffff" color="#770a82" > Code: </td>
     </tr>
 EOD;
 
@@ -205,22 +207,24 @@ $html .= <<<EOD
         <th style="width:70px;"><b> Objectifs </b></th>
         <th style="width:70px;"><b> INDICATEURS </b></th>
         <th style="width:70px;"><b> MODE DE CALCUL </b></th>
-        <th style="width:70px;"><b> PERIODICITE </b></th>
-        <th style="width:70px;"><b> PILOTE </b></th>
-        <th style="width:40px;"><b> CIBLE </b></th>
-        <th style="width:40px;"><b> MOIS 1 </b></th>
-        <th style="width:40px;"><b> MOIS 2 </b></th>
-        <th style="width:40px;"><b> MOIS 3 </b></th>
-        <th style="width:40px;"><b> MOIS 4 </b></th>
-        <th style="width:40px;"><b> MOIS 5 </b></th>
-        <th style="width:40px;"><b> MOIS 6 </b></th>
-        <th style="width:40px;"><b> MOIS 7 </b></th>
-        <th style="width:40px;"><b> MOIS 8 </b></th>
-        <th style="width:40px;"><b> MOIS 9 </b></th>
-        <th style="width:40px;"><b> MOIS 10 </b></th>
-        <th style="width:40px;"><b> MOIS 11 </b></th>
-        <th style="width:40px;"><b> MOIS 12 </b></th>
-        <th style="width:69px;"><b> COMMENTAIRE </b></th>
+        <th style="width:65px;"><b> PERIODICITE </b></th>
+        <th style="width:65px;"><b> PILOTE </b></th>
+        <th style="width:35px;"><b> CIBLE </b></th>
+        <th style="width:35px;"><b> MOIS 1 </b></th>
+        <th style="width:35px;"><b> MOIS 2 </b></th>
+        <th style="width:35px;"><b> MOIS 3 </b></th>
+        <th style="width:35px;"><b> MOIS 4 </b></th>
+        <th style="width:35px;"><b> MOIS 5 </b></th>
+        <th style="width:35px;"><b> MOIS 6 </b></th>
+        <th style="width:35px;"><b> MOIS 7 </b></th>
+        <th style="width:35px;"><b> MOIS 8 </b></th>
+        <th style="width:35px;"><b> MOIS 9 </b></th>
+        <th style="width:35px;"><b> MOIS 10 </b></th>
+        <th style="width:35px;"><b> MOIS 11 </b></th>
+        <th style="width:35px;"><b> MOIS 12 </b></th>
+        <th style="width:35px;"><b> Note finale </b></th>
+        <th style="width:35px;"><b> Taux atteint </b></th>
+        <th style="width:73px;"><b> COMMENTAIRE </b></th>
       </tr><tr>
         <td colspan ="3"> </td>
         <td><b> Collecte </b></td>
@@ -266,22 +270,24 @@ $html .= <<<EOD
       <td style="width:70px;"> $objectifs </td>
       <td style="width:70px;"> $kpi </td>
       <td style="width:70px;"> $mode_calcul </td>
-      <td style="width:70px;"> $periodicite </td>
-      <td style="width:70px;"> $periodicite </td>
-      <td style="width:40px;"> $cible </td>
-      <td style="width:40px;"> $mois1 </td>
-      <td style="width:40px;"> $mois2 </td>
-      <td style="width:40px;"> $mois3 </td>
-      <td style="width:40px;"> $mois4 </td>
-      <td style="width:40px;"> $mois5 </td>
-      <td style="width:40px;"> $mois6 </td>
-      <td style="width:40px;"> $mois7 </td>
-      <td style="width:40px;"> $mois8 </td>
-      <td style="width:40px;"> $mois9 </td>
-      <td style="width:40px;"> $mois10 </td>
-      <td style="width:40px;"> $mois11 </td>
-      <td style="width:40px;"> $mois12 </td>
-      <td style="width:69px;"> $comment </td>
+      <td style="width:65px;"> $periodicite </td>
+      <td style="width:65px;"> $periodicite </td>
+      <td style="width:35px;"> $cible </td>
+      <td style="width:35px;"> $mois1 </td>
+      <td style="width:35px;"> $mois2 </td>
+      <td style="width:35px;"> $mois3 </td>
+      <td style="width:35px;"> $mois4 </td>
+      <td style="width:35px;"> $mois5 </td>
+      <td style="width:35px;"> $mois6 </td>
+      <td style="width:35px;"> $mois7 </td>
+      <td style="width:35px;"> $mois8 </td>
+      <td style="width:35px;"> $mois9 </td>
+      <td style="width:35px;"> $mois10 </td>
+      <td style="width:35px;"> $mois11 </td>
+      <td style="width:35px;"> $mois12 </td>
+      <td style="width:35px;"> $note_final </td>
+      <td style="width:35px;"> $taux_atteind </td>
+      <td style="width:73px;"> $comment </td>
     </tr>
 
 

@@ -47,7 +47,14 @@ jQuery(document).ready(function(){
 
 	$('.firstlevel > label > a').each(function(){
 		var id = $(this).attr('id');
-		$(this).parent().parent().attr('id', id.split('_')[1]);
+    if (id.split('_')[1] != "") {
+      $(this).parent().parent().attr('id', id.split('_')[1].toLowerCase());
+      console.log(id.split('_')[1]);
+    }else {
+      $(this).parent().parent().attr('id', id.split('_')[2].toLowerCase());
+      console.log(id.split('_')[2]);
+    }
+
 	});
 
 

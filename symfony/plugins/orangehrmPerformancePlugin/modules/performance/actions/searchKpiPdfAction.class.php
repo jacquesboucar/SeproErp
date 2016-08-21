@@ -4,7 +4,7 @@
  * ViewJobDetailsAction
  */
 require_once sfConfig::get('sf_root_dir').'/plugins/sfTCPDFPlugin/lib/tcpdf/tcpdf_kpi.php';
-require_once sfConfig::get('sf_root_dir').'/plugins/OrangehrmPerformanceplugin/lib/form/BasePefromanceSearchForm.php';
+require_once sfConfig::get('sf_root_dir').'/plugins/orangehrmPerformancePlugin/lib/form/BasePefromanceSearchForm.php';
 
 /**
  * Description of searchKpiAction
@@ -15,7 +15,7 @@ class searchKpiPdfAction extends basePeformanceAction {
 
 	/**
      *
-     * @return \KpiService 
+     * @return \KpiService
      */
     public function getKpiService() {
 
@@ -25,10 +25,10 @@ class searchKpiPdfAction extends basePeformanceAction {
             return $this->kpiService;
         }
     }
-    
+
      /**
      *
-     * @return \KpiService 
+     * @return \KpiService
      */
     public function getKpiGroupService() {
 
@@ -62,24 +62,24 @@ class searchKpiPdfAction extends basePeformanceAction {
 
     /**
      *
-     * @param KpiSearchForm $kpiSearchForm 
+     * @param KpiSearchForm $kpiSearchForm
      */
     public function setKpiSearchForm($kpiSearchForm) {
         $this->kpiSearchForm = $kpiSearchForm;
     }
-     
+
 
 	public function execute($request) {
-       $kpi = $this->getKpiService()->searchKpi($parameters = null); 
-		
+       $kpi = $this->getKpiService()->searchKpi($parameters = null);
+
       // create new PDF document
        $pdf = new FICHE(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
       // set document information
        $pdf->SetCreator(PDF_CREATOR);
        $pdf->SetAuthor('Sablux');
-       $pdf->SetTitle("Fiche d'evaluation");
-       $pdf->SetSubject('Fiche de poste : '. $name_first .' '.$name_last);
+       $pdf->SetTitle("Dictionnaire des KPIs");
+       $pdf->SetSubject('Dictionnaire des KPIs');
        $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
 
        // set default header data
@@ -119,7 +119,7 @@ class searchKpiPdfAction extends basePeformanceAction {
 // dejavusans is a UTF-8 Unicode font, if you only need to
 // print standard ASCII chars, you can use core fonts like
 // helvetica or times to reduce file size.
-    $pdf->SetFont('Helvetica', '', 12, '', true);
+    $pdf->SetFont('Helvetica', '', 7, '', true);
 
 // Add a page
 // This method has several options, check the source code documentation for more information.
@@ -127,6 +127,25 @@ class searchKpiPdfAction extends basePeformanceAction {
 
 // set text shadow effect
 // $pdf->setTextShadow(array('enabled'=>true, 'depth_w'=>0.2, 'depth_h'=>0.2, 'color'=>array(196,196,196), 'opacity'=>1, 'blend_mode'=>'Normal'));
+
+$html = <<<EOD
+  <table border="1" cellspacing="0" cellpadding="4" >
+    <tr bgcolor="#770a82" color="#ffffff">
+      <th> Indicateur Clé de Performance </th>
+      <th> Kpi Groupe </th>
+      <th> Titre du poste  </th>
+      <th> Objectifs  </th>
+      <th> Mode Calcul </th>
+      <th> Poids </th>
+      <th> Périodicité  </th>
+    </tr>
+
+
+
+
+EOD;
+
+
 foreach ($kpi as $key => $value) {
 	$kpi = $value->getKpiIndicators();
 	$id_group = $value->getKpiGroup();
@@ -140,27 +159,35 @@ foreach ($kpi as $key => $value) {
     $periodicite = $value->getDelai();
 
 
-$html = <<<EOD
-    Indicateur $kpi
-    Kpi Groupe $Kpigroup
-    Titre du poste  $job_title
-    Ojectifs  $objectif
-    Mode de calcul  $mode_calcul
-    Poids $poids
-    Periodicite $periodicite
+$html .= <<<EOD
+
+    <tr>
+      <td> $kpi </td>
+      <td> $Kpigroup </td>
+      <td> $job_title </td>
+      <td> $objectif </td>
+      <td> $mode_calcul </td>
+      <td> $poids </td>
+      <td> $periodicite </td>
+    </tr>
 
 
 EOD;
-$pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
+
 }
+
+$html .= <<<EOD
+  </table>
+EOD;
 // Print text using writeHTMLCell()
+$pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
 
 
 // ---------------------------------------------------------
 
 // Close and output PDF document
 // This method has several options, check the source code documentation for more information.
-$pdf->Output('fiche_'.$name_first.'_'.$name_last, 'I');
+$pdf->Output('dictionnaire_kpi', 'I');
 
   }
-}	
+}
