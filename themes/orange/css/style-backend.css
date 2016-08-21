@@ -303,7 +303,7 @@ table tbody tr td a{
 
 .impressionbtn {
     margin: 15px 25px 0 0;
-
+    display: block !important;
 }
 
 .impressionbtn a{

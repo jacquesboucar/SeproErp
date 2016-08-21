@@ -149,6 +149,11 @@ $pdf->AddPage();
 // $pdf->setTextShadow(array('enabled'=>true, 'depth_w'=>0.2, 'depth_h'=>0.2, 'color'=>array(196,196,196), 'opacity'=>1, 'blend_mode'=>'Normal'));
 
 // Set some content to print
+
+$mission = implode('<br/>', explode('•', $mission));
+$activite = implode('<br/>', explode('•', $activite));
+$competence = implode('<br/>', explode('•', $competence));
+
 $html = <<<EOD
 
 <table border="0.5" cellspacing="0" cellpadding="4">
