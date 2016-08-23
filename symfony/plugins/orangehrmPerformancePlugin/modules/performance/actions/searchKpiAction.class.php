@@ -102,8 +102,12 @@ class searchKpiAction extends basePeformanceAction {
         
         foreach ($kpiList as $key => $value) {
           $group = $this->getKpiGroupService()->getKpiGroupById($value['kpi_group']);
-          $group = $group->getKpiGroupName();
-          $value['kpi_group'] = $group;
+            if(!empty($group))
+            {
+                $group = $group->getKpiGroupName();
+                $value['kpi_group'] = $group;
+            }
+
         }    
         $pageNumber = $this->getPageNumber();
 
