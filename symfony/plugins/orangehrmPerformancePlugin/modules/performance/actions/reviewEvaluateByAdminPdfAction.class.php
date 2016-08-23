@@ -169,7 +169,7 @@ $pdf->AddPage();
         if ($value->getKpi()->getKpiGroup() == $key) {
           $kpigroup = $group;
           if(!in_array($kpigroup, $existe_group)) {
-            $existe_group[] = $kpigroup;
+            $existe_group[$key] = $kpigroup;
           }
         }
       }
@@ -199,7 +199,7 @@ $html = <<<EOD
     </tr>
 EOD;
 
-    foreach ($existe_group as $ex_group) {
+    foreach ($existe_group as $key => $ex_group) {
 $html .= <<<EOD
       <tr>
         <th colspan="19" style="font-weight:bold;text-align:center;font-size: 12px;"><b> $ex_group </b></th>
@@ -239,7 +239,7 @@ EOD;
       $reviewer_id = $value->getReviewerId();
       $reviewer = $this->getPerformanceReviewService()->getReviewerById($reviewer_id);
       $reviewer_group = $reviewer->getReviewerGroupId();
-      if ($reviewer_group == 1) {
+      if ($reviewer_group == 1 && $value->getKpi()->getKpiGroup() == $key) {
         $kpi = $value->getKpi()->getKpiIndicators();
         $objectifs = $value->getKpi()->getObjectif();
         $mode_calcul = $value->getKpi()->getModeCalcul();
