@@ -68,7 +68,11 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                             <?php
                             $groupe =  $form->getKpiGroupListAsArray();
                             $existe_group = array();
-                            $reviewer->getRating();
+                            foreach ($reviewer->getRating() as $rating) {
+                                $review_id=$rating->getReviewId();
+                            }
+                            $param = array('reviewId' => $review_id);
+                            $rating = $form->getPerformanceReviewService()->searchReviewRating($param);
                             foreach ($rating as $value) {
                                 foreach ($groupe as $key => $group) {
                                     if ($value->getKpi()->getKpiGroup() == $key) {
@@ -124,7 +128,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                             <td style="width:70px;"><?php echo $value->getKpi()->getKpiIndicators() ?></td>
                                             <td style="width:70px;"><?php echo $value->getKpi()->getDelai() ?></td>
                                             <td style="width:65px;"><?php echo $value->getKpi()->getMaxRating() ?></td>
-                                            <td style="width:65px"><?php echo $value->getValeurCible(); ?></td>
+                                            <td><input style="width:35px;" type="text" value="<?php echo $value->getValeurCible(); ?>" id="rating_<?php echo $value->getId(); ?>"  name="rating[<?php echo $value->getId(); ?>]" /></td>
                                             <td><input style="width:35px;" type="text" value="<?php echo $value->getRating(); ?>" id="rating_<?php echo $value->getId(); ?>"  name="rating[<?php echo $value->getId(); ?>]" />
                                                 Taux:&nbsp<?php echo round((double)($value->getRating()/$value->getValeurCible())*100); ?>%</td>
                                             <td><input type="text" style="width:35px;" id="mois2_<?php echo $value->getId(); ?>" name="mois2[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois2(); ?>">
@@ -179,8 +183,11 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                             <?php
                             $groupe =  $form->getKpiGroupListAsArray();
                             $existe_group = array();
-                            $rating = $reviewer->getRating();
-
+                            foreach ($form->getReviewRatings() as $rating) {
+                                $review_id=$rating->getReviewId();
+                            }
+                            $param = array('reviewId' => $review_id);
+                            $rating = $form->getPerformanceReviewService()->searchReviewRating($param);
                             foreach ($rating as $value) {
                                 foreach ($groupe as $key => $group) {
                                     if ($value->getKpi()->getKpiGroup() == $key) {
@@ -236,7 +243,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                             <td style="width:70px;"><?php echo $value->getKpi()->getKpiIndicators() ?></td>
                                             <td style="width:70px;"><?php echo $value->getKpi()->getDelai() ?></td>
                                             <td style="width:65px;"><?php echo $value->getKpi()->getMaxRating() ?></td>
-                                            <td style="width:65px"><?php echo $value->getValeurCible(); ?></td>
+                                            <td><input style="width:35px;" type="text" value="<?php echo $value->getValeurCible(); ?>" id="rating_<?php echo $value->getId(); ?>"  name="rating[<?php echo $value->getId(); ?>]" /></td>
                                             <td><input style="width:35px;" type="text" value="<?php echo $value->getRating(); ?>" id="rating_<?php echo $value->getId(); ?>"  name="rating[<?php echo $value->getId(); ?>]" />
                                                 Taux:&nbsp<?php echo round((double)($value->getRating()/$value->getValeurCible())*100); ?>%</td>
                                             <td><input type="text" style="width:35px;" id="mois2_<?php echo $value->getId(); ?>" name="mois2[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois2(); ?>">
