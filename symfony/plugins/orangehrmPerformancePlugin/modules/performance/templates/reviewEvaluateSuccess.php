@@ -64,41 +64,104 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                     <div class="smallerHeader"><h1><?php echo __('Evaluation by ' . $reviewer->getGroup()->getName()) ?></h1></div>
                     <?php echo $form->render() ?>
                     <div class="evaluationexpand">
-                        <table class="expandTable">
-                            <thead>
-                            <tr>
-                                <th></th>
-                                <th><?php echo __("KPI"); ?></th>
-                                <th><?php echo __("Min"); ?></th>
-                                <th><?php echo __("Max"); ?></th>
-                                <th><?php echo __("Rating"); ?></th>
-                                <th><?php echo __("Comment"); ?></th>
-                            </tr>
-                            </thead>
-                            <tbody>
+                        <table  class="evaluateBy" >
                             <?php
-                            $valuesForCalcuation = array();
-                            foreach ($reviewer->getRating() as $rating) {
+                            $groupe =  $form->getKpiGroupListAsArray();
+                            $existe_group = array();
+                            $reviewer->getRating();
+                            foreach ($rating as $value) {
+                                foreach ($groupe as $key => $group) {
+                                    if ($value->getKpi()->getKpiGroup() == $key) {
+                                        $kpigroup = $group;
+                                        if(!in_array($kpigroup, $existe_group)) {
+                                            $existe_group[$key] = $kpigroup;
+                                        }
+                                    }
+                                }
+                            }
+                            foreach ($existe_group as $key =>$ex_group)
+                            {
                                 ?>
                                 <tr>
-                                    <td>
-                                        <input type="hidden" value="<?php echo $rating->getId(); ?>" id="rating_id_<?php echo $rating->getId(); ?>" name="rating_id[<?php echo $rating->getId(); ?>]" />
-                                    </td>
-                                    <td class="rightAlign"><center><?php echo $rating->getKpi()->getKpiIndicators() ?></center></td>
-                                    <td class="rightAlign"><center><?php echo $rating->getKpi()->getMinRating() ?></center></td>
-                                    <td class="rightAlign"><center><?php echo $rating->getKpi()->getMaxRating() ?></center></td>
-                                    <td><center><input class="rightAlign" min="<?php echo $rating->getKpi()->getMinRating() ?>" max="<?php echo $rating->getKpi()->getMaxRating() ?>"  type="text" value="<?php echo $rating->getRating(); ?>" id="rating_<?php echo $rating->getId(); ?>"  name="rating[<?php echo $rating->getId(); ?>]" /></center></td>
-                                    <td><center><textarea class="comment" type="text" id="comment_<?php echo $rating->getId(); ?>" name="comment[<?php echo $rating->getId(); ?>]" ><?php echo $rating->getComment(); ?></textarea></center></td>
+                                    <th colspan="20" style="font-weight:bold;text-align:center;font-size: 12px;"><b><?php echo $ex_group; ?> </b></th>
+                                </tr>
+                                <tr>
+                                    <th style="width:70px;"><b> INDICATEURS </b></th>
+                                    <th style="width:70px;"><b> PERIODICITE </b></th>
+                                    <th style="width:70px;"><b> POIDS </b></th>
+                                    <th style="width:70px;"><b> CIBLE </b></th>
+                                    <th style="width:35px;"><b> MOIS 1 </b></th>
+                                    <th style="width:35px;"><b> MOIS 2 </b></th>
+                                    <th style="width:35px;"><b> MOIS 3 </b></th>
+                                    <th style="width:35px;"><b> MOIS 4 </b></th>
+                                    <th style="width:35px;"><b> MOIS 5 </b></th>
+                                    <th style="width:35px;"><b> MOIS 6 </b></th>
+                                    <th style="width:35px;"><b> MOIS 7 </b></th>
+                                    <th style="width:35px;"><b> MOIS 8 </b></th>
+                                    <th style="width:35px;"><b> MOIS 9 </b></th>
+                                    <th style="width:35px;"><b> MOIS 10 </b></th>
+                                    <th style="width:35px;"><b> MOIS 11 </b></th>
+                                    <th style="width:35px;"><b> MOIS 12 </b></th>
+                                    <th style="width:35px;"><b> CUMULE </b></th>
+                                    <th style="width:35px;"><b> TAUX ATTEINT </b></th>
+                                    <th style="width:35px;"><b> NOTE FINAL </b></th>
+                                    <th style="width:73px;"><b> COMMENTAIRE </b></th>
                                 </tr>
                                 <?php
+                                foreach ($rating as $value)
+                                {
+
+                                    $reviewer_id = $value->getReviewerId();
+                                    $reviewer = $form->getPerformanceReviewService()->getReviewerById($reviewer_id);
+                                    $reviewer_group = $reviewer->getReviewerGroupId();
+
+                                    if ($reviewer_group == 1 && $value->getKpi()->getKpiGroup() == $key)
+                                    {
+                                        ?>
+                                        <input type="hidden" value="<?php echo $value->getId(); ?>" id="rating_id_<?php echo $value->getId(); ?>" name="rating_id[<?php echo $value->getId(); ?>]" />
+                                        <tr>
+
+                                            <td style="width:70px;"><?php echo $value->getKpi()->getKpiIndicators() ?></td>
+                                            <td style="width:70px;"><?php echo $value->getKpi()->getDelai() ?></td>
+                                            <td style="width:65px;"><?php echo $value->getKpi()->getMaxRating() ?></td>
+                                            <td style="width:65px"><?php echo $value->getValeurCible(); ?></td>
+                                            <td><input style="width:35px;" type="text" value="<?php echo $value->getRating(); ?>" id="rating_<?php echo $value->getId(); ?>"  name="rating[<?php echo $value->getId(); ?>]" />
+                                                Taux:&nbsp<?php echo round((double)($value->getRating()/$value->getValeurCible())*100); ?>%</td>
+                                            <td><input type="text" style="width:35px;" id="mois2_<?php echo $value->getId(); ?>" name="mois2[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois2(); ?>">
+                                                Taux:&nbsp<?php echo round((double)($value->getMois2()/$value->getValeurCible())*100); ?>%</td>
+                                            <td><input type="text" style="width:35px;" id="mois3_<?php echo $value->getId(); ?>" name="mois3[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois3(); ?>">
+                                                Taux:&nbsp<?php echo round((double)($value->getMois3()/$value->getValeurCible())*100); ?>%</td>
+                                            <td><input type="text" style="width:35px;" id="mois4_<?php echo $value->getId(); ?>" name="mois4[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois4(); ?>">
+                                                Taux:&nbsp<?php echo round((double)($value->getMois4()/$value->getValeurCible())*100); ?>%</td>
+                                            <td><input type="text" style="width:35px;" id="mois5_<?php echo $value->getId(); ?>" name="mois5[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois5(); ?>">
+                                                Taux:&nbsp<?php echo round((double)($value->getMois5()/$value->getValeurCible())*100); ?>%</td>
+                                            <td><input type="text" style="width:35px;" id="mois6_<?php echo $value->getId(); ?>" name="mois6[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois6(); ?>">
+                                                Taux:&nbsp<?php echo round((double)($value->getMois6()/$value->getValeurCible())*100); ?>%</td>
+                                            <td><input type="text" style="width:35px;" id="mois7_<?php echo $value->getId(); ?>" name="mois7[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois7(); ?>">
+                                                Taux:&nbsp<?php echo round((double)($value->getMois7()/$value->getValeurCible())*100); ?>%</td>
+                                            <td><input type="text" style="width:35px;" id="mois8_<?php echo $value->getId(); ?>" name="mois8[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois8(); ?>">
+                                                Taux:&nbsp<?php echo round((double)($value->getMois8()/$value->getValeurCible())*100); ?>%</td>
+                                            <td><input type="text" style="width:35px;" id="mois9_<?php echo $value->getId(); ?>" name="mois9[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois9(); ?>">
+                                                Taux:&nbsp<?php echo round((double)($value->getMois9()/$value->getValeurCible())*100); ?>%</td>
+                                            <td><input  style="width:35px;" type="text" id="mois10_<?php echo $value->getId(); ?>" name="mois10[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois10(); ?>">
+                                                Taux:&nbsp<?php echo round((double)($value->getMois10()/$value->getValeurCible())*100); ?>%</td>
+                                            <td><input style="width:35px;" type="text" id="mois11_<?php echo $value->getId(); ?>" name="mois11[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois11(); ?>">
+                                                Taux:&nbsp<?php echo round((double)($value->getMois11()/$value->getValeurCible())*100); ?>%</td>
+                                            <td><input  type="text" style="width:35px;" id="mois12_<?php echo $value->getId(); ?>" name="mois12[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois12(); ?>">
+                                                Taux:&nbsp<?php echo round((double)($value->getMois12()/$value->getValeurCible())*100); ?>%</td>
+                                            <td><?php echo $value->getCumule() ?></td>
+                                            <td><?php echo round((double)(($value->getTauxAtteint()/$value->getValeurCible())*100)) ?>%</td>
+                                            <td><input type="text" style="width:35px;" id="noter_<?php echo $value->getId(); ?>" name="noter_[<?php echo $value->getId(); ?>]" value="<?php echo $value->getNote(); ?>"></td>
+                                            <td><textarea class="comment" type="text" id="comment_<?php echo $value->getId(); ?>" name="comment[<?php echo $value->getId(); ?>]" ><?php echo $value->getComment(); ?></textarea></td>
+                                        </tr>
+                                        <?php
+                                    }
+
+                                }
+
                             }
                             ?>
-                            <tr>
-                                <td colspan="4"><td colspan="1"><label class="lableName"><?php echo __("General Comment : "); ?></label></td>
-                                <td colspan="1"><center><textarea class="comment" type="text" id="general_comment_<?php echo $reviewer->getGroup()->getId(); ?>" name="general_comment[<?php echo $reviewer->getGroup()->getId(); ?>]" ><?php echo $reviewer->getComment(); ?></textarea></center></td>
-                            </tr>
 
-                            </tbody>
                         </table>
                     </div>
                     <?php
@@ -112,103 +175,105 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
 
                     <?php echo $form->render() ?>
                     <div class="evaluationexpand">
-                        <table class="expandTable">
-                            <thead>
-                            <tr>
-
-                            </tr>
-                            </thead>
-                            <tbody>
+                        <table  class="evaluateBy" >
                             <?php
-                            $valuesForCalcuation = array();
                             $groupe =  $form->getKpiGroupListAsArray();
                             $existe_group = array();
-                            //var_dump($form->getReviewRatings());die;
-                            foreach ($form->getReviewRatings() as $rating) {
+                            $rating = $reviewer->getRating();
+
+                            foreach ($rating as $value) {
+                                foreach ($groupe as $key => $group) {
+                                    if ($value->getKpi()->getKpiGroup() == $key) {
+                                        $kpigroup = $group;
+                                        if(!in_array($kpigroup, $existe_group)) {
+                                            $existe_group[$key] = $kpigroup;
+                                        }
+                                    }
+                                }
+                            }
+                            foreach ($existe_group as $key =>$ex_group)
+                            {
                                 ?>
                                 <tr>
-                                    <input type="hidden" value="<?php echo $rating->getId(); ?>" id="rating_id_<?php echo $rating->getId(); ?>" name="rating_id[<?php echo $rating->getId(); ?>]" />
-
-                                        <td class="rightAlign">
-                                            <table border="0" class="tableauevalution">
-                                                <thead>
-
-                                                    <?php foreach ($groupe as $key => $value): ?>
-                                                        <?php if ($rating->getKpi()->getKpiGroup() == $key): ?>
-                                                            <?php $group = $value; ?>
-                                                        <?php endif; ?>
-                                                    <?php endforeach; ?>
-                                                    <?php if(!in_array($group, $existe_group)){ ?>
-
-                                                        <tr class="evaluationEmployeeth">
-                                                            <th colspan="20">
-                                                                <center><b><?php echo $group ?></b></center>
-                                                                <?php $existe_group[] = $group ?>
-                                                            </th>
-                                                        </tr>
-                                                        <tr>
-                                                            <th><b><?php echo __("Indicateur"); ?></b></th>
-                                                            <th><b><?php echo __("Periodicite"); ?></b></th>
-                                                            <th><b><?php echo __("Poids"); ?></b></th>
-                                                            <th><b><?php echo __("Cible"); ?></b></th>
-                                                            <th><b><?php echo __("Mois 1"); ?></b></th>
-                                                            <th><b><?php echo __("Mois 2"); ?></b></th>
-                                                            <th><b><?php echo __("Mois 3"); ?></b></th>
-                                                            <th><b><?php echo __("Mois 4"); ?></b></th>
-                                                            <th><b><?php echo __("Mois 5"); ?></b></th>
-                                                            <th><b><?php echo __("Mois 6"); ?></b></th>
-                                                            <th><b><?php echo __("Mois 7"); ?></b></th>
-                                                            <th><b><?php echo __("Mois 8"); ?></b></th>
-                                                            <th><b><?php echo __("Mois 9"); ?></b></th>
-                                                            <th><b><?php echo __("Mois 10"); ?></b></th>
-                                                            <th><b><?php echo __("Mois 11"); ?></b></th>
-                                                            <th><b><?php echo __("Mois 12"); ?></b></th>
-                                                            <th><b><?php echo __("Cumule "); ?></b></th>
-                                                            <th><b><?php echo __("Note "); ?></b></th>
-                                                            <th><b><?php echo __("Taux Atteint "); ?></b></th>
-                                                            <th><b><?php echo __("Comment"); ?></b></th>
-                                                        </tr>
-                                                    <?php } ?>
-                                                </thead>
-                                                <tbody>
-                                                <tr>
-
-                                                    <td class="rightAlign" width="10px"><?php echo $rating->getKpi()->getKpiIndicators() ?></td>
-                                                    <td class="rightAlign"><center><?php echo $rating->getKpi()->getDelai() ?></center></td>
-                                                    <td><input type="text" class="rightAlign" value="<?php echo $rating->getKpi()->getMaxRating() ?>" ></td>
-                                                    <td><center><input type="text" class="rightAlign" value="<?php echo $rating->getValeurCible(); ?>" readonly="readonly"></center></td>
-                                                    <td><center><input class="rightAlign" min="<?php echo $rating->getKpi()->getMinRating() ?>" max="<?php echo $rating->getKpi()->getMaxRating() ?>"  type="text" value="<?php echo $rating->getRating(); ?>" id="rating_<?php echo $rating->getId(); ?>"  name="rating[<?php echo $rating->getId(); ?>]" /><br/>Taux:&nbsp<?php echo round((double)($rating->getRating()/$rating->getValeurCible())*100); ?>%</center></td>
-                                                    <td><center><input class="rightAlign" type="text" id="mois2_<?php echo $rating->getId(); ?>" name="mois2[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois2(); ?>">Taux:&nbsp<?php echo round((double)($rating->getMois2()/$rating->getValeurCible())*100); ?>%</center></td>
-                                                    <td><center><input class="rightAlign" type="text" id="mois3_<?php echo $rating->getId(); ?>" name="mois3[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois3(); ?>">Taux:&nbsp<?php echo round(($rating->getMois3()/$rating->getValeurCible())*100); ?>%</center></td>
-                                                    <td><center><input class="rightAlign" type="text" id="mois4_<?php echo $rating->getId(); ?>" name="mois4[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois4(); ?>">Taux:&nbsp<?php echo round(($rating->getMois4()/$rating->getValeurCible())*100); ?>%</center></td>
-                                                    <td><center><input class="rightAlign" type="text" id="mois5_<?php echo $rating->getId(); ?>" name="mois5[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois5(); ?>">Taux:&nbsp<?php echo round(($rating->getMois5()/$rating->getValeurCible())*100); ?>%</center></td>
-                                                    <td><center><input class="rightAlign" type="text" id="mois6_<?php echo $rating->getId(); ?>" name="mois6[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois6(); ?>">Taux:&nbsp<?php echo round(($rating->getMois6()/$rating->getValeurCible())*100); ?>%</center></td>
-                                                    <td><center><input class="rightAlign" type="text" id="mois7_<?php echo $rating->getId(); ?>" name="mois7[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois7(); ?>">Taux:&nbsp<?php echo round(($rating->getMois7()/$rating->getValeurCible())*100); ?>%</center></td>
-                                                    <td><center><input class="rightAlign" type="text" id="mois8_<?php echo $rating->getId(); ?>" name="mois8[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois8(); ?>">Taux:&nbsp<?php echo round(($rating->getMois8()/$rating->getValeurCible())*100); ?>%</center></td>
-                                                    <td><center><input class="rightAlign" type="text" id="mois9_<?php echo $rating->getId(); ?>" name="mois9[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois9(); ?>">Taux:&nbsp<?php echo round(($rating->getMois9()/$rating->getValeurCible())*100); ?>%</center></td>
-                                                    <td><center><input class="rightAlign" type="text" id="mois10_<?php echo $rating->getId(); ?>" name="mois10[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois10(); ?>">Taux:&nbsp<?php echo round(($rating->getMois10()/$rating->getValeurCible())*100); ?>%</center></td>
-                                                    <td><center><input class="rightAlign" type="text" id="mois11_<?php echo $rating->getId(); ?>" name="mois11[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois11(); ?>">Taux:&nbsp<?php echo round(($rating->getMois11()/$rating->getValeurCible())*100); ?>%</center></td>
-                                                    <td><center><input class="rightAlign" type="text" id="mois12_<?php echo $rating->getId(); ?>" name="mois12[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois12(); ?>">Taux:&nbsp<?php echo round(($rating->getMois12()/$rating->getValeurCible())*100); ?>%</center></td>
-                                                    <td><center><?php echo $rating->getCumule(); ?></center></td>
-                                                    <td><center><input class="rightAlign" type="text" id="noter_<?php echo $rating->getId(); ?>" name="noter[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getNote(); ?>"></center></td>
-                                                    <td><center><?php echo $rating->getTauxAtteint(); ?></center></td>
-                                                    <td><textarea class="comment" type="text" id="comment_<?php echo $rating->getId(); ?>" name="comment[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getComment(); ?>"></textarea> </td>
-
-                                                </tr>
-                                                </tbody>
-                                            </table>
-
-                                        </td>
+                                    <th colspan="20" style="font-weight:bold;text-align:center;font-size: 12px;"><b><?php echo $ex_group; ?> </b></th>
+                                </tr>
+                                <tr>
+                                    <th style="width:70px;"><b> INDICATEURS </b></th>
+                                    <th style="width:70px;"><b> PERIODICITE </b></th>
+                                    <th style="width:70px;"><b> POIDS </b></th>
+                                    <th style="width:70px;"><b> CIBLE </b></th>
+                                    <th style="width:35px;"><b> MOIS 1 </b></th>
+                                    <th style="width:35px;"><b> MOIS 2 </b></th>
+                                    <th style="width:35px;"><b> MOIS 3 </b></th>
+                                    <th style="width:35px;"><b> MOIS 4 </b></th>
+                                    <th style="width:35px;"><b> MOIS 5 </b></th>
+                                    <th style="width:35px;"><b> MOIS 6 </b></th>
+                                    <th style="width:35px;"><b> MOIS 7 </b></th>
+                                    <th style="width:35px;"><b> MOIS 8 </b></th>
+                                    <th style="width:35px;"><b> MOIS 9 </b></th>
+                                    <th style="width:35px;"><b> MOIS 10 </b></th>
+                                    <th style="width:35px;"><b> MOIS 11 </b></th>
+                                    <th style="width:35px;"><b> MOIS 12 </b></th>
+                                    <th style="width:35px;"><b> CUMULE </b></th>
+                                    <th style="width:35px;"><b> TAUX ATTEINT </b></th>
+                                    <th style="width:35px;"><b> NOTE FINAL </b></th>
+                                    <th style="width:73px;"><b> COMMENTAIRE </b></th>
                                 </tr>
                                 <?php
+                                foreach ($rating as $value)
+                                {
+
+                                    $reviewer_id = $value->getReviewerId();
+                                    $reviewer = $form->getPerformanceReviewService()->getReviewerById($reviewer_id);
+                                    $reviewer_group = $reviewer->getReviewerGroupId();
+
+                                    if ($reviewer_group == 1 && $value->getKpi()->getKpiGroup() == $key)
+                                    {
+                                        ?>
+                                        <input type="hidden" value="<?php echo $value->getId(); ?>" id="rating_id_<?php echo $value->getId(); ?>" name="rating_id[<?php echo $value->getId(); ?>]" />
+                                        <tr>
+
+                                            <td style="width:70px;"><?php echo $value->getKpi()->getKpiIndicators() ?></td>
+                                            <td style="width:70px;"><?php echo $value->getKpi()->getDelai() ?></td>
+                                            <td style="width:65px;"><?php echo $value->getKpi()->getMaxRating() ?></td>
+                                            <td style="width:65px"><?php echo $value->getValeurCible(); ?></td>
+                                            <td><input style="width:35px;" type="text" value="<?php echo $value->getRating(); ?>" id="rating_<?php echo $value->getId(); ?>"  name="rating[<?php echo $value->getId(); ?>]" />
+                                                Taux:&nbsp<?php echo round((double)($value->getRating()/$value->getValeurCible())*100); ?>%</td>
+                                            <td><input type="text" style="width:35px;" id="mois2_<?php echo $value->getId(); ?>" name="mois2[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois2(); ?>">
+                                                Taux:&nbsp<?php echo round((double)($value->getMois2()/$value->getValeurCible())*100); ?>%</td>
+                                            <td><input type="text" style="width:35px;" id="mois3_<?php echo $value->getId(); ?>" name="mois3[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois3(); ?>">
+                                                Taux:&nbsp<?php echo round((double)($value->getMois3()/$value->getValeurCible())*100); ?>%</td>
+                                            <td><input type="text" style="width:35px;" id="mois4_<?php echo $value->getId(); ?>" name="mois4[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois4(); ?>">
+                                                Taux:&nbsp<?php echo round((double)($value->getMois4()/$value->getValeurCible())*100); ?>%</td>
+                                            <td><input type="text" style="width:35px;" id="mois5_<?php echo $value->getId(); ?>" name="mois5[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois5(); ?>">
+                                                Taux:&nbsp<?php echo round((double)($value->getMois5()/$value->getValeurCible())*100); ?>%</td>
+                                            <td><input type="text" style="width:35px;" id="mois6_<?php echo $value->getId(); ?>" name="mois6[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois6(); ?>">
+                                                Taux:&nbsp<?php echo round((double)($value->getMois6()/$value->getValeurCible())*100); ?>%</td>
+                                            <td><input type="text" style="width:35px;" id="mois7_<?php echo $value->getId(); ?>" name="mois7[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois7(); ?>">
+                                                Taux:&nbsp<?php echo round((double)($value->getMois7()/$value->getValeurCible())*100); ?>%</td>
+                                            <td><input type="text" style="width:35px;" id="mois8_<?php echo $value->getId(); ?>" name="mois8[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois8(); ?>">
+                                                Taux:&nbsp<?php echo round((double)($value->getMois8()/$value->getValeurCible())*100); ?>%</td>
+                                            <td><input type="text" style="width:35px;" id="mois9_<?php echo $value->getId(); ?>" name="mois9[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois9(); ?>">
+                                                Taux:&nbsp<?php echo round((double)($value->getMois9()/$value->getValeurCible())*100); ?>%</td>
+                                            <td><input  style="width:35px;" type="text" id="mois10_<?php echo $value->getId(); ?>" name="mois10[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois10(); ?>">
+                                                Taux:&nbsp<?php echo round((double)($value->getMois10()/$value->getValeurCible())*100); ?>%</td>
+                                            <td><input style="width:35px;" type="text" id="mois11_<?php echo $value->getId(); ?>" name="mois11[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois11(); ?>">
+                                                Taux:&nbsp<?php echo round((double)($value->getMois11()/$value->getValeurCible())*100); ?>%</td>
+                                            <td><input  type="text" style="width:35px;" id="mois12_<?php echo $value->getId(); ?>" name="mois12[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois12(); ?>">
+                                                Taux:&nbsp<?php echo round((double)($value->getMois12()/$value->getValeurCible())*100); ?>%</td>
+                                            <td><?php echo $value->getCumule() ?></td>
+                                            <td><?php echo round((double)(($value->getTauxAtteint()/$value->getValeurCible())*100)) ?>%</td>
+                                            <td><input type="text" style="width:35px;" id="noter_<?php echo $value->getId(); ?>" name="noter_[<?php echo $value->getId(); ?>]" value="<?php echo $value->getNote(); ?>"></td>
+                                            <td><textarea class="comment" type="text" id="comment_<?php echo $value->getId(); ?>" name="comment[<?php echo $value->getId(); ?>]" ><?php echo $value->getComment(); ?></textarea></td>
+                                        </tr>
+                                        <?php
+                                    }
+
+                                }
+
                             }
                             ?>
-                           <!-- <tr>
-                                <td colspan="3"><td colspan="1"><label class="lableName"><?php //echo __("General Comment : "); ?></label></td>
-                                <td colspan="7"><center><textarea class="comment" type="text" id="general_comment_<?php //echo $form->getReviewer()->getGroup()->getId(); ?>" name="general_comment[<?php echo $form->getReviewer()->getGroup()->getId(); ?>]" value="<?php echo $form->getReviewer()->getComment(); ?>"></textarea></center></td>
-                            </tr>
-                            -->
-                            </tbody>
+
                         </table>
                     </div>
                     <br/><br/>
@@ -251,7 +316,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
     <div class="modal" id="deleteConfModal">
         <div class="modal-header">
             <a class="close" data-dismiss="modal">×</a>
-            <h5><?php echo __('SeproRH - Confirmation Required'); ?></h5>
+            <h5><center><?php echo __('SeproRH - Confirmation Required'); ?></center></h5>
         </div>
         <div class="modal-body">
             <p><?php echo __("The review will be made read-only after completion.") . __("This action cannot be undone.") . __("Are you sure you want to continue?"); ?></p>
@@ -295,13 +360,12 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                 }
             });
         });
-      /* var minMsg = "<?php //echo __('Rating should be less than or equal to ') ?>";
-        var maxMsg = "<?php //echo __('Rating should be greater than or equal to ') ?>";
+        var minMsg = "<?php echo __('Rating should be less than or equal to ') ?>";
+        var maxMsg = "<?php echo __('Rating should be greater than or equal to ') ?>";
         jQuery.extend(jQuery.validator.messages, {
             max: jQuery.validator.format(minMsg + "{0}."),
             min: jQuery.validator.format(maxMsg + "{0}.")
         });
-        */
     </script>
 
 <?php

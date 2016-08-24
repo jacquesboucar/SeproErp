@@ -7,40 +7,40 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
 
 <?php echo isset($templateMessage) ? templateMessage($templateMessage) : ''; ?>
 
-<div class="box" id="divFormContainer">
-    <div class="head"><h1><?php echo __('Administrator Evaluation Form'); ?></h1></div>
-    <?php include_partial('global/form_errors', array('form' => $form)); ?>
-    
-    <div class="inner">
-        <?php include_partial('global/flash_messages'); ?>
-        <div id="reviewData" >
-            <div style="" class="reviewInfo" id="review-details">
-                <div class="smallerHeader"><center><h1><b><?php echo __('Review Details') ?></b></h1></center></div>
-                <table >
-                    <tr style="height: 6px"><td></td></tr>
-                    <tr class="trReviewHeight"><td class="tableColoumnWidth" ><label class="labelName"><?php echo __("Employee Name"); ?></label></td><td class="tableColoumnWidthname" ></td> <td><label class="labelValue"><?php echo $form->getReview()->getEmployee()->getFullName() ?></label></td></tr>
-                    <tr class="trReviewHeight"><td class="tableColoumnWidth" ><label class="labelName"><?php echo __("Job Title"); ?></label></td> <td class="tableColoumnWidthname" > </td> <td><label class="labelValue"><?php echo $form->getReview()->getJobTitle()->getJobTitleName() ?></label></td></tr>
-                    <tr class="trReviewHeight"><td class="tableColoumnWidth" ><label class="labelName"><?php echo __("Review Period"); ?></label></td> <td></td> <td id="reviewColoumnId" ><label class="labelValue"><?php echo set_datepicker_date_format($form->getReview()->getWorkPeriodStart()) . " To " . set_datepicker_date_format($form->getReview()->getWorkPeriodEnd()); ?></label></td></tr>
-                    <tr class="trReviewHeight"><td class="tableColoumnWidth" ><label class="labelName"><?php echo __("Review Due Date"); ?></label></td><td></td>  <td><label class="labelValue"><?php echo set_datepicker_date_format($form->getReview()->getDueDate()) ?></label></td></tr>
-                    <tr class="trReviewHeight"><td class="tableColoumnWidth" ><label class="labelName"><?php echo __("Status"); ?></label></td> <td></td> <td><label class="labelValue"><?php echo __(ReviewStatusFactory::getInstance()->getStatus($form->getReview()->getStatusId())->getName()) ?></label></td></tr>
-                </table>
+    <div class="box" id="divFormContainer">
+        <div class="head"><h1><?php echo __('Administrator Evaluation Form'); ?></h1></div>
+        <?php include_partial('global/form_errors', array('form' => $form)); ?>
+
+        <div class="inner">
+            <?php include_partial('global/flash_messages'); ?>
+            <div id="reviewData" >
+                <div style="" class="reviewInfo" id="review-details">
+                    <div class="smallerHeader"><center><h1><b><?php echo __('Review Details') ?></b></h1></center></div>
+                    <table >
+                        <tr style="height: 6px"><td></td></tr>
+                        <tr class="trReviewHeight"><td class="tableColoumnWidth" ><label class="labelName"><?php echo __("Employee Name"); ?></label></td><td class="tableColoumnWidthname" ></td> <td><label class="labelValue"><?php echo $form->getReview()->getEmployee()->getFullName() ?></label></td></tr>
+                        <tr class="trReviewHeight"><td class="tableColoumnWidth" ><label class="labelName"><?php echo __("Job Title"); ?></label></td> <td class="tableColoumnWidthname" > </td> <td><label class="labelValue"><?php echo $form->getReview()->getJobTitle()->getJobTitleName() ?></label></td></tr>
+                        <tr class="trReviewHeight"><td class="tableColoumnWidth" ><label class="labelName"><?php echo __("Review Period"); ?></label></td> <td></td> <td id="reviewColoumnId" ><label class="labelValue"><?php echo set_datepicker_date_format($form->getReview()->getWorkPeriodStart()) . " To " . set_datepicker_date_format($form->getReview()->getWorkPeriodEnd()); ?></label></td></tr>
+                        <tr class="trReviewHeight"><td class="tableColoumnWidth" ><label class="labelName"><?php echo __("Review Due Date"); ?></label></td><td></td>  <td><label class="labelValue"><?php echo set_datepicker_date_format($form->getReview()->getDueDate()) ?></label></td></tr>
+                        <tr class="trReviewHeight"><td class="tableColoumnWidth" ><label class="labelName"><?php echo __("Status"); ?></label></td> <td></td> <td><label class="labelValue"><?php echo __(ReviewStatusFactory::getInstance()->getStatus($form->getReview()->getStatusId())->getName()) ?></label></td></tr>
+                    </table>
 
 
-            </div>
+                </div>
 
-            <div class="reviewersreviewInfo" >
-                <div class="smallerHeader"><center><h1><?php echo __("Individual Evaluation Status") ?></h1></center></div>
+                <div class="reviewersreviewInfo" >
+                    <div class="smallerHeader"><center><h1><?php echo __("Individual Evaluation Status") ?></h1></center></div>
 
-                <div class="evaluation">
-                    <table id="induvidualEvaluate" >
-                        <thead>
+                    <div class="evaluation">
+                        <table id="induvidualEvaluate" >
+                            <thead>
                             <tr>
                                 <th><?php echo __("Reviewer Type"); ?></th>
                                 <th><?php echo __("Reviewer Name"); ?></th>
-                                <th><?php echo __("Review Status"); ?></th>                       
+                                <th><?php echo __("Review Status"); ?></th>
                             </tr>
-                        </thead>
-                        <tbody>
+                            </thead>
+                            <tbody>
                             <?php foreach ($form->getReviewers() as $reviewer) { ?>
                                 <tr>
                                     <td class="leftAlign"><?php echo __($reviewer->getGroup()->getName()) ?></td>
@@ -48,358 +48,342 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                     <td class="leftAlign"><?php echo ReviewerReviewStatusFactory::getInstance()->getStatus($reviewer->getStatus())->getName() ?></td>
                                 </tr>
                             <?php } ?>
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
-        
-        <br/><br/>
-        <div>
-            <form id="reviewEvaluate" name="reviewEvaluate" method="post" action="">
-                <?php
-                echo $form['_csrf_token'];
-                echo $form['id']->render();
-                echo $form['action']->render();
-                echo $form['evaluationsAction']->render();
-                ?>
-                <?php 
-                $ratings = $form->getSortedRatings($reviewer->getRating());
-                  foreach ($ratings as $rating) {
-                    $review_id = $rating->getReviewId();
-                }
-                ?>
-                <div class="pull-right impressionbtn">
-                <a href="<?php echo url_for('performance/reviewEvaluateByAdminPdf') . '?id=' . $review_id ?>" target="_blank">Telecharger</a>
-                </div>
-                <br class="clear"/>
-                <?php
-                if (sizeof($form->getReviewers()) > 0) {
-                    $reviewerGroupId = $form->getReviewers()->getFirst()->getReviewerGroupId();
-                }
-                
-                
-                $columNumber = 0;
-                foreach ($form->getReviewers() as $reviewer) {
 
-                    if (($reviewer->getGroup()->getId() == 2) || $reviewer->getGroup()->getId() != 2) {
-                        if ($reviewer->getReviewerGroupId() != 2) {
-                            $reviewerGroupId = $reviewer->getReviewerGroupId();
-                            $columNumber = 1;
+            <br/><br/>
+            <div>
+                <form id="reviewEvaluate" name="reviewEvaluate" method="post" action="">
+                    <?php
+                    echo $form['_csrf_token'];
+                    echo $form['id']->render();
+                    echo $form['action']->render();
+                    echo $form['evaluationsAction']->render();
+                    ?>
+                    <?php
+                    $ratings = $form->getSortedRatings($reviewer->getRating());
+                    foreach ($ratings as $rating) {
+                        $review_id = $rating->getReviewId();
+                    }
+                    ?>
+                    <div class="pull-right impressionbtn">
+                        <a href="<?php echo url_for('performance/reviewEvaluateByAdminPdf') . '?id=' . $review_id ?>" target="_blank">Telecharger</a>
+                    </div>
+                    <br class="clear"/>
+                    <?php
+                    if (sizeof($form->getReviewers()) > 0) {
+                        $reviewerGroupId = $form->getReviewers()->getFirst()->getReviewerGroupId();
+                    }
+
+
+                    $columNumber = 0;
+                    foreach ($form->getReviewers() as $reviewer) {
+
+                    if (($reviewer->getGroup()->getId() == 2 && $reviewer->getStatus() == 3) || $reviewer->getGroup()->getId() != 2) {
+                    if ($reviewer->getReviewerGroupId() != 2) {
+                    $reviewerGroupId = $reviewer->getReviewerGroupId();
+                    $columNumber = 1;
+                    ?>
+                    </tr>
+                    </table>
+                    <br class="clear"/>
+                    <div class="smallerHeader"><h1><?php echo __('Evaluation by ' . $reviewer->getGroup()->getName()); ?></h1></div>
+                    <table class="expandTable">
+                        <br class="clear"/>
+                        <tr>
+                            <?php } else {
                             ?>
-                            </tr>
-                            </table>
-                            <br class="clear"/>
-                            <div class="smallerHeader"><h1><?php echo __('Evaluation by ' . $reviewer->getGroup()->getName()); ?></h1></div>
+
+                            <div class="smallerHeader"><h1><?php echo __('Evaluation by Employee'); ?></h1></div>
                             <table class="expandTable">
                                 <br class="clear"/>
                                 <tr>
-                                <?php } else {
-                                    ?>                               
-
-                                <div class="smallerHeader"><h1><?php echo __('Evaluation by Employee'); ?></h1></div>
-                                <table class="expandTable">
-                                    <br class="clear"/>
-                                    <tr>
-                                        <?php
-                                        $columNumber++;
+                                    <?php
+                                    $columNumber++;
                                     }
                                     ?>
                                 </tr>
-                                <td>   
+                                <td>
                                     <div>
                                         <div class="evaluationexpand">
+
                                             <table  class="evaluateBy" >
-                                               
-                                                <thead>
-                                                    <tr>
-                                                        <?php if ($columNumber == 1) { ?>
-                                                            <th colspan="20" class="evaluationEmployees" id="enteteevaluationEmployees">
-                                                                &nbsp &nbsp &nbsp<?php echo __("Evaluation by") . ' ' . $reviewer->getEmployee()->getFullName(); ?>
-                                                            </th>
-                                                        <?php } else { ?>
-                                                            <th colspan="2" class="evaluationEmployees"><?php echo __("Evaluation by") . ' ' . $reviewer->getEmployee()->getFullName(); ?></th>
-                                                        <?php } ?>
-                                                    </tr>
-
-                                                </thead>
-                                                <tbody>
-                                                    <?php
-                                                    $valuesForCalcuation = array();
-                                                    $ratings = $form->getSortedRatings($reviewer->getRating());
-                                                    foreach ($ratings as $rating) {
-                                                        $review_id = $rating->getReviewId();
-                                                    }
-                                                    
-                                                    
-                                                    $groupe =  $form->getKpiGroupListAsArray();//array('Certification ISO 9001', 'Etudes et marketing', 'Outils et évolutions SI', 'Reporting et analyse');
-                                                    $existe_group = array();
-
-                                                    foreach ($ratings as $rating) {
-                                                        ?>
-                                                        <tr>
-                                                    <input type="hidden" value="<?php echo $rating->getId(); ?>" id="rating_id_<?php echo $rating->getId(); ?>" name="rating_id[<?php echo $rating->getId(); ?>]" />
+                                                <tr>
                                                     <?php if ($columNumber == 1) { ?>
-                                                       <td class="rightAlign">
-                                                            <table border="0" class="tableauevalution">
-                                                                <thead>
-                                                                <?php if ($columNumber == 1) { ?>
-                                                                    <?php foreach ($groupe as $key => $value): ?>
-                                                                        <?php if ($rating->getKpi()->getKpiGroup() == $key): ?>
-                                                                            <?php $group = $value; ?>
-                                                                        <?php endif; ?>
-                                                                    <?php endforeach; ?>
-                                                                    <?php if(!in_array($group, $existe_group)){ ?>
-
-                                                                    <tr class="evaluationEmployeeth">
-                                                                            <th colspan="20">
-                                                                                <center><b><?php echo $group ?></b></center>
-                                                                                <?php $existe_group[] = $group ?>
-                                                                            </th>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <th><b><?php echo __("Indicateur"); ?></b></th>
-                                                                        <th><b><?php echo __("Periodicite"); ?></b></th>
-                                                                        <th><b><?php echo __("Poids"); ?></b></th>
-                                                                        <th><b><?php echo __("Cible"); ?></b></th>
-                                                                        <th><b><?php echo __("Mois 1"); ?></b></th>
-                                                                        <th><b><?php echo __("Mois 2"); ?></b></th>
-                                                                        <th><b><?php echo __("Mois 3"); ?></b></th>
-                                                                        <th><b><?php echo __("Mois 4"); ?></b></th>
-                                                                        <th><b><?php echo __("Mois 5"); ?></b></th>
-                                                                        <th><b><?php echo __("Mois 6"); ?></b></th>
-                                                                        <th><b><?php echo __("Mois 7"); ?></b></th>
-                                                                        <th><b><?php echo __("Mois 8"); ?></b></th>
-                                                                        <th><b><?php echo __("Mois 9"); ?></b></th>
-                                                                        <th><b><?php echo __("Mois 10"); ?></b></th>
-                                                                        <th><b><?php echo __("Mois 11"); ?></b></th>
-                                                                        <th><b><?php echo __("Mois 12"); ?></b></th>
-                                                                        <th><b><?php echo __("Cumule"); ?></b></th>
-                                                                        <th><b><?php echo __("Note "); ?></b></th>
-                                                                        <th><b><?php echo __("Taux Atteint "); ?></b></th>
-                                                                        <th><b><?php echo __("Comment"); ?></b></th>
-
-                                                                    </tr>
-                                                                    <?php } ?>
-                                                                <?php } ?>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr>
-
-                                                                         <td class="rightAlign"><center><?php echo $rating->getKpi()->getKpiIndicators() ?></center></td>
-                                                                         <td class="rightAlign"><center><?php echo $rating->getKpi()->getDelai() ?></center></td>
-                                                                         <td><input type="text" class="rightAlign" value="<?php echo $rating->getKpi()->getMaxRating() ?>" readonly="readonly"></td>
-                                                                         <td><input class="rightAlign" type="text" id="valeur_cible_<?php echo $rating->getId(); ?>" name="valeur_cible[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getValeurCible(); ?>"></td>
-                                                                         <td><input class="rightAlign" min="<?php echo $rating->getKpi()->getMinRating() ?>" max="<?php echo $rating->getKpi()->getMaxRating() ?>"  type="text" value="<?php echo $rating->getRating(); ?>" id="rating_<?php echo $rating->getId(); ?>"  name="rating[<?php echo $rating->getId(); ?>]" /><br/>Taux:&nbsp<?php echo round((double)($rating->getRating()/$rating->getValeurCible())*100); ?>%</td>
-                                                                         <td><input class="rightAlign" type="text" id="mois2_<?php echo $rating->getId(); ?>" name="mois2[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois2(); ?>">Taux:&nbsp<?php echo round((double)($rating->getMois2()/$rating->getValeurCible())*100); ?>%</td>
-                                                                         <td><center><input class="rightAlign" type="text" id="mois3_<?php echo $rating->getId(); ?>" name="mois3[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois3(); ?>">Taux:&nbsp<?php echo round((double)($rating->getMois3()/$rating->getValeurCible())*100); ?>%</center></td>
-                                                                         <td><center><input class="rightAlign" type="text" id="mois4_<?php echo $rating->getId(); ?>" name="mois4[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois4(); ?>">Taux:&nbsp<?php echo round((double)($rating->getMois4()/$rating->getValeurCible())*100); ?>%</center></td>
-                                                                         <td><center><input class="rightAlign" type="text" id="mois5_<?php echo $rating->getId(); ?>" name="mois5[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois5(); ?>">Taux:&nbsp<?php echo round((double)($rating->getMois5()/$rating->getValeurCible())*100); ?>%</center></td>
-                                                                         <td><center><input class="rightAlign" type="text" id="mois6_<?php echo $rating->getId(); ?>" name="mois6[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois6(); ?>">Taux:&nbsp<?php echo round((double)($rating->getMois6()/$rating->getValeurCible())*100); ?>%</center></td>
-                                                                         <td><center><input class="rightAlign" type="text" id="mois7_<?php echo $rating->getId(); ?>" name="mois7[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois7(); ?>">Taux:&nbsp<?php echo round((double)($rating->getMois7()/$rating->getValeurCible())*100); ?>%</center></td>
-                                                                         <td><center><input class="rightAlign" type="text" id="mois8_<?php echo $rating->getId(); ?>" name="mois8[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois8(); ?>">Taux:&nbsp<?php echo round((double)($rating->getMois8()/$rating->getValeurCible())*100); ?>%</center></td>
-                                                                         <td><center><input class="rightAlign" type="text" id="mois9_<?php echo $rating->getId(); ?>" name="mois9[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois9(); ?>">Taux:&nbsp<?php echo round((double)($rating->getMois9()/$rating->getValeurCible())*100); ?>%</center></td>
-                                                                         <td><center><input class="rightAlign" type="text" id="mois10_<?php echo $rating->getId(); ?>" name="mois10[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois10(); ?>">Taux:&nbsp<?php echo round((double)($rating->getMois10()/$rating->getValeurCible())*100); ?>%</center></td>
-                                                                         <td><center><input class="rightAlign" type="text" id="mois11_<?php echo $rating->getId(); ?>" name="mois11[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois11(); ?>">Taux:&nbsp<?php echo round((double)($rating->getMois11()/$rating->getValeurCible())*100); ?>%</center></td>
-                                                                         <td><center><input class="rightAlign" type="text" id="mois12_<?php echo $rating->getId(); ?>" name="mois12[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getMois12(); ?>">Taux:&nbsp<?php echo round((double)($rating->getMois12()/$rating->getValeurCible())*100); ?>%</center></td>
-                                                                         <td><center><?php echo $rating->getCumule(); ?></center></td>
-                                                                         <td><center><input class="rightAlign" type="text" id="noter_<?php echo $rating->getId(); ?>" name="noter_[<?php echo $rating->getId(); ?>]" value="<?php echo $rating->getNote(); ?>"></center></td>
-                                                                         <td><center><b><?php echo $rating->getTauxAtteint(); ?>%</b></center></td>
-                                                                         <td><textarea class="comment" type="text" id="comment_<?php echo $rating->getId(); ?>" name="comment[<?php echo $rating->getId(); ?>]" ><?php echo $rating->getComment(); ?></textarea> </td>
-
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-
-                                                        </td>
+                                                        <th colspan="20" class="evaluationEmployee">
+                                                            <?php echo __("Evaluation by") . ' ' . $reviewer->getEmployee()->getFullName(); ?></th>
+                                                    <?php } else { ?>
+                                                        <th colspan="20" class="evaluationEmployee"><?php echo __("Evaluation by") . ' ' . $reviewer->getEmployee()->getFullName(); ?></th>
                                                     <?php } ?>
-                                                        </tr>
-                                                    <?php
+                                                </tr>
+                                                <?php
+                                                    $groupe =  $form->getKpiGroupListAsArray();
+                                                    $existe_group = array();
+                                                    $param = array('reviewId' => $review_id);
+                                                    $rating = $form->getPerformanceReviewService()->searchReviewRating($param);
+                                                foreach ($rating as $value) {
+                                                    foreach ($groupe as $key => $group) {
+                                                        if ($value->getKpi()->getKpiGroup() == $key) {
+                                                            $kpigroup = $group;
+                                                            if(!in_array($kpigroup, $existe_group)) {
+                                                                $existe_group[$key] = $kpigroup;
+                                                            }
+                                                        }
+                                                    }
                                                 }
-                                                if ($columNumber == 1) {
-                                                     ?>
-                                                    
-                                                     
-                                                     <?php
-                                                 } else {
-                                                     ?>
+                                                foreach ($existe_group as $key =>$ex_group)
+                                                {
+                                                 ?>
+                                                <tr>
+                                                    <th colspan="20" style="font-weight:bold;text-align:center;font-size: 12px;"><b><?php echo $ex_group; ?> </b></th>
+                                                </tr>
                                                     <tr>
-                                                        <td colspan="1"><label class="lableName"><?php echo __("General Comment : "); ?></label></td>
-                                                         <td colspan="1"><textarea class="comment" type="text" id="general_comment_<?php echo $reviewer->getGroup()->getId(); ?>" name="general_comment[<?php echo $reviewer->getGroup()->getId(); ?>]" ><?php echo $reviewer->getComment(); ?></textarea></td>
-                                                     </tr>
-                                                    
+                                                        <th style="width:70px;"><b> INDICATEURS </b></th>
+                                                        <th style="width:70px;"><b> PERIODICITE </b></th>
+                                                        <th style="width:70px;"><b> POIDS </b></th>
+                                                        <th style="width:70px;"><b> CIBLE </b></th>
+                                                        <th style="width:35px;"><b> MOIS 1 </b></th>
+                                                        <th style="width:35px;"><b> MOIS 2 </b></th>
+                                                        <th style="width:35px;"><b> MOIS 3 </b></th>
+                                                        <th style="width:35px;"><b> MOIS 4 </b></th>
+                                                        <th style="width:35px;"><b> MOIS 5 </b></th>
+                                                        <th style="width:35px;"><b> MOIS 6 </b></th>
+                                                        <th style="width:35px;"><b> MOIS 7 </b></th>
+                                                        <th style="width:35px;"><b> MOIS 8 </b></th>
+                                                        <th style="width:35px;"><b> MOIS 9 </b></th>
+                                                        <th style="width:35px;"><b> MOIS 10 </b></th>
+                                                        <th style="width:35px;"><b> MOIS 11 </b></th>
+                                                        <th style="width:35px;"><b> MOIS 12 </b></th>
+                                                        <th style="width:35px;"><b> CUMULE </b></th>
+                                                        <th style="width:35px;"><b> TAUX ATTEINT </b></th>
+                                                        <th style="width:35px;"><b> NOTE FINAL </b></th>
+                                                        <th style="width:73px;"><b> COMMENTAIRE </b></th>
+                                                    </tr>
                                                     <?php
-                                                 }
-                                                
-                                                ?>
-                                                </tbody>
+                                                        foreach ($rating as $value)
+                                                        {
+
+                                                            $reviewer_id = $value->getReviewerId();
+                                                            $reviewer = $form->getPerformanceReviewService()->getReviewerById($reviewer_id);
+                                                            $reviewer_group = $reviewer->getReviewerGroupId();
+
+                                                            if ($reviewer_group == 1 && $value->getKpi()->getKpiGroup() == $key)
+								                            {
+                                                                ?>
+                                                                <input type="hidden" value="<?php echo $value->getId(); ?>" id="rating_id_<?php echo $value->getId(); ?>" name="rating_id[<?php echo $value->getId(); ?>]" />
+                                                                <tr>
+
+                                                                    <td style="width:70px;"><?php echo $value->getKpi()->getKpiIndicators() ?></td>
+                                                                    <td style="width:70px;"><?php echo $value->getKpi()->getDelai() ?></td>
+                                                                    <td style="width:65px;"><?php echo $value->getKpi()->getMaxRating() ?></td>
+                                                                    <td><input type="text" style="width:65px;" id="valeur_cible_<?php echo $value->getId(); ?>" name="valeur_cible[<?php echo $value->getId(); ?>]" value="<?php echo $value->getValeurCible(); ?>"></td>
+                                                                    <td><input style="width:35px;" type="text" value="<?php echo $value->getRating(); ?>" id="rating_<?php echo $value->getId(); ?>"  name="rating[<?php echo $value->getId(); ?>]" />
+                                                                        Taux:&nbsp<?php echo round((double)($value->getRating()/$value->getValeurCible())*100); ?>%</td>
+                                                                    <td><input type="text" style="width:35px;" id="mois2_<?php echo $value->getId(); ?>" name="mois2[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois2(); ?>">
+                                                                        Taux:&nbsp<?php echo round((double)($value->getMois2()/$value->getValeurCible())*100); ?>%</td>
+                                                                    <td><input type="text" style="width:35px;" id="mois3_<?php echo $value->getId(); ?>" name="mois3[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois3(); ?>">
+                                                                        Taux:&nbsp<?php echo round((double)($value->getMois3()/$value->getValeurCible())*100); ?>%</td>
+                                                                    <td><input type="text" style="width:35px;" id="mois4_<?php echo $value->getId(); ?>" name="mois4[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois4(); ?>">
+                                                                        Taux:&nbsp<?php echo round((double)($value->getMois4()/$value->getValeurCible())*100); ?>%</td>
+                                                                    <td><input type="text" style="width:35px;" id="mois5_<?php echo $value->getId(); ?>" name="mois5[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois5(); ?>">
+                                                                        Taux:&nbsp<?php echo round((double)($value->getMois5()/$value->getValeurCible())*100); ?>%</td>
+                                                                    <td><input type="text" style="width:35px;" id="mois6_<?php echo $value->getId(); ?>" name="mois6[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois6(); ?>">
+                                                                        Taux:&nbsp<?php echo round((double)($value->getMois6()/$value->getValeurCible())*100); ?>%</td>
+                                                                    <td><input type="text" style="width:35px;" id="mois7_<?php echo $value->getId(); ?>" name="mois7[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois7(); ?>">
+                                                                        Taux:&nbsp<?php echo round((double)($value->getMois7()/$value->getValeurCible())*100); ?>%</td>
+                                                                    <td><input type="text" style="width:35px;" id="mois8_<?php echo $value->getId(); ?>" name="mois8[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois8(); ?>">
+                                                                        Taux:&nbsp<?php echo round((double)($value->getMois8()/$value->getValeurCible())*100); ?>%</td>
+                                                                    <td><input type="text" style="width:35px;" id="mois9_<?php echo $value->getId(); ?>" name="mois9[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois9(); ?>">
+                                                                        Taux:&nbsp<?php echo round((double)($value->getMois9()/$value->getValeurCible())*100); ?>%</td>
+                                                                    <td><input  style="width:35px;" type="text" id="mois10_<?php echo $value->getId(); ?>" name="mois10[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois10(); ?>">
+                                                                        Taux:&nbsp<?php echo round((double)($value->getMois10()/$value->getValeurCible())*100); ?>%</td>
+                                                                    <td><input style="width:35px;" type="text" id="mois11_<?php echo $value->getId(); ?>" name="mois11[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois11(); ?>">
+                                                                        Taux:&nbsp<?php echo round((double)($value->getMois11()/$value->getValeurCible())*100); ?>%</td>
+                                                                    <td><input  type="text" style="width:35px;" id="mois12_<?php echo $value->getId(); ?>" name="mois12[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois12(); ?>">
+                                                                        Taux:&nbsp<?php echo round((double)($value->getMois12()/$value->getValeurCible())*100); ?>%</td>
+                                                                    <td><?php echo $value->getCumule() ?></td>
+                                                                    <td><?php echo round((double)(($value->getTauxAtteint()/$value->getValeurCible())*100)) ?>%</td>
+                                                                    <td><input type="text" style="width:35px;" id="noter_<?php echo $value->getId(); ?>" name="noter_[<?php echo $value->getId(); ?>]" value="<?php echo $value->getNote(); ?>"></td>
+                                                                    <td><textarea class="comment" type="text" id="comment_<?php echo $value->getId(); ?>" name="comment[<?php echo $value->getId(); ?>]" ><?php echo $value->getComment(); ?></textarea></td>
+                                                                </tr>
+                                                                <?php
+                                                            }
+
+                                                        }
+
+                                                        }
+                                                    ?>
+
                                             </table>
 
                                         </div>
                                     </div>
                                 </td>
                                 <?php
-                            }
-                        }
-                        ?>
-                        </tr>
-                    </table>
-                    <br class="clear"/>
-                    <div class="smallerHeader"><h1><?php echo __('Finalization'); ?></h1></div>
-                    <br class="clear"/>
-                    <ol>
-                        <li class="largeTextBox">
-                            <?php echo $form['hrAdminComments']->renderLabel(null, array('class' => 'labelValue')); ?>
-                            <?php echo $form['hrAdminComments']->render() ?>
-                        </li>
+                                }
+                                }
+                                ?>
+                                </tr>
+                            </table>
+                            <br class="clear"/>
+                            <div class="smallerHeader"><h1><?php echo __('Finalization'); ?></h1></div>
+                            <br class="clear"/>
+                            <ol>
+                                <li class="largeTextBox">
+                                    <?php echo $form['hrAdminComments']->renderLabel(null, array('class' => 'labelValue')); ?>
+                                    <?php echo $form['hrAdminComments']->render() ?>
+                                </li>
 
-                        <li>
-                            <?php echo $form['finalRating']->renderLabel(null, array('class' => 'labelValue')); ?>
-                            <?php echo $form['finalRating']->render() ?>
-                        </li>
-                        <li>  
-                            <?php echo $form['completedDate']->renderLabel(null, array('class' => 'labelValue')); ?>
-                            <?php echo $form['completedDate']->render() ?>
-                        </li>
+                                <li>
+                                    <?php echo $form['finalRating']->renderLabel(null, array('class' => 'labelValue')); ?>
+                                    <?php echo $form['finalRating']->render() ?>
+                                </li>
+                                <li>
+                                    <?php echo $form['completedDate']->renderLabel(null, array('class' => 'labelValue')); ?>
+                                    <?php echo $form['completedDate']->render() ?>
+                                </li>
 
-                        <?php if ($form->isEvaluationsEditable()) { ?>
-                            <li class="required">
-                                <em>*</em> <?php echo __(CommonMessages::REQUIRED_FIELD); ?>
-                            </li>
-                        <?php } ?>
-                    </ol>
-                    <p>
-                        <?php if ($form->isEvaluationsEditable()) { ?>
-                            <input type="button" class="applybutton" id="saveBtn" value="<?php echo __('Save'); ?>" title="<?php echo __('Add'); ?>"/>                
-                        <?php } ?>
-                        <?php if ($form->isEvaluationsCompleateEnabled()) { ?>
-                            <input type="button" class="applybutton" id="completeBtn" data-toggle="modal" data-target="#deleteConfModal" value="<?php echo __('Complete'); ?>" title="<?php echo __('Complete'); ?>"/>
-                        <?php } ?>
-                        <input type="button" class="reset" id="backBtn" value="<?php echo __('Back'); ?>" title="<?php echo __('Back'); ?>"/> 
-                    </p>
-            </form>
-            <!-- Confirmation box HTML: Begins -->
-            <div class="modal" id="deleteConfModal">
-                <div class="modal-header">
-                    <a class="close" data-dismiss="modal">×</a>
-                    <h5><?php echo __('SeproRH - Confirmation Required'); ?></h5>
+                                <?php if ($form->isEvaluationsEditable()) { ?>
+                                    <li class="required">
+                                        <em>*</em> <?php echo __(CommonMessages::REQUIRED_FIELD); ?>
+                                    </li>
+                                <?php } ?>
+                            </ol>
+                            <p>
+                                <?php if ($form->isEvaluationsEditable()) { ?>
+                                    <input type="button" class="applybutton" id="saveBtn" value="<?php echo __('Save'); ?>" title="<?php echo __('Add'); ?>"/>
+                                <?php } ?>
+                                <?php if ($form->isEvaluationsCompleateEnabled()) { ?>
+                                    <input type="button" class="applybutton" id="completeBtn" data-toggle="modal" data-target="#deleteConfModal" value="<?php echo __('Complete'); ?>" title="<?php echo __('Complete'); ?>"/>
+                                <?php } ?>
+                                <input type="button" class="reset" id="backBtn" value="<?php echo __('Back'); ?>" title="<?php echo __('Back'); ?>"/>
+                            </p>
+                </form>
+                <!-- Confirmation box HTML: Begins -->
+                <div class="modal" id="deleteConfModal">
+                    <div class="modal-header">
+                        <a class="close" data-dismiss="modal">×</a>
+                        <h5><?php echo __('SeproRH - Confirmation Required'); ?></h5>
+                    </div>
+                    <div class="modal-body">
+                        <p><?php echo __("The review will be made read-only after completion.") . __("This action cannot be undone.") . __("Are you sure you want to continue?"); ?></p>
+                        <br/>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="button" class="btn" data-dismiss="modal" id="dialogDeleteBtn" value="<?php echo __('Ok'); ?>" />
+                        <input type="button" class="btn reset" data-dismiss="modal" value="<?php echo __('Cancel'); ?>" />
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <p><?php echo __("The review will be made read-only after completion.") . __("This action cannot be undone.") . __("Are you sure you want to continue?"); ?></p>
-                    <br/>
-                </div>
-                <div class="modal-footer">
-                    <input type="button" class="btn" data-dismiss="modal" id="dialogDeleteBtn" value="<?php echo __('Ok'); ?>" />
-                    <input type="button" class="btn reset" data-dismiss="modal" value="<?php echo __('Cancel'); ?>" />
-                </div>
+                <!-- Confirmation box HTML: Ends -->
             </div>
-            <!-- Confirmation box HTML: Ends -->
+
         </div>
-
     </div>
-</div>
 
-<script>
+    <script>
 
-    var backUrl = '<?php echo url_for($backUrl); ?>';
+        var backUrl = '<?php echo url_for($backUrl); ?>';
 
-    $(document).ready(function () {
-        $('.evaluationEmployeeths').show();
-<?php if (!$form->isEvaluationsEditable()) { ?>
+        $(document).ready(function () {
+            $('.evaluationEmployeeths').show();
+            <?php if (!$form->isEvaluationsEditable()) { ?>
             $('input,textarea').attr("disabled", "disabled");
             $('#backBtn').removeAttr("disabled");
             $(".calendar").datepicker('disable');
-<?php } ?>
-        $('#saveBtn').click(function () {
-            var settings = $('#reviewEvaluate').validate().settings;
-            delete settings.rules["reviewEvaluation[hrAdminComments]"];
-            delete settings.messages["reviewEvaluation[hrAdminComments]"];
-            delete settings.rules["reviewEvaluation[finalRating]"];
-            delete settings.messages["reviewEvaluation[finalRating]"];
-            delete settings.rules["reviewEvaluation[completedDate]"];
-            delete settings.messages["reviewEvaluation[completedDate]"];
-            $('#reviewEvaluation_action').attr('value', 'save');
-            $('#reviewEvaluate').submit();
-        });
-
-        $('#completeBtn').click(function () {
-            if ($('#reviewEvaluate').valid()) {
-                $("#deleteConfModal").modal();
-            }
-
-        });
-
-        $('#dialogDeleteBtn').bind('click', function () {
-            $('#reviewEvaluation_action').attr('value', 'complete');
-            $('#reviewEvaluation_evaluationsAction').attr('value', 'complete');
-            $('#reviewEvaluate').submit();
-        });
-
-        $('#backBtn').click(function () {
-            console.log(backUrl);
-            window.location.replace(backUrl);
-        });
-
-        var datepickerDateFormat = '<?php echo get_datepicker_date_format($sf_user->getDateFormat()); ?>';
-        var lang_invalidDate = '<?php echo __(ValidationMessages::DATE_FORMAT_INVALID, array('%format%' => get_datepicker_date_format($sf_user->getDateFormat()))) ?>';
-
-        $.datepicker.setDefaults({showOn: 'click'});
-
-        daymarker.bindElement(".ohrm_datepicker", {
-            dateFormat: datepickerDateFormat,
-            onClose: function () {
-                $(this).valid();
-            }
-        });
-
-        $('.ohrm_datepicker').click(function () {
-            daymarker.show(this);
-        });
-
-        $('.calendarBtn').click(function () {
-            var elementId = ($(this).prev().attr('id'));
-            daymarker.show("#" + elementId);
-        });
-        $('#completeBtn').click(function(){
-            $('#deleteConfModal').modal({
-                show: true,
-                closeOnEscape: true
+            <?php } ?>
+            $('#saveBtn').click(function () {
+                var settings = $('#reviewEvaluate').validate().settings;
+                delete settings.rules["reviewEvaluation[hrAdminComments]"];
+                delete settings.messages["reviewEvaluation[hrAdminComments]"];
+                delete settings.rules["reviewEvaluation[finalRating]"];
+                delete settings.messages["reviewEvaluation[finalRating]"];
+                delete settings.rules["reviewEvaluation[completedDate]"];
+                delete settings.messages["reviewEvaluation[completedDate]"];
+                $('#reviewEvaluation_action').attr('value', 'save');
+                $('#reviewEvaluate').submit();
             });
-        });
+
+            $('#completeBtn').click(function () {
+                if ($('#reviewEvaluate').valid()) {
+                    $("#deleteConfModal").modal();
+                }
+
+            });
+
+            $('#dialogDeleteBtn').bind('click', function () {
+                $('#reviewEvaluation_action').attr('value', 'complete');
+                $('#reviewEvaluation_evaluationsAction').attr('value', 'complete');
+                $('#reviewEvaluate').submit();
+            });
+
+            $('#backBtn').click(function () {
+                console.log(backUrl);
+                window.location.replace(backUrl);
+            });
+
+            var datepickerDateFormat = '<?php echo get_datepicker_date_format($sf_user->getDateFormat()); ?>';
+            var lang_invalidDate = '<?php echo __(ValidationMessages::DATE_FORMAT_INVALID, array('%format%' => get_datepicker_date_format($sf_user->getDateFormat()))) ?>';
+
+            $.datepicker.setDefaults({showOn: 'click'});
+
+            daymarker.bindElement(".ohrm_datepicker", {
+                dateFormat: datepickerDateFormat,
+                onClose: function () {
+                    $(this).valid();
+                }
+            });
+
+            $('.ohrm_datepicker').click(function () {
+                daymarker.show(this);
+            });
+
+            $('.calendarBtn').click(function () {
+                var elementId = ($(this).prev().attr('id'));
+                daymarker.show("#" + elementId);
+            });
+            $('#completeBtn').click(function(){
+                $('#deleteConfModal').modal({
+                    show: true,
+                    closeOnEscape: true
+                });
+            });
 
 
-        $("#reviewEvaluate").validate({
-            rules: {
-                'reviewEvaluation[hrAdminComments]': {required: true, maxlength: 255},
-                'reviewEvaluation[finalRating]': {required: true, min: 0, max: 100, number: true, positiveNumber: true},
-                'reviewEvaluation[completedDate]': {
-                    required: true,
-                    valid_date: function () {
-                        return {
-                            format: datepickerDateFormat
+            $("#reviewEvaluate").validate({
+                rules: {
+                    'reviewEvaluation[hrAdminComments]': {required: true, maxlength: 255},
+                    'reviewEvaluation[finalRating]': {required: true, min: 0, max: 100, number: true, positiveNumber: true},
+                    'reviewEvaluation[completedDate]': {
+                        required: true,
+                        valid_date: function () {
+                            return {
+                                format: datepickerDateFormat
+                            }
                         }
+
                     }
-
-                }
-            },
-            messages: {
-                'reviewEvaluation[hrAdminComments]': {
-                    required: '<?php echo __(ValidationMessages::REQUIRED); ?>',
-                    maxlength: '<?php echo __(ValidationMessages::TEXT_LENGTH_EXCEEDS, array('%amount%' => 255)); ?>'
                 },
-                'reviewEvaluation[finalRating]': {
-                    required: '<?php echo __(ValidationMessages::REQUIRED); ?>',
-                    number: '<?php echo __(ValidationMessages::VALID_NUMBER); ?>'
+                messages: {
+                    'reviewEvaluation[hrAdminComments]': {
+                        required: '<?php echo __(ValidationMessages::REQUIRED); ?>',
+                        maxlength: '<?php echo __(ValidationMessages::TEXT_LENGTH_EXCEEDS, array('%amount%' => 255)); ?>'
+                    },
+                    'reviewEvaluation[finalRating]': {
+                        required: '<?php echo __(ValidationMessages::REQUIRED); ?>',
+                        number: '<?php echo __(ValidationMessages::VALID_NUMBER); ?>'
 
-                },
-                'reviewEvaluation[completedDate]': {
-                    required: '<?php echo __(ValidationMessages::REQUIRED); ?>',
-                    valid_date: lang_invalidDate
+                    },
+                    'reviewEvaluation[completedDate]': {
+                        required: '<?php echo __(ValidationMessages::REQUIRED); ?>',
+                        valid_date: lang_invalidDate
+                    }
                 }
-            }
-        });
+            });
 
-        $.validator.addMethod('positiveNumber',
+            $.validator.addMethod('positiveNumber',
                 function (value) {
                     if (!parseFloat(value) > 0) {
                         return /^[0-9][0-9]*$/.test(value);
@@ -409,14 +393,14 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                 }, '<?php echo __(PerformanceValidationMessages::ONLY_INTEGER_ALLOWED); ?>');
 
 
-    });/*
-    var minMsg = "<?php //echo __('Rating should be less than or equal to ') ?>";
-    var maxMsg = "<?php //echo __('Rating should be greater than or equal to ') ?>";
-    jQuery.extend(jQuery.validator.messages, {
-        max: jQuery.validator.format(minMsg + "{0}."),
-        min: jQuery.validator.format(maxMsg + "{0}.")
-    });*/
-</script>
+        });/*
+         var minMsg = "<?php //echo __('Rating should be less than or equal to ') ?>";
+         var maxMsg = "<?php //echo __('Rating should be greater than or equal to ') ?>";
+         jQuery.extend(jQuery.validator.messages, {
+         max: jQuery.validator.format(minMsg + "{0}."),
+         min: jQuery.validator.format(maxMsg + "{0}.")
+         });*/
+    </script>
 
 <?php
 use_stylesheets_for_form($form);

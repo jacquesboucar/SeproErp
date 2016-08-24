@@ -263,8 +263,8 @@ class ReviewEvaluationForm extends BasePefromanceSearchForm {
                         $nbre_mois++;
                         $valeur=$valeur+$mois12;
                     }
-
-                    $rating->setTauxAtteint($valeur/$nbre_mois);
+                    $taux=round((double)($valeur/$nbre_mois));
+                    $rating->setTauxAtteint($taux);
                     $rating->save();
                 }
             }
