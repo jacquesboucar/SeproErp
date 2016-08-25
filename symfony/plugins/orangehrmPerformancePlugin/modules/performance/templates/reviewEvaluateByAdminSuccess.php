@@ -355,7 +355,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
             $("#reviewEvaluate").validate({
                 rules: {
                     'reviewEvaluation[hrAdminComments]': {required: true, maxlength: 255},
-                    'reviewEvaluation[finalRating]': {required: true, min: 0, max: 100, number: true, positiveNumber: true},
+                    'reviewEvaluation[finalRating]': {required: true, min: 0, max: 10000, number: true, positiveNumber: true},
                     'reviewEvaluation[completedDate]': {
                         required: true,
                         valid_date: function () {
@@ -393,13 +393,13 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                 }, '<?php echo __(PerformanceValidationMessages::ONLY_INTEGER_ALLOWED); ?>');
 
 
-        });/*
+        });
          var minMsg = "<?php //echo __('Rating should be less than or equal to ') ?>";
          var maxMsg = "<?php //echo __('Rating should be greater than or equal to ') ?>";
          jQuery.extend(jQuery.validator.messages, {
          max: jQuery.validator.format(minMsg + "{0}."),
          min: jQuery.validator.format(maxMsg + "{0}.")
-         });*/
+         });
     </script>
 
 <?php
