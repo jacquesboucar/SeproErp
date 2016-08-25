@@ -61,10 +61,10 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                 ?>
 
                 <form id="reviewEvaluate" name="reviewEvaluate" method="post" action="">
-                    <div class="smallerHeader"><h1><?php echo __('Evaluation by ' . $reviewer->getGroup()->getName()) ?></h1></div>
+                    <div class="smallerHeader" ><h1><?php echo __('Evaluation by ' . $reviewer->getGroup()->getName()) ?></h1></div>
                     <?php echo $form->render() ?>
                     <div class="evaluationexpand">
-                        <table  class="evaluateBy" >
+                        <table  class="expandTable" >
                             <?php
                             $groupe =  $form->getKpiGroupListAsArray();
                             $existe_group = array();
@@ -108,10 +108,11 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                     <th style="width:35px;"><b> MOIS 12 </b></th>
                                     <th style="width:35px;"><b> CUMULE </b></th>
                                     <th style="width:35px;"><b> TAUX ATTEINT </b></th>
-                                    <th style="width:35px;"><b> NOTE FINAL </b></th>
+                                    <th style="width:35px;"><b> NOTE FINALE </b></th>
                                     <th style="width:73px;"><b> COMMENTAIRE </b></th>
                                 </tr>
                                 <?php
+                                $valuesForCalcuation = array();
                                 foreach ($rating as $value)
                                 {
 
@@ -128,7 +129,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                             <td style="width:70px;"><?php echo $value->getKpi()->getKpiIndicators() ?></td>
                                             <td style="width:70px;"><?php echo $value->getKpi()->getDelai() ?></td>
                                             <td style="width:65px;"><?php echo $value->getKpi()->getMaxRating() ?></td>
-                                            <td><input style="width:35px;" type="text" value="<?php echo $value->getValeurCible(); ?>" id="rating_<?php echo $value->getId(); ?>"  name="rating[<?php echo $value->getId(); ?>]" /></td>
+                                            <td><?php echo $value->getValeurCible(); ?>" id="rating_<?php echo $value->getId(); ?>"  name="rating[<?php echo $value->getId(); ?>]" /></td>
                                             <td><input style="width:35px;" type="text" value="<?php echo $value->getRating(); ?>" id="rating_<?php echo $value->getId(); ?>"  name="rating[<?php echo $value->getId(); ?>]" />
                                                 Taux:&nbsp<?php echo round((double)($value->getRating()/$value->getValeurCible())*100); ?>%</td>
                                             <td><input type="text" style="width:35px;" id="mois2_<?php echo $value->getId(); ?>" name="mois2[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois2(); ?>">
@@ -179,7 +180,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
 
                     <?php echo $form->render() ?>
                     <div class="evaluationexpand">
-                        <table  class="evaluateBy" >
+                        <table  class="expandTable">
                             <?php
                             $groupe =  $form->getKpiGroupListAsArray();
                             $existe_group = array();
@@ -223,10 +224,11 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                     <th style="width:35px;"><b> MOIS 12 </b></th>
                                     <th style="width:35px;"><b> CUMULE </b></th>
                                     <th style="width:35px;"><b> TAUX ATTEINT </b></th>
-                                    <th style="width:35px;"><b> NOTE FINAL </b></th>
+                                    <th style="width:35px;"><b> NOTE FINALE </b></th>
                                     <th style="width:73px;"><b> COMMENTAIRE </b></th>
                                 </tr>
                                 <?php
+                                $valuesForCalcuation = array();
                                 foreach ($rating as $value)
                                 {
 
@@ -237,13 +239,14 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                     if ($reviewer_group == 1 && $value->getKpi()->getKpiGroup() == $key)
                                     {
                                         ?>
+
                                         <input type="hidden" value="<?php echo $value->getId(); ?>" id="rating_id_<?php echo $value->getId(); ?>" name="rating_id[<?php echo $value->getId(); ?>]" />
                                         <tr>
 
                                             <td style="width:70px;"><?php echo $value->getKpi()->getKpiIndicators() ?></td>
                                             <td style="width:70px;"><?php echo $value->getKpi()->getDelai() ?></td>
                                             <td style="width:65px;"><?php echo $value->getKpi()->getMaxRating() ?></td>
-                                            <td><input style="width:35px;" type="text" value="<?php echo $value->getValeurCible(); ?>" id="rating_<?php echo $value->getId(); ?>"  name="rating[<?php echo $value->getId(); ?>]" /></td>
+                                            <td><?php echo $value->getValeurCible() ?></td>
                                             <td><input style="width:35px;" type="text" value="<?php echo $value->getRating(); ?>" id="rating_<?php echo $value->getId(); ?>"  name="rating[<?php echo $value->getId(); ?>]" />
                                                 Taux:&nbsp<?php echo round((double)($value->getRating()/$value->getValeurCible())*100); ?>%</td>
                                             <td><input type="text" style="width:35px;" id="mois2_<?php echo $value->getId(); ?>" name="mois2[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois2(); ?>">

@@ -114,9 +114,9 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                                 <tr>
                                                     <?php if ($columNumber == 1) { ?>
                                                         <th colspan="20" class="evaluationEmployee">
-                                                            <?php echo __("Evaluation by") . ' ' . $reviewer->getEmployee()->getFullName(); ?></th>
+                                                            &nbsp&nbsp&nbsp&nbsp<?php echo __("Evaluation by") . ' ' . $reviewer->getEmployee()->getFullName(); ?></th>
                                                     <?php } else { ?>
-                                                        <th colspan="20" class="evaluationEmployee"><?php echo __("Evaluation by") . ' ' . $reviewer->getEmployee()->getFullName(); ?></th>
+                                                        &nbsp&nbsp&nbsp&nbsp<th colspan="20" class="evaluationEmployee"><?php echo __("Evaluation by") . ' ' . $reviewer->getEmployee()->getFullName(); ?></th>
                                                     <?php } ?>
                                                 </tr>
                                                 <?php
@@ -159,7 +159,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                                         <th style="width:35px;"><b> MOIS 12 </b></th>
                                                         <th style="width:35px;"><b> CUMULE </b></th>
                                                         <th style="width:35px;"><b> TAUX ATTEINT </b></th>
-                                                        <th style="width:35px;"><b> NOTE FINAL </b></th>
+                                                        <th style="width:35px;"><b> NOTE FINALE </b></th>
                                                         <th style="width:73px;"><b> COMMENTAIRE </b></th>
                                                     </tr>
                                                     <?php
