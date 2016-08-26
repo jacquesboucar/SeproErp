@@ -98,7 +98,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                             ?>
 
                             <div class="smallerHeader"><h1><?php echo __('Evaluation by Employee'); ?></h1></div>
-                            <table class="expandTable">
+                            <table class="expandTable" id="emp">
                                 <br class="clear"/>
                                 <tr>
                                     <?php
@@ -179,35 +179,35 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                                                     <td style="width:70px;"><?php echo $value->getKpi()->getKpiIndicators() ?></td>
                                                                     <td style="width:70px;"><?php echo $value->getKpi()->getDelai() ?></td>
                                                                     <td style="width:65px;"><?php echo $value->getKpi()->getMaxRating() ?></td>
-                                                                    <td><input type="text" style="width:65px;" id="valeur_cible_<?php echo $value->getId(); ?>" name="valeur_cible[<?php echo $value->getId(); ?>]" value="<?php echo $value->getValeurCible(); ?>"></td>
-                                                                    <td><input style="width:35px;" type="text" value="<?php echo $value->getRating(); ?>" id="rating_<?php echo $value->getId(); ?>"  name="rating[<?php echo $value->getId(); ?>]" />
+                                                                    <td><input type="text" class="emp" style="width:65px;" id="valeur_cible_<?php echo $value->getId(); ?>" name="valeur_cible[<?php echo $value->getId(); ?>]" value="<?php echo $value->getValeurCible(); ?>"></td>
+                                                                    <td><input style="width:35px;" class="emp" type="text" value="<?php echo $value->getRating(); ?>" id="rating_<?php echo $value->getId(); ?>"  name="rating[<?php echo $value->getId(); ?>]" />
                                                                         Taux:&nbsp<?php echo round((double)($value->getRating()/$value->getValeurCible())*100); ?>%</td>
-                                                                    <td><input type="text" style="width:35px;" id="mois2_<?php echo $value->getId(); ?>" name="mois2[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois2(); ?>">
+                                                                    <td><input type="text" class="emp" style="width:35px;" id="mois2_<?php echo $value->getId(); ?>" name="mois2[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois2(); ?>">
                                                                         Taux:&nbsp<?php echo round((double)($value->getMois2()/$value->getValeurCible())*100); ?>%</td>
-                                                                    <td><input type="text" style="width:35px;" id="mois3_<?php echo $value->getId(); ?>" name="mois3[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois3(); ?>">
+                                                                    <td><input type="text" class="emp" style="width:35px;" id="mois3_<?php echo $value->getId(); ?>" name="mois3[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois3(); ?>">
                                                                         Taux:&nbsp<?php echo round((double)($value->getMois3()/$value->getValeurCible())*100); ?>%</td>
-                                                                    <td><input type="text" style="width:35px;" id="mois4_<?php echo $value->getId(); ?>" name="mois4[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois4(); ?>">
+                                                                    <td><input type="text" class="emp" style="width:35px;" id="mois4_<?php echo $value->getId(); ?>" name="mois4[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois4(); ?>">
                                                                         Taux:&nbsp<?php echo round((double)($value->getMois4()/$value->getValeurCible())*100); ?>%</td>
-                                                                    <td><input type="text" style="width:35px;" id="mois5_<?php echo $value->getId(); ?>" name="mois5[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois5(); ?>">
+                                                                    <td><input type="text" class="emp" style="width:35px;" id="mois5_<?php echo $value->getId(); ?>" name="mois5[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois5(); ?>">
                                                                         Taux:&nbsp<?php echo round((double)($value->getMois5()/$value->getValeurCible())*100); ?>%</td>
-                                                                    <td><input type="text" style="width:35px;" id="mois6_<?php echo $value->getId(); ?>" name="mois6[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois6(); ?>">
+                                                                    <td><input type="text" class="emp" style="width:35px;" id="mois6_<?php echo $value->getId(); ?>" name="mois6[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois6(); ?>">
                                                                         Taux:&nbsp<?php echo round((double)($value->getMois6()/$value->getValeurCible())*100); ?>%</td>
-                                                                    <td><input type="text" style="width:35px;" id="mois7_<?php echo $value->getId(); ?>" name="mois7[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois7(); ?>">
+                                                                    <td><input type="text" class="emp" style="width:35px;" id="mois7_<?php echo $value->getId(); ?>" name="mois7[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois7(); ?>">
                                                                         Taux:&nbsp<?php echo round((double)($value->getMois7()/$value->getValeurCible())*100); ?>%</td>
-                                                                    <td><input type="text" style="width:35px;" id="mois8_<?php echo $value->getId(); ?>" name="mois8[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois8(); ?>">
+                                                                    <td><input type="text" class="emp" style="width:35px;" id="mois8_<?php echo $value->getId(); ?>" name="mois8[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois8(); ?>">
                                                                         Taux:&nbsp<?php echo round((double)($value->getMois8()/$value->getValeurCible())*100); ?>%</td>
-                                                                    <td><input type="text" style="width:35px;" id="mois9_<?php echo $value->getId(); ?>" name="mois9[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois9(); ?>">
+                                                                    <td><input type="text" class="emp" style="width:35px;" id="mois9_<?php echo $value->getId(); ?>" name="mois9[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois9(); ?>">
                                                                         Taux:&nbsp<?php echo round((double)($value->getMois9()/$value->getValeurCible())*100); ?>%</td>
-                                                                    <td><input  style="width:35px;" type="text" id="mois10_<?php echo $value->getId(); ?>" name="mois10[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois10(); ?>">
+                                                                    <td><input  style="width:35px;" class="emp" type="text" id="mois10_<?php echo $value->getId(); ?>" name="mois10[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois10(); ?>">
                                                                         Taux:&nbsp<?php echo round((double)($value->getMois10()/$value->getValeurCible())*100); ?>%</td>
-                                                                    <td><input style="width:35px;" type="text" id="mois11_<?php echo $value->getId(); ?>" name="mois11[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois11(); ?>">
+                                                                    <td><input style="width:35px;" class="emp" type="text" id="mois11_<?php echo $value->getId(); ?>" name="mois11[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois11(); ?>">
                                                                         Taux:&nbsp<?php echo round((double)($value->getMois11()/$value->getValeurCible())*100); ?>%</td>
-                                                                    <td><input  type="text" style="width:35px;" id="mois12_<?php echo $value->getId(); ?>" name="mois12[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois12(); ?>">
+                                                                    <td><input  type="text" class="emp" style="width:35px;" id="mois12_<?php echo $value->getId(); ?>" name="mois12[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois12(); ?>">
                                                                         Taux:&nbsp<?php echo round((double)($value->getMois12()/$value->getValeurCible())*100); ?>%</td>
                                                                     <td><?php echo $value->getCumule() ?></td>
                                                                     <td><?php echo round((double)(($value->getTauxAtteint()/$value->getValeurCible())*100)) ?>%</td>
-                                                                    <td><input type="text" style="width:35px;" id="noter_<?php echo $value->getId(); ?>" name="noter_[<?php echo $value->getId(); ?>]" value="<?php echo $value->getNote(); ?>"></td>
-                                                                    <td><textarea class="comment" type="text" id="comment_<?php echo $value->getId(); ?>" name="comment[<?php echo $value->getId(); ?>]" ><?php echo $value->getComment(); ?></textarea></td>
+                                                                    <td><input type="text" class="emp" style="width:35px;" id="noter_<?php echo $value->getId(); ?>" name="noter_[<?php echo $value->getId(); ?>]" value="<?php echo $value->getNote(); ?>"></td>
+                                                                    <td><textarea class="comment emp" type="text" id="comment_<?php echo $value->getId(); ?>" name="comment[<?php echo $value->getId(); ?>]" ><?php echo $value->getComment(); ?></textarea></td>
                                                                 </tr>
                                                                 <?php
                                                             }
@@ -288,6 +288,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
         var backUrl = '<?php echo url_for($backUrl); ?>';
 
         $(document).ready(function () {
+            $('#emp .emp').attr("disabled", "disabled");
             $('.evaluationEmployeeths').show();
             <?php if (!$form->isEvaluationsEditable()) { ?>
             $('input,textarea').attr("disabled", "disabled");
@@ -400,6 +401,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
          max: jQuery.validator.format(minMsg + "{0}."),
          min: jQuery.validator.format(maxMsg + "{0}.")
          });
+
     </script>
 
 <?php
