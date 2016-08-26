@@ -81,7 +81,7 @@ class reviewEvaluateByAdminPdfAction extends basePeformanceAction {
     $exam_start_date = set_datepicker_date_format($this->getReview($review_id)->getWorkPeriodStart());
     $exam_end_date = set_datepicker_date_format($this->getReview($review_id)->getWorkPeriodEnd());
     $date_completed = set_datepicker_date_format($this->getReview($review_id)->getCompletedDate());
-
+    $finalcomment = $this->getReview($review_id)->getFinalComment();
     // var_dump($this->getReview($review_id));
 
 
@@ -187,15 +187,11 @@ $html = <<<EOD
     <tr>
       <td colspan="2" rowspan="3"  bgcolor="#ffffff" color="#770a82" style="font-size: 20px;font-weight:bold;text-align:center;"> <br><br> SABLUX <br></td>
       <td colspan="14" rowspan="2" border="0" bgcolor="#770a82" color="#ffffff" style="font-size: 20px;font-weight:bold;text-align:center;">  SYSTÈME DE MANAGEMENT DE LA QUALITE <br> TABLEAU DE BORD DU SMQ </td>
-      <td colspan="3" bgcolor="#ffffff" color="#770a82" > Page: $curPage sur $nbPage  </td>
-    </tr>
-    <tr>
-      <td colspan="3" bgcolor="#ffffff" color="#770a82" > Date de création: $date_completed  </td>
+      <td colspan="3" rowspan="3" bgcolor="#ffffff" color="#770a82" > Page: $curPage sur $nbPage  </td>
     </tr>
     <tr>
       <td colspan="7" border="0" bgcolor="#770a82" color="#ffffff" style="font-size: 16px;font-weight:bold;text-align:center;" > Employé : $employe_name  </td>
       <td colspan="7" border="0" bgcolor="#770a82" color="#ffffff" style="font-size: 16px;font-weight:bold;text-align:center;" > Evaluateur : $reviewer_first_name $reviewer_last_name  </td>
-      <td colspan="3" bgcolor="#ffffff" color="#770a82" > Code: </td>
     </tr>
 EOD;
 
@@ -299,6 +295,14 @@ EOD;
 
 $html .= <<<EOD
   </table>
+EOD;
+$html .= <<<EOD
+    <br/><br/><br/><br/>
+    <table>
+        <tr>
+            <td><b>Commentaire Final : </b> <i>$finalcomment</i></td>
+        </tr>
+    <table>
 EOD;
 
 $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
