@@ -239,13 +239,7 @@ $html = <<<EOD
 
 <br><br><br><br><br>
 
-<b><u>Signature supérieure hiérarchique</u></b>
-
-<br><br><br><br><br><br><br>
-
-<b><u>Signature titulaire (mention lu et approuvé)</u></b>
-
-<br><br><br><br><br><br><br>
+<b><i>[*] Fiche de Poste validée par le titulaire</i></b>
 
 
 EOD;
