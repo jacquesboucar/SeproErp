@@ -267,7 +267,7 @@ table tbody tr td a{
     border-color: #1b438c;
 }
 .entetepersonnal{
-    width: 67%;
+    width: 40%;
 }
 .personalDetails form ol li input[type=text] {
     width: 278px;
@@ -343,7 +343,11 @@ table tbody tr td a{
 }
 .evaluationexpand{
 
-    width: 90%;
+    width: 91%;
+    overflow: auto;
+}
+.evaldiv{
+    width: 100%;
     overflow: auto;
 }
 .test{
