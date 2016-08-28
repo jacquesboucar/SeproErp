@@ -179,7 +179,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                     <div class="smallerHeader"><h1><?php echo __('Evaluation by ' . $form->getReviewer()->getGroup()->getName()) ?></h1></div>
 
                     <?php echo $form->render() ?>
-                    <div class="evaluationexpand">
+                    <div class="evaluationexpand evaldiv">
                         <table  class="expandTable">
                             <?php
                             $groupe =  $form->getKpiGroupListAsArray();
@@ -273,7 +273,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                                 Taux:&nbsp<?php echo round((double)($value->getMois12()/$value->getValeurCible())*100); ?>%</td>
                                             <td><?php echo $value->getCumule() ?></td>
                                             <td><?php echo round((double)(($value->getTauxAtteint()/$value->getValeurCible())*100)) ?>%</td>
-                                            <td><input type="text" style="width:35px;" id="noter_<?php echo $value->getId(); ?>" name="noter_[<?php echo $value->getId(); ?>]" value="<?php echo $value->getNote(); ?>"></td>
+                                            <td><?php echo $value->getNote(); ?></td>
                                             <td><textarea class="comment" type="text" id="comment_<?php echo $value->getId(); ?>" name="comment[<?php echo $value->getId(); ?>]" ><?php echo $value->getComment(); ?></textarea></td>
                                         </tr>
                                         <?php
