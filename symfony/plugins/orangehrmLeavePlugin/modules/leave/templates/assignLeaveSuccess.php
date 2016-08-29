@@ -38,7 +38,7 @@ use_stylesheet(plugin_web_path('orangehrmLeavePlugin', 'css/assignLeaveSuccess.c
 <div class="modal" id="balance_details">
   <div class="modal-header">
     <a class="close" data-dismiss="modal">×</a>
-    <h3><?php echo 'OrangeHRM - ' . __('Leave Balance Details'); ?></h3>
+    <h3><?php echo 'SeproRH - ' . __('Leave Balance Details'); ?></h3>
   </div>
   <div class="modal-body">
       <dl class="search-params">
@@ -89,7 +89,7 @@ use_stylesheet(plugin_web_path('orangehrmLeavePlugin', 'css/assignLeaveSuccess.c
 <div class="modal" id="multiperiod_balance">
   <div class="modal-header">
     <a class="close" data-dismiss="modal">×</a>
-    <h3><?php echo 'OrangeHRM - ' . __('Leave Balance Details'); ?></h3>
+    <h3><?php echo 'SeproRH - ' . __('Leave Balance Details'); ?></h3>
   </div>
   <div class="modal-body">
       <dl class="search-params">
@@ -122,7 +122,7 @@ use_stylesheet(plugin_web_path('orangehrmLeavePlugin', 'css/assignLeaveSuccess.c
 <!-- Confirmation box for leave balance update -->
 <div class="modal" id="leaveBalanceConfirm" style="width:500px">
   <div class="modal-header">
-    <h3><?php echo 'OrangeHRM - ' . __('Confirm Leave Assignment'); ?></h3>
+    <h3><?php echo 'SeproRH - ' . __('Confirm Leave Assignment'); ?></h3>
   </div>
   <div class="modal-body">
       <p><?php echo __('Employee does not have sufficient leave balance for leave request.');?></p>
