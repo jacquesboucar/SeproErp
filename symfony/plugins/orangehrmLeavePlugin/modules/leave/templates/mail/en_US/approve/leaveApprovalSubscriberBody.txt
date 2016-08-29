@@ -3,7 +3,7 @@ Hi %recipientFirstName%,
 %performerFullName% has approved leave request of %applicantFullName%. The leave details:
 
 %leaveDetails%
-You were sent this mail, as you have subscribed to Sablux Group leave approvals.
+You were sent this mail, as you have subscribed to Sablux leave approvals.
 
 Thank you.
 

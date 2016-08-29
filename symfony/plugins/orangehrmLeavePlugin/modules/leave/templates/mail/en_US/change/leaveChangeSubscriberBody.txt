@@ -3,7 +3,7 @@ Hi %recipientFirstName%,
 %performerFullName% has done the following changes to leave request of %applicantFullName%. The leave details:
 
 %leaveDetails%
-You were sent this mail, as you have subscribed to Sablux Group leave changes.
+You were sent this mail, as you have subscribed to Sablux leave changes.
 
 Thank you.
 

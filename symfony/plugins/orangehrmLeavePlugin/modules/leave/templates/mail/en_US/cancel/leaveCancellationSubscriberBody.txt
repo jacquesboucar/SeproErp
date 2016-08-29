@@ -3,7 +3,7 @@ Hi %recipientFirstName%,
 %performerFullName% has cancelled leave request of %applicantFullName%. The leave details:
 
 %leaveDetails%
-You were sent this mail, as you have subscribed to Sablux Group leave cancellations.
+You were sent this mail, as you have subscribed to Sablux leave cancellations.
 
 Thank you.
 

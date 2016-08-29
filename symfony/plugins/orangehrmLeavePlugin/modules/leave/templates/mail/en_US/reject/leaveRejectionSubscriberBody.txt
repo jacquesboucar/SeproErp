@@ -3,7 +3,7 @@ Hi %recipientFirstName%,
 %performerFullName% has rejected leave request of %applicantFullName%. The leave details:
 
 %leaveDetails%
-You were sent this mail, as you have subscribed to Sablux Group leave rejections.
+You were sent this mail, as you have subscribed to Sablux leave rejections.
 
 Thank you.
 

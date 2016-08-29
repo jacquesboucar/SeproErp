@@ -5,7 +5,7 @@ Hi %recipientFirstName%,
 %leaveDetails%      
 You were sent this mail, as you are a supervisor assigned for %performerFirstName%.
 
-Please login to Sablux Group, and either approve or reject from Leave List.
+Please login to Sablux, and either approve or reject from Leave List.
 
 Thank you.
 
