@@ -129,14 +129,13 @@ class searchKpiPdfAction extends basePeformanceAction {
 // $pdf->setTextShadow(array('enabled'=>true, 'depth_w'=>0.2, 'depth_h'=>0.2, 'color'=>array(196,196,196), 'opacity'=>1, 'blend_mode'=>'Normal'));
 
 $html = <<<EOD
+  <br/>
   <table border="1" cellspacing="0" cellpadding="4" >
     <tr bgcolor="#770a82" color="#ffffff">
-      <th> Indicateur Clé de Performance </th>
       <th> Kpi Groupe </th>
-      <th> Titre du poste  </th>
+      <th> Indicateur Clé de Performance </th>
       <th> Objectifs  </th>
       <th> Mode Calcul </th>
-      <th> Poids </th>
       <th> Périodicité  </th>
     </tr>
 
@@ -151,23 +150,21 @@ foreach ($kpi as $key => $value) {
 	$id_group = $value->getKpiGroup();
 	$group = $this->getKpiGroupService()->getKpiGroupById($id_group);
     $Kpigroup = $group->getKpiGroupName();
-    $job_id = $value->getJobTitle();
-    $job_title = $this->_getJobTitles($job_id);
+    //$job_id = $value->getJobTitle();
+    //$job_title = $this->_getJobTitles($job_id);
     $objectif = $value->getObjectif();
     $mode_calcul = $value->getModeCalcul();
-    $poids = $value->getMaxRating();
+    //$poids = $value->getMaxRating();
     $periodicite = $value->getDelai();
 
 
 $html .= <<<EOD
 
     <tr>
-      <td> $kpi </td>
       <td> $Kpigroup </td>
-      <td> $job_title </td>
+      <td> $kpi </td>
       <td> $objectif </td>
       <td> $mode_calcul </td>
-      <td> $poids </td>
       <td> $periodicite </td>
     </tr>
 
