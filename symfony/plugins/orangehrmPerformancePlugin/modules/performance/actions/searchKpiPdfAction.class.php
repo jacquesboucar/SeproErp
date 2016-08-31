@@ -68,9 +68,18 @@ class searchKpiPdfAction extends basePeformanceAction {
         $this->kpiSearchForm = $kpiSearchForm;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getKpiGroupListAsArray() {
+        foreach ($this->getKpiGroupService()->getKpiGroupList() as $group) {
+            $kpiGroup[$group->getId()] = $group->getKpiGroupName();
+        }
+        return $kpiGroup;
+    }
 
 	public function execute($request) {
-       $kpi = $this->getKpiService()->searchKpi($parameters = null);
+       $kpis = $this->getKpiService()->searchKpi($parameters = null);
 
       // create new PDF document
        $pdf = new FICHE(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
@@ -129,7 +138,7 @@ class searchKpiPdfAction extends basePeformanceAction {
 // $pdf->setTextShadow(array('enabled'=>true, 'depth_w'=>0.2, 'depth_h'=>0.2, 'color'=>array(196,196,196), 'opacity'=>1, 'blend_mode'=>'Normal'));
 
 $html = <<<EOD
-  <br/>
+  <br/><br/><br/>
   <table border="1" cellspacing="0" cellpadding="4" >
     <tr bgcolor="#770a82" color="#ffffff">
       <th> Kpi Groupe </th>
@@ -143,35 +152,50 @@ $html = <<<EOD
 
 
 EOD;
+$existe_group = array();
+$groupe =  $this->getKpiGroupListAsArray();
+ foreach ($groupe as $key => $grp) {
+   $existe_group[$key] = $key;
+ }
+foreach ($existe_group as $key => $grp)
+{
+    foreach ($kpis as $value)
+    {
+
+        $kpi = $value->getKpiIndicators();
+        $id_group = $value->getKpiGroup();
+        $group = $this->getKpiGroupService()->getKpiGroupById($id_group);
+        $Kpigroup = $group->getKpiGroupName();
+        if($grp==$id_group)
+        {
+            //$job_id = $value->getJobTitle();
+            //$job_title = $this->_getJobTitles($job_id);
+            $objectif = $value->getObjectif();
+            $mode_calcul = $value->getModeCalcul();
+            //$poids = $value->getMaxRating();
+            $periodicite = $value->getDelai();
 
 
-foreach ($kpi as $key => $value) {
-	$kpi = $value->getKpiIndicators();
-	$id_group = $value->getKpiGroup();
-	$group = $this->getKpiGroupService()->getKpiGroupById($id_group);
-    $Kpigroup = $group->getKpiGroupName();
-    //$job_id = $value->getJobTitle();
-    //$job_title = $this->_getJobTitles($job_id);
-    $objectif = $value->getObjectif();
-    $mode_calcul = $value->getModeCalcul();
-    //$poids = $value->getMaxRating();
-    $periodicite = $value->getDelai();
 
+            $html .= <<<EOD
 
-$html .= <<<EOD
-
-    <tr>
-      <td> $Kpigroup </td>
-      <td> $kpi </td>
-      <td> $objectif </td>
-      <td> $mode_calcul </td>
-      <td> $periodicite </td>
-    </tr>
+            <tr>
+              <td> $Kpigroup </td>
+              <td> $kpi </td>
+              <td> $objectif </td>
+              <td> $mode_calcul </td>
+              <td> $periodicite </td>
+            </tr>
 
 
 EOD;
 
+        }
+
+
+    }
 }
+
 
 $html .= <<<EOD
   </table>
