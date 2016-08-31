@@ -343,7 +343,7 @@ table tbody tr td a{
 }
 .evaluationexpand{
 
-    width: 91%;
+    width: 90%;
     overflow: auto;
 }
 .evaldiv{
@@ -352,4 +352,10 @@ table tbody tr td a{
 }
 .test{
     width: 50px;
+}
+@media screen and (max-device-width: 500px) {
+    .evaluationexpand{
+        width: 52%;
+        overflow: auto;
+    }
 }
