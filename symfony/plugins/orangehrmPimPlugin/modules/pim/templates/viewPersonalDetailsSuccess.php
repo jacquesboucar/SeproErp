@@ -104,6 +104,10 @@ use_stylesheet(plugin_web_path('orangehrmPimPlugin', 'css/viewPersonalDetailsSuc
                             <label for="personal_DOB"><?php echo __("Date of Birth"); ?></label>
                             <?php echo $form['DOB']->render(array("class"=>"editable")); ?>
                         </li>
+                        <li>
+                            <label for="personal_ddebut"><?php echo __("Date of Start");?></label>
+                            <?php echo $form['txtdatedebuts']->render(array("class"=>"editable")); ?>
+                        </li>
                         <?php if(!$showDeprecatedFields) : ?>
                             <li class="required new">
                                 <em>*</em> <?php echo __(CommonMessages::REQUIRED_FIELD); ?>

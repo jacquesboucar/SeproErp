@@ -113,6 +113,7 @@ Employee:
     custom8: string(250)
     custom9: string(250)
     custom10: string(250)
+    datedebut: date(25)
   relations:
     subDivision:
       class: Subunit

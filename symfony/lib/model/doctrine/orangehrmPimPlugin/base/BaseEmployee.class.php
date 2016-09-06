@@ -63,6 +63,7 @@
  * @property string $custom8
  * @property string $custom9
  * @property string $custom10
+ * @property date $datedebut
  * @property Subunit $subDivision
  * @property JobTitle $jobTitle
  * @property EmploymentStatus $employeeStatus
@@ -168,6 +169,7 @@
  * @method string                    getCustom8()                    Returns the current record's "custom8" value
  * @method string                    getCustom9()                    Returns the current record's "custom9" value
  * @method string                    getCustom10()                   Returns the current record's "custom10" value
+ * @method date                      getDatedebut()                  Returns the current record's "datedebut" value
  * @method Subunit                   getSubDivision()                Returns the current record's "subDivision" value
  * @method JobTitle                  getJobTitle()                   Returns the current record's "jobTitle" value
  * @method EmploymentStatus          getEmployeeStatus()             Returns the current record's "employeeStatus" value
@@ -272,6 +274,7 @@
  * @method Employee                  setCustom8()                    Sets the current record's "custom8" value
  * @method Employee                  setCustom9()                    Sets the current record's "custom9" value
  * @method Employee                  setCustom10()                   Sets the current record's "custom10" value
+ * @method Employee                  setDatedebut()                  Sets the current record's "datedebut" value
  * @method Employee                  setSubDivision()                Sets the current record's "subDivision" value
  * @method Employee                  setJobTitle()                   Sets the current record's "jobTitle" value
  * @method Employee                  setEmployeeStatus()             Sets the current record's "employeeStatus" value
@@ -575,6 +578,10 @@ abstract class BaseEmployee extends sfDoctrineRecord
         $this->hasColumn('custom10', 'string', 250, array(
              'type' => 'string',
              'length' => 250,
+             ));
+        $this->hasColumn('datedebut', 'date', 25, array(
+             'type' => 'date',
+             'length' => 25,
              ));
     }
 

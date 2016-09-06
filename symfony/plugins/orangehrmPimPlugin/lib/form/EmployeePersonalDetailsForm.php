@@ -144,6 +144,7 @@ class EmployeePersonalDetailsForm extends BaseForm {
             'chkSmokeFlag' => new sfWidgetFormInputCheckbox(),
             'txtLicExpDate' => new ohrmWidgetDatePicker(array(), array('id' => 'personal_txtLicExpDate')),
             'txtMilitarySer' => new sfWidgetFormInputText(),
+            'txtdatedebuts' => new ohrmWidgetDatePicker(array(), array('id' => 'personal_txtdatedebuts')),
         );
 
         //setting default values
@@ -151,6 +152,7 @@ class EmployeePersonalDetailsForm extends BaseForm {
         $widgets['txtEmpFirstName']->setAttribute('value', $this->employee->firstName);
         $widgets['txtEmpMiddleName']->setAttribute('value', $this->employee->middleName);
         $widgets['txtEmpNickName']->setAttribute('value', $this->employee->nickName);
+        $widgets['txtdatedebuts']->setAttribute('value', $this->employee->datedebut);
 
         //setting the default selected nation code
         $widgets['cmbNation']->setDefault($this->employee->nation_code);
@@ -191,7 +193,8 @@ class EmployeePersonalDetailsForm extends BaseForm {
             'cmbMarital' => new sfValidatorString(array('required' => false)),
             'chkSmokeFlag' => new sfValidatorString(array('required' => false)),
             'txtLicExpDate' => new ohrmDateValidator(array('date_format' => $inputDatePattern, 'required' => false), array('invalid' => "Date format should be $inputDatePattern")),
-            'txtMilitarySer' => new sfValidatorString(array('required' => false))
+            'txtMilitarySer' => new sfValidatorString(array('required' => false)),
+            'txtdatedebuts' => new ohrmDateValidator(array('date_format' => $inputDatePattern, 'required' => false), array('invalid' => "Date format should be $inputDatePattern"))
         );
 
         return $validators;
@@ -239,6 +242,7 @@ class EmployeePersonalDetailsForm extends BaseForm {
             $employee->middleName = $this->getValue('txtEmpMiddleName');
             $employee->lastName = $this->getValue('txtEmpLastName');
             $employee->nickName = $this->getValue('txtEmpNickName');
+            $employee->datedebut = $this->getValue('txtdatedebuts');
 
             $nation = $this->getValue('cmbNation');
             $employee->nation_code = ($nation != '0') ? $nation : null;
