@@ -447,7 +447,6 @@ class LeaveEntitlementDao extends BaseDao {
                         $datedebut =new DateTime($emp->getDatedebut());
                         $diff=$datetoday->diff($datedebut);
                         $cpt=0;$solde=0;
-
                         $type=$this->getLeaveTypeService()->readLeaveType($leaveEntitlement->getLeaveTypeId());
                         $typename=$type->getName();
                         if(strcmp("Annuel", $typename)==0 || strcmp("annuel", $typename)==0 || strcmp("ANNUEL", $typename)==0)
@@ -456,12 +455,11 @@ class LeaveEntitlementDao extends BaseDao {
                                 $this->getEmployeeService()->getEmployeeDependents($empNumber);
                                 $cpt=sizeof($this->getEmployeeService()->getEmployeeDependents($empNumber));
                             }
-                            if(!is_float($diff-y/10) && isset($diff)){
-                                $solde=$diff-y/10;
+                            if(!is_float($diff->y/10) && isset($diff) && $diff!=0){
+                                $solde=$diff->y/10;
                             }
 
                         }
-
                         $entitlement = new LeaveEntitlement();
                         $noOfDays = $leaveEntitlement->getNoOfDays()+$solde+$cpt;
                         $entitlement->setEmpNumber($empNumber);
