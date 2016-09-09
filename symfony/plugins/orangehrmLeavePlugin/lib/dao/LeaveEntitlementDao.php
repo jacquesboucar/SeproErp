@@ -28,7 +28,7 @@ class LeaveEntitlementDao extends BaseDao {
     protected $leaveEntitlementStrategy;
     protected $leaveConfigService;
     protected $logger;
-    
+
     /**
      * Get Logger instance. Creates if not already created.
      *
@@ -41,38 +41,43 @@ class LeaveEntitlementDao extends BaseDao {
 
         return($this->logger);
     }
-    
+    public function getEmployeeService() {
+        if (empty($this->employeeService)) {
+            $this->employeeService = new EmployeeService();
+        }
+        return $this->employeeService;
+    }
     public function getLeaveConfigService() {
         if (!($this->leaveConfigService instanceof LeaveConfigurationService)) {
             $this->leaveConfigService = new LeaveConfigurationService();
-        }        
+        }
         return $this->leaveConfigService;
     }
 
     public function setLeaveConfigService($leaveConfigService) {
         $this->leaveConfigService = $leaveConfigService;
     }
-    
+
     public function getLeaveEntitlementStrategy() {
         if (!isset($this->leaveEntitlementStrategy)) {
-            
-            $strategyClass = $this->getLeaveConfigService()->getLeaveEntitlementConsumptionStrategy();            
+
+            $strategyClass = $this->getLeaveConfigService()->getLeaveEntitlementConsumptionStrategy();
             $this->leaveEntitlementStrategy = new $strategyClass;
         }
-        
+
         return $this->leaveEntitlementStrategy;
     }
-    
+
     public function setLeaveEntitlementStrategy($leaveEntitlementStrategy) {
         $this->leaveEntitlementStrategy = $leaveEntitlementStrategy;
-    }    
+    }
 
     public function getPendingStatusIds() {
         if (is_null(self::$pendingStatusIds)) {
             $q = Doctrine_Query::create()
-                    ->select('s.status')
-                    ->from('LeaveStatus s')
-                    ->where("s.name LIKE '%PENDING APPROVAL%'");
+                ->select('s.status')
+                ->from('LeaveStatus s')
+                ->where("s.name LIKE '%PENDING APPROVAL%'");
 
             self::$pendingStatusIds = $q->execute(array(), Doctrine_Core::HYDRATE_SINGLE_SCALAR);
             if (count(self::$pendingStatusIds) == 0) {
@@ -137,36 +142,36 @@ class LeaveEntitlementDao extends BaseDao {
             if (!empty($idList)) {
                 $q->andWhereIn('le.id', $idList);
             }
-            
+
             if (is_array($entitlementTypes) && count($entitlementTypes) > 0) {
-                
+
                 // We are not using andWhereIn(), because it causes the error:
                 // 'Invalid parameter number: mixed named and positional parameters'.
                 // This is because andWhereIn() adds positional parameters (? marks),
                 // while we are using named parameters for the other parts of the query.
-                // Therefore, we are building the whereIn() part using named parameters here.                
-                $count = 0;         
+                // Therefore, we are building the whereIn() part using named parameters here.
+                $count = 0;
                 $namedParams = array();
                 foreach($entitlementTypes as $entitlementType) {
                     $count++;
                     $namedParam = ':et' . $count;
-                    $namedParams[] = $namedParam;                    
+                    $namedParams[] = $namedParam;
                     $params[$namedParam] = $entitlementType;
                 }
                 $q->andWhere('le.entitlement_type IN (' . implode(',', $namedParams) . ')');
             }
-            
+
             if (!empty($empIdList)) {
-                
+
                 // filter empIdList and create comma separated string.
                 $filteredIds = array_map(function($item) {
-                                return filter_var($item, FILTER_VALIDATE_INT);
-                            }, $empIdList);
-                            
+                    return filter_var($item, FILTER_VALIDATE_INT);
+                }, $empIdList);
+
                 // Remove items which did not validate as int (they will be set to false)
                 // NOTE: This doesn't cause SQL injection issues because we filter the array
                 // and only allow integers in the array.
-                $filteredIds = array_filter($filteredIds);                            
+                $filteredIds = array_filter($filteredIds);
                 $q->andWhere('le.emp_number IN (' . implode(',', $filteredIds) . ')');
             }
 
@@ -232,40 +237,40 @@ class LeaveEntitlementDao extends BaseDao {
             throw new DaoException($e->getMessage(), 0, $e);
         }
     }
-    
+
     protected function bulkLinkLeaveToUnusedLeaveEntitlements($entitlements, $leaveTypeId, $fromDate, $toDate) {
-        
+
         // sort collection by $empNumber key;
         $result = ksort($entitlements, SORT_NUMERIC);
         if (!$result) {
             echo "Sort failed";
             die();
         }
-                
-        $empNumbers = array_keys($entitlements);            
+
+        $empNumbers = array_keys($entitlements);
         $leaveList = $this->getLeaveWithoutEntitlements($empNumbers, $leaveTypeId, $fromDate, $toDate);
         $leaveListByEmployee = array();
-        
+
         foreach ($leaveList as $leave) {
             $empNumber = $leave['empNumber'];
-            
+
             if (isset($leaveListByEmployee[$empNumber])) {
                 $leaveListByEmployee[$empNumber][] = $leave;
             } else {
                 $leaveListByEmployee[$empNumber] = array($leave);
             }
         }
-        
-        
+
+
         $query = Doctrine_Query::create()
-                    ->from('LeaveLeaveEntitlement l')
-                    ->where('l.leave_id = ?')
-                    ->andWhere('l.entitlement_id = ?');        
-            
+            ->from('LeaveLeaveEntitlement l')
+            ->where('l.leave_id = ?')
+            ->andWhere('l.entitlement_id = ?');
+
         foreach ($entitlements as $empNumber => $leaveEntitlement) {
-            
+
             $balance = $leaveEntitlement->getNoOfDays() - $leaveEntitlement->getDaysUsed();
-            
+
             if ($balance > 0 && isset($leaveListByEmployee[$empNumber])) {
                 $entitlementId = $leaveEntitlement->getId();
 
@@ -295,12 +300,12 @@ class LeaveEntitlementDao extends BaseDao {
                         break;
                     }
                 }
-            
+
             }
         }
-            
+
         return $leaveEntitlement;
-    }    
+    }
 
     protected function linkLeaveToUnusedLeaveEntitlement(LeaveEntitlement $leaveEntitlement) {
         $balance = $leaveEntitlement->getNoOfDays() - $leaveEntitlement->getDaysUsed();
@@ -310,10 +315,10 @@ class LeaveEntitlementDao extends BaseDao {
             $leaveList = $this->getLeaveWithoutEntitlements($leaveEntitlement->getEmpNumber(), $leaveEntitlement->getLeaveTypeId(), $leaveEntitlement->getFromDate(), $leaveEntitlement->getToDate());
 
             $query = Doctrine_Query::create()
-                        ->from('LeaveLeaveEntitlement l')
-                        ->where('l.leave_id = ?')
-                        ->andWhere('l.entitlement_id = ?');
-            
+                ->from('LeaveLeaveEntitlement l')
+                ->where('l.leave_id = ?')
+                ->andWhere('l.entitlement_id = ?');
+
             foreach ($leaveList as $leave) {
                 $daysLeft = $leave['days_left'];
                 $leaveId = $leave['id'];
@@ -348,9 +353,9 @@ class LeaveEntitlementDao extends BaseDao {
     public function deleteLeaveEntitlements($ids) {
         try {
             $q = Doctrine_Query::create()
-                    ->update('LeaveEntitlement le')
-                    ->set('le.deleted', 1)
-                    ->whereIn('le.id', $ids);
+                ->update('LeaveEntitlement le')
+                ->set('le.deleted', 1)
+                ->whereIn('le.id', $ids);
 
             return $q->execute();
         } catch (Exception $e) {
@@ -382,10 +387,10 @@ class LeaveEntitlementDao extends BaseDao {
             $entitlementList = $this->searchLeaveEntitlements($leaveEntitlementSearchParameterHolder);
             if (count($entitlementList) > 0) {
                 foreach ($entitlementList as $updateEntitlement) {
-                    
+
                     $empNumber = $updateEntitlement['emp_number'];
-                    
-                    if (!isset($allEntitlements[$empNumber])) {                    
+
+                    if (!isset($allEntitlements[$empNumber])) {
                         $entitlement = new LeaveEntitlement();
                         $noOfDays = $leaveEntitlement->getNoOfDays();
                         $entitlement->setEmpNumber($empNumber);
@@ -420,13 +425,28 @@ class LeaveEntitlementDao extends BaseDao {
             $newEmployeeList = array_diff($employeeNumbers, $updateEmpList);
             if (count($newEmployeeList) > 0) {
                 $query = " INSERT INTO ohrm_leave_entitlement(`emp_number`,`leave_type_id`,`from_date`,`to_date`,`no_of_days`,`entitlement_type`) VALUES " .
-                         "(?, ?, ?, ?, ?, ?)";
+                    "(?, ?, ?, ?, ?, ?)";
                 $stmt = $pdo->prepare($query);
-                
+
                 foreach ($newEmployeeList as $empNumber) {
                     if (!isset($allEntitlements[$empNumber])) {
+                        $emp=$this->getEmployeeService()->getEmployee($empNumber);
+
+                        $datetoday=new DateTime();
+                        $datedebut =new DateTime($emp->getDatedebut());
+                        $diff=$datetoday->diff($datedebut);
+                        $cpt=0;$solde=0;
+                        
+                        if($emp->getEmpGender()==1){
+                            $this->getEmployeeService()->getEmployeeDependents($empNumber);
+                            $cpt=sizeof($this->getEmployeeService()->getEmployeeDependents($empNumber));
+                        }
+                        if(!is_float($diff-y/10) && isset($diff)){
+                            $solde=$diff-y/10;
+                        }
+
                         $entitlement = new LeaveEntitlement();
-                        $noOfDays = $leaveEntitlement->getNoOfDays();
+                        $noOfDays = $leaveEntitlement->getNoOfDays()+$solde+$cpt;
                         $entitlement->setEmpNumber($empNumber);
                         $entitlement->setLeaveTypeId($leaveEntitlement->getLeaveTypeId());
 
@@ -450,18 +470,18 @@ class LeaveEntitlementDao extends BaseDao {
                     }
                 }
             }
-            
+
             // If leave period is forced, we can bulk assign at once, because from and to date of
             // all leave entitlements will be the same
             $leavePeriodStatus = LeavePeriodService::getLeavePeriodStatus();
             if ($leavePeriodStatus == LeavePeriodService::LEAVE_PERIOD_STATUS_FORCED) {
                 $this->bulkLinkLeaveToUnusedLeaveEntitlements($allEntitlements, $leaveTypeId, $fromDate, $toDate);
-            } else { 
+            } else {
                 foreach ($allEntitlements as $leaveEntitlement) {
                     $this->linkLeaveToUnusedLeaveEntitlement($leaveEntitlement);
                 }
             }
-            
+
             $conn->commit();
             return $savedCount;
         } catch (Exception $e) {
@@ -480,11 +500,11 @@ class LeaveEntitlementDao extends BaseDao {
                 ':toDate' => $toDate
             );
             $q = Doctrine_Query::create()->from('LeaveEntitlement le')
-                    ->addWhere('le.deleted = 0')
-                    ->addWhere('le.leave_type_id = :leaveTypeId')
-                    ->addWhere('le.emp_number = :empNumber')
-                    ->addWhere('(le.no_of_days - le.days_used) > 0')
-                    ->addWhere('(:fromDate BETWEEN le.from_date AND le.to_date) OR ' .
+                ->addWhere('le.deleted = 0')
+                ->addWhere('le.leave_type_id = :leaveTypeId')
+                ->addWhere('le.emp_number = :empNumber')
+                ->addWhere('(le.no_of_days - le.days_used) > 0')
+                ->addWhere('(:fromDate BETWEEN le.from_date AND le.to_date) OR ' .
                     '(:toDate BETWEEN le.from_date AND le.to_date) OR ' .
                     '(le.from_date BETWEEN :fromDate AND :toDate)');
 
@@ -504,10 +524,10 @@ class LeaveEntitlementDao extends BaseDao {
     public function getLinkedLeaveRequests($entitlementIds, $statuses) {
         try {
             $q = Doctrine_Query::create()->from('Leave l')
-                    ->leftJoin('l.LeaveEntitlements le')
-                    ->andWhereIn('le.id', $entitlementIds)
-                    ->andWhereIn('l.status', $statuses)
-                    ->addOrderBy('l.id ASC');
+                ->leftJoin('l.LeaveEntitlements le')
+                ->andWhereIn('le.id', $entitlementIds)
+                ->andWhereIn('l.status', $statuses)
+                ->addOrderBy('l.id ASC');
 
             $results = $q->execute();
             return $results;
@@ -523,7 +543,7 @@ class LeaveEntitlementDao extends BaseDao {
      *    * scheduled
      *    * pending approval
      *    * leave without entitlements
-     * 
+     *
      * @param int $empNumber Employee Number
      * @param int $leaveTypeId Leave Type ID
      * @param date $asAtDate Balance as at given date
@@ -537,15 +557,15 @@ class LeaveEntitlementDao extends BaseDao {
         $pendingIdList = is_array($pendingIds) ? implode(',', $pendingIds) : $pendingIds;
 
         $sql = 'SELECT le.no_of_days AS entitled, ' .
-                'le.days_used AS used, ' .
-                'sum(IF(l.status = 2, lle.length_days, 0)) AS scheduled, ' .
-                'sum(IF(l.status IN (' . $pendingIdList . '), lle.length_days, 0)) AS pending, ' .
-                'sum(IF(l.status = 3, l.length_days, 0)) AS taken, 0 as notLinked ' .
-                'FROM ohrm_leave_entitlement le LEFT JOIN ' .
-                'ohrm_leave_leave_entitlement lle ON le.id = lle.entitlement_id LEFT JOIN ' .
-                'ohrm_leave l ON l.id = lle.leave_id ' .
-                'WHERE le.deleted = 0 AND le.emp_number = ? AND le.leave_type_id = ? ' .
-                ' AND le.to_date >= ?';
+            'le.days_used AS used, ' .
+            'sum(IF(l.status = 2, lle.length_days, 0)) AS scheduled, ' .
+            'sum(IF(l.status IN (' . $pendingIdList . '), lle.length_days, 0)) AS pending, ' .
+            'sum(IF(l.status = 3, l.length_days, 0)) AS taken, 0 as notLinked ' .
+            'FROM ohrm_leave_entitlement le LEFT JOIN ' .
+            'ohrm_leave_leave_entitlement lle ON le.id = lle.entitlement_id LEFT JOIN ' .
+            'ohrm_leave l ON l.id = lle.leave_id ' .
+            'WHERE le.deleted = 0 AND le.emp_number = ? AND le.leave_type_id = ? ' .
+            ' AND le.to_date >= ?';
 
         $parameters = array($empNumber, $leaveTypeId, $asAtDate);
 
@@ -555,50 +575,50 @@ class LeaveEntitlementDao extends BaseDao {
         }
 
         $sql .= ' GROUP BY le.id';
-        
+
         $dateLimits = $this->getLeaveEntitlementStrategy()->getLeaveWithoutEntitlementDateLimitsForLeaveBalance($asAtDate, $date, $empNumber, $leaveTypeId);
 
         if (is_array($dateLimits) && count($dateLimits) > 0) {
             $sql .= ' UNION ALL ' .
-                    'SELECT ' .
-                    '0 AS entitled, ' .
-                    'SUM(l.length_days) AS used, ' .
-                    'sum(IF(l.status = 2, l.length_days, 0)) AS scheduled, ' .
-                    'sum(IF(l.status IN (' . $pendingIdList . '), l.length_days, 0)) AS pending, ' .
-                    'sum(IF(l.status = 3, l.length_days, 0)) AS taken, ' .
-                    'sum(l.length_days) AS notLinked ' .
-                    'FROM ohrm_leave l ' .
-                    'LEFT JOIN ohrm_leave_leave_entitlement lle ON (lle.leave_id = l.id) ' .
-                    'WHERE (lle.leave_id IS NULL) AND l.emp_number = ? AND l.leave_type_id = ? AND l.status NOT IN (-1, 0) ' .
-                    ' AND l.date BETWEEN ? AND ? ';
+                'SELECT ' .
+                '0 AS entitled, ' .
+                'SUM(l.length_days) AS used, ' .
+                'sum(IF(l.status = 2, l.length_days, 0)) AS scheduled, ' .
+                'sum(IF(l.status IN (' . $pendingIdList . '), l.length_days, 0)) AS pending, ' .
+                'sum(IF(l.status = 3, l.length_days, 0)) AS taken, ' .
+                'sum(l.length_days) AS notLinked ' .
+                'FROM ohrm_leave l ' .
+                'LEFT JOIN ohrm_leave_leave_entitlement lle ON (lle.leave_id = l.id) ' .
+                'WHERE (lle.leave_id IS NULL) AND l.emp_number = ? AND l.leave_type_id = ? AND l.status NOT IN (-1, 0) ' .
+                ' AND l.date BETWEEN ? AND ? ';
 
             $parameters[] = $empNumber;
             $parameters[] = $leaveTypeId;
             $parameters[] = $dateLimits[0];
             $parameters[] = $dateLimits[1];
 
-            //$parameters[] = $asAtDate;        
+            //$parameters[] = $asAtDate;
 
 
             $sql .= 'GROUP BY l.leave_type_id';
         }
-        
-        $sql = 'SELECT sum(a.entitled) as entitled, sum(a.used) as used, sum(a.scheduled) as scheduled, ' . 
-                      'sum(a.pending) as pending, sum(a.taken) as taken, sum(a.notLinked) as notLinked  ' .
-                ' FROM (' . $sql . ') as a';
+
+        $sql = 'SELECT sum(a.entitled) as entitled, sum(a.used) as used, sum(a.scheduled) as scheduled, ' .
+            'sum(a.pending) as pending, sum(a.taken) as taken, sum(a.notLinked) as notLinked  ' .
+            ' FROM (' . $sql . ') as a';
 
         $statement = $conn->prepare($sql);
         $result = $statement->execute($parameters);
 
         $adjustmentSql = " SELECT sum(no_of_days) adjustment FROM ohrm_leave_adjustment la" .
-                " WHERE la.emp_number = ? AND la.leave_type_id= ?  AND ? BETWEEN la.from_date AND la.to_date";
+            " WHERE la.emp_number = ? AND la.leave_type_id= ?  AND ? BETWEEN la.from_date AND la.to_date";
 
         $adjustmentParams = array($empNumber, $leaveTypeId, $asAtDate);
 
         $statementAdjustment = $conn->prepare($adjustmentSql);
         $resultAdjustment = $statementAdjustment->execute($adjustmentParams);
 
-        
+
 
         $balance = new LeaveBalance();
         if ($result) {
@@ -621,7 +641,7 @@ class LeaveEntitlementDao extends BaseDao {
                 }
                 if (!empty($result['notLinked'])) {
                     $balance->setNotLinked($result['notLinked']);
-                }                
+                }
             }
         }
 
@@ -641,8 +661,8 @@ class LeaveEntitlementDao extends BaseDao {
         try {
             $conn = Doctrine_Manager::connection()->getDbh();
             $query = "SELECT e.id, e.no_of_days, e.days_used, e.from_date, e.to_date, sum(lle.length_days) as length_days from ohrm_leave_entitlement e " .
-                    "left join ohrm_leave_leave_entitlement lle on lle.entitlement_id = e.id where " .
-                    "lle.leave_id = ? AND e.deleted = 0 group by e.id order by e.from_date ASC";
+                "left join ohrm_leave_leave_entitlement lle on lle.entitlement_id = e.id where " .
+                "lle.leave_id = ? AND e.deleted = 0 group by e.id order by e.from_date ASC";
             $statement = $conn->prepare($query);
             $result = $statement->execute(array($leaveId));
 
@@ -654,13 +674,13 @@ class LeaveEntitlementDao extends BaseDao {
 
     /**
      * Get Leave without entitlements sorted by empNumber ASC and leave date ASC
-     * 
+     *
      * @param mixed $empNumber integer employee number or array of integer employee numbers
      * @param int $leaveTypeId Leave type ID
      * @param string $fromDate From Date
      * @param string $toDate To Date
      * @return array Array containing leave without entitlements. Each element of the array contains the following:
-     * 
+     *
      * id -> leave id
      * date -> leave date
      * length_hours -> leave length in hours
@@ -669,7 +689,7 @@ class LeaveEntitlementDao extends BaseDao {
      * leave_type_id -> leave type id
      * emp_number -> emp number
      * days_left -> days in leave that are not yet linked to an entitlement
-     * 
+     *
      * @throws DaoException
      */
     public function getLeaveWithoutEntitlements($empNumber, $leaveTypeId, $fromDate, $toDate) {
@@ -679,25 +699,25 @@ class LeaveEntitlementDao extends BaseDao {
                 Leave::LEAVE_STATUS_LEAVE_WEEKEND, Leave::LEAVE_STATUS_LEAVE_HOLIDAY);
 
             $params = array();
-            
+
             if (is_array($empNumber)) {
-                $questionMarks = str_repeat("?,", count($empNumber) - 1) . "?";    
+                $questionMarks = str_repeat("?,", count($empNumber) - 1) . "?";
                 $empClause = ' IN (' . $questionMarks . ') ';
                 $params = $empNumber;
             } else {
                 $empClause = ' = ? ';
                 $params[] = $empNumber;
             }
-            
+
             $params = array_merge($params, array($leaveTypeId, $fromDate, $toDate));
 
             $conn = Doctrine_Manager::connection()->getDbh();
             $query = "select * from (select l.id, l.date, l.length_hours, l.length_days, l.status, l.leave_type_id, l.emp_number, " .
-                    "l.length_days - sum(COALESCE(lle.length_days, 0)) as days_left " .
-                    "from ohrm_leave l left join ohrm_leave_leave_entitlement lle on lle.leave_id = l.id " .
-                    "where l.emp_number " . $empClause . " and l.leave_type_id = ? and l.date >= ? and l.date <= ? and " .
-                    "l.status not in (" . implode(',', $statusList) . ") " .
-                    "group by l.id order by l.emp_number ASC, l.`date` ASC) as A where days_left > 0";
+                "l.length_days - sum(COALESCE(lle.length_days, 0)) as days_left " .
+                "from ohrm_leave l left join ohrm_leave_leave_entitlement lle on lle.leave_id = l.id " .
+                "where l.emp_number " . $empClause . " and l.leave_type_id = ? and l.date >= ? and l.date <= ? and " .
+                "l.status not in (" . implode(',', $statusList) . ") " .
+                "group by l.id order by l.emp_number ASC, l.`date` ASC) as A where days_left > 0";
 
             $statement = $conn->prepare($query);
             $result = $statement->execute($params);
@@ -710,13 +730,13 @@ class LeaveEntitlementDao extends BaseDao {
 
     /**
      * Return any matching entitlements (with identical empNumber, leave type, from and to
-     * dates. 
-     * 
+     * dates.
+     *
      * @param int $empNumber Employee Number
      * @param int $leaveTypeId Leave Type ID
      * @param Date $fromDate From Date
      * @param Date $toDate To Date
-     * 
+     *
      * @return array Array of Entitlement objects. Empty array if no matches
      */
     public function getMatchingEntitlements($empNumber, $leaveTypeId, $fromDate, $toDate) {
@@ -727,11 +747,11 @@ class LeaveEntitlementDao extends BaseDao {
                 ':toDate' => $toDate);
 
             $q = Doctrine_Query::create()->from('LeaveEntitlement le')
-                    ->addWhere('le.deleted = 0')
-                    ->addWhere('le.leave_type_id = :leaveTypeId')
-                    ->addWhere('le.emp_number = :empNumber')
-                    ->addWhere('le.from_date = :fromDate')
-                    ->addWhere('le.to_date = :toDate');
+                ->addWhere('le.deleted = 0')
+                ->addWhere('le.leave_type_id = :leaveTypeId')
+                ->addWhere('le.emp_number = :empNumber')
+                ->addWhere('le.from_date = :fromDate')
+                ->addWhere('le.to_date = :toDate');
 
             $results = $q->execute($params);
             return $results;
@@ -741,8 +761,8 @@ class LeaveEntitlementDao extends BaseDao {
     }
 
     /**
-     * Save Leave Adjustment and linked to relevent leave entitlement 
-     * 
+     * Save Leave Adjustment and linked to relevent leave entitlement
+     *
      * @param LeaveAdjustment $leaveAdjustment
      * @return type
      * @throws DaoException
@@ -761,10 +781,10 @@ class LeaveEntitlementDao extends BaseDao {
             throw new DaoException($e->getMessage(), 0, $e);
         }
     }
-    
+
     /**
      * Get List of LeaveEntitlementTypes
-     * 
+     *
      * @param string $orderField field to order by
      * @param string $orderBy order (ASC/DESC)
      * @return Collection of LeaveEntitlementType
@@ -774,12 +794,12 @@ class LeaveEntitlementDao extends BaseDao {
         try {
             $orderBy = (strcasecmp($orderBy, 'DESC') == 0) ? 'DESC' : 'ASC';
             $q = Doctrine_Query::create()->from('LeaveEntitlementType let')
-                    ->addOrderBy($orderField . ' ' . $orderBy);
+                ->addOrderBy($orderField . ' ' . $orderBy);
             $results = $q->execute();
             return $results;
         } catch (Exception $e) {
             throw new DaoException($e->getMessage(), 0, $e);
-        }        
+        }
     }
 
 }
