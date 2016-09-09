@@ -41,12 +41,23 @@ class LeaveEntitlementDao extends BaseDao {
 
         return($this->logger);
     }
+
     public function getEmployeeService() {
         if (empty($this->employeeService)) {
             $this->employeeService = new EmployeeService();
         }
         return $this->employeeService;
     }
+
+    public function getLeaveTypeService() {
+
+        if (is_null($this->leaveTypeService)) {
+            $this->leaveTypeService = new LeaveTypeService();
+        }
+
+        return $this->leaveTypeService;
+    }
+
     public function getLeaveConfigService() {
         if (!($this->leaveConfigService instanceof LeaveConfigurationService)) {
             $this->leaveConfigService = new LeaveConfigurationService();
@@ -436,13 +447,19 @@ class LeaveEntitlementDao extends BaseDao {
                         $datedebut =new DateTime($emp->getDatedebut());
                         $diff=$datetoday->diff($datedebut);
                         $cpt=0;$solde=0;
-                        
-                        if($emp->getEmpGender()==1){
-                            $this->getEmployeeService()->getEmployeeDependents($empNumber);
-                            $cpt=sizeof($this->getEmployeeService()->getEmployeeDependents($empNumber));
-                        }
-                        if(!is_float($diff-y/10) && isset($diff)){
-                            $solde=$diff-y/10;
+
+                        $type=$this->getLeaveTypeService()->readLeaveType($leaveEntitlement->getLeaveTypeId());
+                        $typename=$type->getName();
+                        if(strcmp("Annuel", $typename)==0 || strcmp("annuel", $typename)==0 || strcmp("ANNUEL", $typename)==0)
+                        {
+                            if($emp->getEmpGender()==1){
+                                $this->getEmployeeService()->getEmployeeDependents($empNumber);
+                                $cpt=sizeof($this->getEmployeeService()->getEmployeeDependents($empNumber));
+                            }
+                            if(!is_float($diff-y/10) && isset($diff)){
+                                $solde=$diff-y/10;
+                            }
+
                         }
 
                         $entitlement = new LeaveEntitlement();
