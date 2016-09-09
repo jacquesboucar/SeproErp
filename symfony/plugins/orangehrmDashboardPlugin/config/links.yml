@@ -21,4 +21,13 @@ link3:
   target: '_self'
   image: 'MyTimesheet.png'
   ohrm_module: 'time'
+
+link4:
+  name: My Performance
+  url: 'performance/myPerformanceReview'
+  plugin: orangehrmPerformancePlugin
+  target: '_self'
+  image: 'kpi.png'
+  ohrm_module: 'performance'
+
     

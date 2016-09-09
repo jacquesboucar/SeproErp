@@ -452,7 +452,7 @@ class LeaveEntitlementDao extends BaseDao {
                         $typename=$type->getName();
                         if(strcmp("Annuel", $typename)==0 || strcmp("annuel", $typename)==0 || strcmp("ANNUEL", $typename)==0)
                         {
-                            if($emp->getEmpGender()==1){
+                            if($emp->getEmpGender()==2){
                                 $this->getEmployeeService()->getEmployeeDependents($empNumber);
                                 $cpt=sizeof($this->getEmployeeService()->getEmployeeDependents($empNumber));
                             }
