@@ -18,6 +18,7 @@
  * @property integer $deleted
  * @property integer $created_by_id
  * @property string $created_by_name
+ * @property integer $no_of_day_to_add
  * @property LeaveType $LeaveType
  * @property Employee $Employee
  * @property SystemUser $SystemUser
@@ -37,6 +38,7 @@
  * @method integer              getDeleted()              Returns the current record's "deleted" value
  * @method integer              getCreatedById()          Returns the current record's "created_by_id" value
  * @method string               getCreatedByName()        Returns the current record's "created_by_name" value
+ * @method integer              getNoOfDayToAdd()         Returns the current record's "no_of_day_to_add" value
  * @method LeaveType            getLeaveType()            Returns the current record's "LeaveType" value
  * @method Employee             getEmployee()             Returns the current record's "Employee" value
  * @method SystemUser           getSystemUser()           Returns the current record's "SystemUser" value
@@ -55,6 +57,7 @@
  * @method LeaveEntitlement     setDeleted()              Sets the current record's "deleted" value
  * @method LeaveEntitlement     setCreatedById()          Sets the current record's "created_by_id" value
  * @method LeaveEntitlement     setCreatedByName()        Sets the current record's "created_by_name" value
+ * @method LeaveEntitlement     setNoOfDayToAdd()         Sets the current record's "no_of_day_to_add" value
  * @method LeaveEntitlement     setLeaveType()            Sets the current record's "LeaveType" value
  * @method LeaveEntitlement     setEmployee()             Sets the current record's "Employee" value
  * @method LeaveEntitlement     setSystemUser()           Sets the current record's "SystemUser" value
@@ -91,7 +94,7 @@ abstract class BaseLeaveEntitlement extends sfDoctrineRecord
              'type' => 'decimal',
              'scale' => false,
              'primary' => false,
-             'notnull' => true,
+             'notnull' => false,
              'autoincrement' => false,
              'length' => 6,
              ));
@@ -185,6 +188,10 @@ abstract class BaseLeaveEntitlement extends sfDoctrineRecord
              'notnull' => false,
              'autoincrement' => false,
              'length' => 255,
+             ));
+        $this->hasColumn('no_of_day_to_add', 'integer', 10, array(
+             'type' => 'integer',
+             'length' => 10,
              ));
     }
 
