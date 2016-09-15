@@ -58,7 +58,7 @@ LeaveEntitlement:
       type: decimal(6)
       scale: false      
       primary: false
-      notnull: true
+      notnull: false
       autoincrement: false
     days_used:
       type: 'decimal(4, 2)'
@@ -129,7 +129,10 @@ LeaveEntitlement:
       unsigned: false
       primary: false
       notnull: false
-      autoincrement: false      
+      autoincrement: false
+    no_of_day_to_add:
+          type: integer(10)
+
   relations:
     LeaveType:
       local: leave_type_id
