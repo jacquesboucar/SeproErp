@@ -18,7 +18,8 @@ use_stylesheet(plugin_web_path('orangehrmLeavePlugin', 'css/assignLeaveSuccess.c
         <?php if (count($leaveTypes) > 1) : ?>           
         <form id="frmLeaveApply" name="frmLeaveApply" method="post" action="">
             <?php include_component('core', 'ohrmPluginPannel', array('location' => 'apply-leave-form-elements'))?>
-            <fieldset>                
+            <fieldset>
+                <i id="eligibiliteemploye"></i>
                 <ol>
                     <?php echo $applyLeaveForm->render(); ?>
                     <li class="required new">
@@ -122,7 +123,7 @@ use_stylesheet(plugin_web_path('orangehrmLeavePlugin', 'css/assignLeaveSuccess.c
         var lang_StartDay = "<?php echo __('Start Day');?>";
         var lang_EndDay = "<?php echo __('End Day');?>";
 
-        $(document).ready(function() {            
+        $(document).ready(function() {
 
             showTimeControls(false, false);
 
@@ -166,88 +167,99 @@ use_stylesheet(plugin_web_path('orangehrmLeavePlugin', 'css/assignLeaveSuccess.c
             var startDate = $('#applyleave_txtFromDate').val();
             var endDate =  $('#applyleave_txtToDate').val();
             $('#applyleave_leaveBalance').text('--');
-            $('#leaveBalance_details_link').remove();  
+            $('#leaveBalance_details_link').remove();
+            $('#applyBtn').show();
+            $('#eligibiliteemploye').text("")
             
             if (leaveType == "") {
                 //$('#applyleave_leaveBalance').text('--');
             } else {
                 $('#applyleave_leaveBalance').text('').addClass('loading_message');
+
                 $.ajax({
                     type: 'GET',
                     url: leaveBalanceUrl,
                     data: '&leaveType=' + leaveType + '&startDate=' + startDate + '&endDate=' + endDate,
                     dataType: 'json',
                     success: function(data) {
-                        
-                        if (data.multiperiod == true) {
+                        if(data.nombremois <= 12){
+                            $('#eligibiliteemploye').text("Vous n'etes pas eligible pour faire une demande de conge annuel");
+                            $('#applyBtn').hide();
+                        }else{
 
-                            var leavePeriods = data.data;
-                            var leavePeriodCount = leavePeriods.length;
+                            if (data.multiperiod == true) {
 
-                            var linkTxt = data.negative ? lang_BalanceNotSufficient : lang_details;
-                            var balanceTxt = leavePeriodCount == 1 ? leavePeriods[0].balance.balance.toFixed(2) : '';
-                            var linkCss = data.negative ? ' class="error" ' : "";
+                                var leavePeriods = data.data;
+                                var leavePeriodCount = leavePeriods.length;
 
-                            $('#applyleave_leaveBalance').text(balanceTxt)
-                            .append('<a href="#multiperiod_balance" data-toggle="modal" id="leaveBalance_details_link"' + linkCss + '>' + 
-                                linkTxt + '</a>');
+                                var linkTxt = data.negative ? lang_BalanceNotSufficient : lang_details;
+                                var balanceTxt = leavePeriodCount == 1 ? leavePeriods[0].balance.balance.toFixed(2) : '';
+                                var linkCss = data.negative ? ' class="error" ' : "";
 
-                            var html = '';
+                                $('#applyleave_leaveBalance').text(balanceTxt)
+                                    .append('<a href="#multiperiod_balance" data-toggle="modal" id="leaveBalance_details_link"' + linkCss + '>' +
+                                        linkTxt + '</a>');
 
-                            var rows = 0;
-                            for (var i = 0; i < leavePeriodCount; i++) {
-                                var leavePeriod = leavePeriods[i];
-                                var days = leavePeriod['days'];
-                                var leavePeriodFirstRow = true;                        
+                                var html = '';
 
-                                for (var leaveDate in days) {
-                                    if (days.hasOwnProperty(leaveDate)) {
-                                        var leaveDateDetails = days[leaveDate];
+                                var rows = 0;
+                                for (var i = 0; i < leavePeriodCount; i++) {
+                                    var leavePeriod = leavePeriods[i];
+                                    var days = leavePeriod['days'];
+                                    var leavePeriodFirstRow = true;
 
-                                        rows++;                        
-                                        var css = rows % 2 ? "even" : "odd";                                
+                                    for (var leaveDate in days) {
+                                        if (days.hasOwnProperty(leaveDate)) {
+                                            var leaveDateDetails = days[leaveDate];
 
-                                        var thisLeavePeriod = leavePeriod['period'];
-                                        var leavePeriodTxt = '';
-                                        var leavePeriodInitialBalance = '';
+                                            rows++;
+                                            var css = rows % 2 ? "even" : "odd";
 
-                                        if (leavePeriodFirstRow) {
-                                            leavePeriodTxt = thisLeavePeriod[0] + ' - ' + thisLeavePeriod[1];
-                                            leavePeriodInitialBalance = leavePeriod.balance.balance.toFixed(2);
-                                            leavePeriodFirstRow = false;                                    
+                                            var thisLeavePeriod = leavePeriod['period'];
+                                            var leavePeriodTxt = '';
+                                            var leavePeriodInitialBalance = '';
+
+                                            if (leavePeriodFirstRow) {
+                                                leavePeriodTxt = thisLeavePeriod[0] + ' - ' + thisLeavePeriod[1];
+                                                leavePeriodInitialBalance = leavePeriod.balance.balance.toFixed(2);
+                                                leavePeriodFirstRow = false;
+                                            }
+
+                                            var balanceValue = leaveDateDetails.balance === false ? leaveDateDetails.desc : leaveDateDetails.balance.toFixed(2);
+
+                                            html += '<tr class="' + css + '"><td>' + leavePeriodTxt + '</td><td class="right">' + leavePeriodInitialBalance +
+                                                '</td><td>' + leaveDate + '</td><td class="right">' + balanceValue + '</td></tr>';
                                         }
-
-                                        var balanceValue = leaveDateDetails.balance === false ? leaveDateDetails.desc : leaveDateDetails.balance.toFixed(2);
-
-                                        html += '<tr class="' + css + '"><td>' + leavePeriodTxt + '</td><td class="right">' + leavePeriodInitialBalance +
-                                            '</td><td>' + leaveDate + '</td><td class="right">' + balanceValue + '</td></tr>';                                
                                     }
-                                }                    
 
-                                $('div#multiperiod_balance table.table tbody').html('').append(html);
-                            }
+                                    $('div#multiperiod_balance table.table tbody').html('').append(html);
+                                }
 
-                        } else {       
-                            var balance = data.balance;
-                            var asAtDate = data.asAtDate;
-                            var balanceDays = balance.balance;
-                            $('#applyleave_leaveBalance').text(balanceDays.toFixed(2))
-                                .append('<a href="#balance_details" data-toggle="modal" id="leaveBalance_details_link">' + 
-                                    lang_details + '</a>');
+                            } else {
+                                var balance = data.balance;
+                                var asAtDate = data.asAtDate;
+                                var balanceDays = balance.balance;
+                                $('#applyleave_leaveBalance').text(balanceDays.toFixed(2))
+                                    .append('<a href="#balance_details" data-toggle="modal" id="leaveBalance_details_link">' +
+                                        lang_details + '</a>');
 
-                            $('#balance_as_of').text(asAtDate);
-                            $('#balance_entitled').text(Number(balance.entitled).toFixed(2));
-                            $('#balance_taken').text(Number(balance.taken).toFixed(2));
-                            $('#balance_scheduled').text(Number(balance.scheduled).toFixed(2));
-                            $('#balance_pending').text(Number(balance.pending).toFixed(2));
-                            $('#balance_adjustment').text(Number(balance.adjustment).toFixed(2));
-                            $('#balance_total').text(balanceDays.toFixed(2));
+                                $('#balance_as_of').text(asAtDate);
+                                $('#balance_entitled').text(Number(balance.entitled).toFixed(2));
+                                $('#balance_taken').text(Number(balance.taken).toFixed(2));
+                                $('#balance_scheduled').text(Number(balance.scheduled).toFixed(2));
+                                $('#balance_pending').text(Number(balance.pending).toFixed(2));
+                                $('#balance_adjustment').text(Number(balance.adjustment).toFixed(2));
+                                $('#balance_total').text(balanceDays.toFixed(2));
 
-                            if(Number(balance.adjustment) == 0 ){
-                                $('#container-adjustment').hide();
+                                if(Number(balance.adjustment) == 0 ){
+                                    $('#container-adjustment').hide();
+                                }
                             }
                         }
-                        $('#applyleave_leaveBalance').removeClass('loading_message');                         
+
+
+                        $('#applyleave_leaveBalance').removeClass('loading_message');
+
                     }
                 });
            }
@@ -531,6 +543,6 @@ use_stylesheet(plugin_web_path('orangehrmLeavePlugin', 'css/assignLeaveSuccess.c
         } else {
             showTimeControls(false, false);
         }
-    }   
+    }
     //]]>
 </script>
