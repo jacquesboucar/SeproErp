@@ -18874,6 +18874,31 @@
                                                            <target>Finalisation</target>
                                                            <note>finalisation evaluation</note>
                                                           </trans-unit>
+                                                          <trans-unit id="3784">
+                                                           <source>Date of Start</source>
+                                                           <target>Date de debut</target>
+                                                           <note>Date de debut du contrat</note>
+                                                          </trans-unit>
+                                                          <trans-unit id="3784">
+                                                           <source>Date of Start</source>
+                                                           <target>Date de debut</target>
+                                                           <note>Date de debut du contrat</note>
+                                                          </trans-unit>
+                                                          <trans-unit id="3784">
+                                                           <source>My Performance</source>
+                                                           <target>Mes evaluations</target>
+                                                           <note>vers la liste de mes evaluations</note>
+                                                          </trans-unit>
+                                                          <trans-unit id="3785">
+                                                           <source>Final Comment</source>
+                                                           <target>Commentaire Final</target>
+                                                           <note>Commentaire final de l'evaluation</note>
+                                                          </trans-unit>
+                                                          <trans-unit id="3786">
+                                                           <source>Warning</source>
+                                                           <target>Avertissement</target>
+                                                           <note>Avertissement pour la demande de conge</note>
+                                                          </trans-unit>
                                                          </body>
                                                         </file>
                                                        </xliff>
