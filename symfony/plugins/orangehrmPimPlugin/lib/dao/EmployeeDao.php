@@ -775,6 +775,24 @@ class EmployeeDao extends BaseDao {
         }
         // @codeCoverageIgnoreEnd
     }
+    /**
+     * Get dependents for given employee
+     * @param int $empNumber Employee Number
+     * @return array Dependents as array
+     */
+    public function getEmployeeDependentsEligible($empNumber) {
+        try {
+            $q = Doctrine_Query:: create()->from('EmpDependent ed')
+                ->where('ed.emp_number = ?', $empNumber)
+                ->andWhere('datediff(now(),ed.ed_date_of_birth)<ss5110')
+                ->orderBy('ed.name ASC');
+            return $q->execute();
+            // @codeCoverageIgnoreStart
+        } catch (Exception $e) {
+            throw new DaoException($e->getMessage(), $e->getCode(), $e);
+        }
+        // @codeCoverageIgnoreEnd
+    }
 
     /**
      * Delete Dependents

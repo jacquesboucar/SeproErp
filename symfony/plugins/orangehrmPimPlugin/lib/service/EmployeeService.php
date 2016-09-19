@@ -256,6 +256,10 @@ class EmployeeService extends BaseService {
         return $this->getEmployeeDao()->getEmployeeDependents($empNumber);
     }
 
+    public function getEmployeeDependentsEligible($empNumber) {
+        return $this->getEmployeeDao()->getEmployeeDependentsEligible($empNumber);
+    }
+
     /**
      * Delete the given dependents from the given employee
      * 

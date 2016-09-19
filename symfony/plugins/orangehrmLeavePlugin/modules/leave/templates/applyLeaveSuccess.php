@@ -38,6 +38,20 @@ use_stylesheet(plugin_web_path('orangehrmLeavePlugin', 'css/assignLeaveSuccess.c
     
 </div> <!-- apply leave -->
 
+<!-- leave balance Negative ou egal a 0 HTML: Begins -->
+<div class="modal" id="balance_negative">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3><?php echo 'SeproRH - ' . __('Warning'); ?></h3>
+    </div>
+    <div class="modal-body">
+        <b><i>Votre solde est insuffisant pour effectuer une demande de congé annuel. Si, vous poursuivez cette demande sera considéré comme une demande d'absence!</i></b>
+    </div>
+    <div class="modal-footer">
+        <input type="button" class="btn" data-dismiss="modal" id="closeButton" value="<?php echo __('Ok'); ?>" />
+    </div>
+</div>
+<!-- leave balance Negative ou egal a 0 HTML: Ends -->
 <!-- leave balance details HTML: Begins -->
 <div class="modal" id="balance_details">
   <div class="modal-header">
@@ -182,6 +196,9 @@ use_stylesheet(plugin_web_path('orangehrmLeavePlugin', 'css/assignLeaveSuccess.c
                     data: '&leaveType=' + leaveType + '&startDate=' + startDate + '&endDate=' + endDate,
                     dataType: 'json',
                     success: function(data) {
+                        if(data.balance<=0 && data.type==1){
+                            $('#balance_negative').modal("show");
+                        }
                         if(data.nombremois <= 12){
                             $('#eligibiliteemploye').text("Vous n'etes pas eligible pour faire une demande de conge annuel");
                             $('#applyBtn').hide();
@@ -199,7 +216,9 @@ use_stylesheet(plugin_web_path('orangehrmLeavePlugin', 'css/assignLeaveSuccess.c
                                 $('#applyleave_leaveBalance').text(balanceTxt)
                                     .append('<a href="#multiperiod_balance" data-toggle="modal" id="leaveBalance_details_link"' + linkCss + '>' +
                                         linkTxt + '</a>');
-
+                                if(data.negative && data.type==1){
+                                    $('#balance_negative').modal("show");
+                                }
                                 var html = '';
 
                                 var rows = 0;

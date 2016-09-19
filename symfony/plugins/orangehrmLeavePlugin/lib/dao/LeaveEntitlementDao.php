@@ -402,60 +402,83 @@ class LeaveEntitlementDao extends BaseDao {
                     $empNumber = $updateEntitlement['emp_number'];
 
                     if (!isset($allEntitlements[$empNumber])) {
+                        if(strcmp($leaveEntitlement->getLeaveType(),1)==0)
+                        {
+                            //Manipulation a l'anniversaire d'embauche
+                            $anniversairestart= $this->getAnniversaireStart($empNumber);
+                            $leaveanterieur= array();
+                            $leaveanterieur=$this->getAnterieurEntitlements($empNumber, $leaveTypeId, $leaveEntitlement->getFromDate(), $leaveEntitlement->getToDate());
 
-                        //Manipulation a l'anniversaire d'embauche
-                        $anniversairestart= $this->getAnniversaireStart($empNumber);
-                        $leaveanterieur= array();
-                        $leaveanterieur=$this->getAnterieurEntitlements($empNumber, $leaveTypeId, $leaveEntitlement->getFromDate(), $leaveEntitlement->getToDate());
+                            $emp=$this->getEmployeeService()->getEmployee($empNumber);
 
-                        $emp=$this->getEmployeeService()->getEmployee($empNumber);
+                            $datetoday=new DateTime();
+                            $datedebut =new DateTime($emp->getDatedebut());
+                            $diff=$datetoday->diff($datedebut);
 
-                        $datetoday=new DateTime();
-                        $datedebut =new DateTime($emp->getDatedebut());
-                        $diff=$datetoday->diff($datedebut);
+                            $type=$this->getLeaveTypeService()->readLeaveType($leaveEntitlement->getLeaveTypeId());
+                            $typename=$type->getName();
+                            $cpt=0;$solde=0;
 
-                        $type=$this->getLeaveTypeService()->readLeaveType($leaveEntitlement->getLeaveTypeId());
-                        $typename=$type->getName();
-                        $cpt=0;$solde=0;
+                            if($anniversairestart==true){
 
-                        //var_dump($leaveanterieur[0]);die;
-                        if($anniversairestart==true){
+                                if($emp->getEmpGender()==2){
+                                    $this->getEmployeeService()->getEmployeeDependents($empNumber);
+                                    $cpt=sizeof($this->getEmployeeService()->getEmployeeDependentsEligible($empNumber));
+                                }
+                                if(!is_float($diff->y/10) && isset($diff) && $diff!=0){
+                                    $solde=$diff->y/10;
+                                }
 
-                            if($emp->getEmpGender()==2){
-                                $this->getEmployeeService()->getEmployeeDependents($empNumber);
-                                $cpt=sizeof($this->getEmployeeService()->getEmployeeDependents($empNumber));
+                                $soldeanterieur=$leaveanterieur[0]['no_of_days']+$leaveanterieur[0]['no_of_day_to_add']+$solde+$cpt-$leaveanterieur[0]['days_used'];
+                                if(!isset($soldeanterieur)){
+                                    $soldeanterieur=0;
+                                }elseif($soldeanterieur>=72){
+                                    $soldeanterieur=$soldeanterieur-24;
+                                }
+
+                                $updateQuery = sprintf("UPDATE ohrm_leave_entitlement SET no_of_days= %f, no_of_day_to_add=%f WHERE id= %s", $soldeanterieur,0,$updateEntitlement['id']);
+                                //var_dump($updateQuery);die;
+                                $updateStmt = $pdo->prepare($updateQuery);//var_dump($updateStmt);die;
+                                $updateStmt->execute();
+
                             }
-                            if(!is_float($diff->y/10) && isset($diff) && $diff!=0){
-                                $solde=$diff->y/10;
-                            }
+                            $entitlement = new LeaveEntitlement();
+                            $noOfDays = $leaveEntitlement->getNoOfDays();
+                            $entitlement->setEmpNumber($empNumber);
+                            $entitlement->setLeaveTypeId($leaveTypeId);
 
-                            $soldeanterieur=$leaveanterieur[0]['no_of_days']-$leaveanterieur[0]['days_used']+$leaveanterieur[0]['no_of_day_to_add']+$solde+$cpt;
-                            if(!isset($soldeanterieur))
-                                $soldeanterieur=0;
+                            $entitlement->setCreditedDate($leaveEntitlement->getCreditedDate());
+                            $entitlement->setCreatedById($leaveEntitlement->getCreatedById());
+                            $entitlement->setCreatedByName($leaveEntitlement->getCreatedByName());
 
-                            $updateQuery = sprintf("UPDATE ohrm_leave_entitlement SET no_of_days= %f, no_of_day_to_add=%f WHERE id= %s", $soldeanterieur,0,$updateEntitlement['id']);
-                            //var_dump($updateQuery);die;
-                            $updateStmt = $pdo->prepare($updateQuery);//var_dump($updateStmt);die;
-                            $updateStmt->execute();
+                            $entitlement->setEntitlementType($leaveEntitlement->getEntitlementType());
+                            $entitlement->setDeleted(0);
 
+                            //$entitlement->setNoOfDays($leaveanterieur[0]['no_of_days']-$leaveanterieur[0]['days_used']+$leaveanterieur[0]['no_of_day_to_add']+$solde+$cpt);
+                            $entitlement->setNoOfDayToAdd($noOfDays);
+                            $entitlement->setFromDate($fromDate);
+                            $entitlement->setToDate($toDate);
+                            $entitlement->setId($updateEntitlement['id']);
+                        }else{
+                            $entitlement = new LeaveEntitlement();
+                            $noOfDays = $leaveEntitlement->getNoOfDays();
+                            $entitlement->setEmpNumber($empNumber);
+                            $entitlement->setLeaveTypeId($leaveTypeId);
+
+                            $entitlement->setCreditedDate($leaveEntitlement->getCreditedDate());
+                            $entitlement->setCreatedById($leaveEntitlement->getCreatedById());
+                            $entitlement->setCreatedByName($leaveEntitlement->getCreatedByName());
+
+                            $entitlement->setEntitlementType($leaveEntitlement->getEntitlementType());
+                            $entitlement->setDeleted(0);
+
+                            $entitlement->setNoOfDays($leaveEntitlement->getNoOfDays());
+                            $entitlement->setFromDate($fromDate);
+                            $entitlement->setToDate($toDate);
+                            $entitlement->setId($updateEntitlement['id']);
                         }
-                        $entitlement = new LeaveEntitlement();
-                        $noOfDays = $leaveEntitlement->getNoOfDays();
-                        $entitlement->setEmpNumber($empNumber);
-                        $entitlement->setLeaveTypeId($leaveTypeId);
 
-                        $entitlement->setCreditedDate($leaveEntitlement->getCreditedDate());
-                        $entitlement->setCreatedById($leaveEntitlement->getCreatedById());
-                        $entitlement->setCreatedByName($leaveEntitlement->getCreatedByName());
 
-                        $entitlement->setEntitlementType($leaveEntitlement->getEntitlementType());
-                        $entitlement->setDeleted(0);
-
-                        $entitlement->setNoOfDays($leaveanterieur[0]['no_of_days']-$leaveanterieur[0]['days_used']+$leaveanterieur[0]['no_of_day_to_add']+$solde+$cpt);
-                        $entitlement->setNoOfDayToAdd($noOfDays);
-                        $entitlement->setFromDate($fromDate);
-                        $entitlement->setToDate($toDate);
-                        $entitlement->setId($updateEntitlement['id']);
 
                        $allEntitlements[$empNumber] = $entitlement;
 
@@ -465,58 +488,87 @@ class LeaveEntitlementDao extends BaseDao {
                     }
                 }
 
+                if(strcmp($leaveEntitlement->getLeaveType(),1)==0){
+                    $updateQuery = sprintf(" UPDATE ohrm_leave_entitlement SET no_of_day_to_add=no_of_day_to_add+ %f WHERE id IN (%s)",$leaveEntitlement->getNoOfDays(), implode(',', $updateEntitlementIdList));
+                }else{
+                    $updateQuery = sprintf(" UPDATE ohrm_leave_entitlement SET no_of_days=no_of_days+ %f WHERE id IN (%s)", $leaveEntitlement->getNoOfDays(), implode(',', $updateEntitlementIdList));
+                }
 
-                $updateQuery = sprintf(" UPDATE ohrm_leave_entitlement SET no_of_day_to_add=no_of_day_to_add+ %f WHERE id IN (%s)",$leaveEntitlement->getNoOfDays(), implode(',', $updateEntitlementIdList));
-                //var_dump($updateQuery);die;
                 $updateStmt = $pdo->prepare($updateQuery);
                 $updateStmt->execute();
             }
 
             $newEmployeeList = array_diff($employeeNumbers, $updateEmpList);
             if (count($newEmployeeList) > 0) {
-                $query = " INSERT INTO ohrm_leave_entitlement(`emp_number`,`leave_type_id`,`from_date`,`to_date`,`no_of_days`, `no_of_day_to_add`,`days_used`,`entitlement_type`) VALUES " .
-                    "(?, ?, ?, ?, ?,?,?,?)";
+                if(strcmp($leaveEntitlement->getLeaveType(),1)==0){
+                    $query = " INSERT INTO ohrm_leave_entitlement(`emp_number`,`leave_type_id`,`from_date`,`to_date`,`no_of_days`, `no_of_day_to_add`,`days_used`,`entitlement_type`) VALUES " .
+                        "(?, ?, ?, ?, ?,?,?,?)";
+                }else{
+                    $query = " INSERT INTO ohrm_leave_entitlement(`emp_number`,`leave_type_id`,`from_date`,`to_date`,`no_of_days`,`entitlement_type`) VALUES " .
+                        "(?, ?, ?, ?, ?, ?)";
+                }
+
                 $stmt = $pdo->prepare($query);
 
                 foreach ($newEmployeeList as $empNumber) {
                     if (!isset($allEntitlements[$empNumber]))
                     {
-                       //Manipulation debut d'annee
-                        $fromdate =new DateTime($leaveEntitlement->getFromDate());
-                        $todate = new DateTime($leaveEntitlement->getToDate());
+                        if(strcmp($leaveEntitlement->getLeaveType(),1)==0){
+                            //Manipulation debut d'annee
+                            $fromdate =new DateTime($leaveEntitlement->getFromDate());
+                            $todate = new DateTime($leaveEntitlement->getToDate());
 
-                        $FROMDATE= $fromdate->modify('1 years ago');
-                        $TODATE=$todate->modify('1 years ago');
+                            $FROMDATE= $fromdate->modify('1 years ago');
+                            $TODATE=$todate->modify('1 years ago');
 
-                        $leaveanterieur= array();
-                        $leaveanterieur=$this->getAnterieurEntitlements($empNumber, $leaveTypeId, date_format($FROMDATE,'Y-m-d H:i:s'), date_format($TODATE,'Y-m-d H:i:s'));
-                        $soldeanterieur=$leaveanterieur[0]['no_of_days'];
-                        $soldeencour=$leaveanterieur[0]['no_of_day_to_add']+$leaveEntitlement->getNoOfDays();
-                        $dayused=$leaveanterieur[0]['days_used'];
-                        if(!isset($soldeanterieur)||!isset($dayused) ){
-                            $soldeanterieur=0;
-                            $dayused=0;
+                            $leaveanterieur= array();
+                            $leaveanterieur=$this->getAnterieurEntitlements($empNumber, $leaveTypeId, date_format($FROMDATE,'Y-m-d H:i:s'), date_format($TODATE,'Y-m-d H:i:s'));
+                            $soldeanterieur=$leaveanterieur[0]['no_of_days'];
+                            $soldeencour=$leaveanterieur[0]['no_of_day_to_add']+$leaveEntitlement->getNoOfDays();
+                            $dayused=$leaveanterieur[0]['days_used'];
+                            if(!isset($soldeanterieur)||!isset($dayused) ){
+                                $soldeanterieur=0;
+                                $dayused=0;
+                            }
+
+                            $entitlement = new LeaveEntitlement();
+                            $entitlement->setEmpNumber($empNumber);
+                            $entitlement->setLeaveTypeId($leaveEntitlement->getLeaveTypeId());
+
+                            $entitlement->setCreditedDate($leaveEntitlement->getCreditedDate());
+                            $entitlement->setCreatedById($leaveEntitlement->getCreatedById());
+                            $entitlement->setCreatedByName($leaveEntitlement->getCreatedByName());
+
+                            $entitlement->setEntitlementType($leaveEntitlement->getEntitlementType());
+                            $entitlement->setDeleted(0);
+
+                            $entitlement->setNoOfDayToAdd($leaveEntitlement->getNoOfDays());
+                            $entitlement->setNoOfDays();
+                            $entitlement->setFromDate($fromDate);
+                            $entitlement->setToDate($toDate);
+
+                            $params = array($empNumber, $leaveEntitlement->getLeaveTypeId(), $fromDate, $toDate, $soldeanterieur,$soldeencour, $dayused, LeaveEntitlement::ENTITLEMENT_TYPE_ADD);
+
+                        }else{
+                            $entitlement = new LeaveEntitlement();
+                            $noOfDays = $leaveEntitlement->getNoOfDays();
+                            $entitlement->setEmpNumber($empNumber);
+                            $entitlement->setLeaveTypeId($leaveEntitlement->getLeaveTypeId());
+
+                            $entitlement->setCreditedDate($leaveEntitlement->getCreditedDate());
+                            $entitlement->setCreatedById($leaveEntitlement->getCreatedById());
+                            $entitlement->setCreatedByName($leaveEntitlement->getCreatedByName());
+
+                            $entitlement->setEntitlementType($leaveEntitlement->getEntitlementType());
+                            $entitlement->setDeleted(0);
+
+                            $entitlement->setNoOfDays($noOfDays);
+                            $entitlement->setFromDate($fromDate);
+                            $entitlement->setToDate($toDate);
+
+                            $params = array($empNumber, $leaveEntitlement->getLeaveTypeId(), $fromDate, $toDate, $noOfDays, LeaveEntitlement::ENTITLEMENT_TYPE_ADD);
                         }
 
-                        $entitlement = new LeaveEntitlement();
-                        $entitlement->setEmpNumber($empNumber);
-                        $entitlement->setLeaveTypeId($leaveEntitlement->getLeaveTypeId());
-
-                        $entitlement->setCreditedDate($leaveEntitlement->getCreditedDate());
-                        $entitlement->setCreatedById($leaveEntitlement->getCreatedById());
-                        $entitlement->setCreatedByName($leaveEntitlement->getCreatedByName());
-
-                        $entitlement->setEntitlementType($leaveEntitlement->getEntitlementType());
-                        $entitlement->setDeleted(0);
-
-                        $entitlement->setNoOfDayToAdd($leaveEntitlement->getNoOfDays());
-                        $entitlement->setNoOfDays();
-                        $entitlement->setFromDate($fromDate);
-                        $entitlement->setToDate($toDate);
-
-                        $params = array($empNumber, $leaveEntitlement->getLeaveTypeId(), $fromDate, $toDate, $soldeanterieur,$soldeencour, $dayused, LeaveEntitlement::ENTITLEMENT_TYPE_ADD);
-
-                        //print_r($soldeanterieur);die();
                         $stmt->execute($params);
                         $entitlement->setId($pdo->lastInsertId());
 

@@ -40,6 +40,15 @@ class applyLeaveAction extends baseLeaveAction {
         return $this->employeeService;
     }
 
+    public function getLeaveTypeService() {
+
+        if (is_null($this->leaveTypeService)) {
+            $this->leaveTypeService = new LeaveTypeService();
+        }
+
+        return $this->leaveTypeService;
+    }
+
     /**
      *
      * @param EmployeeService $service 
@@ -143,7 +152,8 @@ class applyLeaveAction extends baseLeaveAction {
         $employee = $employeeService->getEmployee($empId);
 
         $leaveRequestService = $this->getLeaveRequestService();
-        $leaveTypeList = $leaveRequestService->getEmployeeAllowedToApplyLeaveTypes($employee);
+       // $leaveTypeList = $leaveRequestService->getEmployeeAllowedToApplyLeaveTypes($employee);
+        $leaveTypeList= $leaveRequestService->getLeaveTypeService()->getLeaveTypeList();
 
         $leaveTypeChoices[''] = '--' . __('Select') . '--';
         foreach ($leaveTypeList as $leaveType) {

@@ -26,7 +26,8 @@ class getLeaveBalanceAjaxAction extends sfAction {
 
     protected $leaveEntitlementService;
     protected $workScheduleService;
-    protected $leaveApplicationService;        
+    protected $leaveApplicationService;
+    protected $employeeService;
     
     /**
      * Get leave balance for given leave type
@@ -44,8 +45,13 @@ class getLeaveBalanceAjaxAction extends sfAction {
         $leaveTypeId = $request->getParameter('leaveType');
         $empNumber = $request->getParameter('empNumber');
 
+
         $user = $this->getUser();
         $loggedEmpNumber = $user->getAttribute('auth.empNumber');
+
+
+        $emp= $this->getEmployeeService()->getEmployee($loggedEmpNumber);
+        $nbremois= $this->getNombreMois($emp->getDatedebut());
 
         $allowed = false;
 
@@ -99,7 +105,9 @@ class getLeaveBalanceAjaxAction extends sfAction {
                 $leaveByPeriods[$leavePeriodNdx] = array(
                     'period' => $currentLeavePeriod,
                     'balance' => false,
-                    'days' => array()
+                    'days' => array(),
+                    'nombremois' => $nbremois,
+                    'type' => $leaveTypeId
                 );
                 
                 foreach ($leaveDays as $k => $leave) {
@@ -112,8 +120,10 @@ class getLeaveBalanceAjaxAction extends sfAction {
                         $leaveByPeriods[$leavePeriodNdx] = array(
                             'period' => $currentLeavePeriod,
                             'balance' => false,
-                            'days' => array()
-                        );                        
+                            'days' => array(),
+                            'nombremois' => $nbremois,
+                            'type' => $leaveTypeId
+                        );
                     }
                     
                     $localizedDate = set_datepicker_date_format($leaveDate);
@@ -167,6 +177,8 @@ class getLeaveBalanceAjaxAction extends sfAction {
                 $result = array(
                     'multiperiod' => true,
                     'negative' => $negativeBalance,
+                    'nombremois' => $nbremois,
+                    'type' => $leaveTypeId,
                     'data' => $leaveByPeriods
                 );
             }
@@ -180,11 +192,13 @@ class getLeaveBalanceAjaxAction extends sfAction {
                 $result = array(
                     'multiperiod' => false,
                     'balance' => $balance,
+                    'nombremois' => $nbremois,
+                    'type' => $leaveTypeId,
                     'asAtDate' => $asAtDate
                 );                
             }
-            
-            
+
+
             echo json_encode($result);
         }
 
@@ -272,7 +286,37 @@ class getLeaveBalanceAjaxAction extends sfAction {
      */
     public function setLeaveApplicationService(LeaveApplicationService $service) {
         $this->leaveApplicationService = $service;
-    }        
-        
+    }
+    /**
+     *
+     * @return EmployeeService
+     */
+    public function getEmployeeService() {
+        if (!($this->employeeService instanceof EmployeeService)) {
+            $this->employeeService = new EmployeeService();
+        }
+        return $this->employeeService;
+    }
+
+    /**
+     * @param $datetoday
+     * @param $datedebut
+     * @return bool|string
+     */
+    public function getNombreMois($datedebut){
+
+        $datedeb = strtotime($datedebut);
+        $datenow = strtotime("now");
+
+        $yeardeb = date('Y', $datedeb);
+        $yearnow = date('Y', $datenow);
+
+        $monthdeb = date('m', $datedeb);
+        $monthnow = date('m', $datenow);
+
+        $diff = (($yearnow - $yeardeb) * 12) + ($monthnow - $monthdeb);
+
+        return $diff;
+    }
 }
 

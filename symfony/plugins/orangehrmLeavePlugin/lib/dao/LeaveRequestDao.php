@@ -177,12 +177,28 @@ class LeaveRequestDao extends BaseDao {
         }
     }
 
+    /**
+     *
+     * @param int $leaveRequestId
+     * @return array
+     */
+    public function fetchLeaveSolde($leaveRequestId) {
+
+        $q = Doctrine_Query::create()
+            ->select('SUM(length_hours) as total_duration')
+            ->from('Leave')
+            ->where("leave_request_id =?", $leaveRequestId);
+        $duration = $q->fetchOne();
+
+        return $duration->getTotalDuration();
+    }
+
+
     public function changeLeaveStatus(Leave $leave, $entitlementChanges, $removeLinkedEntitlements = false) {
         $conn = Doctrine_Manager::connection();
-        $conn->beginTransaction();  
-        
+        $conn->beginTransaction();
         try {        
-            
+
             if ($removeLinkedEntitlements) {
                 
                 $leaveId = $leave->getId();

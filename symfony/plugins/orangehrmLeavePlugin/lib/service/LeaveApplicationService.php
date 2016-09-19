@@ -119,10 +119,11 @@ class LeaveApplicationService extends AbstractLeaveAllocationService {
                 $employee = $this->getLoggedInEmployee();
                 $empNumber = $employee->getEmpNumber();
                 $entitlements = $strategy->handleLeaveCreate($empNumber, $leaveType->getId(), $nonHolidayLeaveDays, false);
-
+                /*
                 if (!$this->allowToExceedLeaveBalance() && $entitlements == false) {
                     throw new LeaveAllocationServiceException('Leave Balance Exceeded');
                 }
+                */
             }            
         
             if ($holidayCount != count($leaves)) {
@@ -134,7 +135,7 @@ class LeaveApplicationService extends AbstractLeaveAllocationService {
         
                     $leaveRequest = $this->getLeaveRequestService()->saveLeaveRequest($leaveRequest, $leaves, $entitlements);
                     $leaveComment = trim($leaveRequest->getComments());
-                                   
+
                     if (!empty($leaveComment)) {                                                       
                         if (!empty($loggedInEmpNumber)) {
                             $employee = $this->getEmployeeService()->getEmployee($loggedInEmpNumber);

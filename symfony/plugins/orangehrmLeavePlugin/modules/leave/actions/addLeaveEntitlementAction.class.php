@@ -93,10 +93,10 @@ class addLeaveEntitlementAction extends sfAction {
             if ($this->form->isValid()) {
                 $leaveEntitlement = $this->getLeaveEntitlement($this->form->getValues());
                 
-                
+
                 $bulkFilter = $this->form->getValue('filters');
                 if (!isset($bulkFilter['bulk_assign'])) {
-                    
+
                     $leaveEntitlement = $this->getLeaveEntitlementService()->saveLeaveEntitlement($leaveEntitlement);
                     
                     $eventType = $this->addMode ? LeaveEvents::ENTITLEMENT_ADD : LeaveEvents::ENTITLEMENT_UPDATE;
@@ -191,7 +191,7 @@ class addLeaveEntitlementAction extends sfAction {
     }  
     
     protected function getLeaveEntitlement($values) {
-       
+
        if(isset($values['filters']['bulk_assign'])){
            $leaveEntitlement = new LeaveEntitlement(); 
            $leaveEntitlement->setNoOfDays($values['entitlement']);
@@ -216,7 +216,7 @@ class addLeaveEntitlementAction extends sfAction {
                             
                             $leaveEntitlement = $existingEntitlement;
                             $newValue = $leaveEntitlement->getNoOfDays()+$values['entitlement'];
-                            $leaveEntitlement->setNoOfDays($newValue); 
+                            $leaveEntitlement->setNoOfDays($newValue);
                             $addNew = false;
                         }
                     }
