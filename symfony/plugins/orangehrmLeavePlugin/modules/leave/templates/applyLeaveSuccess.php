@@ -196,7 +196,7 @@ use_stylesheet(plugin_web_path('orangehrmLeavePlugin', 'css/assignLeaveSuccess.c
                     data: '&leaveType=' + leaveType + '&startDate=' + startDate + '&endDate=' + endDate,
                     dataType: 'json',
                     success: function(data) {
-                        if(data.balance<=0 && data.type==1){
+                        if(data.balance<=0 && data.type==3){
                             $('#balance_negative').modal("show");
                         }
                         if(data.nombremois <= 12){
@@ -216,7 +216,7 @@ use_stylesheet(plugin_web_path('orangehrmLeavePlugin', 'css/assignLeaveSuccess.c
                                 $('#applyleave_leaveBalance').text(balanceTxt)
                                     .append('<a href="#multiperiod_balance" data-toggle="modal" id="leaveBalance_details_link"' + linkCss + '>' +
                                         linkTxt + '</a>');
-                                if(data.negative && data.type==1){
+                                if(data.negative && data.type==3){
                                     $('#balance_negative').modal("show");
                                 }
                                 var html = '';
