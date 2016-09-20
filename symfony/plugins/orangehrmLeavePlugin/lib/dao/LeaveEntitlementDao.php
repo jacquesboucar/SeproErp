@@ -402,7 +402,7 @@ class LeaveEntitlementDao extends BaseDao {
                     $empNumber = $updateEntitlement['emp_number'];
 
                     if (!isset($allEntitlements[$empNumber])) {
-                        if(strcmp($leaveEntitlement->getLeaveType(),3)==0)
+                        if(strcmp($leaveEntitlement->getLeaveTypeId(),3)==0)
                         {
                             //Manipulation a l'anniversaire d'embauche
                             $anniversairestart= $this->getAnniversaireStart($empNumber);
@@ -455,7 +455,7 @@ class LeaveEntitlementDao extends BaseDao {
                             $entitlement->setDeleted(0);
 
                             //$entitlement->setNoOfDays($leaveanterieur[0]['no_of_days']-$leaveanterieur[0]['days_used']+$leaveanterieur[0]['no_of_day_to_add']+$solde+$cpt);
-                            $entitlement->setNoOfDayToAdd($noOfDays);
+                            $entitlement->setNoOfDayToAdd($leaveEntitlement->getNoOfDays());
                             $entitlement->setFromDate($fromDate);
                             $entitlement->setToDate($toDate);
                             $entitlement->setId($updateEntitlement['id']);
@@ -488,7 +488,7 @@ class LeaveEntitlementDao extends BaseDao {
                     }
                 }
 
-                if(strcmp($leaveEntitlement->getLeaveType(),3)==0){
+                if(strcmp($leaveEntitlement->getLeaveTypeId(),3)==0){
                     $updateQuery = sprintf(" UPDATE ohrm_leave_entitlement SET no_of_day_to_add=no_of_day_to_add+ %f WHERE id IN (%s)",$leaveEntitlement->getNoOfDays(), implode(',', $updateEntitlementIdList));
                 }else{
                     $updateQuery = sprintf(" UPDATE ohrm_leave_entitlement SET no_of_days=no_of_days+ %f WHERE id IN (%s)", $leaveEntitlement->getNoOfDays(), implode(',', $updateEntitlementIdList));
@@ -500,7 +500,7 @@ class LeaveEntitlementDao extends BaseDao {
 
             $newEmployeeList = array_diff($employeeNumbers, $updateEmpList);
             if (count($newEmployeeList) > 0) {
-                if(strcmp($leaveEntitlement->getLeaveType(),3)==0){
+                if(strcmp($leaveEntitlement->getLeaveTypeId(),3)==0){
                     $query = " INSERT INTO ohrm_leave_entitlement(`emp_number`,`leave_type_id`,`from_date`,`to_date`,`no_of_days`, `no_of_day_to_add`,`days_used`,`entitlement_type`) VALUES " .
                         "(?, ?, ?, ?, ?,?,?,?)";
                 }else{
@@ -513,7 +513,7 @@ class LeaveEntitlementDao extends BaseDao {
                 foreach ($newEmployeeList as $empNumber) {
                     if (!isset($allEntitlements[$empNumber]))
                     {
-                        if(strcmp($leaveEntitlement->getLeaveType(),1)==0){
+                        if(strcmp($leaveEntitlement->getLeaveTypeId(),3)==0){
                             //Manipulation debut d'annee
                             $fromdate =new DateTime($leaveEntitlement->getFromDate());
                             $todate = new DateTime($leaveEntitlement->getToDate());
@@ -526,8 +526,10 @@ class LeaveEntitlementDao extends BaseDao {
                             $soldeanterieur=$leaveanterieur[0]['no_of_days'];
                             $soldeencour=$leaveanterieur[0]['no_of_day_to_add']+$leaveEntitlement->getNoOfDays();
                             $dayused=$leaveanterieur[0]['days_used'];
-                            if(!isset($soldeanterieur)||!isset($dayused) ){
+                            if(!isset($soldeanterieur)){
                                 $soldeanterieur=0;
+                            }
+                            if(!isset($dayused)){
                                 $dayused=0;
                             }
 
@@ -543,7 +545,7 @@ class LeaveEntitlementDao extends BaseDao {
                             $entitlement->setDeleted(0);
 
                             $entitlement->setNoOfDayToAdd($leaveEntitlement->getNoOfDays());
-                            $entitlement->setNoOfDays();
+                            $entitlement->setNoOfDays($soldeanterieur);
                             $entitlement->setFromDate($fromDate);
                             $entitlement->setToDate($toDate);
 
@@ -568,7 +570,6 @@ class LeaveEntitlementDao extends BaseDao {
 
                             $params = array($empNumber, $leaveEntitlement->getLeaveTypeId(), $fromDate, $toDate, $noOfDays, LeaveEntitlement::ENTITLEMENT_TYPE_ADD);
                         }
-
                         $stmt->execute($params);
                         $entitlement->setId($pdo->lastInsertId());
 
