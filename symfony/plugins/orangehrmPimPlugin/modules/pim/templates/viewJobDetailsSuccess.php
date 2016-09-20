@@ -319,6 +319,9 @@
         if(document.getElementById("job_validate_yes").checked==true){
             $('.impressionbtn').show();
             $('.radio').hide();
+        }else{
+            $('.impressionbtn').hide();
+            $('.radio').show();
         }
 
         $('#btnTerminateEmployement').click(function(){
