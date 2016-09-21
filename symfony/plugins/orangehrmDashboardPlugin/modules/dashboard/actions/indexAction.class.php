@@ -51,14 +51,14 @@ class indexAction extends BaseDashboardAction {
         $quicklaunch = array(
             'attributes' => array('title' => "",
                 'width' => 1100,
-                'height' => 120,
+                'height' => 140,
                 'permissions' => array(1, 2, 3, 4, 5, 6, 7)),
             'name' => 'QuickLaunch',
             'panels' => array(array(
                     'name' => 'Quick Launch',
                     'attributes' => array(
                         'width' => 'auto',
-                        'height' => 90.8,
+                        'height' =>136,
                         'module_name' => 'dashboard',
                         'action_name' => 'quickLaunchPanel',
                         'top' => 4,
@@ -81,7 +81,7 @@ class indexAction extends BaseDashboardAction {
                         'height' => 281,
                         'module_name' => 'dashboard',
                         'action_name' => 'employeeDistribution',
-                        'top' => 0,
+                        'top' => 20,
                         'left' => 0,
                         'ohrm_module' => 'pim',
                         'loadDefault' => 'false'
@@ -93,7 +93,7 @@ class indexAction extends BaseDashboardAction {
                         'height' => 281,
                         'module_name' => 'dashboard',
                         'action_name' => 'baseLegend',
-                        'top' => 0,
+                        'top' => 20,
                         'left' => 13,
                         'ohrm_module' => 'pim',
                         'loadDefault' => 'true'
@@ -105,7 +105,7 @@ class indexAction extends BaseDashboardAction {
                         'height' => 281,
                         'module_name' => 'dashboard',
                         'action_name' => 'pendingLeaveRequests',
-                        'top' => 0,
+                        'top' => 20,
                         'left' => 0,
                         'ohrm_module' => 'leave',
                         'loadDefault' => 'false'
@@ -118,7 +118,7 @@ class indexAction extends BaseDashboardAction {
                         'height' => 281,
                         'module_name' => 'dashboard',
                         'action_name' => 'pendingLeaveRequests',
-                        'top' => 0,
+                        'top' => 20,
                         'left' => 0,
                         'ohrm_module' => 'leave',
                         'loadDefault' => 'false'
