@@ -133,7 +133,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                                             }
                                                         }
                                                     }
-                                                }
+                                                } $notefinale=0;$nbrekpi=0;
                                                 foreach ($existe_group as $key =>$ex_group)
                                                 {
                                                  ?>
@@ -171,7 +171,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                                             $reviewer_group = $reviewer->getReviewerGroupId();
 
                                                             if ($reviewer_group == 1 && $value->getKpi()->getKpiGroup() == $key)
-								                            {
+								                            { $nbrekpi++;$notefinale=$notefinale+$value->getNote();
                                                                 ?>
                                                                 <input type="hidden" value="<?php echo $value->getId(); ?>" id="rating_id_<?php echo $value->getId(); ?>" name="rating_id[<?php echo $value->getId(); ?>]" />
                                                                 <tr>
@@ -206,7 +206,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                                                         Taux:&nbsp<?php echo round((double)($value->getMois12()/$value->getValeurCible())*100); ?>%</td>
                                                                     <td><?php echo $value->getCumule() ?></td>
                                                                     <td><?php echo round((double)(($value->getTauxAtteint()/$value->getValeurCible())*100)) ?>%</td>
-                                                                    <td><input type="text" class="emp" style="width:35px;" id="noter_<?php echo $value->getId(); ?>" name="noter_[<?php echo $value->getId(); ?>]" value="<?php echo $value->getNote(); ?>"></td>
+                                                                    <td><input type="text" class="emp" style="width:35px;" id="noter_<?php echo $value->getId(); ?>" name="noter[<?php echo $value->getId(); ?>]" value="<?php echo $value->getNote(); ?>"></td>
                                                                     <td><textarea class="comment emp" type="text" id="comment_<?php echo $value->getId(); ?>" name="comment[<?php echo $value->getId(); ?>]" ><?php echo $value->getComment(); ?></textarea></td>
                                                                 </tr>
                                                                 <?php
@@ -239,7 +239,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
 
                                 <li>
                                     <?php echo $form['finalRating']->renderLabel(null, array('class' => 'labelValue')); ?>
-                                    <?php echo $form['finalRating']->render() ?>
+                                    <?php echo $form['finalRating']->render(array('value'=> $notefinale/$nbrekpi, 'readonly' => 'readonly')) ?>
                                 </li>
                                 <li>
                                     <?php echo $form['completedDate']->renderLabel(null, array('class' => 'labelValue')); ?>
