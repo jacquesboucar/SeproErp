@@ -194,7 +194,7 @@ class EmployeePersonalDetailsForm extends BaseForm {
             'chkSmokeFlag' => new sfValidatorString(array('required' => false)),
             'txtLicExpDate' => new ohrmDateValidator(array('date_format' => $inputDatePattern, 'required' => false), array('invalid' => "Date format should be $inputDatePattern")),
             'txtMilitarySer' => new sfValidatorString(array('required' => false)),
-            'txtdatedebuts' => new ohrmDateValidator(array('date_format' => $inputDatePattern, 'required' => false), array('invalid' => "Date format should be $inputDatePattern"))
+            'txtdatedebuts' => new ohrmDateValidator(array('required' => false))
         );
 
         return $validators;
