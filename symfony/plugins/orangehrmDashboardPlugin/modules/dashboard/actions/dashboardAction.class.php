@@ -51,14 +51,14 @@ class dashboardAction extends BaseDashboardAction {
         $quicklaunch = array(
             'attributes' => array('title' => "",
                 'width' => 1100,
-                'height' => 120,
+                'height' => 200,
                 'permissions' => array(1, 2, 3, 4, 5, 6, 7)),
             'name' => 'QuickLaunch',
             'panels' => array(array(
                     'name' => 'Quick Launch',
                     'attributes' => array(
                         'width' => 'auto',
-                        'height' => 90.8,
+                        'height' => 170,
                         'module_name' => 'dashboard',
                         'action_name' => 'quickLaunchPanel',
                         'top' => 4,
