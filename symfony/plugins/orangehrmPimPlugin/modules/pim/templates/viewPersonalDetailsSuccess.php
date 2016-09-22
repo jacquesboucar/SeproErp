@@ -105,7 +105,7 @@ use_stylesheet(plugin_web_path('orangehrmPimPlugin', 'css/viewPersonalDetailsSuc
                             <?php echo $form['DOB']->render(array("class"=>"editable")); ?>
                         </li>
                         <li>
-                            <label for="personal_ddebut"><?php echo __("Date of Start");?></label>
+                            <label for="personal_txtdatedebuts"><?php echo __("Date of Start");?></label>
                             <?php echo $form['txtdatedebuts']->render(array("class"=>"editable")); ?>
                         </li>
                         <?php if(!$showDeprecatedFields) : ?>
