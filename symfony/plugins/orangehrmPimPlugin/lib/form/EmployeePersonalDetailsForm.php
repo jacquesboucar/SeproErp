@@ -152,7 +152,7 @@ class EmployeePersonalDetailsForm extends BaseForm {
         $widgets['txtEmpFirstName']->setAttribute('value', $this->employee->firstName);
         $widgets['txtEmpMiddleName']->setAttribute('value', $this->employee->middleName);
         $widgets['txtEmpNickName']->setAttribute('value', $this->employee->nickName);
-        $widgets['txtdatedebuts']->setAttribute('value', $this->employee->datedebut);
+        $widgets['txtdatedebuts']->setAttribute('value', set_datepicker_date_format($this->employee->datedebut));
 
         //setting the default selected nation code
         $widgets['cmbNation']->setDefault($this->employee->nation_code);
@@ -194,7 +194,7 @@ class EmployeePersonalDetailsForm extends BaseForm {
             'chkSmokeFlag' => new sfValidatorString(array('required' => false)),
             'txtLicExpDate' => new ohrmDateValidator(array('date_format' => $inputDatePattern, 'required' => false), array('invalid' => "Date format should be $inputDatePattern")),
             'txtMilitarySer' => new sfValidatorString(array('required' => false)),
-            'txtdatedebuts' => new ohrmDateValidator(array('required' => false))
+            'txtdatedebuts' => new ohrmDateValidator(array('date_format' => $inputDatePattern, 'required' => false), array('invalid' => "Date format should be $inputDatePattern"))
         );
 
         return $validators;
