@@ -19,7 +19,6 @@ use_stylesheet(plugin_web_path('orangehrmLeavePlugin', 'css/assignLeaveSuccess.c
         <form id="frmLeaveApply" name="frmLeaveApply" method="post" action="">
             <?php include_component('core', 'ohrmPluginPannel', array('location' => 'apply-leave-form-elements'))?>
             <fieldset>
-                <i id="eligibiliteemploye"></i>
                 <ol>
                     <?php echo $applyLeaveForm->render(); ?>
                     <li class="required new">
@@ -198,10 +197,6 @@ use_stylesheet(plugin_web_path('orangehrmLeavePlugin', 'css/assignLeaveSuccess.c
                     success: function(data) {
                         if(data.balance<=0 && data.type==3){
                             $('#balance_negative').modal("show");
-                        }
-                        if(data.nombremois <= 12){
-                            $('#eligibiliteemploye').text("Vous n'etes pas eligible pour faire une demande de conge annuel");
-                            $('#applyBtn').hide();
                         }else{
 
                             if (data.multiperiod == true) {
