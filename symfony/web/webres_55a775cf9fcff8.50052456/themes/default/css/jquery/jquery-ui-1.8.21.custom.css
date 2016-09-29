@@ -56,9 +56,9 @@
 .ui-widget { font-size: 12px; }
 .ui-widget .ui-widget { font-size: 1em; }
 .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button { font-size: 12em; }
-.ui-widget-content { border: 1px solid #33ac3f; background: #e0e0e0 url(images/ui-bg_highlight-hard_100_f5f3e5_1x100.png) 50% top repeat-x; color: #312e25; }
+.ui-widget-content { border: 1px solid #770a82; background: #e0e0e0 url(images/ui-bg_highlight-hard_100_f5f3e5_1x100.png) 50% top repeat-x; color: #312e25; }
 .ui-widget-content a { color: #312e25; }
-.ui-widget-header { border: 1px solid #33ac3f; background: #33ac3f; color: #fff; font-weight: bold; }
+.ui-widget-header { border: 1px solid #33ac3f; background: #770a82; color: rgba(0, 0, 0, 0.98); font-weight: bold; }
 .ui-widget-header a { color: #433f38; }
 
 /* Interaction states
