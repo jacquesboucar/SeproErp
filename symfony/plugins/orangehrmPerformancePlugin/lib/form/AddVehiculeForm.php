@@ -99,10 +99,10 @@ class AddVehiculeForm extends BasePefromanceSearchForm {
         $user = sfContext::getInstance()->getUser();
         $loggedInEmpNumber = $user->getAttribute('auth.empNumber');
         $values = $this->getValues();
-        var_dump($user);die;
         $vehicule = new Vehicule();
         $vehicule->setMarque($values['marque']);
         $vehicule->setEnergie($values['energie']);
+        $vehicule->setDotationCarburant($values['dotation_carburant']);
         $vehicule->setMatriculeVehicule($values['matricule_vehicule']);
         $vehicule->setDateApplied(date('Y-m-d H:i:s'));
         $vehicule->setEmpNumber($loggedInEmpNumber);
