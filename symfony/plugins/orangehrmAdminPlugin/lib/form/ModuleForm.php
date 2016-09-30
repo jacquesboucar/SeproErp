@@ -48,7 +48,8 @@ class ModuleForm extends BaseForm {
             'help' => new sfWidgetFormInputCheckbox(array(), array('class' => 'checkbox', 'value' => 'on')),
             'directory' => new sfWidgetFormInputCheckbox(array(), array('class' => 'checkbox', 'value' => 'on')),
             'training' => new sfWidgetFormInputCheckbox(array(), array('class' => 'checkbox', 'value' => 'on')),
-        ));        
+            'vehicule' => new sfWidgetFormInputCheckbox(array(), array('class' => 'checkbox', 'value' => 'on')),
+        ));
         
         $this->setValidators(array(
             'admin' => new sfValidatorPass(),
@@ -60,6 +61,7 @@ class ModuleForm extends BaseForm {
             'help' => new sfValidatorPass(),
             'directory' => new sfValidatorPass(),
             'training' => new sfValidatorPass(),
+            'vehicule' => new sfValidatorPass(),
         ));
         
         $this->setDefaults($this->_getDefaultValues());

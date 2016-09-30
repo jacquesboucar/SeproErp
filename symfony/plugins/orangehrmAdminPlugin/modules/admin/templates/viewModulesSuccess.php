@@ -82,6 +82,11 @@
                         <?php echo $form['training']->renderLabel(__('Enable Training module')); ?>
                         <?php echo $form['training']->render(); ?>
                     </li>
+
+                    <li class="checkbox">
+                        <?php echo $form['vehicule']->renderLabel(__('Enable Vehicule module')); ?>
+                        <?php echo $form['vehicule']->render(); ?>
+                    </li>
                     
                     
                     <li class="required">
