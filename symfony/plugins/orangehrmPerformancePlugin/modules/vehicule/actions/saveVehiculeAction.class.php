@@ -22,7 +22,7 @@ class saveVehiculeAction extends basePeformanceAction {
 
     public function getVehiculeForm() {
         if ($this->vehiculeForm == null) {
-            return new AddTrainingForm();
+            return new AddVehiculeForm();
         } else {
             return $this->vehiculeForm;
         }
@@ -32,13 +32,13 @@ class saveVehiculeAction extends basePeformanceAction {
     /**
      * @param $vehiculeForm
      */
-    public function setVehiculeForm($vfdddfdfds) {
+    public function setVehiculeForm($vehiculeForm) {
         $this->vehiculeForm = $vehiculeForm;
     }
 
     public function execute( $request) {
 
-        $request->setParameter('initialActionName', 'searchKpi');
+        $request->setParameter('initialActionName', 'saveVehicule');
         $form = $this->getVehiculeForm();
 
         if ($request->isMethod('post')) {
@@ -47,7 +47,7 @@ class saveVehiculeAction extends basePeformanceAction {
                 try {
                     $form->saveForm();
                     $this->getUser()->setFlash('success', __(TopLevelMessages::SAVE_SUCCESS));
-                    $this->redirect('performance/searchKpi');
+                    $this->redirect('vehicule/saveVehicule');
                 } catch (LeaveAllocationServiceException $e) {
                     $this->templateMessage = array('WARNING', __($e->getMessage()));
                 }

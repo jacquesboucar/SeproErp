@@ -31,8 +31,7 @@ class AddVehiculeForm extends BasePefromanceSearchForm {
             'marque' => new sfWidgetFormInputText(),
             'energie' => new sfWidgetFormInputText(),
             'matricule_vehicule' => new sfWidgetFormInputText(),
-            'dotation_carburant' => new sfWidgetFormInputText(),
-            'date_applied' => new sfWidgetFormInputText()
+            'dotation_carburant' => new sfWidgetFormInputText()
         ));
         $this->setValidators(array(
             'marque' => new sfValidatorString(array('max_length' => 100)),
@@ -45,7 +44,35 @@ class AddVehiculeForm extends BasePefromanceSearchForm {
     }
 
 
+    /**
+     * @param $kpiId
+     */
+    public function loadFormData($kpiId) {
 
+        if ($kpiId > 0) {
+            $kpi = $this->getKpiService()->searchKpi(array('id' => $kpiId));
+            $this->setDefault('id', $kpi->getId());
+            $this->setDefault('jobTitleCode', $kpi->getJobTitleCode());
+            $this->setDefault('keyPerformanceIndicators', $kpi->getKpiIndicators());
+            $this->setDefault('minRating', 1);
+            $this->setDefault('maxRating', $kpi->getMaxRating());
+            $this->setDefault('delai', $kpi->getDelai());
+            $this->setDefault('objectif',$kpi->getObjectif());
+            $this->setDefault('mode_calcul',$kpi->getModeCalcul());
+            $this->setDefault('makeDefault', $kpi->getDefaultKpi());
+
+        } else {
+
+            $parameters ['isDefault'] = 1;
+            $kpi = $this->getKpiService()->searchKpi($parameters);
+
+            if(sizeof($kpi)>0){
+                $kpi = $kpi->getFirst();
+                $this->setDefault('minRating', 1);
+                $this->setDefault('maxRating', $kpi->getMaxRating());
+            }
+        }
+    }
    
 
     /**
@@ -72,7 +99,7 @@ class AddVehiculeForm extends BasePefromanceSearchForm {
         $user = sfContext::getInstance()->getUser();
         $loggedInEmpNumber = $user->getAttribute('auth.empNumber');
         $values = $this->getValues();
-        
+        var_dump($user);die;
         $vehicule = new Vehicule();
         $vehicule->setMarque($values['marque']);
         $vehicule->setEnergie($values['energie']);

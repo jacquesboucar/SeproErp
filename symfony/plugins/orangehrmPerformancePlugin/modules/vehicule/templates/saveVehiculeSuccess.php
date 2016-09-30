@@ -14,7 +14,7 @@
     <div class="inner">
         <?php include_partial('global/flash_messages'); ?>
 
-        <form name="searchKpi" id="searchKpi" method="post" action="" >
+        <form name="saveVehicule" id="saveVehicule" method="post" action="" >
 
             <fieldset>
 
@@ -43,11 +43,11 @@
 
 
         $('#saveBtn').click(function(){
-            $('#searchKpi').submit();
+            $('#saveVehicule').submit();
         });
 
         $('#btnCancel').click(function(){
-            window.location.replace('<?php echo public_path('index.php/performance/searchKpi'); ?>');
+            window.location.replace('<?php echo public_path('index.php/vehicule/saveVehicule'); ?>');
         });
     });
 </script>

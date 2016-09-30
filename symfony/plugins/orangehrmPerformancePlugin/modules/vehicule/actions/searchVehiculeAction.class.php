@@ -10,19 +10,19 @@
  *
  * @author nadeera
  */
-class searchTrainingAction extends basePeformanceAction {
+class searchVehiculeAction extends basePeformanceAction {
     
-    public $trainingSearchForm;
+    public $vehiculeSearchForm;
     
     /**
      *
      * @return KpiSearchForm
      */
-    public function getTrainingSearchForm() {
-        if ($this->trainingSearchForm == null) {
-            return new AddTrainingForm();
+    public function getVehiculeSearchForm() {
+        if ($this->vehiculeSearchForm == null) {
+            return new AddVehiculeForm();
         } else {
-            return $this->trainingSearchForm;
+            return $this->vehiculeSearchForm;
         }
     }
     
@@ -39,14 +39,14 @@ class searchTrainingAction extends basePeformanceAction {
 
     public function execute($request) {
 
-        $form = $this->getTrainingSearchForm();
+        $form = $this->getVehiculeSearchForm();
         $page = $request->getParameter('hdnAction') == 'search' ? 1 : $request->getParameter('pageNo', 1);
 
         $this->setPageNumber($page);
 
-        $trainingList = $form->searchTraining($page);
-        $trainingListCount = $form->getTrainingCount();
-        $this->setListComponent($trainingList, $trainingListCount);
+        $vehiculeList = $form->searchVehicule($page);
+        $vehiculeListCount = $form->getVehiculeCount();
+        $this->setListComponent($vehiculeList, $vehiculeListCount);
         $this->form = $form;
     }
 
@@ -54,16 +54,16 @@ class searchTrainingAction extends basePeformanceAction {
      *
      * @param Doctrine_Collection $kpiList 
      */
-    protected function setListComponent($trainingList, $trainingListCount) {
+    protected function setListComponent($vehiculeList, $vehiculeListCount) {
         
         $pageNumber = $this->getPageNumber();
 
         $configurationFactory = $this->getListConfigurationFactory();
         ohrmListComponent::setActivePlugin('orangehrmPerformancePlugin');
         ohrmListComponent::setConfigurationFactory($configurationFactory);
-        $list = ohrmListComponent::setListData($trainingList);
+        $list = ohrmListComponent::setListData($vehiculeList);
         ohrmListComponent::setPageNumber($pageNumber);
-        $numRecords = $trainingListCount;
+        $numRecords = $vehiculeListCount;
         ohrmListComponent::setItemsPerPage(sfConfig::get('app_items_per_page'));
         ohrmListComponent::setNumberOfRecords($numRecords);
     }
