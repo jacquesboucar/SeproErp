@@ -8,7 +8,7 @@
 
 <div id="location" class="box">
     <div class="head">
-        <h1 id="PerformanceHeading"><?php echo __("Demande de Formation"); ?></h1>
+        <h1 id="PerformanceHeading"><?php echo __("Dotation de vehicule"); ?></h1>
     </div>
 
     <div class="inner">
@@ -39,13 +39,13 @@
 
 <script>
     $(document).ready(function() {
-        
-        
-        
-        $('#saveBtn').click(function(){           
+
+
+
+        $('#saveBtn').click(function(){
             $('#searchKpi').submit();
         });
-        
+
         $('#btnCancel').click(function(){
             window.location.replace('<?php echo public_path('index.php/performance/searchKpi'); ?>');
         });

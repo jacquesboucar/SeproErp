@@ -289,3 +289,38 @@ Training:
       local: emp_number
       foreign: emp_number
       type: one
+
+
+
+Vehicule:
+  tableName: ohrm_vehicule
+  columns:
+    id:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      primary: true
+      autoincrement: true
+    emp_number:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    marque:
+      type: string(100)
+    energie:
+      type: string(100)
+    matricule_vehicule:
+      type: string(50)
+    dotation_carburant:
+      type: string(50)
+    date_applied:
+      type: date(25)
+  relations:
+    Employee:
+      local: emp_number
+      foreign: emp_number
+      type: one
+

@@ -12,6 +12,7 @@
  * @property string $matricule_vehicule
  * @property string $dotation_carburant
  * @property date $date_applied
+ * @property Employee $Employee
  * 
  * @method integer  getId()                 Returns the current record's "id" value
  * @method integer  getEmpNumber()          Returns the current record's "emp_number" value
@@ -20,6 +21,7 @@
  * @method string   getMatriculeVehicule()  Returns the current record's "matricule_vehicule" value
  * @method string   getDotationCarburant()  Returns the current record's "dotation_carburant" value
  * @method date     getDateApplied()        Returns the current record's "date_applied" value
+ * @method Employee getEmployee()           Returns the current record's "Employee" value
  * @method Vehicule setId()                 Sets the current record's "id" value
  * @method Vehicule setEmpNumber()          Sets the current record's "emp_number" value
  * @method Vehicule setMarque()             Sets the current record's "marque" value
@@ -27,6 +29,7 @@
  * @method Vehicule setMatriculeVehicule()  Sets the current record's "matricule_vehicule" value
  * @method Vehicule setDotationCarburant()  Sets the current record's "dotation_carburant" value
  * @method Vehicule setDateApplied()        Sets the current record's "date_applied" value
+ * @method Vehicule setEmployee()           Sets the current record's "Employee" value
  * 
  * @package    orangehrm
  * @subpackage model\performance\base
@@ -80,6 +83,8 @@ abstract class BaseVehicule extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        
+        $this->hasOne('Employee', array(
+             'local' => 'emp_number',
+             'foreign' => 'emp_number'));
     }
 }

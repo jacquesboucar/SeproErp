@@ -5,44 +5,41 @@
  * and open the template in the editor.
  */
 
-/**
- * Description of saveKpiAction
- *
- * @author nadeera
- */
-class saveTrainingAction extends basePeformanceAction {
 
-    public $trainingForm;
+class saveVehiculeAction extends basePeformanceAction {
 
-    
+    public $vehiculeForm;
+
+
+    /**
+     *
+     */
     public function preExecute() {
        $this->_checkAuthentication();
     }
-    
-    /**
-     *
-     * @return \DefineKpiForm 
-     */
-    public function getTrainingForm() {
-        if ($this->trainingForm == null) {
+
+
+
+    public function getVehiculeForm() {
+        if ($this->vehiculeForm == null) {
             return new AddTrainingForm();
         } else {
-            return $this->trainingForm;
+            return $this->vehiculeForm;
         }
     }
 
+
     /**
-     *
-     * @param \DefineKpiForm $kpiSaveForm 
+     * @param $vehiculeForm
      */
-    public function setTrainingForm($kpiSaveForm) {
-        $this->trainingForm = $trainingForm;
+    public function setVehiculeForm($vfdddfdfds) {
+        $this->vehiculeForm = $vehiculeForm;
     }
 
     public function execute( $request) {
 
         $request->setParameter('initialActionName', 'searchKpi');
-        $form = $this->getTrainingForm();
+        $form = $this->getVehiculeForm();
 
         if ($request->isMethod('post')) {
             $form->bind($request->getParameter($form->getName()));
