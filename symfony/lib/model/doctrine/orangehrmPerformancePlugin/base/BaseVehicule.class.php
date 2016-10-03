@@ -12,6 +12,7 @@
  * @property string $matricule_vehicule
  * @property string $dotation_carburant
  * @property date $date_applied
+ * @property boolean $valider
  * @property Employee $Employee
  * 
  * @method integer  getId()                 Returns the current record's "id" value
@@ -21,6 +22,7 @@
  * @method string   getMatriculeVehicule()  Returns the current record's "matricule_vehicule" value
  * @method string   getDotationCarburant()  Returns the current record's "dotation_carburant" value
  * @method date     getDateApplied()        Returns the current record's "date_applied" value
+ * @method boolean  getValider()            Returns the current record's "valider" value
  * @method Employee getEmployee()           Returns the current record's "Employee" value
  * @method Vehicule setId()                 Sets the current record's "id" value
  * @method Vehicule setEmpNumber()          Sets the current record's "emp_number" value
@@ -29,6 +31,7 @@
  * @method Vehicule setMatriculeVehicule()  Sets the current record's "matricule_vehicule" value
  * @method Vehicule setDotationCarburant()  Sets the current record's "dotation_carburant" value
  * @method Vehicule setDateApplied()        Sets the current record's "date_applied" value
+ * @method Vehicule setValider()            Sets the current record's "valider" value
  * @method Vehicule setEmployee()           Sets the current record's "Employee" value
  * 
  * @package    orangehrm
@@ -77,6 +80,9 @@ abstract class BaseVehicule extends sfDoctrineRecord
         $this->hasColumn('date_applied', 'date', 25, array(
              'type' => 'date',
              'length' => 25,
+             ));
+        $this->hasColumn('valider', 'boolean', null, array(
+             'type' => 'boolean',
              ));
     }
 

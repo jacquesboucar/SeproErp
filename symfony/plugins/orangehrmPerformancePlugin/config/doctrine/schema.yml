@@ -318,6 +318,8 @@ Vehicule:
       type: string(50)
     date_applied:
       type: date(25)
+    valider:
+      type: boolean
   relations:
     Employee:
       local: emp_number

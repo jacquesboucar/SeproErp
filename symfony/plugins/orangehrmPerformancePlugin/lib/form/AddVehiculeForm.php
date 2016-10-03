@@ -31,14 +31,18 @@ class AddVehiculeForm extends BasePefromanceSearchForm {
             'marque' => new sfWidgetFormInputText(),
             'energie' => new sfWidgetFormInputText(),
             'matricule_vehicule' => new sfWidgetFormInputText(),
-            'dotation_carburant' => new sfWidgetFormInputText()
+            'dotation_carburant' => new sfWidgetFormInputText(),
+            'valider' => new sfWidgetFormInputCheckbox(array(), array('class' => 'checkbox', 'value' => true))
         ));
         $this->setValidators(array(
             'marque' => new sfValidatorString(array('max_length' => 100)),
             'energie' => new sfValidatorString(array('max_length' => 100)),
             'matricule_vehicule' => new sfValidatorString(array('max_length' => 50)),
-            'dotation_carburant' => new sfValidatorString(array('max_length' => 50))
+            'dotation_carburant' => new sfValidatorString(array('max_length' => 50)),
+            'valider' => new sfValidatorPass(),
+
         ));
+        $this->setDefault('valider', false);
         $this->getWidgetSchema()->setNameFormat('addVehicule[%s]');
         $this->getWidgetSchema()->setLabels($this->getFormLabels());
     }
@@ -87,6 +91,7 @@ class AddVehiculeForm extends BasePefromanceSearchForm {
             'energie' => __('Energie'). $requiredMarker,
             'matricule_vehicule' => __('Matricule vehicule'). $requiredMarker,
             'dotation_carburant' => __('Dotation_carburant'). $requiredMarker,
+            'valider' => __('Valider'),
         );
         return $labels;
     }
@@ -99,11 +104,13 @@ class AddVehiculeForm extends BasePefromanceSearchForm {
         $user = sfContext::getInstance()->getUser();
         $loggedInEmpNumber = $user->getAttribute('auth.empNumber');
         $values = $this->getValues();
+        var_dump($values['valider']);die;
         $vehicule = new Vehicule();
         $vehicule->setMarque($values['marque']);
         $vehicule->setEnergie($values['energie']);
         $vehicule->setDotationCarburant($values['dotation_carburant']);
         $vehicule->setMatriculeVehicule($values['matricule_vehicule']);
+        $vehicule->setValider($values['valider']);
         $vehicule->setDateApplied(date('Y-m-d H:i:s'));
         $vehicule->setEmpNumber($loggedInEmpNumber);
         $this->getVehiculeService()->saveVehicule($vehicule);
