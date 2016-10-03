@@ -290,8 +290,6 @@ Training:
       foreign: emp_number
       type: one
 
-
-
 Vehicule:
   tableName: ohrm_vehicule
   columns:
@@ -320,6 +318,40 @@ Vehicule:
       type: date(25)
     valider:
       type: boolean
+  relations:
+    Employee:
+      local: emp_number
+      foreign: emp_number
+      type: one
+
+PretImmobilier:
+  tableName: ohrm_pretimmobilier
+  columns:
+    id:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      primary: true
+      autoincrement: true
+    montant_pret:
+      type: Decimal(65,0)
+    objet:
+      type: string(100)
+    nombre_mois:
+      type: integer(4)
+    date_accord:
+      type: date(25)
+    date_prelevement:
+      type: date(25)
+    quotite_saisissable:
+      type: Decimal(65,0)
+    emp_number:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
   relations:
     Employee:
       local: emp_number

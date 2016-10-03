@@ -87,6 +87,11 @@
                         <?php echo $form['vehicule']->renderLabel(__('Enable Vehicule module')); ?>
                         <?php echo $form['vehicule']->render(); ?>
                     </li>
+
+                    <li class="checkbox">
+                        <?php echo $form['pretimmobilier']->renderLabel(__('Enable Pret Immobilier module')); ?>
+                        <?php echo $form['pretimmobilier']->render(); ?>
+                    </li>
                     
                     
                     <li class="required">
