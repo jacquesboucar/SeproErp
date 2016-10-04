@@ -35,17 +35,18 @@ class saveTrainingAction extends basePeformanceAction {
      *
      * @param \DefineKpiForm $kpiSaveForm 
      */
-    public function setTrainingForm($kpiSaveForm) {
+    public function setTrainingForm($trainingForm) {
         $this->trainingForm = $trainingForm;
     }
 
     public function execute( $request) {
 
         $request->setParameter('initialActionName', 'searchKpi');
+        $user = $this->getUser()->getAttribute('user');
         $form = $this->getTrainingForm();
 
         if ($request->isMethod('post')) {
-            $form->bind($request->getParameter($form->getName()));
+            $form->bind($request->getParameter($form->getName()),$request->getFiles($form->getName()));
             if ($form->isValid()) {
                 try {
                     $form->saveForm();
@@ -56,6 +57,12 @@ class saveTrainingAction extends basePeformanceAction {
                 }
             }
         } else {
+            if(empty($form->loadFormData($request->getParameter('hdnEditId')))){
+
+                if(!$user->isAdmin()|| !$user->isSupervisor()){
+                    unset($form['file']);
+                }
+            }
             $form->loadFormData($request->getParameter('hdnEditId'));
         }
         $this->form = $form;

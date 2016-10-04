@@ -14,7 +14,7 @@
     <div class="inner">
         <?php include_partial('global/flash_messages'); ?>
 
-        <form name="saveVehicule" id="saveVehicule" method="post" action="" >
+        <form name="saveVehicule" id="saveVehicule" method="post" action="" enctype="multipart/form-data">
 
             <fieldset>
 

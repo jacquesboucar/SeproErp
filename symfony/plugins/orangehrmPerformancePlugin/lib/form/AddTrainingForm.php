@@ -32,16 +32,16 @@ class AddTrainingForm extends BasePefromanceSearchForm {
             //'txtEmpID' => new sfWidgetFormInputHidden(),
             'cout' => new sfWidgetFormInputText(),
             'titre' => new sfWidgetFormInputText(),
-            'description' => new sfWidgetFormTextarea(array(), array('rows' => '3', 'cols' => '30'))
-    
-
+            'description' => new sfWidgetFormTextarea(array(), array('rows' => '3', 'cols' => '30')),
+            'file' => new sfWidgetFormInputFileEditable(array('edit_mode'=>false,'with_delete' => false,'file_src' => ''))
 
         ));
         $this->setValidators(array(
            // 'txtEmpID' => new sfValidatorString(array('required' => true), array('required' => __(ValidationMessages::REQUIRED))),
             'cout' => new sfValidatorString(array('max_length' => 255)),
             'titre' => new sfValidatorString(array('max_length' => 255)),             
-            'description' => new sfValidatorString(array('required' => false, 'trim' => true, 'max_length' => 2000))
+            'description' => new sfValidatorString(array('required' => false, 'trim' => true, 'max_length' => 2000)),
+            'file' =>  new sfValidatorFile(array('max_size' => 1024000,'required' => false))
         ));
         $this->getWidgetSchema()->setNameFormat('addTraining[%s]');
         $this->getWidgetSchema()->setLabels($this->getFormLabels());
@@ -62,6 +62,7 @@ class AddTrainingForm extends BasePefromanceSearchForm {
             'titre' => __('Titre'),
             'cout' => __('Cout'),           
             'description' => __('Description'),
+            'file' => __('Televersement')
         );
         return $labels;
     }
@@ -70,18 +71,30 @@ class AddTrainingForm extends BasePefromanceSearchForm {
         // Get logged user employee Id
         $user = sfContext::getInstance()->getUser();
         $loggedInEmpNumber = $user->getAttribute('auth.empNumber');
-        //print_r($loggedInEmpNumber); die();
         $values = $this->getValues();
-        //print_r($values); die();
-        
+        $file = $this->getValue('file');
+        if(!$file){
+            $filetype=$file->getType();
+            $filename=$file->getOriginalName();
+            $filesize=$file->getSize();
+            $fileTmpName=file_get_contents($file->getTempName());
+        }else{
+            $filetype=null;
+            $filename=null;
+            $filesize=null;
+            $fileTmpName=null;
+        }
+
         $training = new Training();
-        $training->setTitle($value['titre']);
+        $training->setTitle($values['titre']);
         $training->setCoutFormation($values['cout']);
         $training->setDescription($values['description']);
         $training->setDateApplied(date('Y-m-d H:i:s'));
+        $training->setFilecontent($fileTmpName);
+        $training->setFiletype($filetype);
+        $training->setFilesize($filesize);
+        $training->setFilename($filename);
         $training->setEmpNumber($loggedInEmpNumber);
-        $trainingService = $this->getTrainingService();
-        //print_r($trainingService); die();
         $this->getTrainingService()->saveTraining($training);
           
     }

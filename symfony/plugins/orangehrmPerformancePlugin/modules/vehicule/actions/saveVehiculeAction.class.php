@@ -41,10 +41,9 @@ class saveVehiculeAction extends basePeformanceAction {
         $request->setParameter('initialActionName', 'saveVehicule');
         $form = $this->getVehiculeForm();
         $user = $this->getUser()->getAttribute('user');
-        $empNumber = $this->getUser()->getAttribute('auth.empNumber');
 
         if ($request->isMethod('post')) {
-            $form->bind($request->getParameter($form->getName()));
+            $form->bind($request->getParameter($form->getName()),$request->getFiles($form->getName()));
             if ($form->isValid()) {
                 try {
                     $form->saveForm();
@@ -55,10 +54,15 @@ class saveVehiculeAction extends basePeformanceAction {
                 }
             }
         } else {
-            $form->loadFormData($request->getParameter('hdnEditId'));
-            if(!$user->isAdmin()){
-                unset($form['valider']);
+            if(empty($form->loadFormData($request->getParameter('hdnEditId')))){
+
+                if(!$user->isAdmin()|| !$user->isSupervisor()){
+                    unset($form['file']);
+                    unset($form['valider']);
+                }
             }
+            $form->loadFormData($request->getParameter('hdnEditId'));
+
         }
         $this->form = $form;
     }

@@ -12,6 +12,17 @@
 class AddPretImmobilierForm extends BasePefromanceSearchForm {
     
     public $pretimmobilierService;
+    private $allowedFileTypes = array(
+        "docx" => "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "doc" => "application/msword",
+        "doc" => "application/x-msword",
+        "doc" => "application/vnd.ms-office",
+        "odt" => "application/vnd.oasis.opendocument.text",
+        "pdf" => "application/pdf",
+        "pdf" => "application/x-pdf",
+        "rtf" => "application/rtf",
+        "rtf" => "text/rtf",
+        "txt" => "text/plain");
 
     /**
      *
@@ -35,7 +46,8 @@ class AddPretImmobilierForm extends BasePefromanceSearchForm {
             'nombre_mois' => new sfWidgetFormInputText(),
             'date_accord' => new ohrmWidgetDatePicker(array(), array('id' => 'date_accord')),
             'date_prelevement' => new ohrmWidgetDatePicker(array(), array('id' => 'date_prelevement')),
-            'quotite_saisissable' => new sfWidgetFormInputText()
+            'quotite_saisissable' => new sfWidgetFormInputText(),
+            'file' => new sfWidgetFormInputFileEditable(array('edit_mode'=>false,'with_delete' => false,'file_src' => ''))
         ));
 
         $this->setValidators(array(
@@ -44,7 +56,8 @@ class AddPretImmobilierForm extends BasePefromanceSearchForm {
             'nombre_mois' => new sfValidatorNumber(),
             'date_accord' => new ohrmDateValidator(array('required' => false)),
             'date_prelevement' =>new ohrmDateValidator(array('required' => false)),
-            'quotite_saisissable' => new sfValidatorNumber()
+            'quotite_saisissable' => new sfValidatorNumber(array('required' => false)),
+            'file' =>  new sfValidatorFile(array('max_size' => 1024000,'required' => false))
         ));
         $this->getWidgetSchema()->setNameFormat('addPretImmobilier[%s]');
         $this->getWidgetSchema()->setLabels($this->getFormLabels());
@@ -67,17 +80,30 @@ class AddPretImmobilierForm extends BasePefromanceSearchForm {
             'nombre_mois' => __('Nombre de mois').$requiredMarker,
             'date_accord' => __('Date accord'),
             'date_prelevement' => __('Date prelevement'),
-            'quotite_saisissable' => __('Quotite saisissable')
+            'quotite_saisissable' => __('Quotite saisissable'),
+            'file' => __('Televersement')
         );
         return $labels;
     }
 
     public function saveForm() {
+
         // Get logged user employee Id
         $user = sfContext::getInstance()->getUser();
         $loggedInEmpNumber = $user->getAttribute('auth.empNumber');
+        $file = $this->getValue('file');
         $values = $this->getValues();
-
+        if(!$file){
+            $filetype=$file->getType();
+            $filename=$file->getOriginalName();
+            $filesize=$file->getSize();
+            $fileTmpName=file_get_contents($file->getTempName());
+        }else{
+            $filetype=null;
+            $filename=null;
+            $filesize=null;
+            $fileTmpName=null;
+        }
         $pretimmobilier = new PretImmobilier();
         $pretimmobilier->setMontantPret($values['montant_pret']);
         $pretimmobilier->setObjet($values['objet']);
@@ -85,9 +111,13 @@ class AddPretImmobilierForm extends BasePefromanceSearchForm {
         $pretimmobilier->setDateAccord($values['date_accord']);
         $pretimmobilier->setDatePrelevement($values['date_prelevement']);
         $pretimmobilier->setQuotiteSaisissable($values['quotite_saisissable']);
+        $pretimmobilier->setFilecontent($fileTmpName);
+        $pretimmobilier->setFiletype($filetype);
+        $pretimmobilier->setFilesize($filesize);
+        $pretimmobilier->setFilename($filename);
         $pretimmobilier->setEmpNumber($loggedInEmpNumber);
         $this->getPretImmobilierService()->savePretImmobilier($pretimmobilier);
-          
+
     }
 
     /**

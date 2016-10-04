@@ -32,7 +32,8 @@ class AddVehiculeForm extends BasePefromanceSearchForm {
             'energie' => new sfWidgetFormInputText(),
             'matricule_vehicule' => new sfWidgetFormInputText(),
             'dotation_carburant' => new sfWidgetFormInputText(),
-            'valider' => new sfWidgetFormInputCheckbox(array(), array('class' => 'checkbox', 'value' => true))
+            'valider' => new sfWidgetFormInputCheckbox(array(), array('class' => 'checkbox', 'value' => true)),
+            'file' => new sfWidgetFormInputFileEditable(array('edit_mode'=>false,'with_delete' => false,'file_src' => ''))
         ));
         $this->setValidators(array(
             'marque' => new sfValidatorString(array('max_length' => 100)),
@@ -40,6 +41,7 @@ class AddVehiculeForm extends BasePefromanceSearchForm {
             'matricule_vehicule' => new sfValidatorString(array('max_length' => 50)),
             'dotation_carburant' => new sfValidatorString(array('max_length' => 50)),
             'valider' => new sfValidatorPass(),
+            'file' =>  new sfValidatorFile(array('max_size' => 1024000,'required' => false))
 
         ));
         $this->setDefault('valider', false);
@@ -92,6 +94,7 @@ class AddVehiculeForm extends BasePefromanceSearchForm {
             'matricule_vehicule' => __('Matricule vehicule'). $requiredMarker,
             'dotation_carburant' => __('Dotation_carburant'). $requiredMarker,
             'valider' => __('Valider'),
+            'file' => __('Televersement')
         );
         return $labels;
     }
@@ -104,7 +107,18 @@ class AddVehiculeForm extends BasePefromanceSearchForm {
         $user = sfContext::getInstance()->getUser();
         $loggedInEmpNumber = $user->getAttribute('auth.empNumber');
         $values = $this->getValues();
-        var_dump($values['valider']);die;
+        $file = $this->getValue('file');
+        if(!$file){
+            $filetype=$file->getType();
+            $filename=$file->getOriginalName();
+            $filesize=$file->getSize();
+            $fileTmpName=file_get_contents($file->getTempName());
+        }else{
+            $filetype=null;
+            $filename=null;
+            $filesize=null;
+            $fileTmpName=null;
+        }
         $vehicule = new Vehicule();
         $vehicule->setMarque($values['marque']);
         $vehicule->setEnergie($values['energie']);
@@ -112,6 +126,10 @@ class AddVehiculeForm extends BasePefromanceSearchForm {
         $vehicule->setMatriculeVehicule($values['matricule_vehicule']);
         $vehicule->setValider($values['valider']);
         $vehicule->setDateApplied(date('Y-m-d H:i:s'));
+        $vehicule->setFilecontent($fileTmpName);
+        $vehicule->setFiletype($filetype);
+        $vehicule->setFilesize($filesize);
+        $vehicule->setFilename($filename);
         $vehicule->setEmpNumber($loggedInEmpNumber);
         $this->getVehiculeService()->saveVehicule($vehicule);
           

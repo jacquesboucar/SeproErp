@@ -284,6 +284,18 @@ Training:
       primary: false
       notnull: false
       autoincrement: false
+    filecontent:
+      type: blob(2147483647)
+      notnull: false
+    filename:
+      type: string(255)
+      notnull: false
+    filetype:
+      type: string(255)
+      notnull: false
+    filesize:
+      type: integer
+      notnull: false
   relations:
     Employee:
       local: emp_number
@@ -318,6 +330,18 @@ Vehicule:
       type: date(25)
     valider:
       type: boolean
+    filecontent:
+      type: blob(2147483647)
+      notnull: false
+    filename:
+      type: string(255)
+      notnull: false
+    filetype:
+      type: string(255)
+      notnull: false
+    filesize:
+      type: integer
+      notnull: false
   relations:
     Employee:
       local: emp_number
@@ -341,8 +365,10 @@ PretImmobilier:
       type: integer(4)
     date_accord:
       type: date(25)
+      notnull: false
     date_prelevement:
       type: date(25)
+      notnull: false
     quotite_saisissable:
       type: Decimal(65,0)
     emp_number:
@@ -352,6 +378,18 @@ PretImmobilier:
       primary: false
       notnull: true
       autoincrement: false
+    filecontent:
+      type: blob(2147483647)
+      notnull: false
+    filename:
+      type: string(255)
+      notnull: false
+    filetype:
+      type: string(255)
+      notnull: false
+    filesize:
+      type: integer
+      notnull: false
   relations:
     Employee:
       local: emp_number

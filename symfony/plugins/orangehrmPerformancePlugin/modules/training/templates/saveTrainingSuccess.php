@@ -14,7 +14,7 @@
     <div class="inner">
         <?php include_partial('global/flash_messages'); ?>
 
-        <form name="searchKpi" id="searchKpi" method="post" action="" >
+        <form name="searchKpi" id="searchKpi" method="post" action="" enctype="multipart/form-data">
 
             <fieldset>
 

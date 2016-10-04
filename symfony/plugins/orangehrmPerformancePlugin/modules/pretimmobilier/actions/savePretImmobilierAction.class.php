@@ -9,7 +9,17 @@
 class savePretImmobilierAction extends basePeformanceAction {
 
     public $pretimmobilierForm;
-
+    private $allowedFileTypes = array(
+        "docx" => "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "doc" => "application/msword",
+        "doc" => "application/x-msword",
+        "doc" => "application/vnd.ms-office",
+        "odt" => "application/vnd.oasis.opendocument.text",
+        "pdf" => "application/pdf",
+        "pdf" => "application/x-pdf",
+        "rtf" => "application/rtf",
+        "rtf" => "text/rtf",
+        "txt" => "text/plain");
 
     /**
      *
@@ -46,11 +56,13 @@ class savePretImmobilierAction extends basePeformanceAction {
         $request->setParameter('initialActionName', 'savePretImmobilier');
         $form = $this->getPretImmobilierForm();
         $user = $this->getUser()->getAttribute('user');
-        $empNumber = $this->getUser()->getAttribute('auth.empNumber');
+
 
         if ($request->isMethod('post')) {
-            $form->bind($request->getParameter($form->getName()));
+
+            $form->bind($request->getParameter($form->getName()),$request->getFiles($form->getName()));
             if ($form->isValid()) {
+
                 try {
                     $form->saveForm();
                     $this->getUser()->setFlash('success', __(TopLevelMessages::SAVE_SUCCESS));
@@ -60,8 +72,15 @@ class savePretImmobilierAction extends basePeformanceAction {
                 }
             }
         } else {
+            if(empty($form->loadFormData($request->getParameter('hdnEditId')))){
+
+                if(!$user->isAdmin()|| !$user->isSupervisor()){
+                    unset($form['file']);
+                }
+            }
             $form->loadFormData($request->getParameter('hdnEditId'));
         }
+
         $this->form = $form;
     }
 
