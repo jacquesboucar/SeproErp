@@ -470,5 +470,7 @@ class AdminUserRoleDecorator extends UserRoleDecorator {
 	public function isInterviewer() {
 		return $this->user->isInterviewer();
 	}
-
+    public function isSupervisor() {
+        return $this->user->isSupervisor();
+    }
 }

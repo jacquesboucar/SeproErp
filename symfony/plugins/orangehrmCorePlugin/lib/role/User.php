@@ -41,6 +41,7 @@ class User {
 	private $isProjectAdmin = false;	
 	private $isHiringManager = false;
 	private $isInterviewer = false;
+    private $isSupervisior =false;
 	private $employeeListForAttendanceTotalSummaryReport;
 	private $employeeNameList = null;
 
@@ -196,6 +197,9 @@ class User {
 
 	public function isInterviewer() {
 		return $this->isInterviewer;
+	}
+	public function isSupervisor() {
+		return $this->isSupervisor;
 	}
 
 }

@@ -322,4 +322,7 @@ class SupervisorUserRoleDecorator extends UserRoleDecorator {
 		return $this->user->isInterviewer();
 	}
 
+    public function isSupervisor() {
+        return true;
+    }
 }

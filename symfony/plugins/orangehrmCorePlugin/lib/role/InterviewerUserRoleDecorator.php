@@ -235,6 +235,8 @@ class InterviewerUserRoleDecorator extends UserRoleDecorator {
 	public function isInterviewer() {
 		return true;
 	}
-
+    public function isSupervisor() {
+        return $this->user->isSupervisor();
+    }
 }
 
