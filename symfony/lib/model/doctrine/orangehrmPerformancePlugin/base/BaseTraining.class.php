@@ -11,6 +11,10 @@
  * @property date $date_applied
  * @property integer $emp_number
  * @property string $description
+ * @property blob $filecontent
+ * @property string $filename
+ * @property string $filetype
+ * @property integer $filesize
  * @property Employee $Employee
  * 
  * @method integer  getId()             Returns the current record's "id" value
@@ -19,6 +23,10 @@
  * @method date     getDateApplied()    Returns the current record's "date_applied" value
  * @method integer  getEmpNumber()      Returns the current record's "emp_number" value
  * @method string   getDescription()    Returns the current record's "description" value
+ * @method blob     getFilecontent()    Returns the current record's "filecontent" value
+ * @method string   getFilename()       Returns the current record's "filename" value
+ * @method string   getFiletype()       Returns the current record's "filetype" value
+ * @method integer  getFilesize()       Returns the current record's "filesize" value
  * @method Employee getEmployee()       Returns the current record's "Employee" value
  * @method Training setId()             Sets the current record's "id" value
  * @method Training setCoutFormation()  Sets the current record's "cout_formation" value
@@ -26,6 +34,10 @@
  * @method Training setDateApplied()    Sets the current record's "date_applied" value
  * @method Training setEmpNumber()      Sets the current record's "emp_number" value
  * @method Training setDescription()    Sets the current record's "description" value
+ * @method Training setFilecontent()    Sets the current record's "filecontent" value
+ * @method Training setFilename()       Sets the current record's "filename" value
+ * @method Training setFiletype()       Sets the current record's "filetype" value
+ * @method Training setFilesize()       Sets the current record's "filesize" value
  * @method Training setEmployee()       Sets the current record's "Employee" value
  * 
  * @package    orangehrm
@@ -90,6 +102,25 @@ abstract class BaseTraining extends sfDoctrineRecord
              'notnull' => false,
              'autoincrement' => false,
              'length' => 256,
+             ));
+        $this->hasColumn('filecontent', 'blob', 2147483647, array(
+             'type' => 'blob',
+             'notnull' => false,
+             'length' => 2147483647,
+             ));
+        $this->hasColumn('filename', 'string', 255, array(
+             'type' => 'string',
+             'notnull' => false,
+             'length' => 255,
+             ));
+        $this->hasColumn('filetype', 'string', 255, array(
+             'type' => 'string',
+             'notnull' => false,
+             'length' => 255,
+             ));
+        $this->hasColumn('filesize', 'integer', null, array(
+             'type' => 'integer',
+             'notnull' => false,
              ));
     }
 

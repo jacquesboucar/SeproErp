@@ -13,6 +13,10 @@
  * @property date $date_prelevement
  * @property Decimal $quotite_saisissable
  * @property integer $emp_number
+ * @property blob $filecontent
+ * @property string $filename
+ * @property string $filetype
+ * @property integer $filesize
  * @property Employee $Employee
  * 
  * @method integer        getId()                  Returns the current record's "id" value
@@ -23,6 +27,10 @@
  * @method date           getDatePrelevement()     Returns the current record's "date_prelevement" value
  * @method Decimal        getQuotiteSaisissable()  Returns the current record's "quotite_saisissable" value
  * @method integer        getEmpNumber()           Returns the current record's "emp_number" value
+ * @method blob           getFilecontent()         Returns the current record's "filecontent" value
+ * @method string         getFilename()            Returns the current record's "filename" value
+ * @method string         getFiletype()            Returns the current record's "filetype" value
+ * @method integer        getFilesize()            Returns the current record's "filesize" value
  * @method Employee       getEmployee()            Returns the current record's "Employee" value
  * @method PretImmobilier setId()                  Sets the current record's "id" value
  * @method PretImmobilier setMontantPret()         Sets the current record's "montant_pret" value
@@ -32,6 +40,10 @@
  * @method PretImmobilier setDatePrelevement()     Sets the current record's "date_prelevement" value
  * @method PretImmobilier setQuotiteSaisissable()  Sets the current record's "quotite_saisissable" value
  * @method PretImmobilier setEmpNumber()           Sets the current record's "emp_number" value
+ * @method PretImmobilier setFilecontent()         Sets the current record's "filecontent" value
+ * @method PretImmobilier setFilename()            Sets the current record's "filename" value
+ * @method PretImmobilier setFiletype()            Sets the current record's "filetype" value
+ * @method PretImmobilier setFilesize()            Sets the current record's "filesize" value
  * @method PretImmobilier setEmployee()            Sets the current record's "Employee" value
  * 
  * @package    orangehrm
@@ -67,10 +79,12 @@ abstract class BasePretImmobilier extends sfDoctrineRecord
              ));
         $this->hasColumn('date_accord', 'date', 25, array(
              'type' => 'date',
+             'notnull' => false,
              'length' => 25,
              ));
         $this->hasColumn('date_prelevement', 'date', 25, array(
              'type' => 'date',
+             'notnull' => false,
              'length' => 25,
              ));
         $this->hasColumn('quotite_saisissable', 'Decimal', 65, array(
@@ -86,6 +100,25 @@ abstract class BasePretImmobilier extends sfDoctrineRecord
              'notnull' => true,
              'autoincrement' => false,
              'length' => 4,
+             ));
+        $this->hasColumn('filecontent', 'blob', 2147483647, array(
+             'type' => 'blob',
+             'notnull' => false,
+             'length' => 2147483647,
+             ));
+        $this->hasColumn('filename', 'string', 255, array(
+             'type' => 'string',
+             'notnull' => false,
+             'length' => 255,
+             ));
+        $this->hasColumn('filetype', 'string', 255, array(
+             'type' => 'string',
+             'notnull' => false,
+             'length' => 255,
+             ));
+        $this->hasColumn('filesize', 'integer', null, array(
+             'type' => 'integer',
+             'notnull' => false,
              ));
     }
 
