@@ -11,30 +11,53 @@
  * @author nadeera
  */
 class searchVehiculeAction extends basePeformanceAction {
-    
+
     public $vehiculeSearchForm;
-    
-    /**
-     *
-     * @return KpiSearchForm
-     */
-    public function getVehiculeSearchForm() {
-        if ($this->vehiculeSearchForm == null) {
-            return new AddVehiculeForm();
-        } else {
-            return $this->vehiculeSearchForm;
-        }
-    }
-    
+    private $pageNumber;
+
     public function getPageNumber() {
         return $this->pageNumber;
     }
+
     public function setPageNumber($pageNumber) {
         $this->pageNumber = $pageNumber;
     }
 
     public function preExecute() {
         $this->_checkAuthentication();
+    }
+
+    /**
+     *
+     * @return KpiSearchForm
+     */
+    public function getVehiculeSearchForm() {
+        if ($this->vehiculeSearchForm == null) {
+            return new VehiculeSearchForm();
+        } else {
+            return $this->vehiculeSearchForm;
+        }
+    }
+    
+     /**
+     *
+     * @return \KpiService 
+     */
+    public function getVehiculeService() {
+
+        if ($this->vehiculeService == null) {
+            return new VehiculeService();
+        } else {
+            return $this->vehiculeService;
+        }
+    }
+
+    /**
+     *
+     * @param KpiSearchForm $kpiSearchForm 
+     */
+    public function setVehiculeSearchForm($vehiculeSearchForm) {
+        $this->vehiculeSearchForm = $vehiculeSearchForm;
     }
 
     public function execute($request) {
@@ -44,9 +67,30 @@ class searchVehiculeAction extends basePeformanceAction {
 
         $this->setPageNumber($page);
 
-        $vehiculeList = $form->searchVehicule($page);
-        $vehiculeListCount = $form->getVehiculeCount();
-        $this->setListComponent($vehiculeList, $vehiculeListCount);
+        if ($request->isMethod('post')) {
+            $form->bind($request->getParameter($form->getName()));
+            if ($form->isValid()) {
+                try {
+                    
+                } catch (LeaveAllocationServiceException $e) {
+                    $this->templateMessage = array('WARNING', __($e->getMessage()));
+                }
+            }
+        }
+
+        $message = $this->getUser()->getFlash('templateMessage');
+        $this->messageType = (isset($message[0])) ? strtolower($message[0]) : "";
+        $this->message = (isset($message[1])) ? $message[1] : "";
+
+
+        if ($this->getUser()->hasFlash('templateMessage')) {
+            $this->templateMessage = $this->getUser()->getFlash('templateMessage');
+            $this->getUser()->setFlash('templateMessage', array());
+        }
+
+        $kpiList = $form->searchVehicule($page);
+        $kpiListCount = $form->getVehiculeCount();
+        $this->setListComponent($kpiList, $kpiListCount);
         $this->form = $form;
     }
 
@@ -54,16 +98,16 @@ class searchVehiculeAction extends basePeformanceAction {
      *
      * @param Doctrine_Collection $kpiList 
      */
-    protected function setListComponent($vehiculeList, $vehiculeListCount) {
-        
+    protected function setListComponent($kpiList, $kpiListCount) {
+
         $pageNumber = $this->getPageNumber();
 
         $configurationFactory = $this->getListConfigurationFactory();
         ohrmListComponent::setActivePlugin('orangehrmPerformancePlugin');
         ohrmListComponent::setConfigurationFactory($configurationFactory);
-        $list = ohrmListComponent::setListData($vehiculeList);
+        $list = ohrmListComponent::setListData($kpiList);
         ohrmListComponent::setPageNumber($pageNumber);
-        $numRecords = $vehiculeListCount;
+        $numRecords = $kpiListCount;
         ohrmListComponent::setItemsPerPage(sfConfig::get('app_items_per_page'));
         ohrmListComponent::setNumberOfRecords($numRecords);
     }
@@ -73,7 +117,7 @@ class searchVehiculeAction extends basePeformanceAction {
      * @return \KpiListConfigurationFactory 
      */
     protected function getListConfigurationFactory() {
-        return new KpiListConfigurationFactory();
+        return new VehiculeListConfigurationFactory();
     }
     
     protected function _checkAuthentication($request = null) {
