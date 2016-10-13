@@ -64,20 +64,18 @@ class savePretImmobilierAction extends basePeformanceAction {
             if ($form->isValid()) {
 
                 try {
+
                     $form->saveForm();
                     $this->getUser()->setFlash('success', __(TopLevelMessages::SAVE_SUCCESS));
-                    $this->redirect('pretimmobilier/savePretImmobilier');
+                    if(!$user->isAdmin())
+                    $this->redirect('pretimmobilier/searchMyPretImmobilier');
+                    $this->redirect('pretimmobilier/searchPretImmobilier');
                 } catch (LeaveAllocationServiceException $e) {
                     $this->templateMessage = array('WARNING', __($e->getMessage()));
                 }
             }
         } else {
-            if(empty($form->loadFormData($request->getParameter('hdnEditId')))){
 
-                if(!$user->isAdmin()|| !$user->isSupervisor()){
-                    unset($form['file']);
-                }
-            }
             $form->loadFormData($request->getParameter('hdnEditId'));
         }
 

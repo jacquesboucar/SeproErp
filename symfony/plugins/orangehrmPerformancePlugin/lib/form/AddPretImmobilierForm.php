@@ -30,33 +30,34 @@ class AddPretImmobilierForm extends BasePefromanceSearchForm {
      */
     public function getPretImmobilierService() {
 
-        //if ($this->$trainingService == null) {
             return new PretImmobilierService();
-        // } else {
-        //     return $this->$trainingService;
-        // }
     }
 
     public function configure() {
-
+        $type = array('En cours' => 'En cours','Valider' => 'Valider', 'Rejetter' => 'Rejetter');
         $this->setWidgets(array(
-            //'txtEmpID' => new sfWidgetFormInputHidden(),
+            'id' => new sfWidgetFormInputHidden(),
             'montant_pret' => new sfWidgetFormInputText(),
             'objet' => new sfWidgetFormInputText(),
             'nombre_mois' => new sfWidgetFormInputText(),
             'date_accord' => new ohrmWidgetDatePicker(array(), array('id' => 'date_accord')),
             'date_prelevement' => new ohrmWidgetDatePicker(array(), array('id' => 'date_prelevement')),
             'quotite_saisissable' => new sfWidgetFormInputText(),
-            'file' => new sfWidgetFormInputFileEditable(array('edit_mode'=>false,'with_delete' => false,'file_src' => ''))
+            'description' => new sfWidgetFormTextarea(array(), array('rows' => '3', 'cols' => '30')),
+            'valider' => new sfWidgetFormSelect(array('choices' => $type), array('class' => 'formSelect')),
+            'file' => new sfWidgetFormInputFileEditable(array('edit_mode'=>false,'with_delete' => false,'file_src' => '/themes/orange/pictures/'))
         ));
 
         $this->setValidators(array(
+            'id' => new sfValidatorString(array('required' => false)),
             'montant_pret' => new sfValidatorNumber(),
             'objet' => new sfValidatorString(array('max_length' => 255)),
             'nombre_mois' => new sfValidatorNumber(),
             'date_accord' => new ohrmDateValidator(array('required' => false)),
             'date_prelevement' =>new ohrmDateValidator(array('required' => false)),
             'quotite_saisissable' => new sfValidatorNumber(array('required' => false)),
+            'description' => new sfValidatorString(array('required' => false, 'trim' => true, 'max_length' => 2000)),
+            'valider' => new sfValidatorChoice(array('required' => false, 'choices' => array_keys($type))),
             'file' =>  new sfValidatorFile(array('max_size' => 1024000,'required' => false))
         ));
         $this->getWidgetSchema()->setNameFormat('addPretImmobilier[%s]');
@@ -81,6 +82,8 @@ class AddPretImmobilierForm extends BasePefromanceSearchForm {
             'date_accord' => __('Date accord'),
             'date_prelevement' => __('Date prelevement'),
             'quotite_saisissable' => __('Quotite saisissable'),
+            'description' => __('Description'),
+            'valider' => __('Valider'),
             'file' => __('Televersement')
         );
         return $labels;
@@ -90,10 +93,16 @@ class AddPretImmobilierForm extends BasePefromanceSearchForm {
 
         // Get logged user employee Id
         $user = sfContext::getInstance()->getUser();
-        $loggedInEmpNumber = $user->getAttribute('auth.empNumber');
         $file = $this->getValue('file');
         $values = $this->getValues();
-        if(!$file){
+        $pretimmobilier = new PretImmobilier();
+        if($values['id']>0){
+            $pretimmobilier = $this->getPretImmobilierService()->getPretImmobilierById($values['id']);
+            $loggedInEmpNumber=$pretimmobilier->getEmpNumber();
+        }else{
+            $loggedInEmpNumber=$user->getAttribute('auth.empNumber');
+        }
+        if(!empty($file)){
             $filetype=$file->getType();
             $filename=$file->getOriginalName();
             $filesize=$file->getSize();
@@ -104,17 +113,19 @@ class AddPretImmobilierForm extends BasePefromanceSearchForm {
             $filesize=null;
             $fileTmpName=null;
         }
-        $pretimmobilier = new PretImmobilier();
+        var_dump($loggedInEmpNumber);die;
         $pretimmobilier->setMontantPret($values['montant_pret']);
         $pretimmobilier->setObjet($values['objet']);
         $pretimmobilier->setNombreMois($values['nombre_mois']);
         $pretimmobilier->setDateAccord($values['date_accord']);
         $pretimmobilier->setDatePrelevement($values['date_prelevement']);
         $pretimmobilier->setQuotiteSaisissable($values['quotite_saisissable']);
+        $pretimmobilier->setValider($values['valider']);
         $pretimmobilier->setFilecontent($fileTmpName);
         $pretimmobilier->setFiletype($filetype);
         $pretimmobilier->setFilesize($filesize);
         $pretimmobilier->setFilename($filename);
+        $pretimmobilier->setDescription($values['description']);
         $pretimmobilier->setEmpNumber($loggedInEmpNumber);
         $this->getPretImmobilierService()->savePretImmobilier($pretimmobilier);
 
@@ -127,27 +138,18 @@ class AddPretImmobilierForm extends BasePefromanceSearchForm {
     public function loadFormData($kpiId) {
 
         if ($kpiId > 0) {
-            $kpi = $this->getKpiService()->searchKpi(array('id' => $kpiId));
-            $this->setDefault('id', $kpi->getId());
-            $this->setDefault('jobTitleCode', $kpi->getJobTitleCode());
-            $this->setDefault('keyPerformanceIndicators', $kpi->getKpiIndicators());
-            $this->setDefault('minRating', 1);
-            $this->setDefault('maxRating', $kpi->getMaxRating());
-            $this->setDefault('delai', $kpi->getDelai());
-            $this->setDefault('objectif',$kpi->getObjectif());
-            $this->setDefault('mode_calcul',$kpi->getModeCalcul());
-            $this->setDefault('makeDefault', $kpi->getDefaultKpi());
-            
-        } else {
-            
-            $parameters ['isDefault'] = 1;
-            $kpi = $this->getKpiService()->searchKpi($parameters);
-            
-            if(sizeof($kpi)>0){
-                $kpi = $kpi->getFirst();
-                $this->setDefault('minRating', 1);
-                $this->setDefault('maxRating', $kpi->getMaxRating());
-            }           
+
+            $pretimmobilier = $this->getPretImmobilierService()->getPretImmobilierById(array('id' => $kpiId));$files=array($pretimmobilier->getFilecontent(), $pretimmobilier->getFiletype(), $pretimmobilier->getFilesize(), $pretimmobilier->getFilename());
+            $this->setDefault('id', $pretimmobilier->getId());
+            $this->setDefault('montant_pret', $pretimmobilier->getMontantPret());
+            $this->setDefault('objet', $pretimmobilier->getObjet());
+            $this->setDefault('nombre_mois', $pretimmobilier->getNombreMois());
+            $this->setDefault('date_accord', set_datepicker_date_format($pretimmobilier->getDateAccord()));
+            $this->setDefault('date_prelevement', set_datepicker_date_format($pretimmobilier->getDatePrelevement()));
+            $this->setDefault('quotite_saisissable', $pretimmobilier->getQuotiteSaisissable());
+            $this->setDefault('description', $pretimmobilier->getDescription());
+            $this->setDefault('valider', $pretimmobilier->getValider());
+            $this->setDefault('file', $pretimmobilier->getFilename());
         }
     }
     /**

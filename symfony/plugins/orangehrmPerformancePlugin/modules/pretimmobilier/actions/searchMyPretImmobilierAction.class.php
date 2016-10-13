@@ -10,7 +10,7 @@
  *
  * @author nadeera
  */
-class searchPretImmobilierAction extends basePeformanceAction {
+class searchMyPretImmobilierAction extends basePeformanceAction {
     
     public $pretimmobilierSearchForm;
     
@@ -18,9 +18,9 @@ class searchPretImmobilierAction extends basePeformanceAction {
      *
      * @return KpiSearchForm
      */
-    public function getPretImmobilierSearchForm() {
+    public function getPretImmobilierSearchService() {
         if ($this->pretimmobilierSearchForm == null) {
-            return new PretImmobilierSearchForm();
+            return new PretImmobilierService();
         } else {
             return $this->pretimmobilierSearchForm;
         }
@@ -39,24 +39,16 @@ class searchPretImmobilierAction extends basePeformanceAction {
 
     public function execute($request) {
 
-        $form = $this->getPretImmobilierSearchForm();
+
         $page = $request->getParameter('hdnAction') == 'search' ? 1 : $request->getParameter('pageNo', 1);
 
-        $this->setPageNumber($page);
-        if ($request->isMethod('post')) {
-            $form->bind($request->getParameter($form->getName()));
-            if ($form->isValid()) {
-                try {
+        $serachParams ['employeeNumber'] = $this->getUser()->getEmployeeNumber();
+        $serachParams['limit'] = sfConfig::get('app_items_per_page');
+        $serachParams['page'] = $page;
 
-                } catch (LeaveAllocationServiceException $e) {
-                    $this->templateMessage = array('WARNING', __($e->getMessage()));
-                }
-            }
-        }
-        $pretimmobilierList = $form->searchPretImmobilier($page);
-        $pretimmobilierListCount = $form->getPretImmobilierCount();
+        $pretimmobilierList = $this->getPretImmobilierSearchService()->searchPretImmobilier($serachParams);
+        $pretimmobilierListCount = $this->getPretImmobilierSearchService()->getPretImmobilierCount();
         $this->setListComponent($pretimmobilierList, $pretimmobilierListCount);
-        $this->form = $form;
     }
 
     /**
@@ -82,7 +74,7 @@ class searchPretImmobilierAction extends basePeformanceAction {
      * @return \KpiListConfigurationFactory 
      */
     protected function getListConfigurationFactory() {
-        return new PretImmobilierListConfigurationFactory();
+        return new MyPretImmobilierListConfigurationFactory();
     }
     
     protected function _checkAuthentication($request = null) {

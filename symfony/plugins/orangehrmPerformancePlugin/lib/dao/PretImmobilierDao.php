@@ -98,8 +98,11 @@ class PretImmobilierDao extends BaseDao {
                                 case 'objet':
                                     $query->andWhere('objet = ?', $parameter);
                                     break;
-                                case 'isDefault':
-                                    $query->andWhere('default_training = ?', $parameter);
+                                case 'montant':
+                                    $query->andWhere('montant_pret = ?', $parameter);
+                                    break;
+                                case 'employeeNumber':
+                                    $query->andWhere('emp_number = ?', $parameter);
                                     break;
                                 default:
                                     break;
@@ -114,7 +117,7 @@ class PretImmobilierDao extends BaseDao {
             if ($parameters['limit'] != null) {
                 $query->limit($parameters['limit']);
             }
-            $query->orderBy('objet');
+            $query->orderBy('montant_pret');
             return $query->execute();
             //@codeCoverageIgnoreStart
         } catch (Exception $e) {

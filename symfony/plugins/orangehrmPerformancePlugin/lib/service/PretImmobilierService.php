@@ -83,6 +83,15 @@ class PretImmobilierService extends BaseService {
     public function getPretImmobilierById($id){
         return $this->getDao()->getPretImmobilierById($id);
     }
+
+    public function softDeletePretImmobilier($ids) {
+        foreach($ids as $id){
+            $pretimmobilier = $this->getPretImmobilierById($id);
+            if($pretimmobilier instanceof PretImmobilier){
+                $pretimmobilier->delete();
+            }
+        }
+    }
     
 }
 
