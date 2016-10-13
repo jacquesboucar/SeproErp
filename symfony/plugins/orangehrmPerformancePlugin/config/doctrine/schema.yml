@@ -284,6 +284,22 @@ Training:
       primary: false
       notnull: false
       autoincrement: false
+    valider:
+      type: string(20)
+      notnull: false
+      default: 'En cours'
+    formfilecontent:
+      type: blob(2147483647)
+      notnull: false
+    formfilename:
+      type: string(255)
+      notnull: false
+    formfiletype:
+      type: string(255)
+      notnull: false
+    formfilesize:
+      type: integer
+      notnull: false
     filecontent:
       type: blob(2147483647)
       notnull: false
@@ -329,7 +345,9 @@ Vehicule:
     date_applied:
       type: date(25)
     valider:
-      type: boolean
+      type: string(20)
+      notnull: false
+      default: 'En cours'
     filecontent:
       type: blob(2147483647)
       notnull: false
@@ -341,6 +359,12 @@ Vehicule:
       notnull: false
     filesize:
       type: integer
+      notnull: false
+    description:
+      type: string(500)
+      fixed: false
+      unsigned: false
+      primary: false
       notnull: false
   relations:
     Employee:
@@ -378,6 +402,10 @@ PretImmobilier:
       primary: false
       notnull: true
       autoincrement: false
+    valider:
+      type: string(20)
+      notnull: false
+      default: 'En cours'
     filecontent:
       type: blob(2147483647)
       notnull: false
@@ -389,6 +417,12 @@ PretImmobilier:
       notnull: false
     filesize:
       type: integer
+      notnull: false
+    description:
+      type: string(500)
+      fixed: false
+      unsigned: false
+      primary: false
       notnull: false
   relations:
     Employee:
