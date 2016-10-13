@@ -51,18 +51,14 @@ class saveTrainingAction extends basePeformanceAction {
                 try {
                     $form->saveForm();
                     $this->getUser()->setFlash('success', __(TopLevelMessages::SAVE_SUCCESS));
-                    $this->redirect('performance/searchKpi');
+                    if(!$user->isAdmin())
+                    $this->redirect('training/searchMyTraining');
+                    $this->redirect('training/searchTraining');
                 } catch (LeaveAllocationServiceException $e) {
                     $this->templateMessage = array('WARNING', __($e->getMessage()));
                 }
             }
         } else {
-            if(empty($form->loadFormData($request->getParameter('hdnEditId')))){
-
-                if(!$user->isAdmin()|| !$user->isSupervisor()){
-                    unset($form['file']);
-                }
-            }
             $form->loadFormData($request->getParameter('hdnEditId'));
         }
         $this->form = $form;

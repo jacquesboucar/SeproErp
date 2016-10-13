@@ -11,34 +11,49 @@
  * @property date $date_applied
  * @property integer $emp_number
  * @property string $description
+ * @property string $valider
+ * @property blob $formfilecontent
+ * @property string $formfilename
+ * @property string $formfiletype
+ * @property integer $formfilesize
  * @property blob $filecontent
  * @property string $filename
  * @property string $filetype
  * @property integer $filesize
  * @property Employee $Employee
  * 
- * @method integer  getId()             Returns the current record's "id" value
- * @method string   getCoutFormation()  Returns the current record's "cout_formation" value
- * @method string   getTitle()          Returns the current record's "title" value
- * @method date     getDateApplied()    Returns the current record's "date_applied" value
- * @method integer  getEmpNumber()      Returns the current record's "emp_number" value
- * @method string   getDescription()    Returns the current record's "description" value
- * @method blob     getFilecontent()    Returns the current record's "filecontent" value
- * @method string   getFilename()       Returns the current record's "filename" value
- * @method string   getFiletype()       Returns the current record's "filetype" value
- * @method integer  getFilesize()       Returns the current record's "filesize" value
- * @method Employee getEmployee()       Returns the current record's "Employee" value
- * @method Training setId()             Sets the current record's "id" value
- * @method Training setCoutFormation()  Sets the current record's "cout_formation" value
- * @method Training setTitle()          Sets the current record's "title" value
- * @method Training setDateApplied()    Sets the current record's "date_applied" value
- * @method Training setEmpNumber()      Sets the current record's "emp_number" value
- * @method Training setDescription()    Sets the current record's "description" value
- * @method Training setFilecontent()    Sets the current record's "filecontent" value
- * @method Training setFilename()       Sets the current record's "filename" value
- * @method Training setFiletype()       Sets the current record's "filetype" value
- * @method Training setFilesize()       Sets the current record's "filesize" value
- * @method Training setEmployee()       Sets the current record's "Employee" value
+ * @method integer  getId()              Returns the current record's "id" value
+ * @method string   getCoutFormation()   Returns the current record's "cout_formation" value
+ * @method string   getTitle()           Returns the current record's "title" value
+ * @method date     getDateApplied()     Returns the current record's "date_applied" value
+ * @method integer  getEmpNumber()       Returns the current record's "emp_number" value
+ * @method string   getDescription()     Returns the current record's "description" value
+ * @method string   getValider()         Returns the current record's "valider" value
+ * @method blob     getFormfilecontent() Returns the current record's "formfilecontent" value
+ * @method string   getFormfilename()    Returns the current record's "formfilename" value
+ * @method string   getFormfiletype()    Returns the current record's "formfiletype" value
+ * @method integer  getFormfilesize()    Returns the current record's "formfilesize" value
+ * @method blob     getFilecontent()     Returns the current record's "filecontent" value
+ * @method string   getFilename()        Returns the current record's "filename" value
+ * @method string   getFiletype()        Returns the current record's "filetype" value
+ * @method integer  getFilesize()        Returns the current record's "filesize" value
+ * @method Employee getEmployee()        Returns the current record's "Employee" value
+ * @method Training setId()              Sets the current record's "id" value
+ * @method Training setCoutFormation()   Sets the current record's "cout_formation" value
+ * @method Training setTitle()           Sets the current record's "title" value
+ * @method Training setDateApplied()     Sets the current record's "date_applied" value
+ * @method Training setEmpNumber()       Sets the current record's "emp_number" value
+ * @method Training setDescription()     Sets the current record's "description" value
+ * @method Training setValider()         Sets the current record's "valider" value
+ * @method Training setFormfilecontent() Sets the current record's "formfilecontent" value
+ * @method Training setFormfilename()    Sets the current record's "formfilename" value
+ * @method Training setFormfiletype()    Sets the current record's "formfiletype" value
+ * @method Training setFormfilesize()    Sets the current record's "formfilesize" value
+ * @method Training setFilecontent()     Sets the current record's "filecontent" value
+ * @method Training setFilename()        Sets the current record's "filename" value
+ * @method Training setFiletype()        Sets the current record's "filetype" value
+ * @method Training setFilesize()        Sets the current record's "filesize" value
+ * @method Training setEmployee()        Sets the current record's "Employee" value
  * 
  * @package    orangehrm
  * @subpackage model\performance\base
@@ -102,6 +117,31 @@ abstract class BaseTraining extends sfDoctrineRecord
              'notnull' => false,
              'autoincrement' => false,
              'length' => 256,
+             ));
+        $this->hasColumn('valider', 'string', 20, array(
+             'type' => 'string',
+             'notnull' => false,
+             'default' => 'En cours',
+             'length' => 20,
+             ));
+        $this->hasColumn('formfilecontent', 'blob', 2147483647, array(
+             'type' => 'blob',
+             'notnull' => false,
+             'length' => 2147483647,
+             ));
+        $this->hasColumn('formfilename', 'string', 255, array(
+             'type' => 'string',
+             'notnull' => false,
+             'length' => 255,
+             ));
+        $this->hasColumn('formfiletype', 'string', 255, array(
+             'type' => 'string',
+             'notnull' => false,
+             'length' => 255,
+             ));
+        $this->hasColumn('formfilesize', 'integer', null, array(
+             'type' => 'integer',
+             'notnull' => false,
              ));
         $this->hasColumn('filecontent', 'blob', 2147483647, array(
              'type' => 'blob',

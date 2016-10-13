@@ -29,6 +29,7 @@ class TrainingDao extends BaseDao {
         $conn = Doctrine_Manager::connection();
         $conn->beginTransaction();   
         try {
+            //var_dump($training->getId());die;
             $training->save();
             $conn->commit();
             return $training;
@@ -92,8 +93,11 @@ class TrainingDao extends BaseDao {
                                 case 'title':
                                     $query->andWhere('title = ?', $parameter);
                                     break;
-                                case 'isDefault':
-                                    $query->andWhere('default_training = ?', $parameter);
+                                case 'coutformation':
+                                    $query->andWhere('cout_formation = ?', $parameter);
+                                    break;
+                                case 'employeeNumber':
+                                    $query->andWhere('emp_number = ?', $parameter);
                                     break;
                                 default:
                                     break;

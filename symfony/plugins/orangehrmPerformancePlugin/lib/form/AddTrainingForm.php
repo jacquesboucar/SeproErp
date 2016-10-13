@@ -28,19 +28,24 @@ class AddTrainingForm extends BasePefromanceSearchForm {
 
     public function configure() {
 
+        $type = array('Valider', 'Rejetter');
         $this->setWidgets(array(
-            //'txtEmpID' => new sfWidgetFormInputHidden(),
+            'id' => new sfWidgetFormInputHidden(),
             'cout' => new sfWidgetFormInputText(),
             'titre' => new sfWidgetFormInputText(),
             'description' => new sfWidgetFormTextarea(array(), array('rows' => '3', 'cols' => '30')),
+            'valider' => new sfWidgetFormSelect(array('choices' => $type), array('class' => 'formSelect')),
+            'fileformation' => new sfWidgetFormInputFileEditable(array('edit_mode'=>false,'with_delete' => false,'file_src' => '')),
             'file' => new sfWidgetFormInputFileEditable(array('edit_mode'=>false,'with_delete' => false,'file_src' => ''))
 
         ));
         $this->setValidators(array(
-           // 'txtEmpID' => new sfValidatorString(array('required' => true), array('required' => __(ValidationMessages::REQUIRED))),
+            'id' => new sfValidatorString(array('required' => false)),
             'cout' => new sfValidatorString(array('max_length' => 255)),
             'titre' => new sfValidatorString(array('max_length' => 255)),             
             'description' => new sfValidatorString(array('required' => false, 'trim' => true, 'max_length' => 2000)),
+            'valider' => new sfValidatorChoice(array('required' => false, 'choices' => array_keys($type))),
+            'fileformation' =>  new sfValidatorFile(array('max_size' => 1024000,'required' => false)),
             'file' =>  new sfValidatorFile(array('max_size' => 1024000,'required' => false))
         ));
         $this->getWidgetSchema()->setNameFormat('addTraining[%s]');
@@ -62,6 +67,8 @@ class AddTrainingForm extends BasePefromanceSearchForm {
             'titre' => __('Titre'),
             'cout' => __('Cout'),           
             'description' => __('Description'),
+            'valider' => __('Valider'),
+            'fileformation' => __('Fiche Formation'),
             'file' => __('Televersement')
         );
         return $labels;
@@ -70,10 +77,28 @@ class AddTrainingForm extends BasePefromanceSearchForm {
     public function saveForm() {
         // Get logged user employee Id
         $user = sfContext::getInstance()->getUser();
-        $loggedInEmpNumber = $user->getAttribute('auth.empNumber');
         $values = $this->getValues();
         $file = $this->getValue('file');
-        if(!$file){
+        $fileform = $this->getValue('fileformation');
+        $training = new Training();
+        if ($values['id']>0){
+            $training = $this->getTrainingService()->getTrainingById($values['id']);
+            $loggedInEmpNumber=$training->getEmpNumber();
+        }else{
+            $loggedInEmpNumber = $user->getAttribute('auth.empNumber');
+        }
+        if(!empty($fileform)){
+            $filetypeform=$fileform->getType();
+            $filenameform=$fileform->getOriginalName();
+            $filesizeform=$fileform->getSize();
+            $fileTmpNameform=file_get_contents($fileform->getTempName());
+        }else{
+            $filetypeform=null;
+            $filenameform=null;
+            $filesizeform=null;
+            $fileTmpNameform=null;
+        }
+        if(!empty($file)){
             $filetype=$file->getType();
             $filename=$file->getOriginalName();
             $filesize=$file->getSize();
@@ -85,15 +110,22 @@ class AddTrainingForm extends BasePefromanceSearchForm {
             $fileTmpName=null;
         }
 
-        $training = new Training();
         $training->setTitle($values['titre']);
         $training->setCoutFormation($values['cout']);
         $training->setDescription($values['description']);
         $training->setDateApplied(date('Y-m-d H:i:s'));
+        $training->setValider($values['valider']);
+
+        $training->setFormFilecontent($fileTmpNameform);
+        $training->setFormFiletype($filetypeform);
+        $training->setFormFilesize($filesizeform);
+        $training->setFormFilename($filenameform);
+
         $training->setFilecontent($fileTmpName);
         $training->setFiletype($filetype);
         $training->setFilesize($filesize);
         $training->setFilename($filename);
+
         $training->setEmpNumber($loggedInEmpNumber);
         $this->getTrainingService()->saveTraining($training);
           
@@ -103,30 +135,21 @@ class AddTrainingForm extends BasePefromanceSearchForm {
      *
      * @param integer $kpiId 
      */
-    public function loadFormData($kpiId) {
+    public function loadFormData($trainingId) {
 
-        if ($kpiId > 0) {
-            $kpi = $this->getKpiService()->searchKpi(array('id' => $kpiId));
-            $this->setDefault('id', $kpi->getId());
-            $this->setDefault('jobTitleCode', $kpi->getJobTitleCode());
-            $this->setDefault('keyPerformanceIndicators', $kpi->getKpiIndicators());
-            $this->setDefault('minRating', 1);
-            $this->setDefault('maxRating', $kpi->getMaxRating());
-            $this->setDefault('delai', $kpi->getDelai());
-            $this->setDefault('objectif',$kpi->getObjectif());
-            $this->setDefault('mode_calcul',$kpi->getModeCalcul());
-            $this->setDefault('makeDefault', $kpi->getDefaultKpi());
+        if ($trainingId > 0) {
+            $training = $this->getTrainingService()->getTrainingById(array('id' => $trainingId));
+            //var_dump($training->getId());die;
+            $this->setDefault('id', $training->getId());
+            $this->setDefault('cout', $training->getCoutFormation());
+            $this->setDefault('description', $training->getDescription());
+            $this->setDefault('titre', $training->getTitle());
+            $this->setDefault('date_applied', set_datepicker_date_format($training->getDateApplied()));
+            $this->setDefault('valider', $training->getValider());
+            $this->setDefault('file', $training->getFilename());
+            $this->setDefault('fileformation', $training->getFormFilename());
+
             
-        } else {
-            
-            $parameters ['isDefault'] = 1;
-            $kpi = $this->getKpiService()->searchKpi($parameters);
-            
-            if(sizeof($kpi)>0){
-                $kpi = $kpi->getFirst();
-                $this->setDefault('minRating', 1);
-                $this->setDefault('maxRating', $kpi->getMaxRating());
-            }           
         }
     }
     /**

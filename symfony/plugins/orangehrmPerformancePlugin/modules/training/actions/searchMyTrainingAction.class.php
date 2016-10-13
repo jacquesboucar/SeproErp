@@ -10,19 +10,19 @@
  *
  * @author nadeera
  */
-class searchTrainingAction extends basePeformanceAction {
+class searchMyTrainingAction extends basePeformanceAction {
     
-    public $trainingSearchForm;
+    public $trainingService;
     
     /**
      *
      * @return KpiSearchForm
      */
-    public function getTrainingSearchForm() {
-        if ($this->trainingSearchForm == null) {
-            return new TrainingSearchForm();
+    public function getTrainingSearchService() {
+        if ($this->trainingService == null) {
+            return new TrainingService();
         } else {
-            return $this->trainingSearchForm;
+            return $this->trainingService;
         }
     }
     
@@ -39,24 +39,15 @@ class searchTrainingAction extends basePeformanceAction {
 
     public function execute($request) {
 
-        $form = $this->getTrainingSearchForm();
         $page = $request->getParameter('hdnAction') == 'search' ? 1 : $request->getParameter('pageNo', 1);
 
-        $this->setPageNumber($page);
-        if ($request->isMethod('post')) {
-            $form->bind($request->getParameter($form->getName()));
-            if ($form->isValid()) {
-                try {
+        $serachParams ['employeeNumber'] = $this->getUser()->getEmployeeNumber();
+        $serachParams['limit'] = sfConfig::get('app_items_per_page');
+        $serachParams['page'] = $page;
 
-                } catch (LeaveAllocationServiceException $e) {
-                    $this->templateMessage = array('WARNING', __($e->getMessage()));
-                }
-            }
-        }
-        $trainingList = $form->searchTraining($page);
-        $trainingListCount = $form->getTrainingCount();
+        $trainingList = $this->getTrainingSearchService()->searchTraining($serachParams);
+        $trainingListCount = $this->getTrainingSearchService()->getTrainingCount();
         $this->setListComponent($trainingList, $trainingListCount);
-        $this->form = $form;
     }
 
     /**
@@ -82,7 +73,7 @@ class searchTrainingAction extends basePeformanceAction {
      * @return \KpiListConfigurationFactory 
      */
     protected function getListConfigurationFactory() {
-        return new TrainingListConfigurationFactory();
+        return new MyTrainingListConfigurationFactory();
     }
     
     protected function _checkAuthentication($request = null) {

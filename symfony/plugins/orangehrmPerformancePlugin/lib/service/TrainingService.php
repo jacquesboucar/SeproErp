@@ -84,6 +84,14 @@ class TrainingService extends BaseService {
     public function getTrainingById($id){
         return $this->getDao()->getTrainingById($id);
     }
-    
+
+    public function softDeleteTraining($ids) {
+        foreach($ids as $id){
+            $training = $this->getTrainingById($id);
+            if($training instanceof Training){
+                $training->delete();
+            }
+        }
+    }
 }
 
