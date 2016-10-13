@@ -30,8 +30,10 @@ class searchVehiculeAction extends basePeformanceAction {
     /**
      *
      * @return KpiSearchForm
+     *
      */
     public function getVehiculeSearchForm() {
+        //var_dump(new VehiculeSearchForm());die;
         if ($this->vehiculeSearchForm == null) {
             return new VehiculeSearchForm();
         } else {
@@ -41,7 +43,8 @@ class searchVehiculeAction extends basePeformanceAction {
     
      /**
      *
-     * @return \KpiService 
+     * @return \KpiService
+     *
      */
     public function getVehiculeService() {
 
@@ -54,7 +57,8 @@ class searchVehiculeAction extends basePeformanceAction {
 
     /**
      *
-     * @param KpiSearchForm $kpiSearchForm 
+     * @param KpiSearchForm $kpiSearchForm
+     *
      */
     public function setVehiculeSearchForm($vehiculeSearchForm) {
         $this->vehiculeSearchForm = $vehiculeSearchForm;
@@ -66,28 +70,16 @@ class searchVehiculeAction extends basePeformanceAction {
         $page = $request->getParameter('hdnAction') == 'search' ? 1 : $request->getParameter('pageNo', 1);
 
         $this->setPageNumber($page);
-
         if ($request->isMethod('post')) {
             $form->bind($request->getParameter($form->getName()));
             if ($form->isValid()) {
                 try {
-                    
+
                 } catch (LeaveAllocationServiceException $e) {
                     $this->templateMessage = array('WARNING', __($e->getMessage()));
                 }
             }
         }
-
-        $message = $this->getUser()->getFlash('templateMessage');
-        $this->messageType = (isset($message[0])) ? strtolower($message[0]) : "";
-        $this->message = (isset($message[1])) ? $message[1] : "";
-
-
-        if ($this->getUser()->hasFlash('templateMessage')) {
-            $this->templateMessage = $this->getUser()->getFlash('templateMessage');
-            $this->getUser()->setFlash('templateMessage', array());
-        }
-
         $kpiList = $form->searchVehicule($page);
         $kpiListCount = $form->getVehiculeCount();
         $this->setListComponent($kpiList, $kpiListCount);

@@ -75,11 +75,52 @@ class VehiculeDao extends BaseDao {
         }//@codeCoverageIgnoreEnd
     }
 
+    public function searchVehicule($parameters = null) {
 
-    /**
-     * @param null $parameters
-     */
-    public function searchTraining($parameters = null) {
+            try {
+                $query = Doctrine_Query:: create()->from('Vehicule');
 
-    }
+                $offset = ($parameters['page'] > 0) ? (($parameters['page'] - 1) * $parameters['limit']) : 0;
+
+                if (!empty($parameters)) {
+                    if (isset($parameters['id']) && $parameters['id'] > 0) {
+                        $query->andWhere('id = ?', $parameters['id']);
+                        return $query->fetchOne();
+                    } else {
+                        foreach ($parameters as $key => $parameter) {
+                            if (strlen(trim($parameter)) > 0) {
+                                switch ($key) {
+                                    case 'dateapplied':
+                                        $query->andWhere('date_applied = ?', $parameter);
+                                        break;
+                                    case 'marque':
+                                        $query->andWhere('marque = ?', $parameter);
+                                        break;
+                                    case 'valider':
+                                        $query->andWhere('valider = ?', $parameter);
+                                        break;
+                                    case 'employeeNumber':
+                                        $query->andWhere('emp_number = ?', $parameter);
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                //$query->andWhere('deleted_at IS NULL');
+                $query->offset($offset);
+
+                if ($parameters['limit'] != null) {
+                    $query->limit($parameters['limit']);
+                }
+                $query->orderBy('date_applied');
+                return $query->execute();
+                //@codeCoverageIgnoreStart
+            } catch (Exception $e) {
+                throw new DaoException($e->getMessage(), $e->getCode(), $e);
+            }//@codeCoverageIgnoreEnd
+        }
 }

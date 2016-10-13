@@ -48,21 +48,15 @@ class saveVehiculeAction extends basePeformanceAction {
                 try {
                     $form->saveForm();
                     $this->getUser()->setFlash('success', __(TopLevelMessages::SAVE_SUCCESS));
-                    $this->redirect('vehicule/saveVehicule');
+                    if(!$user->isAdmin())
+                    $this->redirect('vehicule/searchMyVehicule');
+                    $this->redirect('vehicule/searchVehicule');
                 } catch (LeaveAllocationServiceException $e) {
                     $this->templateMessage = array('WARNING', __($e->getMessage()));
                 }
             }
         } else {
-            if(empty($form->loadFormData($request->getParameter('hdnEditId')))){
-
-                if(!$user->isAdmin()|| !$user->isSupervisor()){
-                    unset($form['file']);
-                    unset($form['valider']);
-                }
-            }
             $form->loadFormData($request->getParameter('hdnEditId'));
-
         }
         $this->form = $form;
     }

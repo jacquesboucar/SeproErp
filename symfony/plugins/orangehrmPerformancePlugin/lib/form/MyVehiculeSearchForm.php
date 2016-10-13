@@ -9,16 +9,14 @@
  * @author nadeera
  */
 
-class VehiculeSearchForm extends BasePefromanceSearchForm {
-
-
+class MyVehiculeSearchForm extends BasePefromanceSearchForm {
 
     public function configure() {
 
         $this->setWidgets($this->getFormWidgets());
         $this->setValidators($this->getFormValidators());
 
-        $this->getWidgetSchema()->setNameFormat('vehiculeSearchForm[%s]');
+        $this->getWidgetSchema()->setNameFormat('myvehiculeSearchForm[%s]');
         $this->getWidgetSchema()->setLabels($this->getFormLabels());
     }
 
@@ -37,11 +35,10 @@ class VehiculeSearchForm extends BasePefromanceSearchForm {
      * @return array
      */
     protected function getFormWidgets() {
-        $type = array('' => '','Valider' => 'Valider', 'Rejetter' => 'Rejetter');
         $widgets = array(
             'dateapplied' => new ohrmWidgetDatePicker(array(), array('id' => 'dateapplied')),
-            'valider' => new sfWidgetFormSelect(array('choices' => $type), array('class' => 'formSelect')),
-            'marque' => new sfWidgetFormInputText()
+            'marque' => new sfWidgetFormInputText(),
+            'employeeNumber' => new sfWidgetFormInputHidden(),
         );
         return $widgets;
     }
@@ -51,11 +48,11 @@ class VehiculeSearchForm extends BasePefromanceSearchForm {
      * @return array
      */
     protected function getFormValidators() {
-        $type = array('' => '','Valider' => 'Valider', 'Rejetter' => 'Rejetter');
+
         $validators = array(
             'dateapplied' => new sfValidatorString(array('required' => false)),
-            'valider' => new sfValidatorChoice(array('required' => false, 'choices' => array_keys($type))),
-            'marque' => new sfValidatorString(array('required' => false))
+            'marque' => new sfValidatorString(array('required' => false)),
+            'employeeNumber' => new sfValidatorString(array('required' => false))
         );
         return $validators;
     }
@@ -67,7 +64,6 @@ class VehiculeSearchForm extends BasePefromanceSearchForm {
     protected function getFormLabels() {
         $labels = array(
             'dateapplied' => __('Date Soumission'),
-            'valider' => __('Valider'),
             'marque' => __('Marque')
         );
         return $labels;
@@ -78,10 +74,9 @@ class VehiculeSearchForm extends BasePefromanceSearchForm {
      * @return type 
      */
     public function searchVehicule($page) {
-
         $serachParams ['dateapplied'] =  $this->getValue('dateapplied');
-        $serachParams ['valider'] =  $this->getValue('valider');
         $serachParams ['marque'] =  $this->getValue('marque');
+        $serachParams ['employeeNumber'] =  $this->getValue('employeeNumber');
         $serachParams ['page'] =  $page;
         $serachParams ['limit'] =  sfConfig::get('app_items_per_page');
 
@@ -90,8 +85,8 @@ class VehiculeSearchForm extends BasePefromanceSearchForm {
 
     public function getVehiculeCount(){
         $serachParams ['dateapplied'] =  $this->getValue('dateapplied');
-        $serachParams ['valider'] =  $this->getValue('valider');
-        $serachParams ['marque'] =  $this->getValue('marque');
+        $serachParams ['marque'] =  $this->getValue('marque');;
+        $serachParams ['employeeNumber'] =  $this->getValue('employeeNumber');
         $serachParams['limit'] = null;
 
         return $this->getVehiculeService()->getVehiculeCount($serachParams);

@@ -56,7 +56,7 @@ class VehiculeService extends BaseService {
     public function deleteVehicule($ids) {
         foreach($ids as $id){
             $vehicule = $this->getVehiculeById($id);
-            if($vehicule instanceof Training){
+            if($vehicule instanceof Vehicule){
                 $vehicule->delete();
             }
         }
@@ -71,6 +71,29 @@ class VehiculeService extends BaseService {
     public function getVehiculeById($id){
         return $this->getDao()->getVehiculeById($id);
     }
-    
+
+
+    /**
+     *
+     * @param array $parameters
+     * @return Doctrine_Collection
+     */
+    public function searchVehicule($parameters = null) {
+        return $this->getDao()->searchVehicule($parameters);
+    }
+
+    public function getVehiculeCount($serachParams) {
+        $vehiculeList = $this->getDao()->searchVehicule($serachParams);
+        return count($vehiculeList);
+    }
+
+    public function softDeleteVehicule($ids) {
+        foreach($ids as $id){
+            $vehicule = $this->getVehiculeById($id);
+            if($vehicule instanceof Vehicule){
+                $vehicule->delete();
+            }
+        }
+    }
 }
 

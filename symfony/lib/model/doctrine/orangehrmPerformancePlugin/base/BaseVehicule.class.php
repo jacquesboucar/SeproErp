@@ -12,11 +12,12 @@
  * @property string $matricule_vehicule
  * @property string $dotation_carburant
  * @property date $date_applied
- * @property boolean $valider
+ * @property string $valider
  * @property blob $filecontent
  * @property string $filename
  * @property string $filetype
  * @property integer $filesize
+ * @property string $description
  * @property Employee $Employee
  * 
  * @method integer  getId()                 Returns the current record's "id" value
@@ -26,11 +27,12 @@
  * @method string   getMatriculeVehicule()  Returns the current record's "matricule_vehicule" value
  * @method string   getDotationCarburant()  Returns the current record's "dotation_carburant" value
  * @method date     getDateApplied()        Returns the current record's "date_applied" value
- * @method boolean  getValider()            Returns the current record's "valider" value
+ * @method string   getValider()            Returns the current record's "valider" value
  * @method blob     getFilecontent()        Returns the current record's "filecontent" value
  * @method string   getFilename()           Returns the current record's "filename" value
  * @method string   getFiletype()           Returns the current record's "filetype" value
  * @method integer  getFilesize()           Returns the current record's "filesize" value
+ * @method string   getDescription()        Returns the current record's "description" value
  * @method Employee getEmployee()           Returns the current record's "Employee" value
  * @method Vehicule setId()                 Sets the current record's "id" value
  * @method Vehicule setEmpNumber()          Sets the current record's "emp_number" value
@@ -44,6 +46,7 @@
  * @method Vehicule setFilename()           Sets the current record's "filename" value
  * @method Vehicule setFiletype()           Sets the current record's "filetype" value
  * @method Vehicule setFilesize()           Sets the current record's "filesize" value
+ * @method Vehicule setDescription()        Sets the current record's "description" value
  * @method Vehicule setEmployee()           Sets the current record's "Employee" value
  * 
  * @package    orangehrm
@@ -93,8 +96,11 @@ abstract class BaseVehicule extends sfDoctrineRecord
              'type' => 'date',
              'length' => 25,
              ));
-        $this->hasColumn('valider', 'boolean', null, array(
-             'type' => 'boolean',
+        $this->hasColumn('valider', 'string', 20, array(
+             'type' => 'string',
+             'notnull' => false,
+             'default' => 'En cours',
+             'length' => 20,
              ));
         $this->hasColumn('filecontent', 'blob', 2147483647, array(
              'type' => 'blob',
@@ -114,6 +120,14 @@ abstract class BaseVehicule extends sfDoctrineRecord
         $this->hasColumn('filesize', 'integer', null, array(
              'type' => 'integer',
              'notnull' => false,
+             ));
+        $this->hasColumn('description', 'string', 500, array(
+             'type' => 'string',
+             'fixed' => 0,
+             'unsigned' => false,
+             'primary' => false,
+             'notnull' => false,
+             'length' => 500,
              ));
     }
 
