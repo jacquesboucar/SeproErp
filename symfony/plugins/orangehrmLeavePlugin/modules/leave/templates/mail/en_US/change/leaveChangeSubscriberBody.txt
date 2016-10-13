@@ -1,10 +1,11 @@
-Hi %recipientFirstName%,
+Bonjour %recipientFirstName%,
 
-%performerFullName% has done the following changes to leave request of %applicantFullName%. The leave details:
+%performerFullName% a procédé aux modifications suivantes pour la demande de congés de %applicantFullName%, dont voici les details:
 
 %leaveDetails%
-You were sent this mail, as you have subscribed to Sablux leave changes.
 
-Thank you.
+cet e-mail vous a été envoyé car vous avez souscrit aux modifications de congés de Sablux.
 
-This is an automated notification.
+Merci.
+
+Ceci est une notification automatique.

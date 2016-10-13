@@ -1,10 +1,11 @@
-Hi %recipientFirstName%,
+Bonjour %recipientFirstName%,
 
-%performerFullName% has approved leave request of %applicantFullName%. The leave details:
+%performerFullName% a approuvé la demande de congés de %applicantFullName%. pour la période:
 
 %leaveDetails%
-You were sent this mail, as you have subscribed to Sablux leave approvals.
 
-Thank you.
+Cet e-mail vous avez été envoyé car vous avez souscrit aux accords de congés de sablux.
 
-This is an automated notification.
+Merci.
+
+Ceci est une notification automatique.

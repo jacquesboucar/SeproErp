@@ -1,8 +1,9 @@
-Hi %recipientFirstName%,
+Bonjour %recipientFirstName%,
 
-%performerFullName% assigned you the following days of leave:
+%performerFullName% vous a attribué les jours de congés suivants:
 
 %leaveDetails%
-Thank you.
 
-This is an automated notification.
+Merci..
+
+Ceci est une notification automatique.

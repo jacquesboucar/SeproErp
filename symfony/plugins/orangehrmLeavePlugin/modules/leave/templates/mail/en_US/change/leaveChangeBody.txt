@@ -1,8 +1,9 @@
-Hi %recipientFirstName%,
+Bonjour %recipientFirstName%,
 
-%performerFullName% has done the following changes to your leave request for following days:
+%performerFullName% a fait les modifications suivantes à votre demande de congés pour les jours suivants :
 
 %leaveDetails%
-Thank you.
 
-This is an automated notification.
+Merci.
+
+Ceci est une notification automatique.

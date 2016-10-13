@@ -1,1 +1,1 @@
-Leave Notification - %performerFullName% Has Approved Your Leave Request
+Notification de congés - %performerFullName% a approuvé votre demande de congé.

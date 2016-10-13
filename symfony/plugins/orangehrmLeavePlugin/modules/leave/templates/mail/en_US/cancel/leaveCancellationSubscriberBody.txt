@@ -1,10 +1,11 @@
-Hi %recipientFirstName%,
+Bonjour %recipientFirstName%,
 
-%performerFullName% has cancelled leave request of %applicantFullName%. The leave details:
+%performerFullName% a annulé la demande de congés de %applicantFullName%, dont voici les détails:
 
 %leaveDetails%
-You were sent this mail, as you have subscribed to Sablux leave cancellations.
 
-Thank you.
+Cet e-mail vous a été envoyé car vous avez souscrit à l'annulation de congés de Sablux.
 
-This is an automated notification.
+Merci.
+
+Ceci est une notification automatique.

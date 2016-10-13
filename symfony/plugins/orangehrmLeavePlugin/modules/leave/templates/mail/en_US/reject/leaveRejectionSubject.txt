@@ -1,1 +1,1 @@
-Leave Notification - %performerFullName% Has Rejected Your Leave Request
+Notification congés - %performerFullName% a rejeté votre demande de congés.

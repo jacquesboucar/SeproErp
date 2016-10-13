@@ -1,8 +1,9 @@
-Hi %recipientFirstName%,
+Bonjour %recipientFirstName%,
 
-%performerFullName% has approved your leave request for following days:
+%performerFullName% a approuvé votre demande de congés pour la période suivante:
 
 %leaveDetails%
-Thank you.
 
-This is an automated notification.
+Merci.
+
+Ceci est une notification automatique.

@@ -1,8 +1,9 @@
-Hi %recipientFirstName%,
+Bonjour %recipientFirstName%,
 
-%performerFullName% has rejected your leave request for following days:
+%performerFullName% a rejeté  votre demande de congés pour les jours suivants :
 
 %leaveDetails%
-Thank you.
 
-This is an automated notification.
+Merci.
+
+Ceci est une notification automatique.

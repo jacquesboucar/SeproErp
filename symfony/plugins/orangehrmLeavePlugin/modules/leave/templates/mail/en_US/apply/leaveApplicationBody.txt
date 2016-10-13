@@ -1,12 +1,14 @@
-Hi %recipientFirstName%,
+Bonjour %recipientFirstName%,
 
-%performerFullName% has applied for leave. The leave details:
+%performerFullName% a fait une demande de congé dont voici les détails :
 
-%leaveDetails%      
-You were sent this mail, as you are a supervisor assigned for %performerFirstName%.
+%leaveDetails%
 
-Please login to Sablux, and either approve or reject from Leave List.
+Cet e-mail vous a été envoyé, car vous êtes le superviseur attitré de %performerFirstName%.
 
-Thank you.
+Merci de vous connecter à Sablux pour approuver ou rejeter cette demande depuis la liste des congés.
 
-This is an automated notification.
+
+Merci.
+
+Ceci est une notification automatique.

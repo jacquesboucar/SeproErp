@@ -1,10 +1,11 @@
-Hi %recipientFirstName%,
+Bonjour %recipientFirstName%,
 
-%performerFullName% has assigned leave to %assigneeFullName%. The leave details:
+%performerFullName% a atrribué des congés à %assigneeFullName%,  dont voici les détails:
 
 %leaveDetails%
-You were sent this mail, as you have subscribed to Sablux leave assignments.
 
-Thank you.
+Cet e-mail vous a été envoyé car vous avez souscrit à l'attribution de congés de Sablux.
 
-This is an automated notification.
+Merci.
+
+Ceci est une notification automatique.

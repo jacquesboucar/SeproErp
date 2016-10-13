@@ -1,10 +1,9 @@
-Hi %recipientFirstName%,
+Bonjour %recipientFirstName%,
 
-%performerFullName% has cancelled leave. The leave details:
+%performerFullName% a annulé les congés, dont voici les détails:
 
 %leaveDetails%
-You were sent this mail, as you are a supervisor assigned for %performerFirstName%.
 
-Thank you.
+Cet e-mail vous a été envoyé car vous êtes le superviseur attitré de %performerFirstName%.
 
-This is an automated notification.
+Merci.
