@@ -14,6 +14,9 @@ class BasePefromanceSearchForm extends sfForm {
     public $jobService;
     public $kpiService;
     public $kpiGroupService;
+    public $vehiculeService;
+    public $trainingService;
+    public $pretimmobilierService;
     public $companyStructureService;
     public $employeeService;
     public $performanceReviewService;
@@ -184,6 +187,71 @@ class BasePefromanceSearchForm extends sfForm {
             return $this->kpiService;
         }
     }
+
+    /**
+     * @return mixed
+     */
+    public function getVehiculeService()
+    {
+        if ($this->vehiculeService == null) {
+            return new VehiculeService();
+        } else {
+            return $this->vehiculeService;
+        }
+    }
+
+    /**
+     * @param mixed $vehiculeService
+     */
+    public function setVehiculeService($vehiculeService)
+    {
+        $this->vehiculeService = $vehiculeService;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTrainingService()
+    {
+        if ($this->trainingService == null) {
+            return new TrainingService();
+        } else {
+            return $this->trainingService;
+        }
+    }
+
+    /**
+     * @param mixed $trainingService
+     */
+    public function setTrainingService($trainingService)
+    {
+        $this->trainingService = $trainingService;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPretimmobilierService()
+    {
+        if ($this->pretimmobilierService == null) {
+        return new PretImmobilierService();
+    } else {
+        return $this->pretimmobilierService;
+    }
+    }
+
+    /**
+     * @param mixed $pretimmobilierService
+     */
+    public function setPretimmobilierService($pretimmobilierService)
+    {
+        $this->pretimmobilierService = $pretimmobilierService;
+    }
+
+
+
+
+
 
     /**
      *
