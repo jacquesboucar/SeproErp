@@ -113,7 +113,7 @@ class AddPretImmobilierForm extends BasePefromanceSearchForm {
             $filesize=null;
             $fileTmpName=null;
         }
-        var_dump($loggedInEmpNumber);die;
+
         $pretimmobilier->setMontantPret($values['montant_pret']);
         $pretimmobilier->setObjet($values['objet']);
         $pretimmobilier->setNombreMois($values['nombre_mois']);
