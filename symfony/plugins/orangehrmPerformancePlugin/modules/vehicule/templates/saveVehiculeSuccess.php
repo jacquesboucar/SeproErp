@@ -84,8 +84,7 @@
 <script>
     $(document).ready(function() {
 
-
-    alert('test');
+     
 
         $('#saveBtn').click(function(){
             $('#saveVehicule').submit();
