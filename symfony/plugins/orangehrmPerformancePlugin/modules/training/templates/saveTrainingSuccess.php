@@ -26,6 +26,10 @@
 
                 <ol>
                     <li>
+                        <?php echo $form['employee']->renderLabel(null, array('class' => 'labelValue')); ?>
+                        <?php echo $form['employee']->render() ?>
+                    </li>
+                    <li>
                         <?php echo $form['cout']->renderLabel(null, array('class' => 'labelValue')); ?>
                         <?php echo $form['cout']->render() ?>
                     </li>
