@@ -44,7 +44,6 @@ class saveTrainingAction extends basePeformanceAction {
         $request->setParameter('initialActionName', 'searchKpi');
         $user = $this->getUser()->getAttribute('user');
         $form = $this->getTrainingForm();
-
         if ($request->isMethod('post')) {
             $form->bind($request->getParameter($form->getName()),$request->getFiles($form->getName()));
             if ($form->isValid()) {

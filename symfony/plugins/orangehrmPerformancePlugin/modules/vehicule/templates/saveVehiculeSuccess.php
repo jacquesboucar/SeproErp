@@ -31,6 +31,10 @@
                         <?php echo $form['marque']->render() ?>
                     </li>
                     <li>
+                        <?php echo $form['employee']->renderLabel(null, array('class' => 'labelValue')); ?>
+                        <?php echo $form['employee']->render() ?>
+                    </li>
+                    <li>
                         <?php echo $form['energie']->renderLabel(null, array('class' => 'labelValue')); ?>
                         <?php echo $form['energie']->render() ?>
                     </li>
