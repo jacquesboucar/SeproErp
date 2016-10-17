@@ -30,6 +30,7 @@ class AddVehiculeForm extends BasePefromanceSearchForm {
         $this->setWidgets(array(
             'id' => new sfWidgetFormInputHidden(),
             'marque' => new sfWidgetFormInputText(),
+            'employee' => new ohrmWidgetEmployeeNameAutoFill(),
             'energie' => new sfWidgetFormInputText(),
             'matricule_vehicule' => new sfWidgetFormInputText(),
             'dotation_carburant' => new sfWidgetFormInputText(),
@@ -40,13 +41,13 @@ class AddVehiculeForm extends BasePefromanceSearchForm {
         $this->setValidators(array(
             'id' => new sfValidatorString(array('required' => false)),
             'marque' => new sfValidatorString(array('max_length' => 100)),
+            'employee' => new ohrmValidatorEmployeeNameAutoFill(),
             'energie' => new sfValidatorString(array('max_length' => 100)),
             'matricule_vehicule' => new sfValidatorString(array('max_length' => 50)),
             'dotation_carburant' => new sfValidatorString(array('max_length' => 50)),
             'description' => new sfValidatorString(array('required' => false, 'trim' => true, 'max_length' => 2000)),
             'valider' => new sfValidatorChoice(array('required' => false, 'choices' => array_keys($type))),
             'file' =>  new sfValidatorFile(array('max_size' => 1024000,'required' => false))
-
         ));
 
         $this->getWidgetSchema()->setNameFormat('addVehicule[%s]');
@@ -61,10 +62,11 @@ class AddVehiculeForm extends BasePefromanceSearchForm {
 
         if ($vehiculeId > 0) {
             $vehicule = $this->getVehiculeService()->getVehiculeById(array('id' => $vehiculeId));
-
+           // var_dump($vehicule->getEmpNumber());die;
             $this->setDefault('id', $vehicule->getId());
             $this->setDefault('marque', $vehicule->getMarque());
             $this->setDefault('energie', $vehicule->getEnergie());
+            $this->setDefault('employee',  array('empName' => $vehicule->getEmployee()->getFullName(), 'empId' => $vehicule->getEmployee()->getEmpNumber()));
             $this->setDefault('matricule_vehicule', $vehicule->getMatriculeVehicule());
             $this->setDefault('dotation_carburant', $vehicule->getDotationCarburant());
             $this->setDefault('description', $vehicule->getDescription());
@@ -85,6 +87,7 @@ class AddVehiculeForm extends BasePefromanceSearchForm {
         $requiredMarker = '&nbsp;<span class="required">*</span>';
         $labels = array(
             'marque' => __('Marque'). $requiredMarker,
+            'employee' => __('Employee'). $requiredMarker,
             'energie' => __('Energie'). $requiredMarker,
             'matricule_vehicule' => __('Matricule vehicule'). $requiredMarker,
             'dotation_carburant' => __('Dotation_carburant'). $requiredMarker,
@@ -106,9 +109,11 @@ class AddVehiculeForm extends BasePefromanceSearchForm {
         $vehicule = new Vehicule();
         if($values['id']>0){
             $vehicule = $this->getVehiculeService()->getVehiculeById($values['id']);
-            $loggedInEmpNumber=$vehicule->getEmpNumber();
-        }else{
+            $loggedInEmpNumber = $vehicule->getEmpNumber();
+        }elseif ($values['employee']['empId']==''){
             $loggedInEmpNumber = $user->getAttribute('auth.empNumber');
+        }else{
+            $loggedInEmpNumber = $values['employee']['empId'];
         }
         if(!empty($file)){
             $filetype= $file->getType();

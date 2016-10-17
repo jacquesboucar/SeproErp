@@ -28,9 +28,10 @@ class AddTrainingForm extends BasePefromanceSearchForm {
 
     public function configure() {
 
-        $type = array('Valider', 'Rejetter');
+        $type = array('En cours'=>'En cours','Valider'=>'Valider', 'Rejetter'=>'Rejetter');
         $this->setWidgets(array(
             'id' => new sfWidgetFormInputHidden(),
+            'employee' => new ohrmWidgetEmployeeNameAutoFill(),
             'cout' => new sfWidgetFormInputText(),
             'titre' => new sfWidgetFormInputText(),
             'description' => new sfWidgetFormTextarea(array(), array('rows' => '3', 'cols' => '30')),
@@ -41,6 +42,7 @@ class AddTrainingForm extends BasePefromanceSearchForm {
         ));
         $this->setValidators(array(
             'id' => new sfValidatorString(array('required' => false)),
+            'employee' => new ohrmValidatorEmployeeNameAutoFill(),
             'cout' => new sfValidatorString(array('max_length' => 255)),
             'titre' => new sfValidatorString(array('max_length' => 255)),             
             'description' => new sfValidatorString(array('required' => false, 'trim' => true, 'max_length' => 2000)),
@@ -65,7 +67,8 @@ class AddTrainingForm extends BasePefromanceSearchForm {
         $requiredMarker = '&nbsp;<span class="required">*</span>';
         $labels = array(
             'titre' => __('Titre'),
-            'cout' => __('Cout'),           
+            'employee' => __('Employee'),
+            'cout' => __('Cout'),
             'description' => __('Description'),
             'valider' => __('Valider'),
             'fileformation' => __('Fiche Formation'),
@@ -84,8 +87,10 @@ class AddTrainingForm extends BasePefromanceSearchForm {
         if ($values['id']>0){
             $training = $this->getTrainingService()->getTrainingById($values['id']);
             $loggedInEmpNumber=$training->getEmpNumber();
-        }else{
+        }elseif ($values['employee']['empId']==''){
             $loggedInEmpNumber = $user->getAttribute('auth.empNumber');
+        }else{
+            $loggedInEmpNumber = $values['employee']['empId'];
         }
         if(!empty($fileform)){
             $filetypeform=$fileform->getType();
@@ -109,7 +114,6 @@ class AddTrainingForm extends BasePefromanceSearchForm {
             $filesize=null;
             $fileTmpName=null;
         }
-
         $training->setTitle($values['titre']);
         $training->setCoutFormation($values['cout']);
         $training->setDescription($values['description']);
@@ -142,6 +146,7 @@ class AddTrainingForm extends BasePefromanceSearchForm {
             //var_dump($training->getId());die;
             $this->setDefault('id', $training->getId());
             $this->setDefault('cout', $training->getCoutFormation());
+            $this->setDefault('employee', array('empName' => $training->getEmployee()->getFullName(), 'empId' => $training->getEmployee()->getEmpNumber()));
             $this->setDefault('description', $training->getDescription());
             $this->setDefault('titre', $training->getTitle());
             $this->setDefault('date_applied', set_datepicker_date_format($training->getDateApplied()));
@@ -171,4 +176,5 @@ class AddTrainingForm extends BasePefromanceSearchForm {
         
         return $this->getTrainingService()->getTrainingCount($serachParams);
     }
+
 }
