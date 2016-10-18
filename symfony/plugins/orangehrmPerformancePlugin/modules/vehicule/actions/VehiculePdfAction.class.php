@@ -144,62 +144,54 @@ EOD;
 
 
 $html .= <<<EOD
-      <fieldset style="text-align:center;" color="#ffffff">
-        <legend>  Employe</legend>
-        <br/>
-                Nom & Prenom : $employe_lastname $employe_name <br/>
-                Adresse : $superadresse / $employe_city <br/>
-                Telephone : $employe_telephone <br/>
-      </fieldset> <br/> <br/> <br/>
-      <fieldset class="dotationleft">
-        <legend> Responsable :</legend>
-            Nom & Prenom : $supernom $superprenom <br/>
-            Adresse : $superadresse / $supercity <br/>
-            Telephone : $supermobile <br/>
+          <br /><br />
+          <table border="0.5" cellspacing="0" cellpadding="4">
+              <tr bgcolor="#770a82" color="#ffffff">
+                <td colspan="2" style="font-size: 10px;font-weight:bold;text-align:center;"><strong>Responsable</strong></td>
+              </tr>
+              <tr bgcolor="#cccccc" color="#000000">
+                <td><strong>Nom & Prenom</strong></td><td><strong>$supernom $superprenom</strong></td>
+              </tr>
+              <tr bgcolor="#cccccc" color="#000000">
+                <td><strong>Adresse</strong></td><td>$superadresse / $supercity</td>
+              </tr>
+              <tr bgcolor="#cccccc" color="#000000">
+                <td><strong>Téléphone</strong></td><td>$supermobile</td>
+              </tr>
+              <tr bgcolor="#770a82" color="#ffffff" >
+                <td colspan="2" style="font-size: 10px;font-weight:bold;text-align:center;"><strong>Employe</strong></td>
+              </tr>
+              <tr bgcolor="#cccccc" color="#000000">
+                <td><strong>Nom & Prenom </strong></td><td>$employe_lastname $employe_name</td>
+              </tr>
+              <tr bgcolor="#cccccc" color="#000000">
+                <td><strong>Adresse</strong></td><td> $employe_adresse / $employe_city</td>
+              </tr>
+              <tr bgcolor="#cccccc" color="#000000">
+                <td><strong>Téléphone</strong></td><td>$employe_telephone</td>
+              </tr>
+        </table>
         
-      </fieldset>
       <br><br><br>
       <p>
         L’Employeur met à disposition du Salarié un véhicule de fonction de type $marque, immatriculé $matricule_vehicule 
-        et propriété de Sablux à compter du $date
+        , d'énergie $energie, avec une dotation en carburant de $dotation_carburant,et propriété de Sablux à compter du $date
         Le véhicule, objet de la présente clause, est attribué exclusivement pour l’exercice des fonctions du Salarié 
-        et ne peut donc être utilisé que pendant le temps de travail
+        et ne peut donc être utilisé que pendant le temps de travail.
       </p>
       <p>
         Le Salarié restituera le véhicule, objet de la présente clause, dès la cessation effective de ses fonctions 
         et au plus tard le dernier jour du contrat de travail, quelle que soit la cause de la rupture de ce contrat.
       </p>
-    <tr>
-      <table>
-      <tr>
-        <th style="width:70px;"><b> Marque </b></th>
-        <th style="width:70px;"><b> Energie </b></th>
-        <th style="width:70px;"><b> Matricule vehicule </b></th>
-        <th style="width:65px;"><b> Dotation_carburant  </b></th>
-        <th style="width:65px;"><b> Description </b></th>
-        <th style="width:35px;"><b> Nom et Prenom </b></th>
-        <th style="width:35px;"><b> Date </b></th>
-      </tr>
-EOD;
-$html .= <<<EOD
-
-    
-      <td style="width:70px;"> $marque </td>
-      <td style="width:70px;"> $energie </td>
-      <td style="width:70px;"> $matricule_vehicule </td>
-      <td style="width:65px;"> $description </td>
-      <td style="width:65px;"> $dotation_carburant </td>
-      <td style="width:35px;"> $dateapplied </td>
-    </tr>
-     <p>
-     Je m'engage a restituer ce matériel au complet dés la première réquisition de la société Sablux et à n'utiliser ce matériel que dans le cadre des missions que j'effectue avec Sablux 
-     </p>
-
+      <p>
+        Je m'engage a restituer ce matériel au complet dés la première réquisition de la société Sablux et à n'utiliser ce matériel que dans le cadre des missions que j'effectue avec Sablux 
+      </p>
+        </h3>
 EOD;
 
 
 $html .= <<<EOD
-  </table>
+  
 EOD;
 
 $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);

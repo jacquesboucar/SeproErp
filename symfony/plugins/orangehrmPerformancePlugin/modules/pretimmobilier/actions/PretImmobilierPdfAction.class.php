@@ -55,9 +55,14 @@ class PretImmobilierPdfAction extends basePeformanceAction {
     $employe_city = $pretimmobilier->getEmployee()->getCity();
     $employe_telephone = $pretimmobilier->getEmployee()->getEmpMobile();
     $employe_adresse = $pretimmobilier->getEmployee()->getStreet1();
+    $montant = $pretimmobilier->getMontantPret();
+    $objet = $pretimmobilier->getObjet();
+    $nombremois = $pretimmobilier->getNombreMois();
+    $dateaccord = $pretimmobilier->getDateAccord();
+    $dateprelevement = $pretimmobilier->getDatePrelevement();
+    $quotitesaisissable = $pretimmobilier->getQuotiteSaisissable();
     $description  = $pretimmobilier->getDescription();
     $valider  = $pretimmobilier->getValider();
-    $dateapplied = set_datepicker_date_format($pretimmobilier->getDateApplied());
 
     $user = sfContext::getInstance()->getUser();
     $employee = $this->getEmployeeService()->getEmployee($user->getAttribute('auth.empNumber'));
@@ -80,11 +85,11 @@ class PretImmobilierPdfAction extends basePeformanceAction {
        $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
 
        // set default header data
-       $pdf->SetHeaderData(false);
+        $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING, array(0,64,255), array(0,64,128));
        $pdf->setFooterData(false);
 
-       $pdf->setPrintHeader(false);
-       $pdf->setPrintFooter(false);
+      // $pdf->setPrintHeader(false);
+      // $pdf->setPrintFooter(false);
 
 // set header and footer fonts
 $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
@@ -132,69 +137,59 @@ $html = <<<EOD
     <tr>
       <td colspan="2"  bgcolor="#ffffff" color="#770a82" style="font-size: 20px;font-weight:bold;text-align:center;"></td>
       <td colspan="14" border="0" bgcolor="#770a82" color="#ffffff" style="font-size: 10px;font-weight:bold;text-align:center;">FICHE DE PRET IMMOBILIER </td>
-      <td colspan="3" bgcolor="#ffffff" color="#770a82" >$dateapplied</td>
+      <td colspan="3" bgcolor="#ffffff" color="#770a82" >$date</td>
     </tr>
 </table>
 EOD;
 
 
 $html .= <<<EOD
-      <fieldset style="text-align:center;" color="#ffffff">
-        <legend>  Employe</legend>
-        <br/>
-                Nom & Prenom : $employe_lastname $employe_name <br/>
-                Adresse : $employe_adresse / $employe_city <br/>
-                Telephone : $employe_telephone <br/>
-      </fieldset> <br/> <br/> <br/>
-      <fieldset class="dotationleft">
-        <legend> Responsable :</legend>
-            Nom & Prenom : $supernom $superprenom <br/>
-            Adresse : $superadresse / $supercity <br/>
-            Telephone : $supermobile <br/>
-        
-      </fieldset>
+          <br /><br />
+         <table border="0.5" cellspacing="0" cellpadding="4">
+              <tr bgcolor="#770a82" color="#ffffff">
+                <td colspan="2"><strong>Responsable</strong></td>
+              </tr>
+              <tr bgcolor="#cccccc" color="#000000">
+                <td><strong>Nom & Prenom</strong></td><td><strong>$supernom $superprenom</strong></td>
+              </tr>
+              <tr bgcolor="#cccccc" color="#000000">
+                <td><strong>Adresse</strong></td><td>$superadresse / $supercity</td>
+              </tr>
+              <tr bgcolor="#cccccc" color="#000000">
+                <td><strong>Téléphone</strong></td><td>$supermobile</td>
+              </tr>
+              <tr bgcolor="#770a82" color="#ffffff">
+                <td colspan="2"><strong>Employe</strong></td>
+              </tr>
+              <tr bgcolor="#cccccc" color="#000000">
+                <td><strong>Nom & Prenom </strong></td><td>$employe_lastname $employe_name</td>
+              </tr>
+              <tr bgcolor="#cccccc" color="#000000">
+                <td><strong>Adresse</strong></td><td> $employe_adresse / $employe_city</td>
+              </tr>
+              <tr bgcolor="#cccccc" color="#000000">
+                <td><strong>Téléphone</strong></td><td>$employe_telephone</td>
+              </tr>
+        </table>
       <br><br><br>
-      <p>
-        L’Employeur met à disposition du Salarié un véhicule de fonction de type , immatriculé  
-        et propriété de Sablux à compter du 
-        Le véhicule, objet de la présente clause, est attribué exclusivement pour l’exercice des fonctions du Salarié 
-        et ne peut donc être utilisé que pendant le temps de travail
-      </p>
-      <p>
-        Le Salarié restituera le véhicule, objet de la présente clause, dès la cessation effective de ses fonctions 
-        et au plus tard le dernier jour du contrat de travail, quelle que soit la cause de la rupture de ce contrat.
-      </p>
-    <tr>
-      <table>
-      <tr>
-        <th style="width:70px;"><b> Marque </b></th>
-        <th style="width:70px;"><b> Energie </b></th>
-        <th style="width:70px;"><b> Matricule vehicule </b></th>
-        <th style="width:65px;"><b> Dotation_carburant  </b></th>
-        <th style="width:65px;"><b> Description </b></th>
-        <th style="width:35px;"><b> Nom et Prenom </b></th>
-        <th style="width:35px;"><b> Date </b></th>
-      </tr>
-EOD;
-$html .= <<<EOD
-
-    <tr>
-      <td style="width:70px;">  </td>
-      <td style="width:70px;">  </td>
-      <td style="width:70px;">  </td>
-      <td style="width:65px;">  </td>
-      <td style="width:65px;">  </td>
-      <td style="width:35px;">  </td>
-    </tr>
-     <p>
-     Je m'engage a restituer ce matériel au complet dés la première réquisition de la société Sablux et à n'utiliser ce matériel que dans le cadre des missions que j'effectue avec Sablux 
-     </p>
-
-EOD;
-
-
-$html .= <<<EOD
-  </table>
+      <table border="0.4">
+          <tr>
+            <th><b> Motant du pret </b></th>
+            <th><b> Objet  </b></th>
+            <th><b> Nombre de mois  </b></th>
+            <th><b> Date prelevement</b></th>
+            <th><b> Quotite saisissable </b></th>
+            <th><b> Description </b></th>
+          </tr>
+          <tr>
+            <td> $montant </td>
+            <td> $objet </td>
+            <td> $nombremois </td>
+            <td> $dateprelevement </td>
+            <td> $quotitesaisissable </td>
+            <td> $description </td>
+          </tr>
+      </table>
 EOD;
 
 $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
