@@ -36,6 +36,7 @@ class PretImmobilierSearchForm extends BasePefromanceSearchForm {
      */
     protected function getFormWidgets() {
         $widgets = array(
+            'employee' => new ohrmWidgetEmployeeNameAutoFill(),
             'objet' => new sfWidgetFormInputText(),
             'montant' => new sfWidgetFormInputText(),
         );
@@ -49,6 +50,7 @@ class PretImmobilierSearchForm extends BasePefromanceSearchForm {
     protected function getFormValidators() {
 
         $validators = array(
+            'employee' => new ohrmValidatorEmployeeNameAutoFill(),
             'objet' => new sfValidatorString(array('required' => false)),
             'montant' => new sfValidatorNumber(array('required' => false))
         );
@@ -61,6 +63,7 @@ class PretImmobilierSearchForm extends BasePefromanceSearchForm {
      */
     protected function getFormLabels() {
         $labels = array(
+            'employee' => __('Employee'),
             'objet' => __('Objet Pret Immobilier'),
             'montant' => __('Montant')
         );
@@ -72,9 +75,10 @@ class PretImmobilierSearchForm extends BasePefromanceSearchForm {
      * @return type 
      */
     public function searchPretImmobilier($page) {
-
+        $employe= $this->getValue('employee');
         $serachParams ['objet'] =  $this->getValue('objet');
         $serachParams ['montant'] =  $this->getValue('montant');
+        $serachParams ['employeeNumber'] =  $employe['empId'];
         $serachParams ['page'] =  $page;
         $serachParams ['limit'] =  sfConfig::get('app_items_per_page');
 
@@ -82,8 +86,10 @@ class PretImmobilierSearchForm extends BasePefromanceSearchForm {
     }
 
     public function getPretImmobilierCount(){
+        $employe= $this->getValue('employee');
         $serachParams ['objet'] =  $this->getValue('objet');
         $serachParams ['montant'] =  $this->getValue('montant');
+        $serachParams ['employeeNumber'] =  $employe['empId'];
         $serachParams['limit'] = null;
 
         return $this->getPretImmobilierService()->getPretImmobilierCount($serachParams);

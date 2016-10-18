@@ -68,11 +68,11 @@ class AddTrainingForm extends BasePefromanceSearchForm {
         $labels = array(
             'titre' => __('Titre'),
             'employee' => __('Employee'),
-            'cout' => __('Cout'),
+            'cout' => __('Coût'),
             'description' => __('Description'),
             'valider' => __('Valider'),
             'fileformation' => __('Fiche Formation'),
-            'file' => __('Televersement')
+            'file' => __('Téléversement')
         );
         return $labels;
     }

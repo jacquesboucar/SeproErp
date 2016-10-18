@@ -36,6 +36,7 @@ class TrainingSearchForm extends BasePefromanceSearchForm {
      */
     protected function getFormWidgets() {
         $widgets = array(
+            'employee' => new ohrmWidgetEmployeeNameAutoFill(),
             'coutformation' => new sfWidgetFormInputText(),
             'title' => new sfWidgetFormInputText(),
         );
@@ -49,6 +50,7 @@ class TrainingSearchForm extends BasePefromanceSearchForm {
     protected function getFormValidators() {
 
         $validators = array(
+            'employee' => new ohrmValidatorEmployeeNameAutoFill(),
             'coutformation' => new sfValidatorString(array('required' => false)),
             'title' => new sfValidatorString(array('required' => false))
         );
@@ -61,7 +63,8 @@ class TrainingSearchForm extends BasePefromanceSearchForm {
      */
     protected function getFormLabels() {
         $labels = array(
-            'coutformation' => __('Cout Formation'),
+            'employee' => __('Employee'),
+            'coutformation' => __('Coût Formation'),
             'title' => __('Title')
         );
         return $labels;
@@ -72,20 +75,21 @@ class TrainingSearchForm extends BasePefromanceSearchForm {
      * @return type 
      */
     public function searchTraining($page) {
-
+        $employe= $this->getValue('employee');
         $serachParams ['coutformation'] =  $this->getValue('coutformation');
+        $serachParams ['employeeNumber'] =  $employe['empId'];
         $serachParams ['title'] =  $this->getValue('title');
         $serachParams ['page'] =  $page;
         $serachParams ['limit'] =  sfConfig::get('app_items_per_page');
-
         return $this->getTrainingService()->searchTraining($serachParams);
     }
 
     public function getTrainingCount(){
+        $employe= $this->getValue('employee');
         $serachParams ['coutformation'] =  $this->getValue('coutformation');
+        $serachParams ['employeeNumber'] =  $employe['empId'];
         $serachParams ['title'] =  $this->getValue('title');
         $serachParams['limit'] = null;
-
         return $this->getTrainingService()->getTrainingCount($serachParams);
     }
 }

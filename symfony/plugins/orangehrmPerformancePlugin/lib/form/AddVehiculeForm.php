@@ -89,11 +89,11 @@ class AddVehiculeForm extends BasePefromanceSearchForm {
             'marque' => __('Marque'). $requiredMarker,
             'employee' => __('Employee'). $requiredMarker,
             'energie' => __('Energie'). $requiredMarker,
-            'matricule_vehicule' => __('Matricule vehicule'). $requiredMarker,
+            'matricule_vehicule' => __('Matricule véhicule'). $requiredMarker,
             'dotation_carburant' => __('Dotation_carburant'). $requiredMarker,
             'description' => __('Description'),
             'valider' => __('Valider'),
-            'file' => __('Televersement')
+            'file' => __('Téléversement')
         );
         return $labels;
     }

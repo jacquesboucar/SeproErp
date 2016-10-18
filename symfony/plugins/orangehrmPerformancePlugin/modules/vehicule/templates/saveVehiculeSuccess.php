@@ -8,7 +8,7 @@
 
 <div id="location" class="box">
     <div class="head">
-        <h1 id="PerformanceHeading"><?php echo __("Dotation de vehicule"); ?></h1>
+        <h1 id="PerformanceHeading"><?php echo __("Dotation de véhicule"); ?></h1>
     </div>
 
     <div class="inner">
@@ -20,19 +20,19 @@
             ?>
             <?php if($form['id']->getValue()!=null){ ?>
             <div class="pull-right impressionbtn">
-                <a href="<?php echo url_for('vehicule/VehiculePdf') . '?id=' . $form['id']->getValue(); ?>" target="_blank">Telecharger</a>
+                <a href="<?php echo url_for('vehicule/VehiculePdf') . '?id=' . $form['id']->getValue(); ?>" target="_blank">Télécharger</a>
             </div>
             <?php } ?>
             <fieldset>
 
                 <ol>
                     <li>
-                        <?php echo $form['marque']->renderLabel(null, array('class' => 'labelValue')); ?>
-                        <?php echo $form['marque']->render() ?>
-                    </li>
-                    <li>
                         <?php echo $form['employee']->renderLabel(null, array('class' => 'labelValue')); ?>
                         <?php echo $form['employee']->render() ?>
+                    </li>
+                    <li>
+                        <?php echo $form['marque']->renderLabel(null, array('class' => 'labelValue')); ?>
+                        <?php echo $form['marque']->render() ?>
                     </li>
                     <li>
                         <?php echo $form['energie']->renderLabel(null, array('class' => 'labelValue')); ?>

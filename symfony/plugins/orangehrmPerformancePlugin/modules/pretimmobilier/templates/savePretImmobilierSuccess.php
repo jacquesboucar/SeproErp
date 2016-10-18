@@ -1,4 +1,4 @@
-<?php //use_stylesheets_for_form($form);  ?>
+<?php use_stylesheets_for_form($form);  ?>
 <style>
 
 </style>
@@ -8,7 +8,7 @@
 
 <div id="location" class="box">
     <div class="head">
-        <h1 id="PerformanceHeading"><?php echo __("Pret Immobilier"); ?></h1>
+        <h1 id="PerformanceHeading"><?php echo __("Prêt Immobilier"); ?></h1>
     </div>
 
     <div class="inner">
@@ -66,7 +66,7 @@
                             echo $form['file']->render();
                         }else{
                             $linkHtml = "<div id=\"fileLink\"><a target=\"_blank\" class=\"fileLink\" href=\"";
-                            $linkHtml .= url_for('vehicule/viewVehiculeAttachment?hdnEditId=' . $form['id']->getValue());
+                            $linkHtml .= url_for('pretimmobilier/viewPretImmobilierAttachment?hdnEditId=' . $form['id']->getValue());
                             $linkHtml .= "\">{$form['file']->getValue()}</a></div>";
                             echo $form['file']->renderLabel(null, array('class' => 'labelValue'));
                             echo $linkHtml;
