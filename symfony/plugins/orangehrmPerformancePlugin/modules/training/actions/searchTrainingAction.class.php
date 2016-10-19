@@ -38,7 +38,7 @@ class searchTrainingAction extends basePeformanceAction {
     }
 
     public function execute($request) {
-
+        $this->_checkAuthentication($request);
         $form = $this->getTrainingSearchForm();
         $page = $request->getParameter('hdnAction') == 'search' ? 1 : $request->getParameter('pageNo', 1);
 

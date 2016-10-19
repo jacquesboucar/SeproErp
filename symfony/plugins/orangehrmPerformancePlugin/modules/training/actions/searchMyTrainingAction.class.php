@@ -38,7 +38,7 @@ class searchMyTrainingAction extends basePeformanceAction {
     }
 
     public function execute($request) {
-
+        $this->_checkAuthentication($request);
         $page = $request->getParameter('hdnAction') == 'search' ? 1 : $request->getParameter('pageNo', 1);
 
         $serachParams ['employeeNumber'] = $this->getUser()->getEmployeeNumber();
