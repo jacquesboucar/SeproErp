@@ -18899,6 +18899,46 @@
                                                            <target>Avertissement</target>
                                                            <note>Avertissement pour la demande de conge</note>
                                                           </trans-unit>
+                                                          <trans-unit id="3787">
+                                                           <source>Create PretImmobilier</source>
+                                                           <target>Saisir Prêt Immobilier</target>
+                                                           <note>Creer un pret immobilier</note>
+                                                          </trans-unit>
+                                                          <trans-unit id="3788">
+                                                           <source>Search Pret Immobilier</source>
+                                                           <target>Listes Prêt Immobilier</target>
+                                                           <note>Liste des pret immobilier</note>
+                                                          </trans-unit>
+                                                          <trans-unit id="3788">
+                                                           <source>My Pret Immobilier</source>
+                                                           <target>Mes Prêt Immobilier</target>
+                                                           <note>Mes pret immobilier</note>
+                                                          </trans-unit>
+                                                          <trans-unit id="3789">
+                                                           <source>Add dotation vehicule</source>
+                                                           <target>Dotation Véhicule</target>
+                                                           <note>Faire une dotation de vehicule</note>
+                                                          </trans-unit>
+                                                          <trans-unit id="3790">
+                                                           <source>Search dotation vehicule</source>
+                                                           <target>Liste Dotation véhicule</target>
+                                                           <note>Liste des dotation de vehicule</note>
+                                                          </trans-unit>
+                                                          <trans-unit id="3791">
+                                                           <source>My Dotation vehicule</source>
+                                                           <target>Mes Dotation véhicule</target>
+                                                           <note>Ma liste de dotation de véhicule</note>
+                                                          </trans-unit>
+                                                          <trans-unit id="3792">
+                                                           <source>Search Training</source>
+                                                           <target>Liste Formations</target>
+                                                           <note>Liste des formations</note>
+                                                          </trans-unit>
+                                                          <trans-unit id="3793">
+                                                           <source>My Training</source>
+                                                           <target>Mes Demandes de Formation</target>
+                                                           <note>Liste de mes demande de formation</note>
+                                                          </trans-unit>
                                                          </body>
                                                         </file>
                                                        </xliff>
