@@ -21,13 +21,6 @@ class savePretImmobilierAction extends basePeformanceAction {
         "rtf" => "text/rtf",
         "txt" => "text/plain");
 
-    /**
-     *
-     */
-    public function preExecute() {
-       $this->_checkAuthentication();
-    }
-
 
     /**
      * @return AddPretImmobilierForm
@@ -82,14 +75,5 @@ class savePretImmobilierAction extends basePeformanceAction {
         $this->form = $form;
     }
 
-    /**
-     * @param null $request
-     */
-    protected function _checkAuthentication($request = null) {
-        $user = $this->getUser()->getAttribute('user');
-        if (!($user->isAdmin())) {
-            $this->forward(sfConfig::get('sf_secure_module'), sfConfig::get('sf_secure_action'));
-        }
-    }
 
 }

@@ -33,10 +33,6 @@ class searchMyPretImmobilierAction extends basePeformanceAction {
         $this->pageNumber = $pageNumber;
     }
 
-    public function preExecute() {
-        $this->_checkAuthentication();
-    }
-
     public function execute($request) {
 
 
@@ -75,13 +71,6 @@ class searchMyPretImmobilierAction extends basePeformanceAction {
      */
     protected function getListConfigurationFactory() {
         return new MyPretImmobilierListConfigurationFactory();
-    }
-    
-    protected function _checkAuthentication($request = null) {
-        $user = $this->getUser()->getAttribute('user');
-        if (!($user->isAdmin())) {
-            $this->forward(sfConfig::get('sf_secure_module'), sfConfig::get('sf_secure_action'));
-        }
     }
 
 }
