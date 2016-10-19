@@ -33,12 +33,8 @@ class searchMyTrainingAction extends basePeformanceAction {
         $this->pageNumber = $pageNumber;
     }
 
-    public function preExecute() {
-        $this->_checkAuthentication();
-    }
-
     public function execute($request) {
-        $this->_checkAuthentication($request);
+
         $page = $request->getParameter('hdnAction') == 'search' ? 1 : $request->getParameter('pageNo', 1);
 
         $serachParams ['employeeNumber'] = $this->getUser()->getEmployeeNumber();
@@ -75,12 +71,6 @@ class searchMyTrainingAction extends basePeformanceAction {
     protected function getListConfigurationFactory() {
         return new MyTrainingListConfigurationFactory();
     }
-    
-    protected function _checkAuthentication($request = null) {
-        $user = $this->getUser()->getAttribute('user');
-        if (!($user->isAdmin())) {
-            $this->forward(sfConfig::get('sf_secure_module'), sfConfig::get('sf_secure_action'));
-        }
-    }
+
 
 }

@@ -14,11 +14,6 @@ class saveTrainingAction extends basePeformanceAction {
 
     public $trainingForm;
 
-    
-    public function preExecute() {
-       $this->_checkAuthentication();
-    }
-    
     /**
      *
      * @return \DefineKpiForm 
@@ -40,7 +35,8 @@ class saveTrainingAction extends basePeformanceAction {
     }
 
     public function execute( $request) {
-        $this->_checkAuthentication($request);
+
+
         $request->setParameter('initialActionName', 'searchKpi');
         $user = $this->getUser()->getAttribute('user');
         $form = $this->getTrainingForm();
@@ -50,8 +46,10 @@ class saveTrainingAction extends basePeformanceAction {
                 try {
                     $form->saveForm();
                     $this->getUser()->setFlash('success', __(TopLevelMessages::SAVE_SUCCESS));
-                    if(!$user->isAdmin())
-                    $this->redirect('training/searchMyTraining');
+                    if(!$user->isAdmin()){
+                        $this->redirect('training/searchMyTraining');
+                    }
+
                     $this->redirect('training/searchTraining');
                 } catch (LeaveAllocationServiceException $e) {
                     $this->templateMessage = array('WARNING', __($e->getMessage()));
@@ -61,13 +59,6 @@ class saveTrainingAction extends basePeformanceAction {
             $form->loadFormData($request->getParameter('hdnEditId'));
         }
         $this->form = $form;
-    }
-    
-    protected function _checkAuthentication($request = null) {
-        $user = $this->getUser()->getAttribute('user');
-        if (!($user->isAdmin())) {
-            $this->forward(sfConfig::get('sf_secure_module'), sfConfig::get('sf_secure_action'));
-        }
     }
 
 }
