@@ -36,7 +36,6 @@ class saveTrainingAction extends basePeformanceAction {
 
     public function execute( $request) {
 
-
         $request->setParameter('initialActionName', 'searchKpi');
         $user = $this->getUser()->getAttribute('user');
         $form = $this->getTrainingForm();
