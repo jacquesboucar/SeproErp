@@ -76,15 +76,15 @@ class AddPretImmobilierForm extends BasePefromanceSearchForm {
        
         $requiredMarker = '&nbsp;<span class="required">*</span>';
         $labels = array(
-            'montant_pret' => __('Motant du pret').$requiredMarker,
+            'montant_pret' => __('Montant du prêt').$requiredMarker,
             'objet' => __('Objet').$requiredMarker,
             'nombre_mois' => __('Nombre de mois').$requiredMarker,
             'date_accord' => __('Date accord'),
-            'date_prelevement' => __('Date prelevement'),
-            'quotite_saisissable' => __('Quotite saisissable'),
+            'date_prelevement' => __('Date prélèvement'),
+            'quotite_saisissable' => __('Quotité saisissable'),
             'description' => __('Description'),
             'valider' => __('Valider'),
-            'file' => __('Televersement')
+            'file' => __('Téléversement')
         );
         return $labels;
     }
