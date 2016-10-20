@@ -93,7 +93,9 @@
         {
             $('#addVehicule_employee_empName').attr("disabled", "disabled");
             $('#addVehicule_marque').attr("disabled", "disabled");
+            $('#addVehicule_energie').attr("disabled", "disabled");
             $('#addVehicule_matricule_vehicule').attr("disabled", "disabled");
+            $('#addVehicule_dotation_carburant').attr("disabled", "disabled");
             $('#addVehicule_description').attr("disabled", "disabled");
             $('#addVehicule_valider').attr("disabled", "disabled");
             $('#addVehicule_file').attr("disabled", "disabled");
