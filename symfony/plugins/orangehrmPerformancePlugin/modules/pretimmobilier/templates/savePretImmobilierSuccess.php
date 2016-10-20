@@ -99,8 +99,8 @@
             $('#addPretImmobilier_montant_pret').attr("disabled", "disabled");
             $('#addPretImmobilier_objet').attr("disabled", "disabled");
             $('#addPretImmobilier_nombre_mois').attr("disabled", "disabled");
-            $('#addPretImmobilier_date_accord').attr("disabled", "disabled");
-            $('#addPretImmobilier_date_prelevement').attr("disabled", "disabled");
+            $('#date_accord').attr("disabled", "disabled");
+            $('#date_prelevement').attr("disabled", "disabled");
             $('#addPretImmobilier_quotite_saisissable').attr("disabled", "disabled");
             $('#addPretImmobilier_description').attr("disabled", "disabled");
             $('#addPretImmobilier_file').attr("disabled", "disabled");
