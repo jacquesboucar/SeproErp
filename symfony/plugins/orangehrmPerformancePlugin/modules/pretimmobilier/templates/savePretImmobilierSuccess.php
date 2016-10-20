@@ -1,4 +1,4 @@
-<?php use_stylesheets_for_form($form);  ?>
+<?php //use_stylesheets_for_form($form);  ?>
 <style>
 
 </style>
@@ -92,6 +92,20 @@
 
 <script>
     $(document).ready(function() {
+
+        var status = document.getElementById("addPretImmobilier_valider").value;
+        if(status=='Valider' || status=='Rejetter')
+        {
+            $('#addPretImmobilier_montant_pret').attr("disabled", "disabled");
+            $('#addPretImmobilier_objet').attr("disabled", "disabled");
+            $('#addPretImmobilier_nombre_mois').attr("disabled", "disabled");
+            $('#addPretImmobilier_date_accord').attr("disabled", "disabled");
+            $('#addPretImmobilier_date_prelevement').attr("disabled", "disabled");
+            $('#addPretImmobilier_quotite_saisissable').attr("disabled", "disabled");
+            $('#addPretImmobilier_description').attr("disabled", "disabled");
+            $('#addPretImmobilier_file').attr("disabled", "disabled");
+        }
+
 
         $('#saveBtn').click(function(){
             $('#savePretImmobilier').submit();

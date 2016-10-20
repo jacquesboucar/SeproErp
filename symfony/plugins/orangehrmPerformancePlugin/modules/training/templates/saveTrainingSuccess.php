@@ -92,7 +92,18 @@
 
 <script>
     $(document).ready(function() {
-        
+
+        var status = document.getElementById("addTraining_valider").value;
+        if(status=='Valider' || status=='Rejetter')
+        {
+            $('#addTraining_employee_empName').attr("disabled", "disabled");
+            $('#addTraining_cout').attr("disabled", "disabled");
+            $('#addTraining_titre').attr("disabled", "disabled");
+            $('#addTraining_description').attr("disabled", "disabled");
+            $('#addTraining_fileformation').attr("disabled", "disabled");
+            $('#addTraining_valider').attr("disabled", "disabled");
+            $('#addTraining_file').attr("disabled", "disabled");
+        }
         
         
         $('#saveBtn').click(function(){           

@@ -88,7 +88,16 @@
 <script>
     $(document).ready(function() {
 
-     
+        var status = document.getElementById("addTraining_valider").value;
+        if(status=='Valider' || status=='Rejetter')
+        {
+            $('#addVehicule_employee_empName').attr("disabled", "disabled");
+            $('#addTraining_marque').attr("disabled", "disabled");
+            $('#addTraining_matricule_vehicule').attr("disabled", "disabled");
+            $('#addTraining_description').attr("disabled", "disabled");
+            $('#addTraining_valider').attr("disabled", "disabled");
+            $('#addTraining_file').attr("disabled", "disabled");
+        }
 
         $('#saveBtn').click(function(){
             $('#saveVehicule').submit();
