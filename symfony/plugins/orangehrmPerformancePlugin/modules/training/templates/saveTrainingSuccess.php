@@ -19,7 +19,7 @@
             echo $form['id']; ?>
             <?php if($form['id']->getValue()!=null){ ?>
             <div class="pull-right impressionbtn">
-                <a href="<?php echo url_for('training/TrainingPdf') . '?id=' . $form['id']->getValue(); ?>" target="_blank">Telecharger</a>
+                <a href="<?php echo url_for('training/TrainingPdf') . '?id=' . $form['id']->getValue(); ?>" target="_blank" id="btnimprimer">Telecharger</a>
             </div>
             <?php } ?>
             <fieldset>
@@ -103,6 +103,7 @@
             $('#addTraining_fileformation').attr("disabled", "disabled");
             $('#addTraining_valider').attr("disabled", "disabled");
             $('#addTraining_file').attr("disabled", "disabled");
+            $('#btnimprimer').hide();
         }
         
         

@@ -20,7 +20,7 @@
             ?>
             <?php if($form['id']->getValue()!=null){ ?>
             <div class="pull-right impressionbtn">
-                <a href="<?php echo url_for('pretimmobilier/PretImmobilierPdf') . '?id=' . $form['id']->getValue(); ?>" target="_blank">Telecharger</a>
+                <a href="<?php echo url_for('pretimmobilier/PretImmobilierPdf') . '?id=' . $form['id']->getValue(); ?>" target="_blank" id="btnimprimer">Telecharger</a>
             </div>
             <?php } ?>
             <fieldset>
@@ -104,6 +104,9 @@
             $('#addPretImmobilier_quotite_saisissable').attr("disabled", "disabled");
             $('#addPretImmobilier_description').attr("disabled", "disabled");
             $('#addPretImmobilier_file').attr("disabled", "disabled");
+            $('#addPretImmobilier_valider').attr("disabled", "disabled");
+            $('#btnimprimer').hide();
+
         }
 
 
