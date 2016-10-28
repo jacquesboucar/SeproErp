@@ -22,6 +22,14 @@ class AddVehiculeForm extends BasePefromanceSearchForm {
             return new VehiculeService();
     }
 
+    public function getEmailService() {
+
+        return new EmailService();
+    }
+    public function getSystemUserService() {
+
+        return new SystemUserService();
+    }
     /**
      *
      */
@@ -115,17 +123,12 @@ class AddVehiculeForm extends BasePefromanceSearchForm {
         }else{
             $loggedInEmpNumber = $values['employee']['empId'];
         }
-        if(!empty($file)){
-            $filetype= $file->getType();
-            $filename= $file->getOriginalName();
-            $filesize= $file->getSize();
-            $fileTmpName= file_get_contents($file->getTempName());
-        }else{
-            $filetype=null;
-            $filename=null;
-            $filesize=null;
-            $fileTmpName=null;
-        }
+
+        $employee = $this->getEmployeeService()->getEmployee($loggedInEmpNumber);
+        $Emails = $this->ListEmail($loggedInEmpNumber);
+        $messageAdmin = $this->MessageAdmin($values['id'], $vehicule);
+        $messageEmployee = $this->MessageEmploye($values['id'], $vehicule);
+        $ficheteleversement = $this->getFileTraitement($file);
 
         $vehicule->setMarque($values['marque']);
         $vehicule->setEnergie($values['energie']);
@@ -134,13 +137,82 @@ class AddVehiculeForm extends BasePefromanceSearchForm {
         $vehicule->setValider($values['valider']);
         $vehicule->setDateApplied(date('Y-m-d H:i:s'));
 
-        $vehicule->setFilecontent($fileTmpName);
-        $vehicule->setFiletype($filetype);
-        $vehicule->setFilesize($filesize);
-        $vehicule->setFilename($filename);
+
+        $vehicule->setFilecontent($ficheteleversement['tempname']);
+        $vehicule->setFiletype($ficheteleversement['type']);
+        $vehicule->setFilesize($ficheteleversement['size']);
+        $vehicule->setFilename($ficheteleversement['originalname']);
+
         $vehicule->setDescription($values['description']);
         $vehicule->setEmpNumber($loggedInEmpNumber);
+
         $this->getVehiculeService()->saveVehicule($vehicule);
-          
+        $this->getEmailService()->sendEmailVehicule($Emails,$employee, $messageAdmin, $messageEmployee);
+    }
+
+    public function ListEmail($EmpNumber){
+
+        $emplist = $this->getEmployeeService()->getSupervisorIdListBySubordinateId($EmpNumber);
+        $Listemails=array();
+
+        foreach ($emplist as $emp){
+            $Listemails[] = $this->getEmployeeService()->getEmployee($emp)->getEmpWorkEmail();
+        }
+
+        foreach ($this->getSystemUserService()->getEmployeesByUserRole('Admin') as $a){
+            $Listemails[] = $a['emp_work_email'];
+        }
+
+        return $Listemails;
+    }
+
+    public function MessageAdmin($id, $pretimmo){
+        if($id>0){
+            if($pretimmo['valider'] == 'En cours'){
+                $message = "Notification Véhicule \n 
+                            Votre demande de Véhicule a ete modifie \n Merci. \n Ceci est une notification automatique";
+            }else{
+                $message = "Notification Véhicule \n 
+                            Votre demande de Véhicule ".$pretimmo['objet']." a ete ".$pretimmo['valider']." par ".$pretimmo['empNumber']
+                            ." \n Merci. \n Ceci est une notification automatique";
+            }
+
+        }else{
+            $message = "Notification Véhicule \n Une nouvelle demande de Véhicule  a ete creee \n Merci de vous connecter \n Ceci est une notfication automatique";
+        }
+        return $message;
+    }
+    public function MessageEmploye($id, $pretimmo){
+        if($id>0){
+            if($pretimmo['valider'] == 'En cours'){
+                $message = "Votre demande de Véhicule a ete modifier. Merci de vous connecter!";
+            }else{
+                $message = "Notification Véhicule \n".
+                           "Votre demande de Véhicule ".$pretimmo['objet']." a ete ".$pretimmo['valider']." par ".$pretimmo['empNumber']
+                           ." \n Merci de vous connecter \n Ceci est une notification automatique";
+            }
+        }else{
+            $message = "Notification Véhicule \n Vous avez effectue une demande de Véhicule \n Merci de vous connecter \n Ceci est une notification automatique";
+        }
+        return $message;
+    }
+
+    public function getFileTraitement($fichier){
+        $f = array();
+
+        if(!empty($fichier))
+        {
+            $f['type']=$fichier->getType();
+            $f['originalname']=$fichier->getOriginalName();
+            $f['size']=$fichier->getSize();
+            $f['tempname']=file_get_contents($fichier->getTempName());
+        }else{
+            $f['type']=null;
+            $f['originalname']=null;
+            $f['size']=null;
+            $f['tempname']=null;
+        }
+
+        return $f;
     }
 }
