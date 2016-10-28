@@ -33,6 +33,15 @@ class AddPretImmobilierForm extends BasePefromanceSearchForm {
             return new PretImmobilierService();
     }
 
+    public function getEmailService() {
+
+        return new EmailService();
+    }
+    public function getSystemUserService() {
+
+        return new SystemUserService();
+    }
+
     public function configure() {
         $type = array('En cours' => 'En cours','Valider' => 'Valider', 'Rejetter' => 'Rejetter');
         $this->setWidgets(array(
@@ -102,17 +111,13 @@ class AddPretImmobilierForm extends BasePefromanceSearchForm {
         }else{
             $loggedInEmpNumber=$user->getAttribute('auth.empNumber');
         }
-        if(!empty($file)){
-            $filetype=$file->getType();
-            $filename=$file->getOriginalName();
-            $filesize=$file->getSize();
-            $fileTmpName=file_get_contents($file->getTempName());
-        }else{
-            $filetype=null;
-            $filename=null;
-            $filesize=null;
-            $fileTmpName=null;
-        }
+
+        $employee = $this->getEmployeeService()->getEmployee($loggedInEmpNumber);
+        $Emails = $this->ListEmail();
+        $messageAdmin = $this->MessageAdmin($values['id'], $pretimmobilier);
+        $messageEmployee = $this->MessageEmploye($values['id'], $pretimmobilier);
+
+        $ficheteleversement = $this->getFileTraitement($file);
 
         $pretimmobilier->setMontantPret($values['montant_pret']);
         $pretimmobilier->setObjet($values['objet']);
@@ -121,14 +126,17 @@ class AddPretImmobilierForm extends BasePefromanceSearchForm {
         $pretimmobilier->setDatePrelevement($values['date_prelevement']);
         $pretimmobilier->setQuotiteSaisissable($values['quotite_saisissable']);
         $pretimmobilier->setValider($values['valider']);
-        $pretimmobilier->setFilecontent($fileTmpName);
-        $pretimmobilier->setFiletype($filetype);
-        $pretimmobilier->setFilesize($filesize);
-        $pretimmobilier->setFilename($filename);
+
+        $pretimmobilier->setFilecontent($ficheteleversement['tempname']);
+        $pretimmobilier->setFiletype($ficheteleversement['type']);
+        $pretimmobilier->setFilesize($ficheteleversement['size']);
+        $pretimmobilier->setFilename($ficheteleversement['originalname']);
+
         $pretimmobilier->setDescription($values['description']);
         $pretimmobilier->setEmpNumber($loggedInEmpNumber);
-        $this->getPretImmobilierService()->savePretImmobilier($pretimmobilier);
 
+        $this->getPretImmobilierService()->savePretImmobilier($pretimmobilier);
+        $this->getEmailService()->sendEmailPretImmobilier($Emails,$employee, $messageAdmin, $messageEmployee);
     }
 
     /**
@@ -170,5 +178,66 @@ class AddPretImmobilierForm extends BasePefromanceSearchForm {
         $serachParams['limit'] = null;
         
         return $this->getPretImmobilierService()->getPretImmobilierCount($serachParams);
+    }
+
+
+    public function ListEmail(){
+
+        $Listemails=array();
+        foreach ($this->getSystemUserService()->getEmployeesByUserRole('Admin') as $a){
+            $Listemails[] = $a['emp_work_email'];
+        }
+
+        return $Listemails;
+    }
+
+    public function MessageAdmin($id, $pretimmo){
+        if($id>0){
+            if($pretimmo['valider'] == 'En cours'){
+                $message = "Notification Prêt Immobilier \n 
+                        Votre demande de Prêt Immobilier a ete modifie \n Merci. \n Ceci est une notification automatique";
+            }else{
+                $message = "Notification Prêt Immobilier \n 
+                            Votre demande de Prêt Immobilier ".$pretimmo['objet']." a ete ".$pretimmo['valider']." par ".$pretimmo['empNumber']
+                    ." \n Merci. \n Ceci est une notification automatique";
+            }
+
+        }else{
+            $message = "Notification Prêt Immobilier \n Une nouvelle demande de Prêt Immobilier  a ete creee \n Merci de vous connecter \n Ceci est une notfication automatique";
+        }
+        return $message;
+    }
+    public function MessageEmploye($id, $pretimmo){
+        if($id>0){
+            if($pretimmo['valider'] == 'En cours'){
+                $message = "Votre demande de Prêt Immobilier a ete modifier. Merci de vous connecter!";
+            }else{
+                $message = "Notification Prêt Immobilier \n".
+                    "Votre demande de Prêt Immobilier ".$pretimmo['objet']." a ete ".$pretimmo['valider']." par ".$pretimmo['empNumber']
+                    ." \n Merci de vous connecter \n Ceci est une notification automatique";
+            }
+        }else{
+            $message = "Notification Prêt Immobilier \n Vous avez effectue une demande de Prêt Immobilier \n Merci de vous connecter \n Ceci est une notification automatique";
+        }
+        return $message;
+    }
+
+    public function getFileTraitement($fichier){
+        $f = array();
+
+        if(!empty($fichier))
+        {
+            $f['type']=$fichier->getType();
+            $f['originalname']=$fichier->getOriginalName();
+            $f['size']=$fichier->getSize();
+            $f['tempname']=file_get_contents($fichier->getTempName());
+        }else{
+            $f['type']=null;
+            $f['originalname']=null;
+            $f['size']=null;
+            $f['tempname']=null;
+        }
+
+        return $f;
     }
 }
