@@ -45,11 +45,8 @@ class saveTrainingAction extends basePeformanceAction {
                 try {
                     $form->saveForm();
                     $this->getUser()->setFlash('success', __(TopLevelMessages::SAVE_SUCCESS));
-                    if(!$user->isAdmin()){
-                        $this->redirect('training/searchMyTraining');
-                    }
 
-                    $this->redirect('training/searchTraining');
+                    $this->redirect('training/saveTraining');
                 } catch (LeaveAllocationServiceException $e) {
                     $this->templateMessage = array('WARNING', __($e->getMessage()));
                 }

@@ -48,9 +48,7 @@ class saveVehiculeAction extends basePeformanceAction {
                 try {
                     $form->saveForm();
                     $this->getUser()->setFlash('success', __(TopLevelMessages::SAVE_SUCCESS));
-                    if(!$user->isAdmin())
-                    $this->redirect('vehicule/searchMyVehicule');
-                    $this->redirect('vehicule/searchVehicule');
+                    $this->redirect('vehicule/saveVehicule');
                 } catch (LeaveAllocationServiceException $e) {
                     $this->templateMessage = array('WARNING', __($e->getMessage()));
                 }

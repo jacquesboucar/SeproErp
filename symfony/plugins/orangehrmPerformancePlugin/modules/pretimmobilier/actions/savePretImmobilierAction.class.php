@@ -60,9 +60,7 @@ class savePretImmobilierAction extends basePeformanceAction {
 
                     $form->saveForm();
                     $this->getUser()->setFlash('success', __(TopLevelMessages::SAVE_SUCCESS));
-                    if(!$user->isAdmin())
-                    $this->redirect('pretimmobilier/searchMyPretImmobilier');
-                    $this->redirect('pretimmobilier/searchPretImmobilier');
+                    $this->redirect('pretimmobilier/savePretImmobilier');
                 } catch (LeaveAllocationServiceException $e) {
                     $this->templateMessage = array('WARNING', __($e->getMessage()));
                 }
