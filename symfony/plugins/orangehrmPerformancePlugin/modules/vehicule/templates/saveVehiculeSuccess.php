@@ -50,14 +50,14 @@
                         <?php echo $form['description']->renderLabel(null, array('class' => 'labelValue')); ?>
                         <?php echo $form['description']->render() ?>
                     </li>
-                    <?php if($form['id']->getValue() !=null){ ?>
+                    <?php //if($form['id']->getValue() !=null){ ?>
                     <li>
-                        <?php echo $form['valider']->renderLabel(null, array('class' => 'labelValue')); ?>
+                        <?php echo $form['valider']->renderLabel(null, array('class' => 'labelValue addVehicule_valider')); ?>
                         <?php echo $form['valider']->render() ?>
                     </li>
                     <li>
                         <?php if($form['file']->getValue()== ""){
-                        echo $form['file']->renderLabel(null, array('class' => 'labelValue'));
+                        echo $form['file']->renderLabel(null, array('class' => 'labelValue addVehicule_file'));
                         echo $form['file']->render();
                         }else{
                             $linkHtml = "<div id=\"fileLink\"><a target=\"_blank\" class=\"fileLink\" href=\"";
@@ -68,7 +68,7 @@
                         } ?>
 
                     </li>
-                    <?php } ?>
+                    <?php //} ?>
                     <li class="required">
                         <em>*</em> <?php echo __(CommonMessages::REQUIRED_FIELD); ?>
                     </li>
@@ -100,6 +100,11 @@
             $('#addVehicule_valider').attr("disabled", "disabled");
             $('#addVehicule_file').attr("disabled", "disabled");
             $('#btnimprimer').hide();
+        }else if(!document.getElementById("addVehicule_id").value){
+            $('#addVehicule_valider').hide();
+            $('#addVehicule_file').hide();
+            $('.addVehicule_valider').hide();
+            $('.addVehicule_file').hide();
         }
 
         $('#saveBtn').click(function(){
