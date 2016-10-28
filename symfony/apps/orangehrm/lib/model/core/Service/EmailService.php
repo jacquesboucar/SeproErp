@@ -505,7 +505,64 @@ class EmailService extends BaseService {
         $this->messageBody = $body;
 
         return $this->sendEmail();
-    }    
+    }
+
+    public function sendEmailTraining($supEmails, $employee, $messadmin, $messemployee) {
+        $mailType = $this->emailConfig->getMailType();
+
+        if ($mailType == 'smtp') {
+
+            foreach ($supEmails as $email){
+
+                 $this->messageSubject = "Formation";
+                 $this->messageTo = $email;
+                 $this->messageBody = $messadmin;
+                 $this->sendEmail();
+            }
+            $this->messageSubject = "Formation";
+            $this->messageTo = $employee['emp_work_email'];
+            $this->messageBody = $messemployee;
+            $this->sendEmail();
+
+        }
+    }
+    public function sendEmailPretImmobilier($supEmails, $employee, $messadmin, $messemployee) {
+        $mailType = $this->emailConfig->getMailType();
+
+        if ($mailType == 'smtp') {
+
+            foreach ($supEmails as $email){
+
+                 $this->messageSubject = "Prêts Immobilier";
+                 $this->messageTo = $email;
+                 $this->messageBody = $messadmin;
+                 $this->sendEmail();
+            }
+            $this->messageSubject = "Prêts Immobilier";
+            $this->messageTo = $employee['emp_work_email'];
+            $this->messageBody = $messemployee;
+            $this->sendEmail();
+
+        }
+    }
+    public function sendEmailVehicule($supEmails, $employee, $messadmin, $messemployee) {
+        $mailType = $this->emailConfig->getMailType();
+        if ($mailType == 'smtp') {
+
+            foreach ($supEmails as $email){
+
+                 $this->messageSubject = "Véhicule";
+                 $this->messageTo = $email;
+                 $this->messageBody = $messadmin;
+                 $this->sendEmail();
+            }
+            $this->messageSubject = "Véhicule";
+            $this->messageTo = $employee['emp_work_email'];
+            $this->messageBody = $messemployee;
+            $this->sendEmail();
+
+        }
+    }
     
     
     public function sendEmailNotifications($emailName, $recipientRoles, $eventData, $performerRole = null) {
