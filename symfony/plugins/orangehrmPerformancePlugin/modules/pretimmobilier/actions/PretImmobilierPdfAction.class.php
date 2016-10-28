@@ -71,7 +71,7 @@ class PretImmobilierPdfAction extends basePeformanceAction {
     $superadresse = $employee->getStreet1();
     $supermobile = $employee->getEmpMobile();
     $supercity = $employee->getCity();
-
+    $img = public_path('../../symfony/web/themes/default/images/logo.png');
     $date=  date("d-m-Y");
 
     // create new PDF document
@@ -129,17 +129,22 @@ $pdf->SetFont('Helvetica', '', 6, '', true);
 // Add a page
 // This method has several options, check the source code documentation for more information.
 $pdf->AddPage();
-
+//var_dump($img);die;
 $curPage = $pdf->getAliasNumPage();
 $nbPage = $pdf->getAliasNbPages();
 $html = <<<EOD
   <table border="0.4" cellspacing="0" cellpadding="4">
     <tr>
-      <td colspan="2"  bgcolor="#ffffff" color="#770a82" style="font-size: 20px;font-weight:bold;text-align:center;"></td>
+      <td colspan="2"  bgcolor="#ffffff" color="#770a82" style="font-size: 20px;font-weight:bold;text-align:center;">
+        <img src="../../symfony/web/webres_55a775cf9fcff8.50052456/themes/default/images/login/logo.png" alt="SeproRH">
+      </td>
       <td colspan="14" border="0" bgcolor="#770a82" color="#ffffff" style="font-size: 10px;font-weight:bold;text-align:center;">FICHE DE PRET IMMOBILIER </td>
-      <td colspan="3" bgcolor="#ffffff" color="#770a82" >$date</td>
+      <td colspan="2"  bgcolor="#ffffff" color="#770a82" style="font-size: 20px;font-weight:bold;text-align:center;">
+        <img src="../../symfony/web/webres_55a775cf9fcff8.50052456/themes/default/images/login/logo.png" alt="SeproRH">
+      </td>
     </tr>
 </table>
+<h3 style="text-align:right;">$date</h3>
 EOD;
 
 

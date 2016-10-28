@@ -135,11 +135,16 @@ $nbPage = $pdf->getAliasNbPages();
 $html = <<<EOD
   <table border="0.4" cellspacing="0" cellpadding="4">
     <tr>
-      <td colspan="2"  bgcolor="#ffffff" color="#770a82" style="font-size: 20px;font-weight:bold;text-align:center;"></td>
+      <td colspan="2"  bgcolor="#ffffff" color="#770a82" style="font-size: 20px;font-weight:bold;text-align:center;">
+        <img src="../../symfony/web/webres_55a775cf9fcff8.50052456/themes/default/images/login/logo.png" alt="SeproRH">
+      </td>
       <td colspan="14" border="0" bgcolor="#770a82" color="#ffffff" style="font-size: 10px;font-weight:bold;text-align:center;">FICHE DE DOTATION DE VEHICULE </td>
-      <td colspan="3" bgcolor="#ffffff" color="#770a82" >$dateapplied</td>
+      <td colspan="2"  bgcolor="#ffffff" color="#770a82" style="font-size: 20px;font-weight:bold;text-align:center;">
+        <img src="../../symfony/web/webres_55a775cf9fcff8.50052456/themes/default/images/login/logo.png" alt="SeproRH">
+      </td>
     </tr>
 </table>
+<h3 style="text-align:right;">$dateapplied</h3>
 EOD;
 
 

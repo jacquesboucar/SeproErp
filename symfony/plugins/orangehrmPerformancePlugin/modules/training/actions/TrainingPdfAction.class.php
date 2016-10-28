@@ -1,15 +1,11 @@
 <?php
-
 /**
  * ViewJobDetailsAction
  */
 require_once sfConfig::get('sf_root_dir').'/plugins/sfTCPDFPlugin/lib/tcpdf/tcpdf_vehicule.php';
 require_once sfConfig::get('sf_root_dir').'/plugins/orangehrmPerformancePlugin/lib/form/BasePefromanceSearchForm.php';
-
 class TrainingPdfAction extends basePeformanceAction {
-
-
-   /**
+    /**
      *
      * @return \PerformanceReviewService
      */
@@ -20,20 +16,15 @@ class TrainingPdfAction extends basePeformanceAction {
             return $this->trainingService;
         }
     }
-
     /**
      *
      * @return type
      */
     public function getTrainingById($id) {
-
         $parameters ['id'] = $id;
         $training = $this->getTrainingService()->searchTraining($parameters);
-
         return $training;
     }
-
-
     /**
      * Get EmployeeService
      * @returns EmployeeService
@@ -45,105 +36,87 @@ class TrainingPdfAction extends basePeformanceAction {
         }
         return $this->employeeService;
     }
-
     public function execute($request) {
-
         $imagePath = theme_path("images/login");
-
-    $training_id = $request->getParameter('id');
-    $param = array('id' => $training_id);
-    $training = $this->getTrainingService()->searchTraining($param);
-    $employe_name = $training->getEmployee()->getFullName();
-    $employe_lastname = $training->getEmployee()->getLastName();
-    $employe_city = $training->getEmployee()->getCity();
-    $employe_telephone = $training->getEmployee()->getEmpMobile();
-    $employe_adresse = $training->getEmployee()->getStreet1();
-
-    $cout = $training->getCoutFormation();
-    $titre = $training->getTitle();
-    $description  = $training->getDescription();
-    $valider  = $training->getValider();
-
-    $user = sfContext::getInstance()->getUser();
-    $employee = $this->getEmployeeService()->getEmployee($user->getAttribute('auth.empNumber'));
-    $supernom = $employee->getFullName();
-    $superprenom = $employee->getLastName();
-    $superadresse = $employee->getStreet1();
-    $supermobile = $employee->getEmpMobile();
-    $supercity = $employee->getCity();
-
-    $date=  date("d-m-Y");
-
-    // create new PDF document
-       $pdf = new FICHE("L", PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-
-      // set document information
-       $pdf->SetCreator(PDF_CREATOR);
-       $pdf->SetAuthor('Sablux');
-       $pdf->SetTitle("FICHE DEMAMDE DE FORMATION");
-       $pdf->SetSubject('FICHE DEMAMDE DE FORMATION');
-       $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
-
-       // set default header data
-       $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING, array(0,64,255), array(0,64,128));
-       $pdf->setFooterData(false);
-
-       //$pdf->setPrintHeader(false);
-       //$pdf->setPrintFooter(false);
-
+        $training_id = $request->getParameter('id');
+        $param = array('id' => $training_id);
+        $training = $this->getTrainingService()->searchTraining($param);
+        $employe_name = $training->getEmployee()->getFullName();
+        $employe_lastname = $training->getEmployee()->getLastName();
+        $employe_city = $training->getEmployee()->getCity();
+        $employe_telephone = $training->getEmployee()->getEmpMobile();
+        $employe_adresse = $training->getEmployee()->getStreet1();
+        $cout = $training->getCoutFormation();
+        $titre = $training->getTitle();
+        $description  = $training->getDescription();
+        $valider  = $training->getValider();
+        $user = sfContext::getInstance()->getUser();
+        $employee = $this->getEmployeeService()->getEmployee($user->getAttribute('auth.empNumber'));
+        $supernom = $employee->getFullName();
+        $superprenom = $employee->getLastName();
+        $superadresse = $employee->getStreet1();
+        $supermobile = $employee->getEmpMobile();
+        $supercity = $employee->getCity();
+        $date=  date("d-m-Y");
+        // create new PDF document
+        $pdf = new FICHE("L", PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+        // set document information
+        $pdf->SetCreator(PDF_CREATOR);
+        $pdf->SetAuthor('Sablux');
+        $pdf->SetTitle("FICHE DEMAMDE DE FORMATION");
+        $pdf->SetSubject('FICHE DEMAMDE DE FORMATION');
+        $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
+        // set default header data
+        $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING, array(0,64,255), array(0,64,128));
+        $pdf->setFooterData(false);
+        //$pdf->setPrintHeader(false);
+        //$pdf->setPrintFooter(false);
 // set header and footer fonts
-$pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-$pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
-
+        $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+        $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 // set default monospaced font
-$pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
-
+        $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 // set margins
-$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
-$pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
-$pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
-
+        $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+        $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+        $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 // set auto page breaks
-$pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
-
+        $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
 // set image scale factor
-$pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
-
+        $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 // set some language-dependent strings (optional)
-if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
-    require_once(dirname(__FILE__).'/lang/eng.php');
-    $pdf->setLanguageArray($l);
-}
-
+        if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
+            require_once(dirname(__FILE__).'/lang/eng.php');
+            $pdf->setLanguageArray($l);
+        }
 // ---------------------------------------------------------
-
 // set default font subsetting mode
-$pdf->setFontSubsetting(true);
-
+        $pdf->setFontSubsetting(true);
 // Set font
 // dejavusans is a UTF-8 Unicode font, if you only need to
 // print standard ASCII chars, you can use core fonts like
 // helvetica or times to reduce file size.
-$pdf->SetFont('Helvetica', '', 6, '', true);
-
+        $pdf->SetFont('Helvetica', '', 6, '', true);
 // Add a page
 // This method has several options, check the source code documentation for more information.
-$pdf->AddPage();
-
-$curPage = $pdf->getAliasNumPage();
-$nbPage = $pdf->getAliasNbPages();
-$html = <<<EOD
+        $pdf->AddPage();
+        $curPage = $pdf->getAliasNumPage();
+        $nbPage = $pdf->getAliasNbPages();
+        $html = <<<EOD
   <table border="0.4" cellspacing="0" cellpadding="4">
     <tr>
-      <td colspan="2"  bgcolor="#ffffff" color="#770a82" style="font-size: 20px;font-weight:bold;text-align:center;"></td>
+      <td colspan="2"  bgcolor="#ffffff" color="#770a82" style="font-size: 20px;font-weight:bold;text-align:center;">
+        <img src="../../symfony/web/webres_55a775cf9fcff8.50052456/themes/default/images/login/logo.png" alt="SeproRH">
+      </td>
       <td colspan="14" border="0" bgcolor="#770a82" color="#ffffff" style="font-size: 10px;font-weight:bold;text-align:center;">FICHE DEMAMDE DE FORMATION</td>
-      <td colspan="3" bgcolor="#ffffff" color="#770a82" >$date</td>
+      <td colspan="2"  bgcolor="#ffffff" color="#770a82" style="font-size: 20px;font-weight:bold;text-align:center;">
+        <img src="../../symfony/web/webres_55a775cf9fcff8.50052456/themes/default/images/login/logo.png" alt="SeproRH">
+      </td>
     </tr>
 </table>
+<h3 style="text-align:right;">$date</h3>
 EOD;
-
-
-$html .= <<<EOD
+        $html .= <<<EOD
         <br /><br />
           <table border="0.5" cellspacing="0" cellpadding="4">
               <tr bgcolor="#770a82" color="#ffffff">
@@ -190,8 +163,7 @@ $html .= <<<EOD
         <th><b> Description </b></th>
       </tr>
 EOD;
-$html .= <<<EOD
-
+        $html .= <<<EOD
     <tr>
       <td> $cout </td>
       <td> $titre </td>
@@ -199,18 +171,11 @@ $html .= <<<EOD
     </tr>
 </table>
 EOD;
-
-
-$pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
+        $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
 // Print text using writeHTMLCell()
-
-
 // ---------------------------------------------------------
-
 // Close and output PDF document
 // This method has several options, check the source code documentation for more information.
-$pdf->Output('Training_'.$employe_name);
-
-  }
+        $pdf->Output('Training_'.$employe_name);
+    }
 }
-
