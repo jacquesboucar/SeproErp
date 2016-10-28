@@ -8,7 +8,7 @@
  *
  * @author nadeera
  */
-
+require_once sfConfig::get('sf_root_dir').'/apps/orangehrm/lib/model/core/Service/EmailService.php';
 class AddTrainingForm extends BasePefromanceSearchForm {
     
     public $trainingService;
@@ -19,11 +19,20 @@ class AddTrainingForm extends BasePefromanceSearchForm {
      */
     public function getTrainingService() {
 
-        //if ($this->$trainingService == null) {
             return new TrainingService();
-        // } else {
-        //     return $this->$trainingService;
-        // }
+    }
+
+    public function getEmployeeService() {
+
+            return new EMployeeService();
+    }
+    public function getEmailService() {
+
+            return new EmailService();
+    }
+    public function getSystemUserService() {
+
+            return new SystemUserService();
     }
 
     public function configure() {
@@ -83,7 +92,9 @@ class AddTrainingForm extends BasePefromanceSearchForm {
         $values = $this->getValues();
         $file = $this->getValue('file');
         $fileform = $this->getValue('fileformation');
+
         $training = new Training();
+
         if ($values['id']>0){
             $training = $this->getTrainingService()->getTrainingById($values['id']);
             $loggedInEmpNumber=$training->getEmpNumber();
@@ -92,46 +103,33 @@ class AddTrainingForm extends BasePefromanceSearchForm {
         }else{
             $loggedInEmpNumber = $values['employee']['empId'];
         }
-        if(!empty($fileform)){
-            $filetypeform=$fileform->getType();
-            $filenameform=$fileform->getOriginalName();
-            $filesizeform=$fileform->getSize();
-            $fileTmpNameform=file_get_contents($fileform->getTempName());
-        }else{
-            $filetypeform=null;
-            $filenameform=null;
-            $filesizeform=null;
-            $fileTmpNameform=null;
-        }
-        if(!empty($file)){
-            $filetype=$file->getType();
-            $filename=$file->getOriginalName();
-            $filesize=$file->getSize();
-            $fileTmpName=file_get_contents($file->getTempName());
-        }else{
-            $filetype=null;
-            $filename=null;
-            $filesize=null;
-            $fileTmpName=null;
-        }
+        $ficheformation = $this->getFileTraitement($fileform);
+        $ficheteleversement = $this->getFileTraitement($file);
+
+        $employee = $this->getEmployeeService()->getEmployee($loggedInEmpNumber);
+        $Emails = $this->ListEmail($loggedInEmpNumber);
+        $messageAdmin = $this->MessageAdmin($values['id'], $training);
+        $messageEmployee = $this->MessageEmploye($values['id'], $training);
+
         $training->setTitle($values['titre']);
         $training->setCoutFormation($values['cout']);
         $training->setDescription($values['description']);
         $training->setDateApplied(date('Y-m-d H:i:s'));
         $training->setValider($values['valider']);
 
-        $training->setFormFilecontent($fileTmpNameform);
-        $training->setFormFiletype($filetypeform);
-        $training->setFormFilesize($filesizeform);
-        $training->setFormFilename($filenameform);
+        $training->setFormFilecontent($ficheformation['tempname']);
+        $training->setFormFiletype($ficheformation['type']);
+        $training->setFormFilesize($ficheformation['size']);
+        $training->setFormFilename($ficheformation['originalname']);
 
-        $training->setFilecontent($fileTmpName);
-        $training->setFiletype($filetype);
-        $training->setFilesize($filesize);
-        $training->setFilename($filename);
+        $training->setFilecontent($ficheteleversement['tempname']);
+        $training->setFiletype($ficheteleversement['type']);
+        $training->setFilesize($ficheteleversement['size']);
+        $training->setFilename($ficheteleversement['originalname']);
 
         $training->setEmpNumber($loggedInEmpNumber);
         $this->getTrainingService()->saveTraining($training);
+        $this->getEmailService()->sendEmailTraining($Emails,$employee, $messageAdmin, $messageEmployee);
           
     }
 
@@ -143,7 +141,6 @@ class AddTrainingForm extends BasePefromanceSearchForm {
 
         if ($trainingId > 0) {
             $training = $this->getTrainingService()->getTrainingById(array('id' => $trainingId));
-            //var_dump($training->getId());die;
             $this->setDefault('id', $training->getId());
             $this->setDefault('cout', $training->getCoutFormation());
             $this->setDefault('employee', array('empName' => $training->getEmployee()->getFullName(), 'empId' => $training->getEmployee()->getEmpNumber()));
@@ -177,4 +174,71 @@ class AddTrainingForm extends BasePefromanceSearchForm {
         return $this->getTrainingService()->getTrainingCount($serachParams);
     }
 
+    public function ListEmail($EmpNumber){
+
+        $emplist = $this->getEmployeeService()->getSupervisorIdListBySubordinateId($EmpNumber);
+        $Listemails=array();
+
+        foreach ($emplist as $emp){
+            $Listemails[] = $this->getEmployeeService()->getEmployee($emp)->getEmpWorkEmail();
+        }
+
+        //$Listemails[] = $this->getEmployeeService()->getEmployee($EmpNumber)->getEmpWorkEmail();
+
+        foreach ($this->getSystemUserService()->getEmployeesByUserRole('Admin') as $a){
+            $Listemails[] = $a['emp_work_email'];
+        }
+
+        return $Listemails;
+    }
+
+    public function MessageAdmin($id, $training){
+        if($id>0){
+            if($training['valider'] == 'En cours'){
+                $message = "Notification Formation \n 
+                        Votre demande de formation a ete modifie \n Merci. \n Ceci est une notification automatique";
+            }else{
+                $message = "Notification Formation \n 
+                            Votre demande de formation ".$training['title']." a ete ".$training['valider']." par ".$training['empNumber']
+                           ." \n Merci. \n Ceci est une notification automatique";
+            }
+
+        }else{
+            $message = "Notification Formation \n Une nouvelle demande de formation  a ete creee \n Merci de vous connecter \n Ceci est une notfication automatique";
+        }
+        return $message;
+    }
+    public function MessageEmploye($id, $training){
+        if($id>0){
+            if($training['valider'] == 'En cours'){
+                $message = "Votre demande de formation a ete modifier. Merci de vous connecter!";
+            }else{
+                $message = "Notification formation \n".
+                    "Votre demande de formation ".$training['title']." a ete ".$training['valider']." par ".$training['empNumber']
+                           ." \n Merci de vous connecter \n Ceci est une notification automatique";
+            }
+        }else{
+            $message = "Notification Formation \n Vous avez effectue une demande de formation \n Merci de vous connecter \n Ceci est une notification automatique";
+        }
+        return $message;
+    }
+
+    public function getFileTraitement($fichier){
+        $f = array();
+
+        if(!empty($fichier))
+        {
+            $f['type']=$fichier->getType();
+            $f['originalname']=$fichier->getOriginalName();
+            $f['size']=$fichier->getSize();
+            $f['tempname']=file_get_contents($fichier->getTempName());
+        }else{
+            $f['type']=null;
+            $f['originalname']=null;
+            $f['size']=null;
+            $f['tempname']=null;
+        }
+
+        return $f;
+    }
 }
