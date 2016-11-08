@@ -23,10 +23,33 @@
                         <?php echo $form['kpi_group']->renderLabel(null, array('class' => 'labelValue')); ?>
                         <?php echo $form['kpi_group']->render() ?>
                     </li>
-                    <li>
-                        <?php echo $form['jobTitleCode']->renderLabel(null, array('class' => 'labelValue')); ?>
-                        <?php echo $form['jobTitleCode']->render() ?>
-                    </li>
+                    <p id="selectManyTable">
+                    <table border="0" width="45%" class="">
+                        <tbody>
+                        <tr>
+                            <td width="35%" style="font-weight:bold; height: 20px">
+                                <?php echo __("available JobTitle"); ?>
+                            </td>
+                            <td width="30%"></td>
+                            <td width="35%" ><span style="font-weight: bold"><?php echo __("added JobTitle"); ?></span><em style="color: #AA4935"> *</em></td>
+                        </tr>
+                        <td>
+                            <?php echo $form['availableJob']->render(array("class" => "selectMany", "size" => 10, "style" => "width: 100%")); ?>
+                        </td>
+                        <td align="center" style="vertical-align: middle">
+
+                            <input type="button" style="width: 70%;" value="<?php echo __("Add"). " >"; ?>" class="" id="btnAssignEmployee" name="btnAssignEmployee">
+                            <br><br>
+                            <input type="button" style="width: 70%;" value="<?php echo "< ".__("Remove"); ?>" class="delete" id="btnRemoveEmployee" name="btnRemoveEmployee">
+
+                        </td>
+                        <td>
+                            <?php echo $form['assignedJob']->render(array("class" => "selectMany", "size" => 10, "style" => "width: 100%")); ?>
+                        </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    </p>
                     <li>
                        <?php echo $form['keyPerformanceIndicators']->renderLabel(null, array('class' => 'labelValue')); ?>
                         <?php echo $form['keyPerformanceIndicators']->render() ?>
@@ -53,14 +76,6 @@
                         <?php echo $form['id']->render() ?>
                         <?php echo $form['_csrf_token']->render() ?>
                     </li>
-                    <!--
-                    <li>
-                        <?php //echo $form['valeur_cible']->renderLabel(null, array('class' => 'labelValue')); ?>
-                        <?php //echo $form['valeur_cible']->render() ?>
-                    </li>
-                    -->
-                    <?php //echo $form->render(); ?>
-
                     <li class="required">
                         <em>*</em> <?php echo __(CommonMessages::REQUIRED_FIELD); ?>
                     </li>
@@ -80,6 +95,13 @@
 <script>
     $(document).ready(function() {
 
+        $('#btnAssignEmployee').click(function() {
+            return !$('#defineKpi360_availableJob option:selected').remove().appendTo('#defineKpi360_assignedJob');
+        });
+
+        $('#btnRemoveEmployee').click(function() {
+            return !$('#defineKpi360_assignedJob option:selected').remove().appendTo('#defineKpi360_availableJob');
+        });
         $('#saveBtn').click(function(){
             $('#searchKpi').submit();
         });

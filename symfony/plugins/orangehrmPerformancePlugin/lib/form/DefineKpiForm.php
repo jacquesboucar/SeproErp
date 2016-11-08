@@ -18,11 +18,11 @@ class DefineKpiForm extends BasePefromanceSearchForm {
         $this->setWidgets(array(
             'id' => new sfWidgetFormInputHidden(),
             'kpi_group' => new sfWidgetFormSelect(array('choices' => $groupe)),
-            'jobTitleCode' => new sfWidgetFormChoice(array('multiple' => true, 'choices' => $this->getJobTitleListAsArrayWithSelectOption()), array('class' => 'formSelect')),  
             'keyPerformanceIndicators' => new sfWidgetFormInput(array(), array('class' => 'formInputText')),
             'minRating' => new sfWidgetFormInput(array(), array('class' => 'formInputText')),
             'maxRating' => new sfWidgetFormInput(array(), array('class' => 'formInputText')),
-           // 'makeDefault' => new sfWidgetFormInputCheckbox(array(), array('class' => 'formCheckbox')),
+            'availableJob' => new sfWidgetFormSelectMany(array('choices' => $this->getJobTitleListAsArrayWithSelectOption())),
+            'assignedJob' => new sfWidgetFormSelectMany(array('choices' => null)),
             'delai' => new sfWidgetFormInputText(),
             'objectif'  => new sfWidgetFormInputText(),
             'mode_calcul'  => new sfWidgetFormInputText(),
@@ -32,10 +32,11 @@ class DefineKpiForm extends BasePefromanceSearchForm {
         $this->setValidators(array(
             'id' => new sfValidatorString(array('required' => false)),
             'kpi_group' => new sfValidatorChoice(array('required' => false, 'choices' => array_keys($groupe))),
-            'jobTitleCode' => new sfValidatorChoice(array('multiple' => true, 'choices' => array_keys($this->getJobTitleListAsArrayWithSelectOption()), 'required' => false)),
             'keyPerformanceIndicators' => new sfValidatorString(array('required' => true)),
             'minRating' => new sfValidatorString(array('required' => false)),
             'maxRating' => new sfValidatorString(array('required' => false)),
+            'availableJob' => new sfValidatorPass(),
+            'assignedJob' => new sfValidatorPass(array('required' => true)),
             'makeDefault' => new sfValidatorString(array('required' => false)),
             'delai' => new sfValidatorString(array('required' => false)),
             'objectif' => new sfValidatorString(array('required' => false)),
@@ -90,7 +91,6 @@ class DefineKpiForm extends BasePefromanceSearchForm {
         $requiredMarker = '&nbsp;<span class="required">*</span>';
         $labels = array(
             'kpi_type' =>  __('Type') . $requiredMarker,
-            'jobTitleCode' => __('Job Title') . $requiredMarker,
             'keyPerformanceIndicators' => __('Key Performance Indicator') . $requiredMarker,
             'minRating' => __('Minimum Rating'). $requiredMarker,
             'maxRating' => __('Poids'). $requiredMarker,
@@ -104,7 +104,8 @@ class DefineKpiForm extends BasePefromanceSearchForm {
 
     public function saveForm() {
         $values = $this->getValues();
-        foreach ($values['jobTitleCode'] as $jobcode) {
+
+        foreach ($values['assignedJob'] as $jobcode) {
           $kpi = new Kpi();
           if ($values['id'] > 0) {
             $kpi = $this->getKpiService()->searchKpi(array('id' => $values['id']));
