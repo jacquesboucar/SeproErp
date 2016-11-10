@@ -202,7 +202,6 @@ class PerformanceReviewDao extends BaseDao {
                                 case 'reviewId':
                                     $q->andWhere('review_id =?', $parameter);
                                     break;
-                                default:
                                 case 'id':
                                     $q->andWhere('id =?', $parameter);
                                     break;
@@ -261,4 +260,45 @@ class PerformanceReviewDao extends BaseDao {
         }//@codeCoverageIgnoreEnd
     }
 
+    public function getCommentaire($parameters){
+        try {
+            $q = Doctrine_Query::create()->from('Commentaire');
+                if (is_array($parameters)) {
+                    foreach ($parameters as $key => $parameter) {
+                        if (strlen($parameter) > 0) {
+                            switch ($key) {
+                                case 'kpi_id':
+                                    $q->andWhere('kpi_id =?', $parameter);
+                                    break;
+                                case 'rating_id':
+                                    $q->andWhere('rating_id =?', $parameter);
+                                    break;
+                                case 'mois':
+                                    $q->andWhere('mois =?', $parameter);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    }
+                }
+                //var_dump($q->execute());die;
+                return $q->fetchOne();
+        } catch (Exception $e) {
+            throw new DaoException($e->getMessage(), $e->getCode(), $e);
+        }//@codeCoverageIgnoreEnd
+    }
+    public function saveCommentaire(sfDoctrineRecord $commentaire) {
+        $conn = Doctrine_Manager::connection();
+        $conn->beginTransaction();
+        try {
+            //var_dump($training->getId());die;
+            $commentaire->save();
+            $conn->commit();
+            return $commentaire;
+        } catch (Exception $e) {
+            $conn->rollback();
+            throw new DaoException($e->getMessage());
+        }
+    }
 }

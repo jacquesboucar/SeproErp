@@ -177,10 +177,12 @@ class ReviewEvaluationForm extends BasePefromanceSearchForm {
     public function saveForm($request) {
         if ($this->isEditable()) {
             $postParameters = $request->getPostParameters();
-            //var_dump($request->getPostParameters()); die();
+            //var_dump($postParameters); die();
             foreach ($postParameters['rating_id'] as $key => $ratingId) {
-                if ($this->isValidRatingId($ratingId)) {
-                   // var_dump($this->filterPostValues(round($postParameters['valeur_cible'][$key])));die;
+
+                if ($this->isValidRatingId($ratingId))
+                {
+
                     $rating = $this->getPerformanceReviewService()->getReviewRating($ratingId);
                     $rating->setRating($this->filterPostValues(round($postParameters['rating'][$key], 2)));
                     if($this->filterPostValues(round($postParameters['valeur_cible'][$key]))!=null)
@@ -198,7 +200,25 @@ class ReviewEvaluationForm extends BasePefromanceSearchForm {
                     $rating->setMois11($this->filterPostValues($postParameters['mois11'][$key]));
                     $rating->setMois12($this->filterPostValues($postParameters['mois12'][$key]));
 
+                    for($i=1; $i<=12; $i++){
+                       // $commentaire = new Commentaire();
+                        $commentaire = $this->getPerformanceReviewService()->getCommentaire($rating->getKpi()->getId(),$ratingId,"Mois$i");
 
+                        if ($commentaire['id'] > 0) {
+                            $commentaire->setComment($this->filterPostValues($postParameters['comment'.$i][$key]));
+
+                        } else {
+                            $commentaire = new Commentaire();
+                            $commentaire->setComment($this->filterPostValues($postParameters['comment'.$i][$key]));
+                            $commentaire->setMois("Mois$i");
+                            $commentaire->setKpiId($rating->getKpi()->getId());
+                            $commentaire->setRatingId($ratingId);
+
+                        }
+
+                        $this->getPerformanceReviewService()->saveCommentaire($commentaire);
+
+                    }
                     // Set Final Rating
 
                     $mois1 = $this->filterPostValues($postParameters['rating'][$key]);
