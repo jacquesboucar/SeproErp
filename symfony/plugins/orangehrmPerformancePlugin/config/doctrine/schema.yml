@@ -430,3 +430,33 @@ PretImmobilier:
       foreign: emp_number
       type: one
 
+Commentaire:
+  tableName: ohrm_commentaire
+  columns:
+    id:
+      type: integer(6)
+      primary: true
+      autoincrement: true
+    kpi_id:
+      name: kpi_id
+      type: integer(20)
+    rating_id:
+      name: rating_id
+      type: integer(11)
+    comment:
+      name: comment
+      type: clob(65532)
+    mois:
+      name: mois
+      type: string
+  relations:
+    reviewerRating:
+      class: ReviewerRating
+      local: rating_id
+      foreign: id
+      type: one
+    kpi:
+      class: Kpi
+      local: kpi_id
+      foreign: id
+      type: one
