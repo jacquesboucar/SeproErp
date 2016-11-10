@@ -112,4 +112,13 @@ class PerformanceReviewService {
      public function getRatingByReviewId($id) {
         return $this->getDao()->getRatingByReviewId($id);
      }
+    public function getCommentaire($kpi_id, $rating_id, $mois){
+
+        $parameter = array("kpi_id" => $kpi_id,"rating_id" => $rating_id,"mois" => $mois);
+
+        return $this->getDao()->getCommentaire($parameter);
+    }
+    public function saveCommentaire($commentaire){
+        return $this->getDao()->saveCommentaire($commentaire);
+    }
 }
