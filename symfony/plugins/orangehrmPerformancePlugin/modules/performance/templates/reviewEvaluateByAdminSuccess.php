@@ -147,7 +147,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                                         <th style="width:200px;"><b> CIBLE </b></th>
                                                         <th style="width:250px;"><b> CUMULE </b></th>
                                                         <th style="width:100px;"><b> TAUX ATTEINT </b></th>
-                                                        <th style="width:50px;"><b> NOTE FINALE </b></th>
+                                                        <th style="width:100px;"><b> NOTE FINALE </b></th>
                                                         <th style="width:150px;"><b> COMMENTAIRE </b></th>
                                                         <th style="width:40px;"><b> EVALUER </b></th>
                                                     </tr>
@@ -171,7 +171,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                                                     <td><input type="text" class="emp" style="width:200px;" id="valeur_cible_<?php echo $value->getId(); ?>" name="valeur_cible[<?php echo $value->getId(); ?>]" value="<?php echo $value->getValeurCible(); ?>"></td>
                                                                     <td><?php echo $value->getCumule() ?></td>
                                                                     <td><?php echo round((double)(($value->getTauxAtteint()/$value->getValeurCible())*100)) ?>%</td>
-                                                                    <td><input type="text" class="emp" style="width:70px;" id="noter_<?php echo $value->getId(); ?>" name="noter[<?php echo $value->getId(); ?>]" value="<?php echo $value->getNote(); ?>"></td>
+                                                                    <td><input type="text" class="emp" style="width:100px;" id="noter_<?php echo $value->getId(); ?>" name="noter[<?php echo $value->getId(); ?>]" value="<?php echo $value->getNote(); ?>"></td>
                                                                     <td><textarea class="comment emp" type="text" id="comment_<?php echo $value->getId(); ?>" name="comment[<?php echo $value->getId(); ?>]" ><?php echo $value->getComment(); ?></textarea></td>
                                                                    <td><input type="button" id="btnValeur" name="btnValeur" value="Valeur/Mois" onclick="FormValeurParMois(<?php echo $value->getId(); ?>)"></td>
                                                                     <!-- Confirmation box HTML: Begins -->
