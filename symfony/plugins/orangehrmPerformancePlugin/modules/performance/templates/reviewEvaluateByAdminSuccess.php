@@ -185,7 +185,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                                                                 <ol>
                                                                                     <li>
                                                                                         <?php $commentaire = $form->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois1"); ?>
-                                                                                        <div class="row"><label><b>Taux atteint en Janvier</b></label></div>
+                                                                                        <div class="row"><label><b>Valeur atteinte en Janvier</b></label></div>
                                                                                         <div class="row"><input style="width:200px;" class="emp" type="text" value="<?php echo $value->getRating(); ?>" id="rating_<?php echo $value->getId(); ?>"  name="rating[<?php echo $value->getId(); ?>]" />
                                                                                             Taux:&nbsp<?php echo round((double)($value->getRating()/$value->getValeurCible())*100); ?>%</div>
                                                                                         <div class="row"><label>Commentaire</label></div>
@@ -193,7 +193,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                                                                     </li>
                                                                                     <li>
                                                                                         <?php $commentaire = $form->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois2"); ?>
-                                                                                        <div class="row"><label><b>Taux atteint en Fevrier</b></label></div>
+                                                                                        <div class="row"><label><b>Valeur atteinte en Fevrier</b></label></div>
                                                                                         <div class="row"><input type="text" class="emp" style="width:200px;" id="mois2_<?php echo $value->getId(); ?>" name="mois2[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois2(); ?>">
                                                                                             Taux:&nbsp<?php echo round((double)($value->getMois2()/$value->getValeurCible())*100); ?>%</div>
                                                                                         <div class="row"><label>Commentaire</label></div>
@@ -201,7 +201,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                                                                      </li>
                                                                                     <li>
                                                                                         <?php $commentaire = $form->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois3"); ?>
-                                                                                        <div class="row"><label><b>Taux atteint en Mars</b></label></div>
+                                                                                        <div class="row"><label><b>Valeur atteinte en Mars</b></label></div>
                                                                                         <div class="row"><input type="text" class="emp" style="width:200px;" id="mois3_<?php echo $value->getId(); ?>" name="mois3[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois3(); ?>">
                                                                                             Taux:&nbsp<?php echo round((double)($value->getMois3()/$value->getValeurCible())*100); ?>%</div>
                                                                                         <div class="row"><label>Commentaire</label></div>
@@ -209,7 +209,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                                                                     </li>
                                                                                     <li>
                                                                                         <?php $commentaire = $form->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois4"); ?>
-                                                                                        <div class="row"><label><b>Taux atteint en Avril</b></label></div>
+                                                                                        <div class="row"><label><b>Valeur atteinte en Avril</b></label></div>
                                                                                         <div class="row"><input type="text" class="emp" style="width:200px;" id="mois4_<?php echo $value->getId(); ?>" name="mois4[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois4(); ?>">
                                                                                             Taux:&nbsp<?php echo round((double)($value->getMois4()/$value->getValeurCible())*100); ?>%</div>
                                                                                         <div class="row"><label>Commentaire</label></div>
@@ -217,7 +217,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                                                                     </li>
                                                                                     <li>
                                                                                         <?php $commentaire = $form->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois5"); ?>
-                                                                                        <div class="row"><label><b>Taux atteint en Mai</b></label></div>
+                                                                                        <div class="row"><label><b>Valeur atteinte en Mai</b></label></div>
                                                                                         <div class="row"><input type="text" class="emp" style="width:200px;" id="mois5_<?php echo $value->getId(); ?>" name="mois5[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois5(); ?>">
                                                                                             Taux:&nbsp<?php echo round((double)($value->getMois5()/$value->getValeurCible())*100); ?>%</div>
                                                                                         <div class="row"><label>Commentaire</label></div>
@@ -225,7 +225,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                                                                      </li>
                                                                                     <li>
                                                                                         <?php $commentaire = $form->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois6"); ?>
-                                                                                        <div class="row"><label><b>Taux atteint en Juin</b></label></div>
+                                                                                        <div class="row"><label><b>Valeur atteinte en Juin</b></label></div>
                                                                                         <div class="row"><input type="text" class="emp" style="width:200px;" id="mois6_<?php echo $value->getId(); ?>" name="mois6[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois6(); ?>">
                                                                                             Taux:&nbsp<?php echo round((double)($value->getMois6()/$value->getValeurCible())*100); ?>%</div>
                                                                                         <div class="row"><label>Commentaire</label></div>
@@ -233,7 +233,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                                                                     </li>
                                                                                     <li>
                                                                                         <?php $commentaire = $form->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois7"); ?>
-                                                                                        <div class="row"><label><b>Taux atteint en Juillet</b></label></div>
+                                                                                        <div class="row"><label><b>Valeur atteinte en Juillet</b></label></div>
                                                                                         <div class="row"><input type="text" class="emp" style="width:200px;" id="mois7_<?php echo $value->getId(); ?>" name="mois7[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois7(); ?>">
                                                                                             Taux:&nbsp<?php echo round((double)($value->getMois7()/$value->getValeurCible())*100); ?>%</div>
                                                                                         <div class="row"><label>Commentaire</label></div>
@@ -241,7 +241,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                                                                     </li>
                                                                                     <li>
                                                                                         <?php $commentaire = $form->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois8"); ?>
-                                                                                        <div class="row"><label><b>Taux atteint en Aout</b></label></div>
+                                                                                        <div class="row"><label><b>Valeur atteinte en Aout</b></label></div>
                                                                                         <div class="row"><input type="text" class="emp" style="width:200px;" id="mois8_<?php echo $value->getId(); ?>" name="mois8[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois8(); ?>">
                                                                                             Taux:&nbsp<?php echo round((double)($value->getMois8()/$value->getValeurCible())*100); ?>%</div>
                                                                                         <div class="row"><label>Commentaire</label></div>
@@ -249,7 +249,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                                                                     </li>
                                                                                     <li>
                                                                                         <?php $commentaire = $form->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois9"); ?>
-                                                                                        <div class="row"><label><b>Taux atteint en Septembre</b></label></div>
+                                                                                        <div class="row"><label><b>Valeur atteinte en Septembre</b></label></div>
                                                                                         <div class="row"><input type="text" class="emp" style="width:200px;" id="mois9_<?php echo $value->getId(); ?>" name="mois9[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois9(); ?>">
                                                                                             Taux:&nbsp<?php echo round((double)($value->getMois9()/$value->getValeurCible())*100); ?>%</div>
                                                                                         <div class="row"><label>Commentaire</label></div>
@@ -257,7 +257,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                                                                     </li>
                                                                                     <li>
                                                                                         <?php $commentaire = $form->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois10"); ?>
-                                                                                        <div class="row"><label><b>Taux atteint en Octobre</b></label></div>
+                                                                                        <div class="row"><label><b>Valeur atteinte en Octobre</b></label></div>
                                                                                         <div class="row"><input  style="width:200px;" class="emp" type="text" id="mois10_<?php echo $value->getId(); ?>" name="mois10[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois10(); ?>">
                                                                                             Taux:&nbsp<?php echo round((double)($value->getMois10()/$value->getValeurCible())*100); ?>%</div>
                                                                                         <div class="row"><label>Commentaire</label></div>
@@ -265,7 +265,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                                                                     </li>
                                                                                     <li>
                                                                                         <?php $commentaire = $form->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois11"); ?>
-                                                                                        <div class="row"><label><b>Taux atteint en Novembre</b></label></div>
+                                                                                        <div class="row"><label><b>Valeur atteinte en Novembre</b></label></div>
                                                                                         <div class="row"><input style="width:200px;" class="emp" type="text" id="mois11_<?php echo $value->getId(); ?>" name="mois11[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois11(); ?>">
                                                                                             Taux:&nbsp<?php echo round((double)($value->getMois11()/$value->getValeurCible())*100); ?>%</div>
                                                                                         <div class="row"><label>Commentaire</label></div>
@@ -273,7 +273,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                                                                     </li>
                                                                                     <li>
                                                                                         <?php $commentaire = $form->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois12"); ?>
-                                                                                        <div class="row"><label><b>Taux atteint en Decembre</b></label></div>
+                                                                                        <div class="row"><label><b>Valeur atteinte en Decembre</b></label></div>
                                                                                         <div class="row"><input  type="text" class="emp" style="width:200px;" id="mois12_<?php echo $value->getId(); ?>" name="mois12[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois12(); ?>">
                                                                                             Taux:&nbsp<?php echo round((double)($value->getMois12()/$value->getValeurCible())*100); ?>%</div>
                                                                                         <div class="row"><label>Commentaire</label></div>
