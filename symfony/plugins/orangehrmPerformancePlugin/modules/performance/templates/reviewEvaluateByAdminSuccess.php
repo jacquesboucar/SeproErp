@@ -174,6 +174,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                                                     <td><input type="text" class="emp" style="width:100px;" id="noter_<?php echo $value->getId(); ?>" name="noter[<?php echo $value->getId(); ?>]" value="<?php echo $value->getNote(); ?>"></td>
                                                                     <td><textarea class="comment emp" type="text" id="comment_<?php echo $value->getId(); ?>" name="comment[<?php echo $value->getId(); ?>]" ><?php echo $value->getComment(); ?></textarea></td>
                                                                    <td><input type="button" id="btnValeur" name="btnValeur" value="Valeur/Mois" onclick="FormValeurParMois(<?php echo $value->getId(); ?>)"></td>
+
                                                                     <!-- Confirmation box HTML: Begins -->
                                                                     <div class="modal valeurevaluation" id="Valeurevaluations<?php echo $value->getId(); ?>">
                                                                         <div class="modal-header">
@@ -373,7 +374,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
         $(document).ready(function () {
             $('#emp .emp').attr("disabled", "disabled");
             $('.evaluationEmployeeths').show();
-            $('#btnValeur').removeAttr("disabled", "disabled");
+            $('#btnValeur').removeAttr("disabled");
 
             <?php if (!$form->isEvaluationsEditable()) { ?>
             $('input,textarea').attr("disabled", "disabled");
