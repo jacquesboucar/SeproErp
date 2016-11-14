@@ -373,7 +373,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
         $(document).ready(function () {
             $('#emp .emp').attr("disabled", "disabled");
             $('.evaluationEmployeeths').show();
-            document.getElementById('btnValeur').disabled = false;
+            $('#btnValeur').removeAttr("disabled", "disabled");
 
             <?php if (!$form->isEvaluationsEditable()) { ?>
             $('input,textarea').attr("disabled", "disabled");
