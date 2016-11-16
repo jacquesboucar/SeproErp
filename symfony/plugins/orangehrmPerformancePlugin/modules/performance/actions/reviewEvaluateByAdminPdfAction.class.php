@@ -185,13 +185,13 @@ $nbPage = $pdf->getAliasNbPages();
 $html = <<<EOD
   <table border="0.4" cellspacing="0" cellpadding="4">
     <tr>
-      <td colspan="2" rowspan="3"  bgcolor="#ffffff" color="#770a82" style="font-size: 20px;font-weight:bold;text-align:center;"> <br><br> SABLUX <br></td>
-      <td colspan="14" rowspan="2" border="0" bgcolor="#770a82" color="#ffffff" style="font-size: 20px;font-weight:bold;text-align:center;">  SYSTÈME DE MANAGEMENT DE LA QUALITE <br> TABLEAU DE BORD DU SMQ </td>
-      <td colspan="3" rowspan="3" bgcolor="#ffffff" color="#770a82" > Page: $curPage sur $nbPage  </td>
+      <td colspan="2" rowspan="2"  bgcolor="#ffffff" color="#770a82" style="font-size: 20px;font-weight:bold;text-align:center;"> <br><br> SABLUX <br></td>
+      <td colspan="14" rowspan="1" border="0" bgcolor="#770a82" color="#ffffff" style="font-size: 20px;font-weight:bold;text-align:center;">  SYSTÈME DE MANAGEMENT DE LA QUALITE <br> TABLEAU DE BORD DU SMQ </td>
+      <td colspan="3" rowspan="2" bgcolor="#ffffff" color="#770a82" > Page: $curPage sur $nbPage  </td>
     </tr>
     <tr>
-      <td colspan="7" border="0" bgcolor="#770a82" color="#ffffff" style="font-size: 16px;font-weight:bold;text-align:center;" > Employé : $employe_name  </td>
-      <td colspan="7" border="0" bgcolor="#770a82" color="#ffffff" style="font-size: 16px;font-weight:bold;text-align:center;" > Evaluateur : $reviewer_first_name $reviewer_last_name  </td>
+      <td colspan="7" border="0" bgcolor="#770a82" color="#ffffff" style="font-size: 16px;font-weight:bold;" > Employé : $employe_name  </td>
+      <td colspan="7" border="0" bgcolor="#770a82" color="#ffffff" style="font-size: 16px;font-weight:bold;" > Responsable Evaluation : $reviewer_first_name $reviewer_last_name  </td>
     </tr>
 EOD;
 
@@ -294,10 +294,85 @@ EOD;
 }
 
 $html .= <<<EOD
+  </table><br/><br/><br/><p><h1><b>Commentaires des valeurs atteintes par mois suivant un indicateur</b></h1></p>
+  <table border="0.4" cellspacing="0" cellpadding="4">
+   
+EOD;
+// commentaire par mois
+        foreach ($existe_group as $key => $ex_group) {
+            $html .= <<<EOD
+      <tr>
+        <th colspan="13" style="font-weight:bold;text-align:center;font-size: 12px;"><b> $ex_group </b></th>
+      </tr>
+      <tr>
+        <th style="width:100px;" colspan="2"><b> INDICATEURS </b></th>
+        <th style="width:70px;"><b> Janvier </b></th>
+        <th style="width:70px;"><b> Fevrier </b></th>
+        <th style="width:70px;"><b> Mars </b></th>
+        <th style="width:70px;"><b> Avril </b></th>
+        <th style="width:70px;"><b> Mai </b></th>
+        <th style="width:70px;"><b> Juin </b></th>
+        <th style="width:70px;"><b> Juillet </b></th>
+        <th style="width:70px;"><b> Aout </b></th>
+        <th style="width:70px;"><b> Septembre </b></th>
+        <th style="width:70px;"><b> Octobre </b></th>
+        <th style="width:70px;"><b> Novembre </b></th>
+        <th style="width:70px;"><b> Decembre </b></th>
+      </tr>
+EOD;
+
+            foreach ($rating as $value) {
+
+                $reviewer_id = $value->getReviewerId();
+                $reviewer = $this->getPerformanceReviewService()->getReviewerById($reviewer_id);
+                $reviewer_group = $reviewer->getReviewerGroupId();
+                if ($reviewer_group == 1 && $value->getKpi()->getKpiGroup() == $key) {
+                    $kpi = $value->getKpi()->getKpiIndicators();
+                    $Comment1 = $this->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois1")->getComment();
+                    $Comment2 = $this->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois2")->getComment();
+                    $Comment3 = $this->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois3")->getComment();
+                    $Comment4 = $this->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois4")->getComment();
+                    $Comment5 = $this->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois5")->getComment();
+                    $Comment6 = $this->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois6")->getComment();
+                    $Comment7 = $this->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois7")->getComment();
+                    $Comment8 = $this->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois8")->getComment();
+                    $Comment9 = $this->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois9")->getComment();
+                    $Comment10 = $this->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois10")->getComment();
+                    $Comment11 = $this->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois11")->getComment();
+                    $Comment12 = $this->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois12")->getComment();
+
+
+$html .= <<<EOD
+
+    <tr>
+      <td style="width:100px;"> $kpi </td>
+      <td style="width:70px;"> $Comment1 </td>
+      <td style="width:70px;"> $Comment2 </td>
+      <td style="width:70px;"> $Comment3 </td>
+      <td style="width:70px;"> $Comment4 </td>
+      <td style="width:70px;"> $Comment5 </td>
+      <td style="width:70px;"> $Comment6 </td>
+      <td style="width:70px;"> $Comment7 </td>
+      <td style="width:70px;"> $Comment8 </td>
+      <td style="width:70px;"> $Comment9 </td>
+      <td style="width:70px;"> $Comment10 </td>
+      <td style="width:70px;"> $Comment11 </td>
+      <td style="width:70px;"> $Comment12 </td>
+    </tr>
+
+
+EOD;
+
+                }
+            }
+        }
+
+        $html .= <<<EOD
   </table>
 EOD;
+        ////fin commentaire par mois
 $html .= <<<EOD
-    <br/><br/><br/><br/>
+    <br/><br/>
     <table>
         <tr>
             <td><b>Commentaire Final : </b> <i>$finalcomment</i></td>
