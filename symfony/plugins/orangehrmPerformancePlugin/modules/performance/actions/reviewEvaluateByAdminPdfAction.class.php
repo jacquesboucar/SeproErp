@@ -328,19 +328,30 @@ EOD;
                 $reviewer_group = $reviewer->getReviewerGroupId();
                 if ($reviewer_group == 1 && $value->getKpi()->getKpiGroup() == $key) {
                     $kpi = $value->getKpi()->getKpiIndicators();
-                    $Comment1 = $this->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois1")->getComment();
-                    $Comment2 = $this->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois2")->getComment();
-                    $Comment3 = $this->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois3")->getComment();
-                    $Comment4 = $this->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois4")->getComment();
-                    $Comment5 = $this->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois5")->getComment();
-                    $Comment6 = $this->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois6")->getComment();
-                    $Comment7 = $this->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois7")->getComment();
-                    $Comment8 = $this->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois8")->getComment();
-                    $Comment9 = $this->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois9")->getComment();
-                    $Comment10 = $this->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois10")->getComment();
-                    $Comment11 = $this->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois11")->getComment();
-                    $Comment12 = $this->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois12")->getComment();
-
+                    $Commententaire = $this->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois1");
+                    $Comment1 = $Commententaire['comment'];
+                    $Commententaire = $this->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois2")->getComment();
+                    $Comment2 = $Commententaire['comment'];
+                    $Commententaire = $this->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois3")->getComment();
+                    $Comment3 = $Commententaire['comment'];
+                    $Commententaire = $this->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois4")->getComment();
+                    $Comment4 = $Commententaire['comment'];
+                    $Commententaire = $this->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois5")->getComment();
+                    $Comment5 = $Commententaire['comment'];
+                    $Commententaire = $this->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois6")->getComment();
+                    $Comment6 = $Commententaire['comment'];
+                    $Commententaire = $this->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois7")->getComment();
+                    $Comment7 = $Commententaire['comment'];
+                    $Commententaire = $this->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois8")->getComment();
+                    $Comment8 = $Commententaire['comment'];
+                    $Commententaire = $this->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois9")->getComment();
+                    $Comment9 = $Commententaire['comment'];
+                    $Commententaire = $this->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois10")->getComment();
+                    $Comment10 = $Commententaire['comment'];
+                    $Commententaire = $this->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois11")->getComment();
+                    $Comment11 = $Commententaire['comment'];
+                    $Commententaire = $this->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois12")->getComment();
+                    $Comment12 = $Commententaire['comment'];
 
 $html .= <<<EOD
 
