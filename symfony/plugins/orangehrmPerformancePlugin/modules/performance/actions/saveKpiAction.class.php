@@ -23,11 +23,9 @@ class saveKpiAction extends basePeformanceAction {
      *
      * @return \DefineKpiForm 
      */
-    public function getKpiSaveForm() {
+    public function getKpiSaveForm($parameters) {
         if ($this->kpiSaveForm == null) {
-            return new DefineKpiForm();
-        } else {
-            return $this->kpiSaveFor;
+            return new DefineKpiForm(array(), $parameters, null);
         }
     }
 
@@ -46,10 +44,11 @@ class saveKpiAction extends basePeformanceAction {
         $request->setParameter('initialActionName', 'searchKpi');
         $kpiId = $request->getParameter('hdnEditId');
 
-        $form = $this->getKpiSaveForm(new DefineKpiForm( array(), array('kpiId' => $kpiId), null));
+        $form = $this->getKpiSaveForm(array('kpiId' => $kpiId));
 
         if ($request->isMethod('post')) {
             $form->bind($request->getParameter($form->getName()));
+
             if ($form->isValid()) {
                 try {
                     $form->saveForm();

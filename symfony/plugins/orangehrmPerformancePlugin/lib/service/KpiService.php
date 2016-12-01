@@ -77,10 +77,6 @@ class KpiService {
         return $this->getDao()->searchKpiByJobTitle($parameters);
     }
 
-    /**
-     * @param null $parameters
-     * @return Doctrine_Collection
-     */
     public function searchKpiByJobTitleAndIndicator($parameters = null) {
         return $this->getDao()->searchKpiByJobTitleAndIndicator($parameters);
     }
