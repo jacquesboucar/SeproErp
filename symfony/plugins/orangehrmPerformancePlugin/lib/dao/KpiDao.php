@@ -139,4 +139,32 @@ class KpiDao extends BaseDao {
         }//@codeCoverageIgnoreEnd
     }
 
+    public function getJobtitleById($id){
+        try{
+            $result = Doctrine :: getTable('JobTitle')->find($id);
+            return $result;
+            //@codeCoverageIgnoreStart
+        } catch (Exception $ex) {
+            throw new DaoException($ex->getMessage(), $ex->getCode(), $ex);
+        }//@codeCoverageIgnoreEnd
+    }
+
+    public function searchKpiByJobTitleAndIndicator($parameters = null) {
+        try {
+            //var_dump($parameters);die;
+
+            $query = Doctrine_Query:: create()->from('Kpi');
+            $query->andWhere('kpi_indicators = ?', $parameters['indicateur']);
+            $query->andWhere('deleted_at IS NULL');
+            $query->orderBy('kpi_indicators');
+            //var_dump($query);die;
+            return $query->execute();
+            //@codeCoverageIgnoreStart
+        } catch (Exception $e) {
+            throw new DaoException($e->getMessage(), $e->getCode(), $e);
+        }//@codeCoverageIgnoreEnd
+    }
+
+
+
 }

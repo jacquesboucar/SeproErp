@@ -421,7 +421,7 @@ class BasePefromanceSearchForm extends sfForm {
      * @return array 
      */
     public function getJobTitleListAsArrayWithSelectOption() {
-        $jobTitles = array("" => "--".__("Select")."--");
+
         foreach ($this->getJobService()->getJobTitleList() as $job) {
             $jobTitles [$job->getId()] = $job->getJobTitleName();
         }

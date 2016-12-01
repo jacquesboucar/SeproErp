@@ -11,18 +11,31 @@
 
 class DefineKpiForm extends BasePefromanceSearchForm {
 
+    public $jobassign = array();
+    public $jobavailable = array();
     
     public function configure() {
         $groupe = $this->getKpiGroupListAsArray();
-        $type[] = array('Indicateur de Performance', 'Indicateur de Pilotage');
+        $kpi_id = $this->getOption('kpiId');
+
+        if(!empty($kpi_id)){
+            $kpi = $this->getKpiService()->searchKpi(array('id' => $kpi_id));
+            $jobtitleassign = $this->getJobTitleAssign($kpi->getKpiIndicators());
+            $jobtitleavailable = $this->getJobTitleAvailable($kpi->getKpiIndicators());
+        }else{
+            $jobtitleassign = null;
+            $jobtitleavailable = $this->getJobTitleListAsArray();
+        }
+        //var_dump($test);die;
+       //var_dump($jobtitleassign, $jobtitleavailable);die;
         $this->setWidgets(array(
             'id' => new sfWidgetFormInputHidden(),
             'kpi_group' => new sfWidgetFormSelect(array('choices' => $groupe)),
             'keyPerformanceIndicators' => new sfWidgetFormInput(array(), array('class' => 'formInputText')),
             'minRating' => new sfWidgetFormInput(array(), array('class' => 'formInputText')),
             'maxRating' => new sfWidgetFormInput(array(), array('class' => 'formInputText')),
-            'availableJob' => new sfWidgetFormSelectMany(array('choices' => $this->getJobTitleListAsArrayWithSelectOption())),
-            'assignedJob' => new sfWidgetFormSelectMany(array('choices' => null)),
+            'availableJob' => new sfWidgetFormSelectMany(array('choices' => $jobtitleavailable)),
+            'assignedJob' => new sfWidgetFormSelectMany(array('choices' => $jobtitleassign)),
             'delai' => new sfWidgetFormInputText(),
             'objectif'  => new sfWidgetFormInputText(),
             'mode_calcul'  => new sfWidgetFormInputText(),
@@ -69,6 +82,36 @@ class DefineKpiForm extends BasePefromanceSearchForm {
         return $jobTitles;
     }
 
+    public function getJobTitleAssign($indicateur){
+
+       foreach ($this->getKpiService()->searchKpiByJobTitleAndIndicator(array('indicateur' => $indicateur)) as $kpi) {
+            $jobTitles [$kpi->getId()] = $kpi->getJobTitleCode();
+       }
+       foreach ($this->getJobService()->getJobTitleList() as $job) {
+            if(in_array($job, $jobTitles)){
+                $this->jobassign [$job->getId()] = $job->getJobTitleName();
+            }
+
+       }
+
+       return  $this->jobassign;
+    }
+
+    public function getJobTitleAvailable($indicateur){
+
+        foreach ($this->getKpiService()->searchKpiByJobTitleAndIndicator(array('indicateur' => $indicateur)) as $kpi) {
+            $jobTitles [$kpi->getId()] = $kpi->getJobTitleCode();
+        }
+        foreach ($this->getJobService()->getJobTitleList() as $job) {
+            if(!in_array($job, $jobTitles)){
+                $this->jobavailable [$job->getId()] = $job->getJobTitleName();
+            }
+
+        }
+
+        return  $this->jobavailable;
+    }
+
     /**
      *
      * @return array 
@@ -107,12 +150,15 @@ class DefineKpiForm extends BasePefromanceSearchForm {
 
         foreach ($values['assignedJob'] as $jobcode) {
           $kpi = new Kpi();
+           // $kpi_old = $this->getKpiService()->searchKpiByJobTitle($jobcode);
+           // var_dump($kpi_old);die;
           if ($values['id'] > 0) {
+
             $kpi = $this->getKpiService()->searchKpi(array('id' => $values['id']));
           }
-        
+
           $kpi->setKpiGroup($values['kpi_group']);
-          $kpi->setJobTitleCode($values['jobTitleCode']);
+          $kpi->setJobTitleCode($jobcode);
           $kpi->setKpiIndicators($values['keyPerformanceIndicators']);
         
           $kpi->setDelai($values['delai']);
