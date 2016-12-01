@@ -82,6 +82,10 @@ class DefineKpiForm extends BasePefromanceSearchForm {
         return $jobTitles;
     }
 
+    /**
+     * @param $indicateur
+     * @return array
+     */
     public function getJobTitleAssign($indicateur){
 
        foreach ($this->getKpiService()->searchKpiByJobTitleAndIndicator(array('indicateur' => $indicateur)) as $kpi) {
@@ -97,6 +101,10 @@ class DefineKpiForm extends BasePefromanceSearchForm {
        return  $this->jobassign;
     }
 
+    /**
+     * @param $indicateur
+     * @return array
+     */
     public function getJobTitleAvailable($indicateur){
 
         foreach ($this->getKpiService()->searchKpiByJobTitleAndIndicator(array('indicateur' => $indicateur)) as $kpi) {
@@ -190,6 +198,7 @@ class DefineKpiForm extends BasePefromanceSearchForm {
         if ($kpiId > 0) {
             $kpi = $this->getKpiService()->searchKpi(array('id' => $kpiId));
             $this->setDefault('id', $kpi->getId());
+            $this->setDefault('kpi_group',$kpi->getKpiGroup());
             $this->setDefault('jobTitleCode', $kpi->getJobTitleCode());
             $this->setDefault('keyPerformanceIndicators', $kpi->getKpiIndicators());
             $this->setDefault('minRating', 1);
