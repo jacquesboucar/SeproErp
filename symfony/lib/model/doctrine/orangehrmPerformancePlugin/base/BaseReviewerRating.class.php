@@ -26,7 +26,7 @@
  * @property decimal $taux_atteint
  * @property decimal $cumule
  * @property string $valeur_cible
- * @property integer $poids
+ * @property decimal $poids
  * @property PerformanceReview $performanceReview
  * @property Reviewer $reviewer
  * @property Kpi $kpi
@@ -53,7 +53,7 @@
  * @method decimal             getTauxAtteint()       Returns the current record's "taux_atteint" value
  * @method decimal             getCumule()            Returns the current record's "cumule" value
  * @method string              getValeurCible()       Returns the current record's "valeur_cible" value
- * @method integer             getPoids()             Returns the current record's "poids" value
+ * @method decimal             getPoids()             Returns the current record's "poids" value
  * @method PerformanceReview   getPerformanceReview() Returns the current record's "performanceReview" value
  * @method Reviewer            getReviewer()          Returns the current record's "reviewer" value
  * @method Kpi                 getKpi()               Returns the current record's "kpi" value
@@ -167,8 +167,8 @@ abstract class BaseReviewerRating extends sfDoctrineRecord
              'type' => 'string',
              'length' => 250,
              ));
-        $this->hasColumn('poids', 'integer', 11, array(
-             'type' => 'integer',
+        $this->hasColumn('poids', 'decimal', 11, array(
+             'type' => 'decimal',
              'length' => 11,
              ));
     }

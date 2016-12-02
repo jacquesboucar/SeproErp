@@ -184,23 +184,24 @@ class ReviewEvaluationForm extends BasePefromanceSearchForm {
                 {
 
                     $rating = $this->getPerformanceReviewService()->getReviewRating($ratingId);
-                    $rating->getPoids(round($postParameters['poids'][$key]));
-                    $rating->setRating($this->filterPostValues(round($postParameters['rating'][$key], 2)));
-                    if($this->filterPostValues(round($postParameters['valeur_cible'][$key]))!=null)
-                    $rating->setValeurCible($this->filterPostValues(round($postParameters['valeur_cible'][$key])));
-                    $rating->setComment($this->filterPostValues($postParameters['comment'][$key]));
-                    $rating->setMois2($this->filterPostValues($postParameters['mois2'][$key]));
-                    $rating->setMois3($this->filterPostValues($postParameters['mois3'][$key]));
-                    $rating->setMois4($this->filterPostValues($postParameters['mois4'][$key]));
-                    $rating->setMois5($this->filterPostValues($postParameters['mois5'][$key]));
-                    $rating->setMois6($this->filterPostValues($postParameters['mois6'][$key]));
-                    $rating->setMois7($this->filterPostValues($postParameters['mois7'][$key]));
-                    $rating->setMois8($this->filterPostValues($postParameters['mois8'][$key]));
-                    $rating->setMois9($this->filterPostValues($postParameters['mois9'][$key]));
-                    $rating->setMois10($this->filterPostValues($postParameters['mois10'][$key]));
-                    $rating->setMois11($this->filterPostValues($postParameters['mois11'][$key]));
-                    $rating->setMois12($this->filterPostValues($postParameters['mois12'][$key]));
-
+                    //var_dump($this->filterPostValues($postParameters['poids'][$key]));die;
+                    $rating->setRating($this->filterPostValues(round(trim($postParameters['rating'][$key], 2))));
+                    $rating->setPoids(round($this->filterPostValues(trim($postParameters['poids'][$key]))));
+                    if($this->filterPostValues(round(trim($postParameters['valeur_cible'][$key])))!=null)
+                    $rating->setValeurCible($this->filterPostValues(round(trim($postParameters['valeur_cible'][$key]))));
+                    $rating->setComment($this->filterPostValues(trim($postParameters['comment'][$key])));
+                    $rating->setMois2($this->filterPostValues(trim($postParameters['mois2'][$key])));
+                    $rating->setMois3($this->filterPostValues(trim($postParameters['mois3'][$key])));
+                    $rating->setMois4($this->filterPostValues(trim($postParameters['mois4'][$key])));
+                    $rating->setMois5($this->filterPostValues(trim($postParameters['mois5'][$key])));
+                    $rating->setMois6($this->filterPostValues(trim($postParameters['mois6'][$key])));
+                    $rating->setMois7($this->filterPostValues(trim($postParameters['mois7'][$key])));
+                    $rating->setMois8($this->filterPostValues(trim($postParameters['mois8'][$key])));
+                    $rating->setMois9($this->filterPostValues(trim($postParameters['mois9'][$key])));
+                    $rating->setMois10($this->filterPostValues(trim($postParameters['mois10'][$key])));
+                    $rating->setMois11($this->filterPostValues(trim($postParameters['mois11'][$key])));
+                    $rating->setMois12($this->filterPostValues(trim($postParameters['mois12'][$key])));
+                    //var_dump($rating);die;
                     for($i=1; $i<=12; $i++){
                        // $commentaire = new Commentaire();
                         $commentaire = $this->getPerformanceReviewService()->getCommentaire($rating->getKpi()->getId(),$ratingId,"Mois$i");
@@ -222,18 +223,18 @@ class ReviewEvaluationForm extends BasePefromanceSearchForm {
                     }
                     // Set Final Rating
 
-                    $mois1 = $this->filterPostValues($postParameters['rating'][$key]);
-                    $mois2 = $this->filterPostValues($postParameters['mois2'][$key]);
-                    $mois3 = $this->filterPostValues($postParameters['mois3'][$key]);
-                    $mois4 = $this->filterPostValues($postParameters['mois4'][$key]);
-                    $mois5 = $this->filterPostValues($postParameters['mois5'][$key]);
-                    $mois6 = $this->filterPostValues($postParameters['mois6'][$key]);
-                    $mois7 = $this->filterPostValues($postParameters['mois7'][$key]);
-                    $mois8 = $this->filterPostValues($postParameters['mois8'][$key]);
-                    $mois9 = $this->filterPostValues($postParameters['mois9'][$key]);
-                    $mois10 = $this->filterPostValues($postParameters['mois10'][$key]);
-                    $mois11 = $this->filterPostValues($postParameters['mois11'][$key]);
-                    $mois12 = $this->filterPostValues($postParameters['mois12'][$key]);
+                    $mois1 = $this->filterPostValues(trim($postParameters['rating'][$key]));
+                    $mois2 = $this->filterPostValues(trim($postParameters['mois2'][$key]));
+                    $mois3 = $this->filterPostValues(trim($postParameters['mois3'][$key]));
+                    $mois4 = $this->filterPostValues(trim($postParameters['mois4'][$key]));
+                    $mois5 = $this->filterPostValues(trim($postParameters['mois5'][$key]));
+                    $mois6 = $this->filterPostValues(trim($postParameters['mois6'][$key]));
+                    $mois7 = $this->filterPostValues(trim($postParameters['mois7'][$key]));
+                    $mois8 = $this->filterPostValues(trim($postParameters['mois8'][$key]));
+                    $mois9 = $this->filterPostValues(trim($postParameters['mois9'][$key]));
+                    $mois10 = $this->filterPostValues(trim($postParameters['mois10'][$key]));
+                    $mois11 = $this->filterPostValues(trim($postParameters['mois11'][$key]));
+                    $mois12 = $this->filterPostValues(trim($postParameters['mois12'][$key]));
                     $final_rate = $mois1+$mois2+$mois3+$mois4+$mois5+$mois6+$mois7+$mois8+$mois9+$mois10+$mois11+$mois12;
                     $rating->setCumule($final_rate);
                     $rating->setNote($this->filterPostValues($postParameters['noter'][$key]));

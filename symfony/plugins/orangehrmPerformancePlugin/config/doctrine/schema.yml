@@ -156,7 +156,7 @@ ReviewerRating:
       type: decimal
     valeur_cible: string(250)
     poids:
-      type: integer(11)
+      type: decimal(11)
   relations:
     performanceReview:
       class: PerformanceReview
