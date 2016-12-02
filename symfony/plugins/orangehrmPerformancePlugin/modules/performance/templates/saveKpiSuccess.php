@@ -58,7 +58,7 @@
                         <?php echo $form['minRating']->renderLabel(null, array('class' => 'labelValue')); ?>
                         <?php echo $form['minRating']->render() ?>
                     </li>
-                    <li>
+                    <li class="minratingclasse">
                         <?php echo $form['maxRating']->renderLabel(null, array('class' => 'labelValue')); ?>
                         <?php echo $form['maxRating']->render() ?>
                     </li>

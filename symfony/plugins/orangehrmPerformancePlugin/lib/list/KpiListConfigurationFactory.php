@@ -90,6 +90,7 @@ class KpiListConfigurationFactory extends ohrmListConfigurationFactory {
         ));
         $headerArray [] = $header5;
 
+        /*
         $header6 = new ListHeader();
         $header6->populateFromArray(array(
             'name' => 'Poids',
@@ -100,7 +101,7 @@ class KpiListConfigurationFactory extends ohrmListConfigurationFactory {
             'elementProperty' => array('getter' => 'getMaxRating')
 
         ));
-        $headerArray [] = $header6;
+        $headerArray [] = $header6;*/
         
         $header7 = new ListHeader();
         $header7->populateFromArray(array(
