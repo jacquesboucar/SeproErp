@@ -184,6 +184,7 @@ class ReviewEvaluationForm extends BasePefromanceSearchForm {
                 {
 
                     $rating = $this->getPerformanceReviewService()->getReviewRating($ratingId);
+                    $rating->getPoids(round($postParameters['poids'][$key]));
                     $rating->setRating($this->filterPostValues(round($postParameters['rating'][$key], 2)));
                     if($this->filterPostValues(round($postParameters['valeur_cible'][$key]))!=null)
                     $rating->setValeurCible($this->filterPostValues(round($postParameters['valeur_cible'][$key])));

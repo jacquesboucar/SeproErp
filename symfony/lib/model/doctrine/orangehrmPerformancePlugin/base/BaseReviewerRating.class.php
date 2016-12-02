@@ -26,58 +26,64 @@
  * @property decimal $taux_atteint
  * @property decimal $cumule
  * @property string $valeur_cible
+ * @property integer $poids
  * @property PerformanceReview $performanceReview
  * @property Reviewer $reviewer
  * @property Kpi $kpi
+ * @property Doctrine_Collection $Commentaire
  * 
- * @method integer           getId()                Returns the current record's "id" value
- * @method decimal           getRating()            Returns the current record's "rating" value
- * @method integer           getKpiId()             Returns the current record's "kpiId" value
- * @method integer           getReviewId()          Returns the current record's "reviewId" value
- * @method integer           getReviewerId()        Returns the current record's "reviewerId" value
- * @method clob              getComment()           Returns the current record's "comment" value
- * @method decimal           getMois2()             Returns the current record's "mois2" value
- * @method decimal           getMois3()             Returns the current record's "mois3" value
- * @method decimal           getMois4()             Returns the current record's "mois4" value
- * @method decimal           getMois5()             Returns the current record's "mois5" value
- * @method decimal           getMois6()             Returns the current record's "mois6" value
- * @method decimal           getMois7()             Returns the current record's "mois7" value
- * @method decimal           getMois8()             Returns the current record's "mois8" value
- * @method decimal           getMois9()             Returns the current record's "mois9" value
- * @method decimal           getMois10()            Returns the current record's "mois10" value
- * @method decimal           getMois11()            Returns the current record's "mois11" value
- * @method decimal           getMois12()            Returns the current record's "mois12" value
- * @method decimal           getNote()              Returns the current record's "note" value
- * @method decimal           getTauxAtteint()       Returns the current record's "taux_atteint" value
- * @method decimal           getCumule()            Returns the current record's "cumule" value
- * @method string            getValeurCible()       Returns the current record's "valeur_cible" value
- * @method PerformanceReview getPerformanceReview() Returns the current record's "performanceReview" value
- * @method Reviewer          getReviewer()          Returns the current record's "reviewer" value
- * @method Kpi               getKpi()               Returns the current record's "kpi" value
- * @method ReviewerRating    setId()                Sets the current record's "id" value
- * @method ReviewerRating    setRating()            Sets the current record's "rating" value
- * @method ReviewerRating    setKpiId()             Sets the current record's "kpiId" value
- * @method ReviewerRating    setReviewId()          Sets the current record's "reviewId" value
- * @method ReviewerRating    setReviewerId()        Sets the current record's "reviewerId" value
- * @method ReviewerRating    setComment()           Sets the current record's "comment" value
- * @method ReviewerRating    setMois2()             Sets the current record's "mois2" value
- * @method ReviewerRating    setMois3()             Sets the current record's "mois3" value
- * @method ReviewerRating    setMois4()             Sets the current record's "mois4" value
- * @method ReviewerRating    setMois5()             Sets the current record's "mois5" value
- * @method ReviewerRating    setMois6()             Sets the current record's "mois6" value
- * @method ReviewerRating    setMois7()             Sets the current record's "mois7" value
- * @method ReviewerRating    setMois8()             Sets the current record's "mois8" value
- * @method ReviewerRating    setMois9()             Sets the current record's "mois9" value
- * @method ReviewerRating    setMois10()            Sets the current record's "mois10" value
- * @method ReviewerRating    setMois11()            Sets the current record's "mois11" value
- * @method ReviewerRating    setMois12()            Sets the current record's "mois12" value
- * @method ReviewerRating    setNote()              Sets the current record's "note" value
- * @method ReviewerRating    setTauxAtteint()       Sets the current record's "taux_atteint" value
- * @method ReviewerRating    setCumule()            Sets the current record's "cumule" value
- * @method ReviewerRating    setValeurCible()       Sets the current record's "valeur_cible" value
- * @method ReviewerRating    setPerformanceReview() Sets the current record's "performanceReview" value
- * @method ReviewerRating    setReviewer()          Sets the current record's "reviewer" value
- * @method ReviewerRating    setKpi()               Sets the current record's "kpi" value
+ * @method integer             getId()                Returns the current record's "id" value
+ * @method decimal             getRating()            Returns the current record's "rating" value
+ * @method integer             getKpiId()             Returns the current record's "kpiId" value
+ * @method integer             getReviewId()          Returns the current record's "reviewId" value
+ * @method integer             getReviewerId()        Returns the current record's "reviewerId" value
+ * @method clob                getComment()           Returns the current record's "comment" value
+ * @method decimal             getMois2()             Returns the current record's "mois2" value
+ * @method decimal             getMois3()             Returns the current record's "mois3" value
+ * @method decimal             getMois4()             Returns the current record's "mois4" value
+ * @method decimal             getMois5()             Returns the current record's "mois5" value
+ * @method decimal             getMois6()             Returns the current record's "mois6" value
+ * @method decimal             getMois7()             Returns the current record's "mois7" value
+ * @method decimal             getMois8()             Returns the current record's "mois8" value
+ * @method decimal             getMois9()             Returns the current record's "mois9" value
+ * @method decimal             getMois10()            Returns the current record's "mois10" value
+ * @method decimal             getMois11()            Returns the current record's "mois11" value
+ * @method decimal             getMois12()            Returns the current record's "mois12" value
+ * @method decimal             getNote()              Returns the current record's "note" value
+ * @method decimal             getTauxAtteint()       Returns the current record's "taux_atteint" value
+ * @method decimal             getCumule()            Returns the current record's "cumule" value
+ * @method string              getValeurCible()       Returns the current record's "valeur_cible" value
+ * @method integer             getPoids()             Returns the current record's "poids" value
+ * @method PerformanceReview   getPerformanceReview() Returns the current record's "performanceReview" value
+ * @method Reviewer            getReviewer()          Returns the current record's "reviewer" value
+ * @method Kpi                 getKpi()               Returns the current record's "kpi" value
+ * @method Doctrine_Collection getCommentaire()       Returns the current record's "Commentaire" collection
+ * @method ReviewerRating      setId()                Sets the current record's "id" value
+ * @method ReviewerRating      setRating()            Sets the current record's "rating" value
+ * @method ReviewerRating      setKpiId()             Sets the current record's "kpiId" value
+ * @method ReviewerRating      setReviewId()          Sets the current record's "reviewId" value
+ * @method ReviewerRating      setReviewerId()        Sets the current record's "reviewerId" value
+ * @method ReviewerRating      setComment()           Sets the current record's "comment" value
+ * @method ReviewerRating      setMois2()             Sets the current record's "mois2" value
+ * @method ReviewerRating      setMois3()             Sets the current record's "mois3" value
+ * @method ReviewerRating      setMois4()             Sets the current record's "mois4" value
+ * @method ReviewerRating      setMois5()             Sets the current record's "mois5" value
+ * @method ReviewerRating      setMois6()             Sets the current record's "mois6" value
+ * @method ReviewerRating      setMois7()             Sets the current record's "mois7" value
+ * @method ReviewerRating      setMois8()             Sets the current record's "mois8" value
+ * @method ReviewerRating      setMois9()             Sets the current record's "mois9" value
+ * @method ReviewerRating      setMois10()            Sets the current record's "mois10" value
+ * @method ReviewerRating      setMois11()            Sets the current record's "mois11" value
+ * @method ReviewerRating      setMois12()            Sets the current record's "mois12" value
+ * @method ReviewerRating      setNote()              Sets the current record's "note" value
+ * @method ReviewerRating      setTauxAtteint()       Sets the current record's "taux_atteint" value
+ * @method ReviewerRating      setCumule()            Sets the current record's "cumule" value
+ * @method ReviewerRating      setValeurCible()       Sets the current record's "valeur_cible" value
+ * @method ReviewerRating      setPoids()             Sets the current record's "poids" value
+ * @method ReviewerRating      setPerformanceReview() Sets the current record's "performanceReview" value
+ * @method ReviewerRating      setReviewer()          Sets the current record's "reviewer" value
+ * @method ReviewerRating      setKpi()               Sets the current record's "kpi" value
+ * @method ReviewerRating      setCommentaire()       Sets the current record's "Commentaire" collection
  * 
  * @package    orangehrm
  * @subpackage model\performance\base
@@ -161,6 +167,10 @@ abstract class BaseReviewerRating extends sfDoctrineRecord
              'type' => 'string',
              'length' => 250,
              ));
+        $this->hasColumn('poids', 'integer', 11, array(
+             'type' => 'integer',
+             'length' => 11,
+             ));
     }
 
     public function setUp()
@@ -177,5 +187,9 @@ abstract class BaseReviewerRating extends sfDoctrineRecord
         $this->hasOne('Kpi as kpi', array(
              'local' => 'kpi_id',
              'foreign' => 'id'));
+
+        $this->hasMany('Commentaire', array(
+             'local' => 'id',
+             'foreign' => 'rating_id'));
     }
 }

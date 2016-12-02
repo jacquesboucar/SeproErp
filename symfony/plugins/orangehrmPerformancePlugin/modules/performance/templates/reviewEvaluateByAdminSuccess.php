@@ -144,6 +144,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                                         <th style="width:400px;"><b> INDICATEURS </b></th>
                                                         <th style="width:200px;"><b> PERIODICITE </b></th>
                                                         <th style="width:100px;"><b> POIDS </b></th>
+                                                        <th style="width:100px;"><b> POIDS </b></th>
                                                         <th style="width:200px;"><b> CIBLE </b></th>
                                                         <th style="width:250px;"><b> CUMULE </b></th>
                                                         <th style="width:100px;"><b> TAUX ATTEINT </b></th>
@@ -168,6 +169,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                                                     <td style="width:400px;"><?php echo $value->getKpi()->getKpiIndicators() ?></td>
                                                                     <td style="width:200px;"><?php echo $value->getKpi()->getDelai() ?></td>
                                                                     <td style="width:100px;"><?php echo $value->getKpi()->getMaxRating() ?></td>
+                                                                    <td><input type="text" class="emp" style="width:200px;" id="poids_<?php echo $value->getId(); ?>" name="poids[<?php echo $value->getId(); ?>]" value="<?php echo $value->getPoids(); ?>"></td>
                                                                     <td><input type="text" class="emp" style="width:200px;" id="valeur_cible_<?php echo $value->getId(); ?>" name="valeur_cible[<?php echo $value->getId(); ?>]" value="<?php echo $value->getValeurCible(); ?>"></td>
                                                                     <td><?php echo $value->getCumule() ?></td>
                                                                     <td><?php echo round((double)(($value->getTauxAtteint()/$value->getValeurCible())*100)) ?>%</td>
