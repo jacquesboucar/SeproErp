@@ -319,8 +319,8 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                             <td style="width:400px;"><?php echo $value->getKpi()->getKpiIndicators() ?></td>
                                             <td style="width:200px;"><?php echo $value->getKpi()->getDelai() ?></td>
                                             <td style="width:100px;"><?php echo $value->getKpi()->getMaxRating() ?></td>
-                                            <td><?php echo $value->getValeurCible() ?></td>
                                             <td><?php echo $value->getPoids() ?></td>
+                                            <td><?php echo $value->getValeurCible() ?></td>
                                             <td><?php echo $value->getCumule() ?></td>
                                             <td><?php echo round((double)(($value->getTauxAtteint()/$value->getValeurCible())*100)) ?>%</td>
                                             <td><?php echo $value->getNote(); ?></td>
