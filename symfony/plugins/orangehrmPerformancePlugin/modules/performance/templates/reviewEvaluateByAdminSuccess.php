@@ -168,7 +168,6 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
 
                                                                     <td style="width:400px;"><?php echo $value->getKpi()->getKpiIndicators() ?></td>
                                                                     <td style="width:200px;"><?php echo $value->getKpi()->getDelai() ?></td>
-                                                                    <td style="width:100px;"><?php echo $value->getKpi()->getMaxRating() ?></td>
                                                                     <td><input type="text" class="emp" style="width:200px;" id="poids_<?php echo $value->getId(); ?>" name="poids[<?php echo $value->getId(); ?>]" value="<?php echo $value->getPoids(); ?>"></td>
                                                                     <td><input type="text" class="emp" style="width:200px;" id="valeur_cible_<?php echo $value->getId(); ?>" name="valeur_cible[<?php echo $value->getId(); ?>]" value="<?php echo $value->getValeurCible(); ?>"></td>
                                                                     <td><?php echo $value->getCumule() ?></td>
