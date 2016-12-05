@@ -144,7 +144,6 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                                         <th style="width:400px;"><b> INDICATEURS </b></th>
                                                         <th style="width:200px;"><b> PERIODICITE </b></th>
                                                         <th style="width:100px;"><b> POIDS </b></th>
-                                                        <th style="width:100px;"><b> POIDS </b></th>
                                                         <th style="width:200px;"><b> CIBLE </b></th>
                                                         <th style="width:250px;"><b> CUMULE </b></th>
                                                         <th style="width:100px;"><b> TAUX ATTEINT </b></th>
