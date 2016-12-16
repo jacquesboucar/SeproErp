@@ -190,7 +190,7 @@ class ReviewEvaluationForm extends BasePefromanceSearchForm {
                     if($this->filterPostValues(round(trim($postParameters['valeur_cible'][$key])))!=null)
                     $rating->setValeurCible($this->filterPostValues(round(trim($postParameters['valeur_cible'][$key]))));
                     $rating->setComment($this->filterPostValues(trim($postParameters['comment'][$key])));
-                    $rating->setMois2($this->filterPostValues(trim($postParameters['mois2'][$key])));
+                    $rating->setMois2($this->filterPostValues($postParameters['mois2'][$key]));
                     $rating->setMois3($this->filterPostValues(trim($postParameters['mois3'][$key])));
                     $rating->setMois4($this->filterPostValues(trim($postParameters['mois4'][$key])));
                     $rating->setMois5($this->filterPostValues(trim($postParameters['mois5'][$key])));
@@ -224,7 +224,7 @@ class ReviewEvaluationForm extends BasePefromanceSearchForm {
                     // Set Final Rating
 
                     $mois1 = $this->filterPostValues(trim($postParameters['rating'][$key]));
-                    $mois2 = $this->filterPostValues(trim($postParameters['mois2'][$key]));
+                    $mois2 = $this->filterPostValues($postParameters['mois2'][$key]);
                     $mois3 = $this->filterPostValues(trim($postParameters['mois3'][$key]));
                     $mois4 = $this->filterPostValues(trim($postParameters['mois4'][$key]));
                     $mois5 = $this->filterPostValues(trim($postParameters['mois5'][$key]));
