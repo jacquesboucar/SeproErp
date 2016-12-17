@@ -183,7 +183,7 @@ class ReviewEvaluationForm extends BasePefromanceSearchForm {
 
                 if ($this->isValidRatingId($ratingId))
                 {
-                    var_dump($ratingId);die;
+                    //var_dump($ratingId);die;
                     $rating = $this->getPerformanceReviewService()->getReviewRating($ratingId);
 
                     $rating->setRating($this->filterPostValues(round(trim($postParameters['rating'][$key], 2))));
