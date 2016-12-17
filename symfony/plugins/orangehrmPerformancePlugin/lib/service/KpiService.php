@@ -77,6 +77,10 @@ class KpiService {
         return $this->getDao()->searchKpiByJobTitle($parameters);
     }
 
+    public function searchKpiByJob($parameters = null) {
+        return $this->getDao()->searchKpiByJob($parameters);
+    }
+
     public function searchKpiByJobTitleAndIndicator($parameters = null) {
         return $this->getDao()->searchKpiByJobTitleAndIndicator($parameters);
     }

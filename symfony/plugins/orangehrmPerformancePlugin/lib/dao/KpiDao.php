@@ -117,10 +117,7 @@ class KpiDao extends BaseDao {
      */
     public function searchKpiByJobTitle($parameters = null) {
         try {
-            //var_dump($parameters);die;
-         /*   $result = Doctrine :: getTable('Kpi')->findBy(
-                'jobTitleCode', $parameters);
-            return $result;*/
+
 
             $query = Doctrine_Query:: create()->from('Kpi');
             $query->andWhere('jobTitleCode = ?', $parameters['job'] );
@@ -128,12 +125,24 @@ class KpiDao extends BaseDao {
             $query->andWhere('deleted_at IS NULL');
             $query->orderBy('kpi_indicators');
             return $query->execute();
+
             //@codeCoverageIgnoreStart
         } catch (Exception $e) {
             throw new DaoException($e->getMessage(), $e->getCode(), $e);
         }//@codeCoverageIgnoreEnd
     }
-    
+
+    /**
+     * @param null $parameters
+     * @return array|Doctrine_Collection
+     */
+    public function searchKpiByJob($parameters = null){
+
+        $result = Doctrine :: getTable('Kpi')->findBy(
+            'jobTitleCode', $parameters);
+        return $result;
+    }
+
     public function getKpiById($id){
         try{
             $result = Doctrine :: getTable('Kpi')->find($id);
