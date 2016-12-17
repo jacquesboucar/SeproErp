@@ -189,7 +189,7 @@ class SaveReviewForm extends BasePefromanceSearchForm {
 
         $parameters ['jobCode'] = $review->getEmployee()->getJobTitle()->getId();
 
-        $kpis = $this->getKpiService()->searchKpiByJob($parameters);
+        $kpis = $this->getKpiService()->searchKpiByJobTitle($parameters);
 
         foreach ($review->getReviewers() as $reviewer) {
             foreach ($kpis as $kpi) {

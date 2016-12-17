@@ -115,7 +115,7 @@ class KpiDao extends BaseDao {
      * @return Doctrine_Collection
      * @throws DaoException 
      */
-    public function searchKpiByJobTitle($parameters = null) {
+    public function searchKpiByJob($parameters = null) {
         try {
 
 
@@ -136,12 +136,12 @@ class KpiDao extends BaseDao {
      * @param null $parameters
      * @return array|Doctrine_Collection
      */
-    public function searchKpiByJob($parameters = null){
+    public function searchKpiByJobTitle($parameters = null){
 
 
         $result = Doctrine :: getTable('Kpi')->findBy(
             'jobTitleCode', $parameters['jobCode']);
-        //var_dump($result);die;
+
         return $result;
     }
 

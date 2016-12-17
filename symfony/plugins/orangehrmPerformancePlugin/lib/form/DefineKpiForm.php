@@ -175,7 +175,7 @@ class DefineKpiForm extends BasePefromanceSearchForm {
           if ($values['id'] > 0) {
               $kpi1 = new Kpi();
               $kpi1 = $this->getKpiService()->getKpiById($values['id']);
-              $kpi_old = $this->getKpiService()->searchKpiByJobTitle(array('job' => (string)$jobcode, 'indicateur' => $kpi1->getKpiIndicators()));
+              $kpi_old = $this->getKpiService()->searchKpiByJob(array('job' => (string)$jobcode, 'indicateur' => $kpi1->getKpiIndicators()));
               if($kpi_old[0]['id'] != null){
                   $kpi = $this->getKpiService()->getKpiById($kpi_old[0]['id']);
               }else{
