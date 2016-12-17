@@ -138,8 +138,10 @@ class KpiDao extends BaseDao {
      */
     public function searchKpiByJob($parameters = null){
 
+
         $result = Doctrine :: getTable('Kpi')->findBy(
-            'jobTitleCode', $parameters);
+            'jobTitleCode', $parameters['jobCode']);
+        //var_dump($result);die;
         return $result;
     }
 
