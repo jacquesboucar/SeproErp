@@ -190,7 +190,7 @@ class ReviewEvaluationForm extends BasePefromanceSearchForm {
                     $rating->setPoids(round($this->filterPostValues(trim($postParameters['poids'][$key]))));
                     if($this->filterPostValues(round(trim($postParameters['valeur_cible'][$key])))!=null)
                     $rating->setValeurCible($this->filterPostValues(round(trim($postParameters['valeur_cible'][$key]))));
-                    $rating->setComment($this->filterPostValues(round(trim($postParameters['comment'][$key]))));
+                    $rating->setComment($this->filterPostValues($postParameters['comment'][$key]));
                     $rating->setMois2($this->filterPostValues(round(trim($postParameters['mois2'][$key]))));
                     $rating->setMois3($this->filterPostValues(round(trim($postParameters['mois3'][$key]))));
                     $rating->setMois4($this->filterPostValues(round(trim($postParameters['mois4'][$key]))));
