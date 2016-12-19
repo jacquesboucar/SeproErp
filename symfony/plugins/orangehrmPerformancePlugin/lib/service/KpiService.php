@@ -107,4 +107,8 @@ class KpiService {
         }
     }
 
+    public function getAllKpi(){
+        return $this->getDao()->getAllKpi();
+    }
+
 }

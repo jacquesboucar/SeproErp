@@ -79,7 +79,8 @@ class searchKpiPdfAction extends basePeformanceAction {
     }
 
 	public function execute($request) {
-       $kpis = $this->getKpiService()->searchKpi($parameters = null);
+       //$kpis = $this->getKpiService()->searchKpi($parameters = null);
+       $kpis = $this->getKpiService()->getAllKpi();
 
       // create new PDF document
        $pdf = new FICHE(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);

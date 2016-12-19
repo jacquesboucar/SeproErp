@@ -186,5 +186,19 @@ class KpiDao extends BaseDao {
     }
 
 
+    public function getAllKpi($parameters = null) {
+        try {
+            $query = Doctrine_Query:: create()
+                ->from('Kpi')
+                ->Where('deleted_at IS NULL')
+                ->groupBy('kpi_indicators');
+            //var_dump($query->getSqlQuery());die;
+            return $query->execute();
+            //@codeCoverageIgnoreStart
+        } catch (Exception $e) {
+            throw new DaoException($e->getMessage(), $e->getCode(), $e);
+        }//@codeCoverageIgnoreEnd
+    }
+
 
 }
