@@ -278,7 +278,7 @@ $html .= <<<EOD
       <td style="width:50px;"> $mois11 </td>
       <td style="width:50px;"> $mois12 </td>
       <td style="width:50px;"> $note_final </td>
-      <td style="width:50px;"> $taux_atteind </td>
+      <td style="width:50px;"> $taux_atteind %</td>
     </tr>
 
 
