@@ -185,13 +185,15 @@ $nbPage = $pdf->getAliasNbPages();
 $html = <<<EOD
   <table border="0.4" cellspacing="0" cellpadding="4">
     <tr>
-      <td colspan="2" rowspan="2"  bgcolor="#ffffff" color="#770a82" style="font-size: 20px;font-weight:bold;text-align:center;"> <br><br> SABLUX <br></td>
-      <td colspan="14" rowspan="1" border="0" bgcolor="#770a82" color="#ffffff" style="font-size: 20px;font-weight:bold;text-align:center;">  SYSTÈME DE MANAGEMENT DE LA QUALITE <br> TABLEAU DE BORD DU SMQ </td>
+      <td colspan="2" rowspan="2"  bgcolor="#ffffff" color="#770a82" style="font-size: 10px;font-weight:bold;text-align:center;"> 
+      <img src="../../symfony/web/webres_55a775cf9fcff8.50052456/themes/default/images/login/logosablux.png" alt="SeproRH">
+      </td>
+      <td colspan="14" rowspan="1" border="0" bgcolor="#ffffff" color="#770a82" style="font-size: 16px;font-weight:bold;text-align:center;">  SYSTÈME DE MANAGEMENT DE LA QUALITE TABLEAU DE BORD DU SMQ </td>
       <td colspan="3" rowspan="2" bgcolor="#ffffff" color="#770a82" > Page: $curPage sur $nbPage  </td>
     </tr>
     <tr>
-      <td colspan="7" border="0" bgcolor="#770a82" color="#ffffff" style="font-size: 16px;font-weight:bold;" > Employé : $employe_name  </td>
-      <td colspan="7" border="0" bgcolor="#770a82" color="#ffffff" style="font-size: 16px;font-weight:bold;" > Responsable Evaluation : $reviewer_first_name $reviewer_last_name  </td>
+      <td colspan="7" border="0" bgcolor="#ffffff" color="#770a82" style="font-size: 12px;font-weight:bold;" > Employé : $employe_name  </td>
+      <td colspan="7" border="0" bgcolor="#ffffff" color="#770a82" style="font-size: 12px;font-weight:bold;" > Responsable Evaluation : $reviewer_first_name $reviewer_last_name  </td>
     </tr>
 EOD;
 
@@ -200,32 +202,26 @@ $html .= <<<EOD
       <tr>
         <th colspan="19" style="font-weight:bold;text-align:center;font-size: 12px;"><b> $ex_group </b></th>
       </tr><tr>
-        <th style="width:70px;"><b> Objectifs </b></th>
-        <th style="width:70px;"><b> INDICATEURS </b></th>
-        <th style="width:70px;"><b> MODE DE CALCUL </b></th>
-        <th style="width:65px;"><b> PERIODICITE </b></th>
-        <th style="width:65px;"><b> PILOTE </b></th>
-        <th style="width:35px;"><b> CIBLE </b></th>
-        <th style="width:35px;"><b> MOIS 1 </b></th>
-        <th style="width:35px;"><b> MOIS 2 </b></th>
-        <th style="width:35px;"><b> MOIS 3 </b></th>
-        <th style="width:35px;"><b> MOIS 4 </b></th>
-        <th style="width:35px;"><b> MOIS 5 </b></th>
-        <th style="width:35px;"><b> MOIS 6 </b></th>
-        <th style="width:35px;"><b> MOIS 7 </b></th>
-        <th style="width:35px;"><b> MOIS 8 </b></th>
-        <th style="width:35px;"><b> MOIS 9 </b></th>
-        <th style="width:35px;"><b> MOIS 10 </b></th>
-        <th style="width:35px;"><b> MOIS 11 </b></th>
-        <th style="width:35px;"><b> MOIS 12 </b></th>
-        <th style="width:35px;"><b> Note finale </b></th>
-        <th style="width:35px;"><b> Taux atteint </b></th>
-        <th style="width:73px;"><b> COMMENTAIRE </b></th>
-      </tr><tr>
-        <td colspan ="3"> </td>
-        <td><b> Collecte </b></td>
-        <td><b> Analyse </b></td>
-        <td colspan = "14"> </td>
+       
+        <th style="width:115px;"><b> INDICATEURS </b></th>
+        
+        <th style="width:73px;"><b> PERIODICITE </b></th>
+        
+        <th style="width:50px;"><b> CIBLE </b></th>
+        <th style="width:50px;"><b> MOIS 1 </b></th>
+        <th style="width:50px;"><b> MOIS 2 </b></th>
+        <th style="width:50px;"><b> MOIS 3 </b></th>
+        <th style="width:50px;"><b> MOIS 4 </b></th>
+        <th style="width:50px;"><b> MOIS 5 </b></th>
+        <th style="width:50px;"><b> MOIS 6 </b></th>
+        <th style="width:50px;"><b> MOIS 7 </b></th>
+        <th style="width:50px;"><b> MOIS 8 </b></th>
+        <th style="width:50px;"><b> MOIS 9 </b></th>
+        <th style="width:50px;"><b> MOIS 10 </b></th>
+        <th style="width:50px;"><b> MOIS 11 </b></th>
+        <th style="width:50px;"><b> MOIS 12 </b></th>
+        <th style="width:50px;"><b> Note finale </b></th>
+        <th style="width:50px;"><b> Taux atteint </b></th>
       </tr>
 
 EOD;
@@ -263,27 +259,26 @@ EOD;
 $html .= <<<EOD
 
     <tr>
-      <td style="width:70px;"> $objectifs </td>
-      <td style="width:70px;"> $kpi </td>
-      <td style="width:70px;"> $mode_calcul </td>
-      <td style="width:65px;"> $periodicite </td>
-      <td style="width:65px;"> $periodicite </td>
-      <td style="width:35px;"> $cible </td>
-      <td style="width:35px;"> $mois1 </td>
-      <td style="width:35px;"> $mois2 </td>
-      <td style="width:35px;"> $mois3 </td>
-      <td style="width:35px;"> $mois4 </td>
-      <td style="width:35px;"> $mois5 </td>
-      <td style="width:35px;"> $mois6 </td>
-      <td style="width:35px;"> $mois7 </td>
-      <td style="width:35px;"> $mois8 </td>
-      <td style="width:35px;"> $mois9 </td>
-      <td style="width:35px;"> $mois10 </td>
-      <td style="width:35px;"> $mois11 </td>
-      <td style="width:35px;"> $mois12 </td>
-      <td style="width:35px;"> $note_final </td>
-      <td style="width:35px;"> $taux_atteind </td>
-      <td style="width:73px;"> $comment </td>
+      
+      <td style="width:115px;"> $kpi </td>
+      
+      
+      <td style="width:73px;"> $periodicite </td>
+      <td style="width:50px;"> $cible </td>
+      <td style="width:50px;"> $mois1 </td>
+      <td style="width:50px;"> $mois2 </td>
+      <td style="width:50px;"> $mois3 </td>
+      <td style="width:50px;"> $mois4 </td>
+      <td style="width:50px;"> $mois5 </td>
+      <td style="width:50px;"> $mois6 </td>
+      <td style="width:50px;"> $mois7 </td>
+      <td style="width:50px;"> $mois8 </td>
+      <td style="width:50px;"> $mois9 </td>
+      <td style="width:50px;"> $mois10 </td>
+      <td style="width:50px;"> $mois11 </td>
+      <td style="width:50px;"> $mois12 </td>
+      <td style="width:50px;"> $note_final </td>
+      <td style="width:50px;"> $taux_atteind </td>
     </tr>
 
 
