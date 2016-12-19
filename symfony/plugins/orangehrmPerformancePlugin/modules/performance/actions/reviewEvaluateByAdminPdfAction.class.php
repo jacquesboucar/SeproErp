@@ -251,7 +251,7 @@ EOD;
         $mois11 = $value->getMois11();
         $mois12 = $value->getMois12();
         $note_final = $value->getNote();
-        $taux_atteind = $value->getTauxAtteint();
+        $taux_atteind = round((double)(($value->getTauxAtteint()/$value->getValeurCible())*100));
         $comment = $value->getComment();
 
 
