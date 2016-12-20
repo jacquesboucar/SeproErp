@@ -51,6 +51,15 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                 </div>
             </div>
             <br/><br/>
+            <?php
+            $ratings = $form->getSortedRatings($reviewer->getRating());
+            foreach ($ratings as $rating) {
+                $review_id = $rating->getReviewId();
+            }
+            ?>
+            <div class="pull-right impressionbtn">
+                <a href="<?php echo url_for('performance/reviewEvaluateByAdminPdf') . '?id=' . $review_id ?>" target="_blank">Telecharger</a>
+            </div>
             <br class="clear"/>
             <form id="reviewEvaluate" name="reviewEvaluate" method="post" action="">
                 <?php
