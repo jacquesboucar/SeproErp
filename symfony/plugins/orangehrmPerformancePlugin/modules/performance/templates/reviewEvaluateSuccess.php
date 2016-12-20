@@ -188,7 +188,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                                                 <div class="row"><input type="text" style="width:200px;" id="mois6_<?php echo $value->getId(); ?>" name="mois6[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois6(); ?>">
                                                                     Taux:&nbsp<?php echo round((double)($value->getMois6()/$value->getValeurCible())*100); ?>%</div>
                                                                 <div class="row"><label>Commentaire</label></div>
-                                                                <div class="row"><textarea class="comment" type="text" id="comment_<?php echo $value->getId(); ?>" name="comment[<?php echo $value->getId(); ?>]" ><?php echo $commentaire['comment']; ?></textarea></div>
+                                                                <div class="row"><textarea class="comment" type="text" id="comment6_<?php echo $value->getId(); ?>" name="comment6[<?php echo $value->getId(); ?>]" ><?php echo $commentaire['comment']; ?></textarea></div>
                                                             </li>
                                                             <li>
                                                                 <?php $commentaire = $form->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois7"); ?>
@@ -386,7 +386,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                                                 <div class="row"><input type="text" style="width:200px;" id="mois6_<?php echo $value->getId(); ?>" name="mois6[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois6(); ?>">
                                                                     Taux:&nbsp<?php echo round((double)($value->getMois6()/$value->getValeurCible())*100); ?>%</div>
                                                                 <div class="row"><label>Commentaire</label></div>
-                                                                <div class="row"><textarea class="comment" type="text" id="comment_<?php echo $value->getId(); ?>" name="comment[<?php echo $value->getId(); ?>]" ><?php echo $commentaire['comment']; ?></textarea></div>
+                                                                <div class="row"><textarea class="comment" type="text" id="comment6_<?php echo $value->getId(); ?>" name="comment6[<?php echo $value->getId(); ?>]" ><?php echo $commentaire['comment']; ?></textarea></div>
                                                             </li>
                                                             <li>
                                                                 <?php $commentaire = $form->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois7"); ?>
