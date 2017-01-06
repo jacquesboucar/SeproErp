@@ -177,9 +177,32 @@ class ReviewEvaluationForm extends BasePefromanceSearchForm {
     public function saveForm($request) {
         if ($this->isEditable()) {
             $postParameters = $request->getPostParameters();
-            //var_dump($postParameters); die();
+            //var_dump($postParameters);die;
+            $param = array('reviewId' => $this->getReviewId());
 
-            foreach ($postParameters['rating_id'] as $key => $ratingId) {
+            if ($this->getValue('action') == 'complete') {
+                $lesrating = $this->getPerformanceReviewService()->searchReviewRating($param);
+                foreach ($lesrating as $value)
+                {
+                    $reviewer_id = $value->getReviewerId();
+
+                    $reviewer = $this->getPerformanceReviewService()->getReviewerById($reviewer_id);
+                    $reviewer_group = $reviewer->getReviewerGroupId();
+
+                    if ($reviewer_group == 1) {
+                        $rating_ids[$value->getId()] = $value->getId();
+                    }
+                }
+            }else{
+                $rating_ids = $postParameters['rating_id'];
+                //var_dump($rating_ids);die;
+            }
+
+            //var_dump($rating_ids);die;
+
+            $rating = $this->getPerformanceReviewService()->searchReviewRating($param);
+
+            foreach ($rating_ids as $key => $ratingId) {
 
                 if ($this->isValidRatingId($ratingId))
                 {
@@ -295,6 +318,7 @@ class ReviewEvaluationForm extends BasePefromanceSearchForm {
             }
 
             if ($this->getValue('action') == 'complete') {
+
                 $reviewer = $rating->getReviewer();
                 if ($reviewer->getGroup()->getId() == 2) {
                     $comment = $postParameters['general_comment'][$reviewer->getGroup()->getId()];
@@ -325,13 +349,14 @@ class ReviewEvaluationForm extends BasePefromanceSearchForm {
                 $reviewer->save();
             }
 
-            $review = $this->getPerformanceReviewService()->searchReview($this->getReviewId());
+            //$review = $this->getPerformanceReviewService()->searchReview($this->getReviewId());
             $status = $this->getReviewStatusFactory()->getStatus($reviewer->getReview()->getStatusId());
             $review = $reviewer->getReview();
             $review->setStatusId($status->getNextStatus());
             $review->save();
             return $review;
         }
+        //var_dump($review);die;
     }
 
     public function isValidRatingId($ratingId) {

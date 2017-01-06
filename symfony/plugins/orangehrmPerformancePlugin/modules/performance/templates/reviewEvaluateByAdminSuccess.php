@@ -1,3 +1,9 @@
+<script>
+    function FormValeurParMois(arg) {
+        alert('test');
+        $('#Valeurevaluations'+arg).modal("show");
+    }
+</script>
 <?php use_stylesheets_for_form($form); ?>
 
 <?php
@@ -57,7 +63,9 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
             <br/><br/>
             <div>
                 <form id="reviewEvaluate" name="reviewEvaluate" method="post" action="">
+                    <input type="hidden" id="utilisateur_id" value="<?php echo $form->getUser()->getEmployeeNumber(); ?>"/>
                     <?php
+
                     echo $form['_csrf_token'];
                     echo $form['id']->render();
                     echo $form['action']->render();
@@ -68,6 +76,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                     foreach ($ratings as $rating) {
                         $review_id = $rating->getReviewId();
                     }
+
                     ?>
                     <div class="pull-right impressionbtn">
                         <a href="<?php echo url_for('performance/reviewEvaluateByAdminPdf') . '?id=' . $review_id ?>" target="_blank">Telecharger</a>
@@ -79,13 +88,13 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                     }
 
 
-                    $columNumber = 0;
+                    $columNumber = 0;$emp='';
                     foreach ($form->getReviewers() as $reviewer) {
 
                     if (($reviewer->getGroup()->getId() == 2 && $reviewer->getStatus() == 3) || $reviewer->getGroup()->getId() != 2) {
                     if ($reviewer->getReviewerGroupId() != 2) {
                     $reviewerGroupId = $reviewer->getReviewerGroupId();
-                    $columNumber = 1;
+                    $columNumber = 1;$emp='';
                     ?>
                     </tr>
                     </table>
@@ -94,7 +103,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                     <table class="expandTable">
                         <br class="clear"/>
                         <tr>
-                            <?php } else {
+                            <?php } else { $emp='emp';
                             ?>
 
                             <div class="smallerHeader"><h1><?php echo __('Evaluation by Employee'); ?></h1></div>
@@ -110,7 +119,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                     <div>
                                         <div class="evaluationexpand">
 
-                                            <table  class="evaluateBy" >
+                                            <table  class="evaluateBy">
                                                 <tr>
                                                     <?php if ($columNumber == 1) { ?>
                                                         <th colspan="20" class="evaluationEmployee">
@@ -134,173 +143,24 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                                         }
                                                     }
                                                 } $notefinale=0;$nbrekpi=0;
-                                                foreach ($existe_group as $key =>$ex_group)
-                                                {
-                                                 ?>
+                                                ?>
                                                 <tr>
-                                                    <th colspan="20" style="font-weight:bold;text-align:center;font-size: 12px;"><b><?php echo $ex_group; ?> </b></th>
+                                                    <th colspan="20" style="font-weight:bold;text-align:center;font-size: 12px;">
+                                                        <select id="ChoisirGroupe<?php echo $emp; ?>" style="width: 100%;font-weight:bold;text-align:center;font-size: 14px;" >
+                                                                <option>Veuillez choisir un  kpi groupe</option>
+                                                            <?php foreach ($existe_group as $key =>$ex_group){ ?>
+                                                                <option value="<?php echo $ex_group; ?>"><?php echo $ex_group; ?></option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </th>
                                                 </tr>
-                                                    <tr>
-                                                        <th style="width:400px;"><b> INDICATEURS </b></th>
-                                                        <th style="width:200px;"><b> PERIODICITE </b></th>
-                                                        <th style="width:100px;"><b> POIDS </b></th>
-                                                        <th style="width:200px;"><b> CIBLE </b></th>
-                                                        <th style="width:250px;"><b> CUMULE </b></th>
-                                                        <th style="width:100px;"><b> TAUX ATTEINT </b></th>
-                                                        <th style="width:100px;"><b> NOTE FINALE </b></th>
-                                                        <th style="width:150px;"><b> COMMENTAIRE </b></th>
-                                                        <th style="width:40px;"><b> EVALUER </b></th>
-                                                    </tr>
-                                                    <?php
-                                                        foreach ($rating as $value)
-                                                        {
 
-                                                            $reviewer_id = $value->getReviewerId();
-                                                            $reviewer = $form->getPerformanceReviewService()->getReviewerById($reviewer_id);
-                                                            $reviewer_group = $reviewer->getReviewerGroupId();
-
-                                                            if ($reviewer_group == 1 && $value->getKpi()->getKpiGroup() == $key)
-								                            { $nbrekpi++;$notefinale=$notefinale+$value->getNote();
-                                                                ?>
-                                                                <input type="hidden" value="<?php echo $value->getId(); ?>" id="rating_id_<?php echo $value->getId(); ?>" name="rating_id[<?php echo $value->getId(); ?>]" />
-                                                                <tr>
-
-                                                                    <td style="width:400px;"><?php echo $value->getKpi()->getKpiIndicators() ?></td>
-                                                                    <td style="width:200px;"><?php echo $value->getKpi()->getDelai() ?></td>
-                                                                    <td><input type="text" class="emp" style="width:200px;" id="poids_<?php echo $value->getId(); ?>" name="poids[<?php echo $value->getId(); ?>]" value="<?php echo $value->getPoids(); ?>"></td>
-                                                                    <td><input type="text" class="emp" style="width:200px;" id="valeur_cible_<?php echo $value->getId(); ?>" name="valeur_cible[<?php echo $value->getId(); ?>]" value="<?php echo $value->getValeurCible(); ?>"></td>
-                                                                    <td><?php echo $value->getCumule() ?></td>
-                                                                    <td><?php echo round((double)(($value->getTauxAtteint()/$value->getValeurCible())*100)) ?>%</td>
-                                                                    <td><input type="text" class="emp" style="width:100px;" id="noter_<?php echo $value->getId(); ?>" name="noter[<?php echo $value->getId(); ?>]" value="<?php echo $value->getNote(); ?>"></td>
-                                                                    <td><textarea class="comment emp" type="text" id="comment_<?php echo $value->getId(); ?>" name="comment[<?php echo $value->getId(); ?>]" ><?php echo $value->getComment(); ?></textarea></td>
-                                                                   <td><input type="button" id="btnValeur" name="btnValeur" value="Valeur/Mois" onclick="FormValeurParMois(<?php echo $value->getId(); ?>)"></td>
-
-                                                                    <!-- Confirmation box HTML: Begins -->
-                                                                    <div class="modal valeurevaluation" id="Valeurevaluations<?php echo $value->getId(); ?>">
-                                                                        <div class="modal-header">
-                                                                            <a class="close" data-dismiss="modal">×</a>
-                                                                            <h5><?php echo __('Valeurs Atteintes/Mois'); ?></h5>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <fieldset>
-                                                                                <ol>
-                                                                                    <li>
-                                                                                        <?php $commentaire = $form->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois1"); ?>
-                                                                                        <div class="row"><label><b>Valeur atteinte en Janvier</b></label></div>
-                                                                                        <div class="row"><input style="width:200px;" class="emp" type="text" value="<?php echo $value->getRating(); ?>" id="rating_<?php echo $value->getId(); ?>"  name="rating[<?php echo $value->getId(); ?>]" />
-                                                                                            Taux:&nbsp<?php echo round((double)($value->getRating()/$value->getValeurCible())*100); ?>%</div>
-                                                                                        <div class="row"><label>Commentaire</label></div>
-                                                                                        <div class="row"><textarea class="comment emp" type="text" id="comment1_<?php echo $value->getId(); ?>" name="comment1[<?php echo $value->getId(); ?>]" ><?php echo $commentaire['comment']; ?></textarea></div>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <?php $commentaire = $form->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois2"); ?>
-                                                                                        <div class="row"><label><b>Valeur atteinte en Fevrier</b></label></div>
-                                                                                        <div class="row"><input type="text" class="emp" style="width:200px;" id="mois2_<?php echo $value->getId(); ?>" name="mois2[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois2(); ?>">
-                                                                                            Taux:&nbsp<?php echo round((double)($value->getMois2()/$value->getValeurCible())*100); ?>%</div>
-                                                                                        <div class="row"><label>Commentaire</label></div>
-                                                                                        <div class="row"><textarea class="comment emp" type="text" id="comment2_<?php echo $value->getId(); ?>" name="comment2[<?php echo $value->getId(); ?>]" ><?php echo $commentaire['comment']; ?></textarea></div>
-                                                                                     </li>
-                                                                                    <li>
-                                                                                        <?php $commentaire = $form->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois3"); ?>
-                                                                                        <div class="row"><label><b>Valeur atteinte en Mars</b></label></div>
-                                                                                        <div class="row"><input type="text" class="emp" style="width:200px;" id="mois3_<?php echo $value->getId(); ?>" name="mois3[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois3(); ?>">
-                                                                                            Taux:&nbsp<?php echo round((double)($value->getMois3()/$value->getValeurCible())*100); ?>%</div>
-                                                                                        <div class="row"><label>Commentaire</label></div>
-                                                                                        <div class="row"><textarea class="comment emp" type="text" id="comment3_<?php echo $value->getId(); ?>" name="comment3[<?php echo $value->getId(); ?>]" ><?php echo $commentaire['comment']; ?></textarea></div>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <?php $commentaire = $form->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois4"); ?>
-                                                                                        <div class="row"><label><b>Valeur atteinte en Avril</b></label></div>
-                                                                                        <div class="row"><input type="text" class="emp" style="width:200px;" id="mois4_<?php echo $value->getId(); ?>" name="mois4[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois4(); ?>">
-                                                                                            Taux:&nbsp<?php echo round((double)($value->getMois4()/$value->getValeurCible())*100); ?>%</div>
-                                                                                        <div class="row"><label>Commentaire</label></div>
-                                                                                        <div class="row"><textarea class="comment emp" type="text" id="comment4_<?php echo $value->getId(); ?>" name="comment4[<?php echo $value->getId(); ?>]" ><?php echo $commentaire['comment']; ?></textarea></div>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <?php $commentaire = $form->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois5"); ?>
-                                                                                        <div class="row"><label><b>Valeur atteinte en Mai</b></label></div>
-                                                                                        <div class="row"><input type="text" class="emp" style="width:200px;" id="mois5_<?php echo $value->getId(); ?>" name="mois5[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois5(); ?>">
-                                                                                            Taux:&nbsp<?php echo round((double)($value->getMois5()/$value->getValeurCible())*100); ?>%</div>
-                                                                                        <div class="row"><label>Commentaire</label></div>
-                                                                                        <div class="row"><textarea class="comment emp" type="text" id="comment5_<?php echo $value->getId(); ?>" name="comment5[<?php echo $value->getId(); ?>]" ><?php echo $commentaire['comment']; ?></textarea></div>
-                                                                                     </li>
-                                                                                    <li>
-                                                                                        <?php $commentaire = $form->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois6"); ?>
-                                                                                        <div class="row"><label><b>Valeur atteinte en Juin</b></label></div>
-                                                                                        <div class="row"><input type="text" class="emp" style="width:200px;" id="mois6_<?php echo $value->getId(); ?>" name="mois6[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois6(); ?>">
-                                                                                            Taux:&nbsp<?php echo round((double)($value->getMois6()/$value->getValeurCible())*100); ?>%</div>
-                                                                                        <div class="row"><label>Commentaire</label></div>
-                                                                                        <div class="row"><textarea class="comment emp" type="text" id="comment6_<?php echo $value->getId(); ?>" name="comment6[<?php echo $value->getId(); ?>]" ><?php echo $commentaire['comment']; ?></textarea></div>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <?php $commentaire = $form->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois7"); ?>
-                                                                                        <div class="row"><label><b>Valeur atteinte en Juillet</b></label></div>
-                                                                                        <div class="row"><input type="text" class="emp" style="width:200px;" id="mois7_<?php echo $value->getId(); ?>" name="mois7[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois7(); ?>">
-                                                                                            Taux:&nbsp<?php echo round((double)($value->getMois7()/$value->getValeurCible())*100); ?>%</div>
-                                                                                        <div class="row"><label>Commentaire</label></div>
-                                                                                        <div class="row"><textarea class="comment emp" type="text" id="comment7_<?php echo $value->getId(); ?>" name="comment7[<?php echo $value->getId(); ?>]" ><?php echo $commentaire['comment']; ?></textarea></div>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <?php $commentaire = $form->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois8"); ?>
-                                                                                        <div class="row"><label><b>Valeur atteinte en Aout</b></label></div>
-                                                                                        <div class="row"><input type="text" class="emp" style="width:200px;" id="mois8_<?php echo $value->getId(); ?>" name="mois8[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois8(); ?>">
-                                                                                            Taux:&nbsp<?php echo round((double)($value->getMois8()/$value->getValeurCible())*100); ?>%</div>
-                                                                                        <div class="row"><label>Commentaire</label></div>
-                                                                                        <div class="row"><textarea class="comment emp" type="text" id="comment8_<?php echo $value->getId(); ?>" name="comment8[<?php echo $value->getId(); ?>]" ><?php echo $commentaire['comment']; ?></textarea></div>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <?php $commentaire = $form->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois9"); ?>
-                                                                                        <div class="row"><label><b>Valeur atteinte en Septembre</b></label></div>
-                                                                                        <div class="row"><input type="text" class="emp" style="width:200px;" id="mois9_<?php echo $value->getId(); ?>" name="mois9[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois9(); ?>">
-                                                                                            Taux:&nbsp<?php echo round((double)($value->getMois9()/$value->getValeurCible())*100); ?>%</div>
-                                                                                        <div class="row"><label>Commentaire</label></div>
-                                                                                        <div class="row"><textarea class="comment emp" type="text" id="comment9_<?php echo $value->getId(); ?>" name="comment9[<?php echo $value->getId(); ?>]" ><?php echo $commentaire['comment']; ?></textarea></div>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <?php $commentaire = $form->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois10"); ?>
-                                                                                        <div class="row"><label><b>Valeur atteinte en Octobre</b></label></div>
-                                                                                        <div class="row"><input  style="width:200px;" class="emp" type="text" id="mois10_<?php echo $value->getId(); ?>" name="mois10[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois10(); ?>">
-                                                                                            Taux:&nbsp<?php echo round((double)($value->getMois10()/$value->getValeurCible())*100); ?>%</div>
-                                                                                        <div class="row"><label>Commentaire</label></div>
-                                                                                        <div class="row"><textarea class="comment emp" type="text" id="comment10_<?php echo $value->getId(); ?>" name="comment10[<?php echo $value->getId(); ?>]" ><?php echo $commentaire['comment']; ?></textarea></div>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <?php $commentaire = $form->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois11"); ?>
-                                                                                        <div class="row"><label><b>Valeur atteinte en Novembre</b></label></div>
-                                                                                        <div class="row"><input style="width:200px;" class="emp" type="text" id="mois11_<?php echo $value->getId(); ?>" name="mois11[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois11(); ?>">
-                                                                                            Taux:&nbsp<?php echo round((double)($value->getMois11()/$value->getValeurCible())*100); ?>%</div>
-                                                                                        <div class="row"><label>Commentaire</label></div>
-                                                                                        <div class="row"><textarea class="comment emp" type="text" id="comment11_<?php echo $value->getId(); ?>" name="comment11[<?php echo $value->getId(); ?>]" ><?php echo $commentaire['comment']; ?></textarea></div>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <?php $commentaire = $form->getPerformanceReviewService()->getCommentaire($value->getKpi()->getId(),$value->getId(),"Mois12"); ?>
-                                                                                        <div class="row"><label><b>Valeur atteinte en Decembre</b></label></div>
-                                                                                        <div class="row"><input  type="text" class="emp" style="width:200px;" id="mois12_<?php echo $value->getId(); ?>" name="mois12[<?php echo $value->getId(); ?>]" value="<?php echo $value->getMois12(); ?>">
-                                                                                            Taux:&nbsp<?php echo round((double)($value->getMois12()/$value->getValeurCible())*100); ?>%</div>
-                                                                                        <div class="row"><label>Commentaire</label></div>
-                                                                                        <div class="row"><textarea class="comment emp" type="text" id="comment12_<?php echo $value->getId(); ?>" name="comment12[<?php echo $value->getId(); ?>]" ><?php echo $commentaire['comment']; ?></textarea></div>
-                                                                                    </li>
-                                                                                </ol>
-                                                                            </fieldset>
-
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <input type="button" class="btn" data-dismiss="modal" id="dialogEvalutionBtn" value="<?php echo __('Ok'); ?>" />
-                                                                            <input type="button" class="btn reset" data-dismiss="modal" value="<?php echo __('Cancel'); ?>" />
-                                                                        </div>
-                                                                    </div>
-                                                                    <!-- Confirmation box HTML: Ends -->
-                                                                </tr>
-                                                                <?php
-                                                            }
-
-                                                        }
-
-                                                        }
-                                                    ?>
 
                                             </table>
 
+                                            <table  class="expandTable" id="selectbygroupe<?php echo $emp; ?>"></table>
+
+                                            <div  id="modalbygroupe<?php echo $emp; ?>"></div>
                                         </div>
                                     </div>
                                 </td>
@@ -321,7 +181,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
 
                                 <li>
                                     <?php echo $form['finalRating']->renderLabel(null, array('class' => 'labelValue')); ?>
-                                    <?php echo $form['finalRating']->render(array('value'=> $notefinale/$nbrekpi, 'readonly' => 'readonly')) ?>
+                                    <?php echo $form['finalRating']->render(array('readonly' => 'readonly')) ?>
                                 </li>
                                 <li>
                                     <?php echo $form['completedDate']->renderLabel(null, array('class' => 'labelValue')); ?>
@@ -348,10 +208,10 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                 <div class="modal" id="deleteConfModal">
                     <div class="modal-header">
                         <a class="close" data-dismiss="modal">×</a>
-                        <h5><?php echo __('SeproRH - Confirmation Required'); ?></h5>
+                        <h5><?php echo __('SeproRH - Confirmation Requise'); ?></h5>
                     </div>
                     <div class="modal-body">
-                        <p><?php echo __("The review will be made read-only after completion.") . __("This action cannot be undone.") . __("Are you sure you want to continue?"); ?></p>
+                        <p><?php echo __("L'examen sera rendu en lecture seule une fois la demande terminée.") . __("Cette action ne peut pas être annulée.") . __("Êtes-vous sûr de vouloir continuer?"); ?></p>
                         <br/>
                     </div>
                     <div class="modal-footer">
@@ -368,14 +228,89 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
     <script>
 
         var backUrl = '<?php echo url_for($backUrl); ?>';
-        function FormValeurParMois(arg) {
+        var getChargement = '<?php echo url_for('performance/getChargementTableau');?>';
+
+        $('.btnValeur').live('click',function () {
+            var arg = $(this).attr('data-id');
             $('#Valeurevaluations'+arg).modal("show");
-        }
+        });
+
+        $('.btnValeuremp').live('click',function () {
+
+            var arg = $(this).attr('data-id');
+            $('#Valeurevaluationsemp'+arg).modal("show");
+        });
+
         $(document).ready(function () {
+
+            $('#ChoisirGroupeemp').change(function() {
+
+                var groupeselected = document.getElementById('ChoisirGroupeemp').value;
+                var idreview = $('#reviewEvaluation_id').val();
+                var popuptype = 'emp';
+
+                if(groupeselected =='' || idreview ==''){
+                    $("#selectbygroupeemp").html('');
+                    $("#modalbygroupeemp").html('');
+                    return;
+                }
+
+                $.ajax({
+                    type: 'GET',
+                    url: getChargement,
+                    data: 'groupeselected='+ groupeselected + '&idreview='+idreview + '&popuptype='+popuptype,
+                    contentType: "application/json",
+                    success: function (data) {
+                        $("#selectbygroupeemp").html(data.datars);
+                        $("#modalbygroupeemp").html(data.datarsmodal);
+                        $('#reviewEvaluation_finalRating').val(data.notefinal);
+                        $('#emp #selectbygroupeemp .emp').attr("disabled", "disabled");
+                        $('#emp #modalbygroupeemp .emp').attr("disabled", "disabled");
+                    },
+                    error : function (error) {
+                        console.dir(error);
+                    }
+                });
+            });
+            $('#ChoisirGroupe').change(function() {
+
+                var groupeselected = document.getElementById('ChoisirGroupe').value;
+                var idreview = $('#reviewEvaluation_id').val();
+                var popuptype = '';
+                if(groupeselected =='' || idreview ==''){
+                    $("#selectbygroupe").html('');
+                    $("#modalbygroupe").html('');
+                    return;
+                }
+
+                $.ajax({
+                    type: 'GET',
+                    url: getChargement,
+                    data: 'groupeselected='+ groupeselected + '&idreview='+idreview + '&popuptype='+popuptype,
+                    contentType: "application/json",
+                    success: function (data) {
+                        $("#selectbygroupe").html(data.datars);
+                        $("#modalbygroupe").html(data.datarsmodal);
+                        $('#reviewEvaluation_finalRating').val(data.notefinal);
+                        <?php if (!$form->isEvaluationsEditable()) { ?>
+                        $('input,textarea').attr("disabled", "disabled");
+                        $('#backBtn').removeAttr("disabled");
+                        $(".calendar").datepicker('disable');
+                        <?php } ?>
+                        $('.btnValeur').removeAttr("disabled");
+                    },
+                    error : function (error) {
+                        console.dir(error);
+                    }
+                });
+            });
+
+            $('#ChoisirGroupe').removeAttr("disabled");
+
             $('#emp .emp').attr("disabled", "disabled");
             $('.evaluationEmployeeths').show();
             $('#btnValeur').removeAttr("disabled");
-
+            //alert(test);
             <?php if (!$form->isEvaluationsEditable()) { ?>
             $('input,textarea').attr("disabled", "disabled");
             $('#backBtn').removeAttr("disabled");
@@ -442,7 +377,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
             $("#reviewEvaluate").validate({
                 rules: {
                     'reviewEvaluation[hrAdminComments]': {required: true, maxlength: 255},
-                    'reviewEvaluation[finalRating]': {required: true, min: 0, max: 10000, number: true, positiveNumber: true},
+                    'reviewEvaluation[finalRating]': {required: true, min: 0, max: 10000, number: true},
                     'reviewEvaluation[completedDate]': {
                         required: true,
                         valid_date: function () {
@@ -478,7 +413,6 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                         return true;
                     }
                 }, '<?php echo __(PerformanceValidationMessages::ONLY_INTEGER_ALLOWED); ?>');
-
 
         });
          var minMsg = "<?php //echo __('Rating should be less than or equal to ') ?>";
