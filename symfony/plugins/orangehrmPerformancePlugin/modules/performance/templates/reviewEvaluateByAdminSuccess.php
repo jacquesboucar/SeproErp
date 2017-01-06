@@ -142,7 +142,8 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                                             }
                                                         }
                                                     }
-                                                } $notefinale=0;$nbrekpi=0;
+                                                } $notefinale=0;
+                                                $nbrekpi=0;
                                                 ?>
                                                 <tr>
                                                     <th colspan="20" style="font-weight:bold;text-align:center;font-size: 12px;">
