@@ -55,6 +55,18 @@ class KpiListConfigurationFactory extends ohrmListConfigurationFactory {
 
         $headerArray [] = $header2;
 
+        $header2= new ListHeader();
+        $header2->populateFromArray(array(
+            'name' => 'type d\'indicateur',
+            'isSortable' => false,
+            'sortField' => null,
+            'elementType' => 'label',
+            'elementProperty' => array(
+                'getter' => array('getKpiType', 'getKpiType'))
+        ));
+
+        $headerArray [] = $header2;
+
         $header3 = new ListHeader();
         $header3->populateFromArray(array(
             'name' => 'Job Title',

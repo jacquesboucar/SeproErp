@@ -21,6 +21,7 @@ Kpi:
     delai: string(250)
     objectif: string(250)
     mode_calcul: string(250)
+    kpi_type: varchar(400)
   relations:
     JobTitle:
       local: jobTitleCode

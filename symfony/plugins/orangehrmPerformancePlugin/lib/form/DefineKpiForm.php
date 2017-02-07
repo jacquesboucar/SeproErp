@@ -17,6 +17,7 @@ class DefineKpiForm extends BasePefromanceSearchForm {
     public function configure() {
         $groupe = $this->getKpiGroupListAsArray();
         $kpi_id = $this->getOption('kpiId');
+        $kpitype = array('' => '','Performance' => 'Performances','Pilotage' => 'Pilotage');
         if(!empty($kpi_id)){
             $kpi = $this->getKpiService()->searchKpi(array('id' => $kpi_id));
             $jobtitleassign = $this->getJobTitleAssign($kpi->getKpiIndicators());
@@ -29,6 +30,7 @@ class DefineKpiForm extends BasePefromanceSearchForm {
         $this->setWidgets(array(
             'id' => new sfWidgetFormInputHidden(),
             'kpi_group' => new sfWidgetFormSelect(array('choices' => $groupe)),
+            'kpi_type' =>  new sfWidgetFormSelect(array('choices' => $kpitype)),
             'keyPerformanceIndicators' => new sfWidgetFormInput(array(), array('class' => 'formInputText')),
             'minRating' => new sfWidgetFormInput(array(), array('class' => 'formInputText')),
             'maxRating' => new sfWidgetFormInput(array(), array('class' => 'formInputText')),
@@ -44,6 +46,7 @@ class DefineKpiForm extends BasePefromanceSearchForm {
         $this->setValidators(array(
             'id' => new sfValidatorString(array('required' => false)),
             'kpi_group' => new sfValidatorChoice(array('required' => false, 'choices' => array_keys($groupe))),
+            'kpi_type' => new sfValidatorChoice(array('required' => false, 'choices' => array_keys($kpitype))),
             'keyPerformanceIndicators' => new sfValidatorString(array('required' => true)),
             'minRating' => new sfValidatorString(array('required' => false)),
             'maxRating' => new sfValidatorString(array('required' => false)),
@@ -147,6 +150,7 @@ class DefineKpiForm extends BasePefromanceSearchForm {
             'delai' => __("Périodicité"),
             'objectif' => __('Objectifs'),
             'mode_calcul' => __('Mode de Calcul'),
+            'kpi_type' => __('Type d\'indicateur'),
            // 'makeDefault' => __('Make Default Scale')
         );
         return $labels;
@@ -185,6 +189,7 @@ class DefineKpiForm extends BasePefromanceSearchForm {
 
           }
 
+          $kpi->setKpiType($values['kpi_type']);
           $kpi->setKpiGroup($values['kpi_group']);
           $kpi->setJobTitleCode($jobcode);
           $kpi->setKpiIndicators($values['keyPerformanceIndicators']);
@@ -219,6 +224,7 @@ class DefineKpiForm extends BasePefromanceSearchForm {
             $kpi = $this->getKpiService()->searchKpi(array('id' => $kpiId));
             $this->setDefault('id', $kpi->getId());
             $this->setDefault('kpi_group',$kpi->getKpiGroup());
+            $this->setDefault('kpi_type',$kpi->getKpiType());
             $this->setDefault('jobTitleCode', $kpi->getJobTitleCode());
             $this->setDefault('keyPerformanceIndicators', $kpi->getKpiIndicators());
             $this->setDefault('availableJob', $this->getJobTitleAvailable($kpi->getKpiIndicators()));

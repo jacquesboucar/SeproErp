@@ -23,6 +23,10 @@
                         <?php echo $form['kpi_group']->renderLabel(null, array('class' => 'labelValue')); ?>
                         <?php echo $form['kpi_group']->render() ?>
                     </li>
+                    <li>
+                        <?php echo $form['kpi_type']->renderLabel(null, array('class' => 'labelValue')); ?>
+                        <?php echo $form['kpi_type']->render() ?>
+                    </li>
                     <p id="selectManyTable">
                     <table border="0" width="45%" class="">
                         <tbody>
