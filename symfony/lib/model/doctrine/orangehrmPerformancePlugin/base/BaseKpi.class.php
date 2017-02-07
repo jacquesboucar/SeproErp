@@ -15,8 +15,10 @@
  * @property string $delai
  * @property string $objectif
  * @property string $mode_calcul
+ * @property varchar $kpi_type
  * @property JobTitle $JobTitle
  * @property Doctrine_Collection $ReviewerRating
+ * @property Doctrine_Collection $Commentaire
  * 
  * @method integer             getId()             Returns the current record's "id" value
  * @method string              getJobTitleCode()   Returns the current record's "jobTitleCode" value
@@ -28,8 +30,10 @@
  * @method string              getDelai()          Returns the current record's "delai" value
  * @method string              getObjectif()       Returns the current record's "objectif" value
  * @method string              getModeCalcul()     Returns the current record's "mode_calcul" value
+ * @method varchar             getKpiType()        Returns the current record's "kpi_type" value
  * @method JobTitle            getJobTitle()       Returns the current record's "JobTitle" value
  * @method Doctrine_Collection getReviewerRating() Returns the current record's "ReviewerRating" collection
+ * @method Doctrine_Collection getCommentaire()    Returns the current record's "Commentaire" collection
  * @method Kpi                 setId()             Sets the current record's "id" value
  * @method Kpi                 setJobTitleCode()   Sets the current record's "jobTitleCode" value
  * @method Kpi                 setKpiIndicators()  Sets the current record's "kpi_indicators" value
@@ -40,8 +44,10 @@
  * @method Kpi                 setDelai()          Sets the current record's "delai" value
  * @method Kpi                 setObjectif()       Sets the current record's "objectif" value
  * @method Kpi                 setModeCalcul()     Sets the current record's "mode_calcul" value
+ * @method Kpi                 setKpiType()        Sets the current record's "kpi_type" value
  * @method Kpi                 setJobTitle()       Sets the current record's "JobTitle" value
  * @method Kpi                 setReviewerRating() Sets the current record's "ReviewerRating" collection
+ * @method Kpi                 setCommentaire()    Sets the current record's "Commentaire" collection
  * 
  * @package    orangehrm
  * @subpackage model\performance\base
@@ -95,6 +101,10 @@ abstract class BaseKpi extends sfDoctrineRecord
              'type' => 'string',
              'length' => 250,
              ));
+        $this->hasColumn('kpi_type', 'varchar', 400, array(
+             'type' => 'varchar',
+             'length' => 400,
+             ));
     }
 
     public function setUp()
@@ -105,6 +115,10 @@ abstract class BaseKpi extends sfDoctrineRecord
              'foreign' => 'id'));
 
         $this->hasMany('ReviewerRating', array(
+             'local' => 'id',
+             'foreign' => 'kpi_id'));
+
+        $this->hasMany('Commentaire', array(
              'local' => 'id',
              'foreign' => 'kpi_id'));
 
