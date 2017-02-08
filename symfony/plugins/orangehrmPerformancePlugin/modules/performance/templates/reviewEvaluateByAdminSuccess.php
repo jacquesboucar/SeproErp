@@ -182,7 +182,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
 
                                 <li>
                                     <?php echo $form['finalRating']->renderLabel(null, array('class' => 'labelValue')); ?>
-                                    <?php echo $form['finalRating']->render(array('readonly' => 'readonly')) ?>
+                                    <?php echo $form['finalRating']->render() ?>
                                 </li>
                                 <li>
                                     <?php echo $form['completedDate']->renderLabel(null, array('class' => 'labelValue')); ?>

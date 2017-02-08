@@ -141,6 +141,7 @@ class searchKpiPdfAction extends basePeformanceAction {
 $html = <<<EOD
   <br/><br/><br/>
   <table border="1" cellspacing="0" cellpadding="4" >
+  <tr bgcolor="#770a82" color="#ffffff" style="font-weight:bold;text-align:center;font-size: 12px;"><td colspan="5"> Indicateur Clé de Performance</td></tr>
     <tr bgcolor="#770a82" color="#ffffff">
       <th> Kpi Groupe </th>
       <th> Indicateur Clé de Performance </th>
@@ -171,15 +172,13 @@ foreach ($existe_group as $key => $grp)
         {
             //$job_id = $value->getJobTitle();
             //$job_title = $this->_getJobTitles($job_id);
+            ////$poids = $value->getMaxRating();
             $objectif = $value->getObjectif();
             $mode_calcul = $value->getModeCalcul();
-            //$poids = $value->getMaxRating();
             $periodicite = $value->getDelai();
-
-
-
-            $html .= <<<EOD
-
+            $kpitype = $value->getKpiType();
+            if($kpitype == 'Performances' || $kpitype==0){
+                $html .= <<<EOD
             <tr>
               <td> $Kpigroup </td>
               <td> $kpi </td>
@@ -187,15 +186,67 @@ foreach ($existe_group as $key => $grp)
               <td> $mode_calcul </td>
               <td> $periodicite </td>
             </tr>
-
-
 EOD;
+            }
 
         }
 
 
     }
 }
+
+        $html .= <<<EOD
+  </table>
+  <br/><br/><br/>
+  <table border="1" cellspacing="0" cellpadding="4" >
+  <tr bgcolor="#770a82" color="#ffffff" style="font-weight:bold;text-align:center;font-size: 12px;"><td colspan="5"> Indicateur Clé de Pilotage</td></tr>
+    <tr bgcolor="#770a82" color="#ffffff">
+      <th> Kpi Groupe </th>
+      <th> Indicateur Clé de Pilotage </th>
+      <th> Objectifs  </th>
+      <th> Mode Calcul </th>
+      <th> Périodicité  </th>
+    </tr>
+EOD;
+foreach ($existe_group as $key => $grp)
+{
+    foreach ($kpis as $value)
+    {
+
+        $kpi = $value->getKpiIndicators();
+        $id_group = $value->getKpiGroup();
+        $group = $this->getKpiGroupService()->getKpiGroupById($id_group);
+        $Kpigroup = $group->getKpiGroupName();
+        if($grp==$id_group)
+        {
+            //$job_id = $value->getJobTitle();
+            //$job_title = $this->_getJobTitles($job_id);
+            ////$poids = $value->getMaxRating();
+            $objectif = $value->getObjectif();
+            $mode_calcul = $value->getModeCalcul();
+            $periodicite = $value->getDelai();
+            $kpitype = $value->getKpiType();
+            if($kpitype == 'Pilotage'){
+                $html .= <<<EOD
+            <tr>
+              <td> $Kpigroup </td>
+              <td> $kpi </td>
+              <td> $objectif </td>
+              <td> $mode_calcul </td>
+              <td> $periodicite </td>
+            </tr>
+EOD;
+    }
+
+}
+
+
+}
+}
+
+
+
+EOD;
 
 
 $html .= <<<EOD
