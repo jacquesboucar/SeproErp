@@ -177,7 +177,7 @@ foreach ($existe_group as $key => $grp)
             $mode_calcul = $value->getModeCalcul();
             $periodicite = $value->getDelai();
             $kpitype = $value->getKpiType();
-            if($kpitype == 'Performances' || $kpitype==0){
+            if($kpitype == 'Performances'){
                 $html .= <<<EOD
             <tr>
               <td> $Kpigroup </td>

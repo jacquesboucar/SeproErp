@@ -208,7 +208,7 @@ $html .= <<<EOD
         <th style="width:73px;"><b> PERIODICITE </b></th>
         
         <th style="width:50px;"><b> CIBLE </b></th>
-        <th style="width:50px;"><b> Janvier </b></th>
+       <th style="width:50px;"><b> Janvier </b></th>
         <th style="width:50px;"><b> Fevrier </b></th>
         <th style="width:50px;"><b> Mars </b></th>
         <th style="width:50px;"><b> Avril </b></th>

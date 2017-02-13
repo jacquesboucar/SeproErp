@@ -146,6 +146,16 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                                                 $nbrekpi=0;
                                                 ?>
                                                 <tr>
+                                                    <th colspan="20">
+                                                        <select id="typeindicateur<?php echo $emp; ?>" style="width: 100%;font-weight:bold;text-align:center;font-size: 14px;" >
+                                                            <option>Veuillez choisir un  type d'indicateur</option>
+                                                            <option value="Pilotage">Pilotage</option>
+                                                            <option value="Performance">Performance</option>
+
+                                                        </select>
+                                                    </th>
+                                                </tr>
+                                                <tr>
                                                     <th colspan="20" style="font-weight:bold;text-align:center;font-size: 12px;">
                                                         <select id="ChoisirGroupe<?php echo $emp; ?>" style="width: 100%;font-weight:bold;text-align:center;font-size: 14px;" >
                                                                 <option>Veuillez choisir un  kpi groupe</option>
@@ -244,67 +254,101 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
 
         $(document).ready(function () {
 
-            $('#ChoisirGroupeemp').change(function() {
+            $('#ChoisirGroupe').hide();
+            $('#ChoisirGroupeemp').hide();
 
-                var groupeselected = document.getElementById('ChoisirGroupeemp').value;
-                var idreview = $('#reviewEvaluation_id').val();
-                var popuptype = 'emp';
+            //Gerer le type d'indicateur
+            $('#typeindicateur').change(function() {
 
-                if(groupeselected =='' || idreview ==''){
-                    $("#selectbygroupeemp").html('');
-                    $("#modalbygroupeemp").html('');
-                    return;
-                }
-
-                $.ajax({
-                    type: 'GET',
-                    url: getChargement,
-                    data: 'groupeselected='+ groupeselected + '&idreview='+idreview + '&popuptype='+popuptype,
-                    contentType: "application/json",
-                    success: function (data) {
-                        $("#selectbygroupeemp").html(data.datars);
-                        $("#modalbygroupeemp").html(data.datarsmodal);
-                        $('#reviewEvaluation_finalRating').val(data.notefinal);
-                        $('#emp #selectbygroupeemp .emp').attr("disabled", "disabled");
-                        $('#emp #modalbygroupeemp .emp').attr("disabled", "disabled");
-                    },
-                    error : function (error) {
-                        console.dir(error);
-                    }
-                });
+                ShowGroupbyType();
             });
-            $('#ChoisirGroupe').change(function() {
+            $('#typeindicateuremp').change(function() {
 
-                var groupeselected = document.getElementById('ChoisirGroupe').value;
-                var idreview = $('#reviewEvaluation_id').val();
-                var popuptype = '';
-                if(groupeselected =='' || idreview ==''){
+                ShowGroupbyTypeEmp();
+            });
+
+            function ShowGroupbyType() {
+
+                $('#ChoisirGroupe').show();
+
+                $('#ChoisirGroupe').change(function() {
+
                     $("#selectbygroupe").html('');
                     $("#modalbygroupe").html('');
-                    return;
-                }
 
-                $.ajax({
-                    type: 'GET',
-                    url: getChargement,
-                    data: 'groupeselected='+ groupeselected + '&idreview='+idreview + '&popuptype='+popuptype,
-                    contentType: "application/json",
-                    success: function (data) {
-                        $("#selectbygroupe").html(data.datars);
-                        $("#modalbygroupe").html(data.datarsmodal);
-                        $('#reviewEvaluation_finalRating').val(data.notefinal);
-                        <?php if (!$form->isEvaluationsEditable()) { ?>
-                        $('input,textarea').attr("disabled", "disabled");
-                        $('#backBtn').removeAttr("disabled");
-                        $(".calendar").datepicker('disable');
-                        <?php } ?>
-                        $('.btnValeur').removeAttr("disabled");
-                    },
-                    error : function (error) {
-                        console.dir(error);
-                    }
+                    var kpitype = document.getElementById('typeindicateur').value;
+                    var groupeselected = document.getElementById('ChoisirGroupe').value;
+                    var idreview = $('#reviewEvaluation_id').val();
+                    var popuptype = '';
+                    //if(groupeselected =='' || idreview ==''){
+                    //    $("#selectbygroupe").html('');
+                   //     $("#modalbygroupe").html('');
+                  //      return;
+                   // }
+
+                    $.ajax({
+                        type: 'GET',
+                        url: getChargement,
+                        data: 'groupeselected='+ groupeselected + '&idreview='+idreview + '&popuptype='+popuptype + '&typeindicateur='+kpitype,
+                        contentType: "application/json",
+                        success: function (data) {
+                            $("#selectbygroupe").html(data.datars);
+                            $("#modalbygroupe").html(data.datarsmodal);
+                            $('#reviewEvaluation_finalRating').val(data.notefinal);
+                            <?php if (!$form->isEvaluationsEditable()) { ?>
+                            $('input,textarea').attr("disabled", "disabled");
+                            $('#backBtn').removeAttr("disabled");
+                            $(".calendar").datepicker('disable');
+                            <?php } ?>
+                            $('.btnValeur').removeAttr("disabled");
+                        },
+                        error : function (error) {
+                            console.dir(error);
+                        }
+                    });
                 });
-            });
+
+            }
+
+            function ShowGroupbyTypeEmp() {
+
+                $('#ChoisirGroupeemp').show();
+
+                $('#ChoisirGroupeemp').change(function() {
+
+                    $("#selectbygroupeemp").html('');
+                    $("#modalbygroupeemp").html('');
+
+                    var kpitype = document.getElementById('typeindicateuremp').value;
+                    var groupeselected = document.getElementById('ChoisirGroupeemp').value;
+                    var idreview = $('#reviewEvaluation_id').val();
+                    var popuptype = 'emp';
+                    /*
+                    if(groupeselected =='' || idreview ==''){
+                        $("#selectbygroupeemp").html('');
+                        $("#modalbygroupeemp").html('');
+                        return;
+                    }
+                    */
+                    $.ajax({
+                        type: 'GET',
+                        url: getChargement,
+                        data: 'groupeselected='+ groupeselected + '&idreview='+idreview + '&popuptype='+popuptype + '&typeindicateur='+kpitype,
+                        contentType: "application/json",
+                        success: function (data) {
+                            $("#selectbygroupeemp").html(data.datars);
+                            $("#modalbygroupeemp").html(data.datarsmodal);
+                            $('#reviewEvaluation_finalRating').val(data.notefinal);
+                            $('#emp #selectbygroupeemp .emp').attr("disabled", "disabled");
+                            $('#emp #modalbygroupeemp .emp').attr("disabled", "disabled");
+                        },
+                        error : function (error) {
+                            console.dir(error);
+                        }
+                    });
+                });
+
+            }
 
             $('#ChoisirGroupe').removeAttr("disabled");
 
@@ -377,7 +421,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
 
             $("#reviewEvaluate").validate({
                 rules: {
-                    'reviewEvaluation[hrAdminComments]': {required: true, maxlength: 255},
+                    'reviewEvaluation[hrAdminComments]': {required: true, maxlength: 1000},
                     'reviewEvaluation[finalRating]': {required: true, min: 0, max: 10000, number: true},
                     'reviewEvaluation[completedDate]': {
                         required: true,
@@ -392,7 +436,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                 messages: {
                     'reviewEvaluation[hrAdminComments]': {
                         required: '<?php echo __(ValidationMessages::REQUIRED); ?>',
-                        maxlength: '<?php echo __(ValidationMessages::TEXT_LENGTH_EXCEEDS, array('%amount%' => 255)); ?>'
+                        maxlength: '<?php echo __(ValidationMessages::TEXT_LENGTH_EXCEEDS, array('%amount%' => 1000)); ?>'
                     },
                     'reviewEvaluation[finalRating]': {
                         required: '<?php echo __(ValidationMessages::REQUIRED); ?>',
