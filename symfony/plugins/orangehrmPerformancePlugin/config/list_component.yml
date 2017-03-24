@@ -205,7 +205,7 @@ MyTraining:
   hasSelectableRows: true
   unselectableRowIds: []
   idValueGetter: getId
-  title: 'My Dotation Vehicule List'
+  title: 'My Training List'
   tableWidth: 100%
   hasSummary: false
   summary: []
