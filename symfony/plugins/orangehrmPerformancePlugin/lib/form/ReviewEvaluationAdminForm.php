@@ -87,6 +87,7 @@ class ReviewEvaluationAdminForm extends ReviewEvaluationForm {
     public function saveForm($request) {    
         
        $review = parent::saveForm($request);
+
        if(strlen($this->getValue('hrAdminComments'))>0){
             $review->setFinalComment($this->getValue('hrAdminComments'));
        }

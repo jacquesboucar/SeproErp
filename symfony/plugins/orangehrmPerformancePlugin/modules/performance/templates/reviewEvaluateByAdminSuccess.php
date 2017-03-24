@@ -254,14 +254,46 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
 
         $(document).ready(function () {
 
-            $('#ChoisirGroupe').hide();
+
+            var kpitype = '';
+            var groupeselected = '';
+
+            //$('#ChoisirGroupe').hide();
             $('#ChoisirGroupeemp').hide();
 
             //Gerer le type d'indicateur
+
+            kpitype = $('#typeindicateur :nth-child(3)').val();
+            groupeselected = $('#ChoisirGroupe :nth-child(2)').val();
+            var idreview = $('#reviewEvaluation_id').val();
+            var popuptype = '';
+            $.ajax({
+                type: 'GET',
+                url: getChargement,
+                data: 'groupeselected='+ groupeselected + '&idreview='+idreview + '&popuptype='+popuptype + '&typeindicateur='+kpitype,
+                contentType: "application/json",
+                success: function (data) {
+                    $("#selectbygroupe").html(data.datars);
+                    $("#modalbygroupe").html(data.datarsmodal);
+                    $('#reviewEvaluation_finalRating').val(data.notefinal);
+                    <?php if (!$form->isEvaluationsEditable()) { ?>
+                    $('input,textarea').attr("disabled", "disabled");
+                    $('#backBtn').removeAttr("disabled");
+                    $(".calendar").datepicker('disable');
+                    <?php } ?>
+                    $('.btnValeur').removeAttr("disabled");
+                },
+                error : function (error) {
+                    console.dir(error);
+                }
+            });
+
+
             $('#typeindicateur').change(function() {
 
                 ShowGroupbyType();
             });
+
             $('#typeindicateuremp').change(function() {
 
                 ShowGroupbyTypeEmp();
@@ -271,20 +303,19 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
 
                 $('#ChoisirGroupe').show();
 
+               // alert(kpitype);
                 $('#ChoisirGroupe').change(function() {
 
                     $("#selectbygroupe").html('');
                     $("#modalbygroupe").html('');
 
-                    var kpitype = document.getElementById('typeindicateur').value;
+                   // alert(kpitype);
+                    kpitype = document.getElementById('typeindicateur').value;
                     var groupeselected = document.getElementById('ChoisirGroupe').value;
+
                     var idreview = $('#reviewEvaluation_id').val();
                     var popuptype = '';
-                    //if(groupeselected =='' || idreview ==''){
-                    //    $("#selectbygroupe").html('');
-                   //     $("#modalbygroupe").html('');
-                  //      return;
-                   // }
+
 
                     $.ajax({
                         type: 'GET',
@@ -347,6 +378,42 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                         }
                     });
                 });
+
+            }
+
+            //Sans Le change
+            function ShowGroupbyTypeNotChange() {
+
+                $('#ChoisirGroupe').show();
+
+                //alert(kpitype);
+                    $("#selectbygroupe").html('');
+                    $("#modalbygroupe").html('');
+
+                    var idreview = $('#reviewEvaluation_id').val();
+                    var popuptype = '';
+
+
+                    $.ajax({
+                        type: 'GET',
+                        url: getChargement,
+                        data: 'groupeselected='+ groupeselected + '&idreview='+idreview + '&popuptype='+popuptype + '&typeindicateur='+kpitype,
+                        contentType: "application/json",
+                        success: function (data) {
+                            $("#selectbygroupe").html(data.datars);
+                            $("#modalbygroupe").html(data.datarsmodal);
+                            $('#reviewEvaluation_finalRating').val(data.notefinal);
+                            <?php if (!$form->isEvaluationsEditable()) { ?>
+                            $('input,textarea').attr("disabled", "disabled");
+                            $('#backBtn').removeAttr("disabled");
+                            $(".calendar").datepicker('disable');
+                            <?php } ?>
+                            $('.btnValeur').removeAttr("disabled");
+                        },
+                        error : function (error) {
+                            console.dir(error);
+                        }
+                    });
 
             }
 
@@ -421,7 +488,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
 
             $("#reviewEvaluate").validate({
                 rules: {
-                    'reviewEvaluation[hrAdminComments]': {required: true, maxlength: 1000},
+                    'reviewEvaluation[hrAdminComments]': {required: true, maxlength: 10000000},
                     'reviewEvaluation[finalRating]': {required: true, min: 0, max: 10000, number: true},
                     'reviewEvaluation[completedDate]': {
                         required: true,
@@ -436,7 +503,7 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                 messages: {
                     'reviewEvaluation[hrAdminComments]': {
                         required: '<?php echo __(ValidationMessages::REQUIRED); ?>',
-                        maxlength: '<?php echo __(ValidationMessages::TEXT_LENGTH_EXCEEDS, array('%amount%' => 1000)); ?>'
+                        maxlength: '<?php echo __(ValidationMessages::TEXT_LENGTH_EXCEEDS, array('%amount%' => 10000000)); ?>'
                     },
                     'reviewEvaluation[finalRating]': {
                         required: '<?php echo __(ValidationMessages::REQUIRED); ?>',

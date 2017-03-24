@@ -254,8 +254,40 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
             $('#ChoisirGroupe').removeAttr("disabled");
             $('#ChoisirGrouperes').removeAttr("disabled");
 
-            $('#ChoisirGroupe').hide();
+            //$('#ChoisirGroupe').hide();
             $('#ChoisirGrouperes').hide();
+
+            var kpitype = '';
+            var groupeselected = '';
+
+            //$('#ChoisirGroupe').hide();
+            $('#ChoisirGroupeemp').hide();
+
+            //Gerer le type d'indicateur
+
+            kpitype = $('#typeindicateur :nth-child(3)').val();
+            groupeselected = $('#ChoisirGroupe :nth-child(2)').val();
+            var idreview = $('#reviewEvaluation_id').val();
+            var popuptype = 'emp';
+            $.ajax({
+                type: 'GET',
+                url: getChargement,
+                data: 'groupeselected='+ groupeselected + '&idreview='+ idreview + '&popuptype='+ popuptype + '&typeindicateur='+ kpitype,
+                contentType: "application/json",
+                success: function (data) {
+                    $("#selectbygroupe").html(data.datars);
+                    $("#modalbygroupe").html(data.datarsmodal);
+                    <?php if (!$form->isEditable()) { ?>
+                    $('input,textarea').attr("disabled", "disabled");
+                    $('#backBtn').removeAttr("disabled");
+                    $('#btnValeur').removeAttr("disabled");
+                    <?php } ?>
+                    $('.btnValeuremp').removeAttr("disabled");
+                },
+                error : function (error) {
+                    console.dir(error);
+                }
+            });
 
             $('#typeindicateur').change(function() {
 
@@ -265,6 +297,8 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
             $('#typeindicateurres').change(function() {
 
                 ShowGroupByTyperes();
+
+
             });
 
             function ShowGroupByType() {
@@ -281,11 +315,9 @@ Doctrine_Manager::getInstance()->setAttribute(Doctrine::ATTR_USE_DQL_CALLBACKS, 
                     var groupeselected = document.getElementById('ChoisirGroupe').value;
                     var idreview = $('#reviewEvaluation_id').val();
                     var popuptype = 'emp';
-                    //if(groupeselected =='' || idreview ==''){
-                    //    $("#selectbygroupe").html('');
-                   //     $("#modalbygroupe").html('');
-                  //      return;
-                   // }
+                    if(groupeselected =='' || idreview ==''){
+
+                    }
 
                     $.ajax({
                         type: 'GET',

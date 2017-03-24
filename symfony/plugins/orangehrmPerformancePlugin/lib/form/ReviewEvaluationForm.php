@@ -178,38 +178,15 @@ class ReviewEvaluationForm extends BasePefromanceSearchForm {
         if ($this->isEditable()) {
             $postParameters = $request->getPostParameters();
             //var_dump($postParameters);die;
-            $param = array('reviewId' => $this->getReviewId());
 
-            if ($this->getValue('action') == 'complete') {
-                $lesrating = $this->getPerformanceReviewService()->searchReviewRating($param);
-                foreach ($lesrating as $value)
-                {
-                    $reviewer_id = $value->getReviewerId();
-
-                    $reviewer = $this->getPerformanceReviewService()->getReviewerById($reviewer_id);
-                    $reviewer_group = $reviewer->getReviewerGroupId();
-
-                    if ($reviewer_group == 1) {
-                        $rating_ids[$value->getId()] = $value->getId();
-                    }
-                }
-            }else{
-                $rating_ids = $postParameters['rating_id'];
-                //var_dump($rating_ids);die;
-            }
-
-            //var_dump($rating_ids);die;
-
-            $rating = $this->getPerformanceReviewService()->searchReviewRating($param);
-
-            foreach ($rating_ids as $key => $ratingId) {
+            foreach ($postParameters['rating_id'] as $key => $ratingId) {
 
                 if ($this->isValidRatingId($ratingId))
                 {
                     //var_dump($ratingId);die;
                     $rating = $this->getPerformanceReviewService()->getReviewRating($ratingId);
 
-                    $rating->setRating($this->filterPostValues(round(trim($postParameters['rating'][$key], 2))));
+                    $rating->setRating($this->filterPostValues(round(trim($postParameters['rating'][$key]))));
                     $rating->setPoids(round($this->filterPostValues(trim($postParameters['poids'][$key]))));
                     if($this->filterPostValues(round(trim($postParameters['valeur_cible'][$key])))!=null)
                     $rating->setValeurCible($this->filterPostValues(round(trim($postParameters['valeur_cible'][$key]))));
