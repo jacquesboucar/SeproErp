@@ -82,6 +82,9 @@ class searchKpiPdfAction extends basePeformanceAction {
        //$kpis = $this->getKpiService()->searchKpi($parameters = null);
        $kpis = $this->getKpiService()->getAllKpi();
 
+        $typeIndicateur = $request->getParameter('typeindicateur');
+        //var_dump($typeIndicateur);die;
+
       // create new PDF document
        $pdf = new FICHE(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
@@ -141,10 +144,10 @@ class searchKpiPdfAction extends basePeformanceAction {
 $html = <<<EOD
   <br/><br/><br/>
   <table border="1" cellspacing="0" cellpadding="4" >
-  <tr bgcolor="#770a82" color="#ffffff" style="font-weight:bold;text-align:center;font-size: 12px;"><td colspan="5"> Indicateur Clé de Performance</td></tr>
+  <tr bgcolor="#770a82" color="#ffffff" style="font-weight:bold;text-align:center;font-size: 12px;"><td colspan="5"> Indicateur Clé de $typeIndicateur </td></tr>
     <tr bgcolor="#770a82" color="#ffffff">
       <th> Kpi Groupe </th>
-      <th> Indicateur Clé de Performance </th>
+      <th> Indicateur Clé de $typeIndicateur </th>
       <th> Objectifs  </th>
       <th> Mode Calcul </th>
       <th> Périodicité  </th>
@@ -168,6 +171,7 @@ foreach ($existe_group as $key => $grp)
         $id_group = $value->getKpiGroup();
         $group = $this->getKpiGroupService()->getKpiGroupById($id_group);
         $Kpigroup = $group->getKpiGroupName();
+
         if($grp==$id_group)
         {
             //$job_id = $value->getJobTitle();
@@ -177,7 +181,7 @@ foreach ($existe_group as $key => $grp)
             $mode_calcul = $value->getModeCalcul();
             $periodicite = $value->getDelai();
             $kpitype = $value->getKpiType();
-            if($kpitype == 'Performances'){
+            if($kpitype == $typeIndicateur){
                 $html .= <<<EOD
             <tr>
               <td> $Kpigroup </td>
@@ -195,63 +199,12 @@ EOD;
     }
 }
 
+
         $html .= <<<EOD
   </table>
-  <br/><br/><br/>
-  <table border="1" cellspacing="0" cellpadding="4" >
-  <tr bgcolor="#770a82" color="#ffffff" style="font-weight:bold;text-align:center;font-size: 12px;"><td colspan="5"> Indicateur Clé de Pilotage</td></tr>
-    <tr bgcolor="#770a82" color="#ffffff">
-      <th> Kpi Groupe </th>
-      <th> Indicateur Clé de Pilotage </th>
-      <th> Objectifs  </th>
-      <th> Mode Calcul </th>
-      <th> Périodicité  </th>
-    </tr>
-EOD;
-foreach ($existe_group as $key => $grp)
-{
-    foreach ($kpis as $value)
-    {
-
-        $kpi = $value->getKpiIndicators();
-        $id_group = $value->getKpiGroup();
-        $group = $this->getKpiGroupService()->getKpiGroupById($id_group);
-        $Kpigroup = $group->getKpiGroupName();
-        if($grp==$id_group)
-        {
-            //$job_id = $value->getJobTitle();
-            //$job_title = $this->_getJobTitles($job_id);
-            ////$poids = $value->getMaxRating();
-            $objectif = $value->getObjectif();
-            $mode_calcul = $value->getModeCalcul();
-            $periodicite = $value->getDelai();
-            $kpitype = $value->getKpiType();
-            if($kpitype == 'Pilotage'){
-                $html .= <<<EOD
-            <tr>
-              <td> $Kpigroup </td>
-              <td> $kpi </td>
-              <td> $objectif </td>
-              <td> $mode_calcul </td>
-              <td> $periodicite </td>
-            </tr>
-EOD;
-    }
-
-}
-
-
-}
-}
-
-
-
 EOD;
 
 
-$html .= <<<EOD
-  </table>
-EOD;
 // Print text using writeHTMLCell()
 $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
 
